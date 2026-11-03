@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F5F5F7">
+<title>Prospecto · Armadillo</title>
+<style>
+:root{
+  --bg:#F5F5F7; --card:#FFFFFF; --card2:#F2F2F7; --text:#1D1D1F; --text2:#6E6E73; --text3:#AEAEB2;
+  --sep:rgba(60,60,67,.13); --fill:rgba(118,118,128,.12); --fill2:rgba(118,118,128,.08);
+  --accent:#1F6F6B; --accent-tint:rgba(31,111,107,.11); --madera:#B5803F; --madera-tint:rgba(181,128,63,.13);
+  --green:#34C759; --orange:#FF9500; --red:#FF3B30; --indigo:#5856D6;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.05);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#000; --card:#1C1C1E; --card2:#2C2C2E; --text:#F5F5F7; --text2:#98989D; --text3:#636366;
+  --sep:rgba(84,84,88,.55); --fill:rgba(118,118,128,.24); --fill2:rgba(118,118,128,.16);
+  --accent:#3FA39D; --accent-tint:rgba(63,163,157,.18); --madera:#D9A866; --madera-tint:rgba(217,168,102,.16);
+  --green:#30D158; --orange:#FF9F0A; --red:#FF453A; --indigo:#5E5CE6; --shadow:none; color-scheme:dark }}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.4;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px;border-radius:12px}
+.wrap{max-width:560px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));display:grid;gap:14px}
+.marca{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);font-weight:600}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px}
+.persona{display:flex;gap:14px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:20px;flex:none;background:var(--accent)}
+.avatar.Media{background:var(--madera)}.avatar.Baja{background:#8E8E93}
+.persona h1{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.persona p{color:var(--text2);font-size:14px;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border-radius:99px;font-size:13px;font-weight:600;background:var(--fill2)}
+.chip.etapa{background:var(--accent-tint);color:var(--accent)}
+.chip.rojo{background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red)}
+.datos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin-top:14px;padding-top:14px;border-top:1px solid var(--sep)}
+.datos div{min-width:0}
+.datos span{display:block;font-size:12px;color:var(--text2)}
+.datos b{display:block;font-size:14.5px;font-weight:500;overflow-wrap:anywhere}
+.siguiente{background:var(--accent);color:#fff;border-radius:18px;padding:14px 16px;display:grid;gap:2px}
+.siguiente small{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:600}
+.siguiente b{font-size:18px;font-weight:700;line-height:1.25}
+.siguiente span{font-size:14px;opacity:.92}
+.titulo{font-size:13px;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;font-weight:600;margin:6px 4px -4px}
+.yo{display:flex;gap:8px;flex-wrap:wrap}
+.yo button{flex:1;min-width:96px;height:44px;border-radius:12px;background:var(--card);box-shadow:var(--shadow);font-weight:600;font-size:15px}
+.yo button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.contacto{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gran{height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;font-weight:700}
+.gran.wa{background:#25D366;color:#fff}.gran.tel{background:var(--card);color:var(--accent);box-shadow:var(--shadow)}
+.gran svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tomar{width:100%;height:52px;border-radius:14px;background:var(--madera);color:#fff;font-weight:700;font-size:16px}
+.pasos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.paso{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:12px;text-align:left;display:grid;gap:3px;min-height:76px;align-content:start}
+.paso b{font-size:15.5px;font-weight:700;line-height:1.2}
+.paso span{font-size:12.5px;color:var(--text2);line-height:1.3}
+.paso i{font-style:normal;font-size:20px;line-height:1;color:var(--accent);font-weight:700}
+.paso.actual{box-shadow:inset 0 0 0 2px var(--accent)}
+.paso.rojo i{color:var(--red)}.paso.verde i{color:color-mix(in srgb,var(--green) 75%,var(--text))}
+.paso:disabled{opacity:.45}
+.panel{display:grid;gap:10px}
+.panel p{font-weight:600}
+.panel input,.panel textarea{width:100%;border:0;background:var(--fill2);border-radius:12px;padding:12px;font-size:16px}
+.panel textarea{min-height:80px;resize:vertical}
+.opciones{display:flex;flex-wrap:wrap;gap:8px}
+.opciones button{height:40px;padding:0 14px;border-radius:99px;background:var(--fill2);font-weight:600;font-size:14.5px}
+.opciones button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.opciones.rojo button{background:color-mix(in srgb,var(--red) 10%,transparent);color:var(--red)}
+.fila-b{display:flex;gap:8px}
+.btn{flex:1;height:48px;border-radius:12px;background:var(--accent);color:#fff;font-weight:700;font-size:16px}
+.btn.sec{background:var(--fill);color:var(--text)}
+.linea{position:relative;padding:2px 0 2px 22px;display:grid;gap:10px}
+.linea::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--sep)}
+.linea p{position:relative;font-size:14px}
+.linea p::before{content:"";position:absolute;left:-21px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2.5px var(--accent)}
+.linea p:first-child::before{background:var(--accent)}
+.linea small{display:block;font-size:12px;color:var(--text2)}
+.vacio{text-align:center;padding:60px 20px;color:var(--text2)}
+.vacio b{display:block;color:var(--text);font-size:18px;margin-bottom:6px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(30,30,32,.94);color:#fff;padding:12px 18px;border-radius:14px;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;max-width:calc(100% - 32px);text-align:center;z-index:9}
+.toast.ver{opacity:1;transform:translate(-50%,0)}
+.cargando .pasos,.cargando .contacto{opacity:.5;pointer-events:none}
+.demo{background:var(--madera-tint);border-radius:12px;padding:10px 14px;font-size:14px}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"><div class="vacio"><b>Cargando prospecto…</b></div></main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ============ CONFIGURACIÓN ============ */
+const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec";
+const EQUIPO = ["Daniel", "Arq. Eric", "Arq. Omar"];           // quienes hacen las visitas
+const QUIENES = EQUIPO.concat(["Agendador"]);                     // quienes pueden registrar movimientos
+const PAGO = "";   /* Datos de pago de la visita (CLABE o liga de Clip). Cuando Daniel los dé, se agregan solos al mensaje de confirmación. */
+const CADENCIA = [0, 1, 3, 7, 14];
+const MOTIVOS = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
+const HORARIOS = ["por la mañana (9 a 12)", "a mediodía (12 a 3)", "por la tarde (3 a 6)"];
+/* ======================================= */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
+const q = new URLSearchParams(location.search), F = q.get("f") || "", K = q.get("k") || "";
+const DEMO = K === "demo";
+const DIA = 864e5;
+let L = null, yo = store.get("ad_asesor") || "", panel = "", horario = "", visitador = "", ocupado = false;
+
+const aMs = v => { if(v === "" || v == null) return 0; if(typeof v === "number") return v; const s = String(v);
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){ const [a,m,d] = s.split("-").map(Number); return new Date(a, m-1, d).getTime(); } const d = new Date(s); return isNaN(d) ? 0 : d.getTime(); };
+const hoy0 = () => { const d = new Date(); d.setHours(0,0,0,0); return d.getTime(); };
+const iso = d => d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+const fCorta = ms => new Date(ms).toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
+function hace(ms){ if(!ms) return ""; const s = (Date.now() - ms) / 1000;
+  if(s < 3600) return `hace ${Math.max(1, Math.floor(s/60))} min`; if(s < 86400) return `hace ${Math.floor(s/3600)} h`;
+  if(s < 172800) return "ayer"; return `hace ${Math.floor(s/86400)} días`; }
+const nombre1 = n => String(n || "").trim().split(/\s+/)[0] || "";
+const inic = n => String(n || "?").trim().split(/\s+/).slice(0,2).map(p => p[0]).join("").toUpperCase();
+
+function norm(r){
+  return { folio: r["Folio"], nombre: r["Nombre"] || "Sin nombre", tel: String(r["WhatsApp"] || "").replace(/\D/g,"").replace(/^52(?=\d{10}$)/,""),
+    prioridad: r["Prioridad"] || "Media", fecha: aMs(r["Fecha"]), etapaCasa: r["Etapa"] || "", forma: r["Distribución"] || "", acabado: r["Acabados"] || "",
+    inversion: r["Inversión"] || "", tiempo: r["Tiempo"] || "", zona: r["Zona"] || "", apartada: r["Estado"] === "Visita apartada",
+    visitaDia: r["Visita día"] || "", visitaHora: r["Visita horario"] || "", ubic: r["Ubicación visita"] || "",
+    seg: r["Seguimiento"] || "Nuevo", resp: r["Responsable"] || "", primer: aMs(r["Primer contacto"]), ultimo: aMs(r["Último contacto"]),
+    proximo: aMs(r["Próximo contacto"]), intentos: Number(r["Intentos"]) || 0, motivo: r["Motivo perdido"] || "", monto: Number(r["Monto cerrado"]) || 0,
+    hist: String(r["Historial"] || "").split("\n").filter(Boolean).reverse() };
+}
+
+/* ---------- API ---------- */
+async function api(params){
+  if(DEMO) return demo(params);
+  const r = await fetch(API + "?" + new URLSearchParams(Object.assign({ f: F, k: K }, params)), { cache: "no-store" });
+  return r.json();
+}
+async function cargar(){
+  try{
+    const r = await api({ accion: "ficha" });
+    if(!r.ok){ $("app").innerHTML = `<div class="vacio"><b>Este link no funciona</b>Puede estar incompleto o el prospecto ya no existe. Pide el link otra vez en el grupo.</div>`; return; }
+    L = norm(r.lead); pintar();
+  }catch(e){ $("app").innerHTML = `<div class="vacio"><b>Sin conexión</b>No pudimos cargar el prospecto. Revisa tu internet y vuelve a abrir el link.</div>`; }
+}
+async function guardar(c, ok){
+  if(!yo){ toast("Primero toca tu nombre"); document.querySelector(".yo")?.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+  if(ocupado) return; ocupado = true; $("app").classList.add("cargando");
+  try{
+    const r = await api({ accion: "asesor", quien: yo, cambios: JSON.stringify(c) });
+    if(!r.ok) throw new Error(r.error);
+    L = norm(r.lead); panel = ""; horario = ""; visitador = ""; pintar(); toast(ok || "Listo, el CRM ya se actualizó");
+  }catch(e){ toast("No se guardó. Revisa tu internet e inténtalo otra vez."); }
+  finally{ ocupado = false; $("app").classList.remove("cargando"); }
+}
+/* Un intento por día mientras no haya visita: fija solo la fecha del siguiente (días 0, 1, 3, 7, 14). */
+function conIntento(c){
+  if((L.seg === "Nuevo" || L.seg === "Contactado") && L.intentos < 5 && !(L.ultimo >= hoy0())){
+    c.intento = 1;
+    const n = L.intentos + 1, base = new Date(L.primer || Date.now()); base.setHours(0,0,0,0);
+    c.proximo = n < 5 ? iso(new Date(base.getTime() + CADENCIA[n] * DIA)) : "";
+  }
+  if(L.seg === "Nuevo") c.seguimiento = "Contactado";
+  return c;
+}
+
+/* ---------- Mensaje para el cliente según la etapa ---------- */
+function msj(){
+  const quien = yo === "Daniel" ? "el Ing. Daniel García" : yo && yo !== "Agendador" ? "el " + yo : "";
+  const yoTxt = `Hola ${nombre1(L.nombre)}, ${quien ? "soy " + quien + " de" : "te escribo de"} Armadillo Diseño.`;
+  switch(L.seg){
+    case "Visita agendada": return `Hola ${nombre1(L.nombre)}, ${quien ? "soy " + quien + " de Armadillo Diseño. " : "gracias por tu tiempo. "}Te dejo los datos de tu visita técnica: ${L.visitaDia || "fecha por confirmar"}${L.visitaHora ? ", " + L.visitaHora : ""}${L.resp ? ", con " + (L.resp === "Daniel" ? "el Ing. Daniel García" : "el " + L.resp) : ""}. Tiene un costo de $1,000 que se abona completo a tu cocina, y si no avanzamos el render es tuyo. Puedes pagarla por transferencia o con tarjeta${PAGO ? ":\n" + PAGO + "\n\n" : ". "}En cuanto se refleje el pago tu visita queda confirmada. Y para llegar sin problema, ¿me mandas tu ubicación por aquí?`;
+    case "Visita pagada": return `${yoTxt} Ya quedó registrado tu pago, gracias. Nos vemos en tu visita${L.visitaDia ? " el " + L.visitaDia : ""}. Si tienes fotos de tu cocina actual o planos, mándamelos y llego con ideas.`;
+    case "Visita realizada": return `${yoTxt} Gracias por recibirnos. Ya estamos trabajando en el render de tu cocina. ¿Hay algo que se te haya ocurrido después de la visita y quieras que tomemos en cuenta?`;
+    case "Propuesta enviada": return `${yoTxt} ¿Qué te pareció el render de tu cocina? Si hay algo que quieras ajustar, lo platicamos y lo dejamos como te imaginas.`;
+    case "Contactado": return `${yoTxt} Te escribo para dar seguimiento a tu cocina. ¿Pudiste pensar lo que platicamos? Esta semana tengo espacio para ir a medir.`;
+    default: return L.apartada
+      ? `${yoTxt} Vi que apartaste tu visita técnica para el ${L.visitaDia}${L.visitaHora ? ", " + L.visitaHora : ""}. ¿Me compartes tu ubicación para dejarla confirmada?`
+      : `${yoTxt} Recibí tu diagnóstico de cocina. Antes de proponerte algo, cuéntame: ¿qué es lo que más te gustaría cambiar de tu cocina?`;
+  }
+}
+
+/* ---------- Siguiente paso ---------- */
+function siguiente(){
+  switch(L.seg){
+    case "Nuevo": return ["Escríbele ya", `Llegó ${hace(L.fecha)}. La meta es contestar en menos de 2 horas.`];
+    case "Contactado": return L.intentos >= 5 ? ["Ya van 5 intentos", "Si no respondió, márcalo como perdido."]
+      : ["Sigue la plática y busca la visita", L.proximo ? `Próximo intento: ${fCorta(L.proximo)} (intento ${L.intentos + 1} de 5).` : "Propón día para la visita técnica."];
+    case "Visita agendada": return ["Confirma pago y ubicación", `Visita ${L.visitaDia || "sin fecha"}${L.visitaHora ? ", " + L.visitaHora : ""}.`];
+    case "Visita pagada": return ["Ve a la visita", `${L.visitaDia || "Sin fecha"}${L.visitaHora ? ", " + L.visitaHora : ""}${L.ubic ? " · " + L.ubic : ""}.`];
+    case "Visita realizada": return ["Entrega el render", "De preferencia en el showroom, en 7 a 10 días."];
+    case "Propuesta enviada": return ["Da seguimiento a la propuesta", "Pregunta qué le pareció y qué ajustaría."];
+    case "Ganado": return ["Prospecto ganado", L.monto ? "Monto: $" + L.monto.toLocaleString("es-MX") : "Felicidades al equipo."];
+    default: return ["Prospecto cerrado", L.motivo ? "Motivo: " + L.motivo : ""];
+  }
+}
+
+/* ---------- Pantalla ---------- */
+const PASOS = [
+  ["nocontesto", "✕", "No contestó", "Cuenta como intento", "rojo"],
+  ["contesto", "✓", "Contestó", "Seguimos platicando", "Contactado"],
+  ["agendo", "▦", "Agendó visita", "Elige día y horario", "Visita agendada"],
+  ["pago", "$", "Pagó la visita", "Ya mandó los $1,000", "Visita pagada"],
+  ["visita", "⌂", "Hice la visita", "Ya fuimos a medir", "Visita realizada"],
+  ["propuesta", "▤", "Envié propuesta", "Render y presupuesto", "Propuesta enviada"],
+  ["gano", "★", "¡Cerramos!", "Anota el monto", "Ganado"],
+  ["perdido", "–", "Se perdió", "Elige el motivo", "Perdido"]
+];
+function pintar(){
+  const [sigT, sigS] = siguiente();
+  const tarde = L.seg === "Nuevo" && !L.primer && Date.now() - L.fecha > 2 * 36e5;
+  let h = DEMO ? `<div class="demo"><b>Ejemplo.</b> Así lo verá el asesor; aquí no se guarda nada.</div>` : "";
+  h += `<div class="marca">Armadillo Diseño · Prospecto ${esc(L.folio)}</div>`;
+  h += `<section class="card"><div class="persona"><span class="avatar ${esc(L.prioridad)}">${esc(inic(L.nombre))}</span>
+    <div><h1>${esc(L.nombre)}</h1><p>Llegó ${hace(L.fecha)} · ${L.resp ? "Responsable: " + esc(L.resp) : "Sin responsable"}</p></div></div>
+    <div class="chips"><span class="chip etapa">${esc(L.seg)}</span><span class="chip">Prioridad ${esc(L.prioridad.toLowerCase())}</span>${tarde ? `<span class="chip rojo">Fuera de tiempo</span>` : ""}${L.apartada ? `<span class="chip">Apartó visita</span>` : ""}</div>
+    <div class="datos">
+      ${[["Zona", L.zona], ["Inversión", L.inversion], ["Para cuándo", L.tiempo], ["Cocina", [L.forma, L.acabado].filter(Boolean).join(" · ")], ["Situación", L.etapaCasa], ["Visita", L.visitaDia ? L.visitaDia + (L.visitaHora ? ", " + L.visitaHora : "") : ""]]
+        .filter(x => x[1]).map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}
+    </div></section>`;
+  h += `<section class="siguiente"><small>Siguiente paso</small><b>${esc(sigT)}</b><span>${esc(sigS)}</span></section>`;
+
+  h += `<p class="titulo">¿Quién eres?</p><div class="yo" role="group" aria-label="Quién eres">${QUIENES.map(p => `<button data-yo="${p}" aria-pressed="${yo === p}">${p}</button>`).join("")}</div>`;
+  if(yo && yo !== "Agendador" && L.resp !== yo && L.seg !== "Ganado" && L.seg !== "Perdido") h += `<button class="tomar" id="tomar">${L.resp ? `Pasármelo a mí (ahora es de ${esc(L.resp)})` : "Tomar este prospecto"}</button>`;
+
+  h += `<p class="titulo">Contactar</p><div class="contacto">
+    <a class="gran wa" id="b-wa" href="https://wa.me/52${esc(L.tel)}?text=${encodeURIComponent(msj())}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg>WhatsApp</a>
+    <a class="gran tel" id="b-tel" href="tel:+52${esc(L.tel)}"><svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Llamar</a></div>`;
+
+  h += `<p class="titulo">¿Qué pasó?</p><div class="pasos">${PASOS.map(([id, ic, t, s, et]) =>
+    `<button class="paso ${et === L.seg ? "actual" : ""} ${id === "nocontesto" || id === "perdido" ? "rojo" : id === "gano" ? "verde" : ""}" data-paso="${id}" ${id === "nocontesto" && L.intentos >= 5 ? "disabled" : ""}><i>${ic}</i><b>${t}</b><span>${s}</span></button>`).join("")}</div>`;
+
+  if(panel === "agendo") h += `<section class="card panel"><p>¿Qué día es la visita?</p><input type="date" id="v-fecha" min="${iso(new Date())}">
+    <div class="opciones" role="group" aria-label="Horario">${HORARIOS.map(x => `<button data-hora="${x}" aria-pressed="${horario === x}">${x}</button>`).join("")}</div>
+    <p>¿Quién hace la visita?</p><div class="opciones" role="group" aria-label="Quién hace la visita">${EQUIPO.map(x => `<button data-visitador="${x}" aria-pressed="${(visitador || L.resp) === x}">${x}</button>`).join("")}</div>
+    <div class="fila-b"><button class="btn sec" data-cerrar>Cancelar</button><button class="btn" id="g-agendo">Guardar visita</button></div></section>`;
+  if(panel === "gano") h += `<section class="card panel"><p>¿En cuánto cerró la cocina?</p><input type="number" inputmode="numeric" id="v-monto" placeholder="Monto en pesos">
+    <div class="fila-b"><button class="btn sec" data-cerrar>Cancelar</button><button class="btn" id="g-gano">Guardar</button></div></section>`;
+  if(panel === "perdido") h += `<section class="card panel"><p>¿Por qué se perdió?</p><div class="opciones rojo">${MOTIVOS.map(m => `<button data-motivo="${m}">${m}</button>`).join("")}</div>
+    <div class="fila-b"><button class="btn sec" data-cerrar>Cancelar</button></div></section>`;
+
+  h += `<p class="titulo">Nota rápida</p><section class="card panel"><textarea id="v-nota" placeholder="Ej. Quiere isla, le preocupa el tiempo de entrega"></textarea><div class="fila-b"><button class="btn" id="g-nota">Guardar nota</button></div></section>`;
+  if(L.hist.length) h += `<p class="titulo">Lo último</p><section class="card"><div class="linea">${L.hist.slice(0, 6).map(n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; }).join("")}</div></section>`;
+  $("app").innerHTML = h;
+  conectar();
+}
+function conectar(){
+  document.querySelectorAll("[data-yo]").forEach(b => b.onclick = () => { yo = b.dataset.yo; store.set("ad_asesor", yo); pintar(); });
+  const t = $("tomar"); if(t) t.onclick = () => guardar({ responsable: yo }, "Ahora este prospecto es tuyo");
+  $("b-wa").onclick = () => { yo ? guardar(conIntento({ contacto: "WhatsApp enviado" }), "WhatsApp registrado") : toast("Toca tu nombre para que quede registrado"); };
+  $("b-tel").onclick = () => { yo ? guardar(conIntento({ contacto: "Llamada" }), "Llamada registrada") : toast("Toca tu nombre para que quede registrado"); };
+  document.querySelectorAll("[data-paso]").forEach(b => b.onclick = () => {
+    const p = b.dataset.paso;
+    if(!yo){ toast("Primero toca tu nombre"); return; }
+    if(p === "nocontesto") return guardar(conIntento({ contacto: "No contestó" }), `Intento ${Math.min(L.intentos + 1, 5)} de 5 registrado`);
+    if(p === "contesto") return guardar({ seguimiento: "Contactado", contacto: "Contestó" }, "Listo: contestó");
+    if(p === "pago") return guardar({ seguimiento: "Visita pagada", contacto: "Pagó la visita" }, "Visita pagada registrada");
+    if(p === "visita") return guardar({ seguimiento: "Visita realizada" }, "Visita realizada registrada");
+    if(p === "propuesta"){ const d = new Date(); d.setDate(d.getDate() + 3); return guardar({ seguimiento: "Propuesta enviada", proximo: iso(d) }, "Propuesta registrada · seguimiento en 3 días"); }
+    panel = panel === p ? "" : p; pintar();
+    document.querySelector(".panel")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+  document.querySelectorAll("[data-cerrar]").forEach(b => b.onclick = () => { panel = ""; pintar(); });
+  document.querySelectorAll("[data-visitador]").forEach(b => b.onclick = () => { visitador = b.dataset.visitador; document.querySelectorAll("[data-visitador]").forEach(x => x.setAttribute("aria-pressed", x === b)); });
+  document.querySelectorAll("[data-hora]").forEach(b => b.onclick = () => { horario = b.dataset.hora; document.querySelectorAll("[data-hora]").forEach(x => x.setAttribute("aria-pressed", x === b)); });
+  const ga = $("g-agendo"); if(ga) ga.onclick = () => {
+    const v = $("v-fecha").value; if(!v){ toast("Elige el día de la visita"); return; } if(!horario){ toast("Elige el horario"); return; }
+    const [a, m, d] = v.split("-").map(Number); const dia = new Date(a, m - 1, d).toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
+    const quienVisita = visitador || L.resp; if(!quienVisita){ toast("Elige quién hace la visita"); return; }
+    const c = { seguimiento: "Visita agendada", visita_dia: dia, visita_horario: horario, visita_fecha: v, contacto: "Agendó visita" };
+    if(quienVisita !== L.resp) c.responsable = quienVisita;
+    guardar(c, "Visita agendada · ahora mándale la confirmación y el pago por WhatsApp");
+  };
+  const gg = $("g-gano"); if(gg) gg.onclick = () => { const v = $("v-monto").value; if(!v){ toast("Escribe el monto"); return; } guardar({ seguimiento: "Ganado", monto: v }, "¡Cocina cerrada!"); };
+  document.querySelectorAll("[data-motivo]").forEach(b => b.onclick = () => guardar({ seguimiento: "Perdido", motivo: b.dataset.motivo }, "Registrado como perdido"));
+  $("g-nota").onclick = () => { const v = $("v-nota").value.trim(); if(!v){ toast("Escribe la nota"); return; } guardar({ nota: v }, "Nota guardada"); };
+}
+function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("ver"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("ver"), 2600); }
+
+/* ---------- Ejemplo (k=demo) ---------- */
+function demo(p){
+  if(!demo.l) demo.l = { "Folio": F || "AD-5279", "Fecha": Date.now() - 3 * 36e5, "Nombre": "Laura Méndez", "WhatsApp": "2221234567", "Prioridad": "Alta", "Estado": "Diagnóstico completo",
+    "Etapa": "Casa nueva", "Distribución": "Con isla", "Acabados": "Diseño y materiales seleccionados", "Inversión": "$250,000 a $400,000", "Tiempo": "En 1 a 3 meses",
+    "Zona": "Cholula o San Andrés", "Seguimiento": "Nuevo", "Responsable": "Arq. Eric", "Intentos": 0, "Historial": "03/11 08:40 · Llegó desde la landing\n03/11 08:52 · Responsable: Arq. Eric" };
+  const l = demo.l;
+  if(p.accion === "asesor"){
+    const c = JSON.parse(p.cambios), s = new Date().toLocaleString("es-MX", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" });
+    if(c.seguimiento) l["Seguimiento"] = c.seguimiento; if(c.responsable) l["Responsable"] = c.responsable;
+    if(c.contacto){ l["Último contacto"] = Date.now(); if(!l["Primer contacto"]) l["Primer contacto"] = Date.now(); }
+    if(c.intento) l["Intentos"] = (l["Intentos"] || 0) + 1; if(c.proximo !== undefined) l["Próximo contacto"] = c.proximo;
+    if(c.visita_dia){ l["Visita día"] = c.visita_dia; l["Visita horario"] = c.visita_horario; }
+    if(c.motivo) l["Motivo perdido"] = c.motivo; if(c.monto) l["Monto cerrado"] = c.monto;
+    l["Historial"] += `\n${s} · ${p.quien}: ${[c.contacto, c.seguimiento, c.nota, c.motivo].filter(Boolean).join(" · ")}`;
+  }
+  return Promise.resolve({ ok: true, lead: Object.assign({}, l) });
+}
+
+if(!F || !K) $("app").innerHTML = `<div class="vacio"><b>Falta el link completo</b>Abre este prospecto desde el link que llegó al grupo.</div>`;
+else cargar();
+</script>
+</body>
+</html>

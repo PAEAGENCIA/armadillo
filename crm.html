@@ -462,7 +462,7 @@ function normLead(l){
     ultimoContacto: aFecha(l["Último contacto"])?.getTime() || 0, proximo: aFecha(l["Próximo contacto"]),
     dispositivo: l["Dispositivo"] || "", ubic: l["Ubicación visita"] || "", responsable: l["Responsable"] || "",
     asignado: aFecha(l["Asignado"])?.getTime() || 0, primerContacto: aFecha(l["Primer contacto"])?.getTime() || 0,
-    intentos: Number(l["Intentos"]) || 0, motivo: l["Motivo perdido"] || ""
+    intentos: Number(l["Intentos"]) || 0, motivo: l["Motivo perdido"] || "", token: l["Token"] || ""
   };
 }
 function normSesion(s){
@@ -512,6 +512,7 @@ const fueraTiempo = l => sla(l)?.estado === "vencido";
 const sinAsignar = l => activo(l) && !l.responsable;
 const colorResp = p => { const i = EQUIPO.indexOf(p); return i < 0 ? "rx" : "r" + i; };
 const inicResp = p => p ? iniciales(p.replace(/^Arq\.\s*/, "")) : "?";
+const linkAsesor = l => new URL("asesor.html", location.href).href.split("?")[0] + "?f=" + encodeURIComponent(l.folio) + "&k=" + (l.token || (DEMO ? "demo" : ""));
 const burbuja = p => `<span class="resp ${colorResp(p)}" title="${p ? "Responsable: " + esc(p) : "Sin responsable"}">${esc(inicResp(p))}</span>`;
 
 /* ---------- API ---------- */
@@ -829,8 +830,8 @@ function msjResumen(){
   const lineas = [`*RESUMEN DEL EQUIPO · ${fecha}*`, `Activos: ${act.length} · Sin asignar: ${sa.length} · Fuera de tiempo: ${venc.length}`, ""];
   EQUIPO.forEach(p => { const s = statsPersona(p);
     lineas.push(`*${p}*: ${s.act.length} activos · ${s.sinC.length} sin contactar · ${s.venc.length} fuera de tiempo · ${s.seg.length} seguimientos hoy`); });
-  if(venc.length){ lineas.push("", "*Fuera de tiempo (atender ya)*"); venc.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · llegó ${hace(l.fecha)}`)); }
-  if(seg.length){ lineas.push("", "*Seguimientos de hoy*"); seg.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · intento ${Math.min(l.intentos + 1, 5)} de 5`)); }
+  if(venc.length){ lineas.push("", "*Fuera de tiempo (atender ya)*"); venc.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · llegó ${hace(l.fecha)}`, `  ${linkAsesor(l)}`)); }
+  if(seg.length){ lineas.push("", "*Seguimientos de hoy*"); seg.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · intento ${Math.min(l.intentos + 1, 5)} de 5`, `  ${linkAsesor(l)}`)); }
   if(sa.length){ lineas.push("", "*Sin asignar*"); sa.forEach(l => lineas.push(`- ${l.nombre} · ${l.zona || "sin zona"}`)); }
   return lineas.join("\n");
 }
@@ -917,8 +918,8 @@ function msjGrupo(l){
     `Inversión: ${l.inversion || "sin dato"}`, `Para cuándo: ${l.tiempo || "sin dato"}`,
     apartoVisita(l) ? `*Apartó visita:* ${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""}` : "", "",
     `*LE TOCA A: ${quien.toUpperCase()}*`, `Escríbele aquí: https://wa.me/52${l.tel}`, "",
-    "*Turnos (prospectos activos)*", "```" + carga + "```", "",
-    "Respondan a este mensaje con:", "*TOMADO* · *CONTACTADO* · *VISITA AGENDADA*"].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n");
+    "*Cuando hables con el prospecto, actualiza aquí:*", linkAsesor(l), "",
+    "*Turnos (prospectos activos)*", "```" + carga + "```"].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n");
 }
 function fichaTexto(l){
   return [`Lead Armadillo · ${l.nombre} (prioridad ${l.prioridad})`, `WhatsApp: ${l.tel}`,

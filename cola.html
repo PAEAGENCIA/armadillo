@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F5F5F7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Llamadas Armadillo">
+<title>Llamadas · Armadillo</title>
+<style>
+:root{
+  --bg:#F5F5F7; --card:#FFFFFF; --card2:#F2F2F7; --text:#1D1D1F; --text2:#6E6E73; --text3:#AEAEB2;
+  --sep:rgba(60,60,67,.13); --fill:rgba(118,118,128,.12); --fill2:rgba(118,118,128,.08);
+  --accent:#1F6F6B; --accent-tint:rgba(31,111,107,.11); --madera:#B5803F; --madera-tint:rgba(181,128,63,.13);
+  --green:#34C759; --orange:#FF9500; --red:#FF3B30;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.05);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#000; --card:#1C1C1E; --card2:#2C2C2E; --text:#F5F5F7; --text2:#98989D; --text3:#636366;
+  --sep:rgba(84,84,88,.55); --fill:rgba(118,118,128,.24); --fill2:rgba(118,118,128,.16);
+  --accent:#3FA39D; --accent-tint:rgba(63,163,157,.18); --madera:#D9A866; --madera-tint:rgba(217,168,102,.16);
+  --green:#30D158; --orange:#FF9F0A; --red:#FF453A; --shadow:none; color-scheme:dark }}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.4;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px;border-radius:12px}
+.wrap{max-width:620px;margin:0 auto;padding:calc(16px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));display:grid;gap:14px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+header small{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);font-weight:600}
+header h1{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+header p{color:var(--text2);font-size:14px;margin-top:2px}
+.ref{width:40px;height:40px;border-radius:50%;background:var(--fill);color:var(--accent);display:grid;place-items:center;flex:none;font-size:20px;font-weight:700}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tile{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:12px}
+.tile b{display:block;font-size:28px;font-weight:700;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile span{font-size:12.5px;color:var(--text2)}
+.tile.rojo b{color:var(--red)}
+.seccion{display:grid;gap:8px}
+.seccion h2{font-size:19px;font-weight:700;letter-spacing:-.02em;margin:8px 2px 0}
+.seccion > p{font-size:13.5px;color:var(--text2);margin:-4px 2px 2px}
+.lead{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:12px 12px 12px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.lead.urgente{box-shadow:inset 4px 0 0 var(--red),var(--shadow)}
+.lead .n{font-size:16.5px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.lead .s{font-size:13.5px;color:var(--text2);margin-top:2px}
+.lead .t{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;margin-top:5px}
+.lead .t::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.t.rojo{color:var(--red)}.t.ambar{color:color-mix(in srgb,var(--orange) 85%,var(--text))}.t.verde{color:color-mix(in srgb,var(--green) 72%,var(--text))}.t.gris{color:var(--text2)}
+.prio{font-size:11px;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--accent-tint);color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
+.prio.Media{background:var(--madera-tint);color:var(--madera)}.prio.Baja{background:var(--fill);color:var(--text2)}
+.acc{display:flex;gap:8px}
+.acc a{height:44px;min-width:44px;padding:0 14px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:14.5px}
+.acc .llamar{background:var(--accent);color:#fff}
+.acc .ficha{background:var(--fill);color:var(--accent)}
+.acc svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vacio{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:18px;text-align:center;color:var(--text2);font-size:14.5px}
+.aviso{background:var(--madera-tint);border-radius:12px;padding:10px 14px;font-size:14px}
+.error{text-align:center;padding:60px 20px;color:var(--text2)}
+.error b{display:block;color:var(--text);font-size:18px;margin-bottom:6px}
+@media (max-width:420px){.acc .ficha span{display:none}.acc a{padding:0 12px}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"><div class="error"><b>Cargando…</b></div></main>
+<script>
+/* ============ CONFIGURACIÓN ============ */
+const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec";
+/* ======================================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const K = new URLSearchParams(location.search).get("k") || "";
+const DEMO = K === "demo", DIA = 864e5;
+let leads = [], ultima = 0;
+
+const aMs = v => { if(v === "" || v == null) return 0; if(typeof v === "number") return v; const s = String(v);
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){ const [a,m,d] = s.split("-").map(Number); return new Date(a, m-1, d).getTime(); } const d = new Date(s); return isNaN(d) ? 0 : d.getTime(); };
+const hoy0 = () => { const d = new Date(); d.setHours(0,0,0,0); return d.getTime(); };
+function hace(ms){ const s = (Date.now() - ms) / 1000; if(s < 3600) return `hace ${Math.max(1, Math.floor(s/60))} min`; if(s < 86400) return `hace ${Math.floor(s/3600)} h`; if(s < 172800) return "ayer"; return `hace ${Math.floor(s/86400)} días`; }
+function dur(ms){ const m = Math.max(1, Math.round(Math.abs(ms)/6e4)); if(m < 60) return m + " min"; const h = Math.floor(m/60); return h < 24 ? h + " h" : Math.round(h/24) + " d"; }
+/* Mismo semáforo que el CRM: 2 h de día, antes de las 10 am si llegó de noche, domingo pasa al lunes. */
+function limite(ms){ const d = new Date(ms), h = d.getHours(), l = new Date(ms);
+  if(h >= 20){ l.setDate(l.getDate()+1); l.setHours(10,0,0,0); } else if(h < 8) l.setHours(10,0,0,0); else l.setTime(ms + 2*36e5);
+  if(l.getDay() === 0){ l.setDate(l.getDate()+1); l.setHours(10,0,0,0); } return l.getTime(); }
+
+function norm(r){ return { folio: r["Folio"], token: r.Token, nombre: r["Nombre"] || "Sin nombre", tel: String(r["WhatsApp"] || "").replace(/\D/g,"").replace(/^52(?=\d{10}$)/,""),
+  prioridad: r["Prioridad"] || "Media", fecha: aMs(r["Fecha"]), zona: r["Zona"] || "", inversion: r["Inversión"] || "", tiempo: r["Tiempo"] || "",
+  seg: r["Seguimiento"] || "Nuevo", resp: r["Responsable"] || "", primer: aMs(r["Primer contacto"]), ultimo: aMs(r["Último contacto"]),
+  proximo: aMs(r["Próximo contacto"]), intentos: Number(r["Intentos"]) || 0, visitaDia: r["Visita día"] || "", visitaHora: r["Visita horario"] || "", apartada: r["Estado"] === "Visita apartada" }; }
+
+async function cargar(){
+  try{
+    const r = DEMO ? demo() : await (await fetch(API + "?" + new URLSearchParams({ accion: "cola", k: K }), { cache: "no-store" })).json();
+    if(!r.ok){ $("app").innerHTML = `<div class="error"><b>Este link no funciona</b>Pídele a Raúl tu link de llamadas otra vez.</div>`; return; }
+    leads = r.leads.map(norm); ultima = Date.now(); pintar();
+  }catch(e){ if(!ultima) $("app").innerHTML = `<div class="error"><b>Sin conexión</b>Revisa tu internet y vuelve a abrir esta página.</div>`; }
+}
+const linkFicha = l => new URL("asesor.html", location.href).href.split("?")[0] + "?f=" + encodeURIComponent(l.folio) + "&k=" + (DEMO ? "demo" : l.token);
+
+function fila(l, nota, urgente){
+  const tel = `<svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>`;
+  return `<div class="lead ${urgente ? "urgente" : ""}"><div><div class="n">${esc(l.nombre)} <span class="prio ${esc(l.prioridad)}">${esc(l.prioridad)}</span></div>
+    <div class="s">${esc([l.zona, l.inversion, l.tiempo].filter(Boolean).join(" · "))}</div>${nota}</div>
+    <div class="acc"><a class="llamar" href="tel:+52${esc(l.tel)}" aria-label="Llamar a ${esc(l.nombre)}">${tel}</a><a class="ficha" href="${linkFicha(l)}"><span>Ficha</span> ›</a></div></div>`;
+}
+function pintar(){
+  const ahora = Date.now(), manana = hoy0() + DIA;
+  const nuevos = leads.filter(l => l.seg === "Nuevo" && !l.primer && !l.ultimo).sort((a,b) => a.fecha - b.fecha);
+  const volver = leads.filter(l => (l.seg === "Nuevo" || l.seg === "Contactado") && (l.primer || l.ultimo) && l.proximo && l.proximo < manana && l.intentos < 5).sort((a,b) => a.proximo - b.proximo);
+  const sinPago = leads.filter(l => l.seg === "Visita agendada").sort((a,b) => a.fecha - b.fecha);
+  const vencidos = nuevos.filter(l => ahora > limite(l.fecha)).length;
+  const fecha = new Date().toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
+  let h = DEMO ? `<div class="aviso"><b>Ejemplo.</b> Así se ve la lista con prospectos reales.</div>` : "";
+  h += `<header><div><small>Armadillo Diseño · Agendador</small><h1>Llamadas de hoy</h1><p>${fecha.charAt(0).toUpperCase() + fecha.slice(1)} · actualizado ${hace(ultima)}</p></div><button class="ref" id="ref" aria-label="Actualizar">↻</button></header>`;
+  h += `<div class="tiles"><div class="tile ${vencidos ? "rojo" : ""}"><b>${nuevos.length}</b><span>Llamar ya${vencidos ? ` · ${vencidos} tarde` : ""}</span></div>
+    <div class="tile"><b>${volver.length}</b><span>Volver a llamar</span></div><div class="tile"><b>${sinPago.length}</b><span>Agendadas sin pago</span></div></div>`;
+  h += `<section class="seccion"><h2>1. Llamar ya</h2><p>Prospectos nuevos, el más antiguo primero. La meta es llamar en menos de 5 minutos.</p>${nuevos.length ? nuevos.map(l => {
+    const falta = limite(l.fecha) - ahora, cls = falta < 0 ? "rojo" : falta < 30*6e4 ? "ambar" : "verde";
+    return fila(l, `<span class="t ${cls}">Llegó ${hace(l.fecha)}${falta < 0 ? " · fuera de tiempo" : " · vence en " + dur(falta)}</span>`, falta < 0); }).join("") : `<div class="vacio">No hay prospectos nuevos por llamar.</div>`}</section>`;
+  h += `<section class="seccion"><h2>2. Volver a llamar hoy</h2><p>Les toca otro intento según el seguimiento de 5 intentos en 14 días.</p>${volver.length ? volver.map(l =>
+    fila(l, `<span class="t ${l.proximo < hoy0() ? "rojo" : "gris"}">Intento ${l.intentos + 1} de 5 · ${l.proximo < hoy0() ? "atrasado" : "toca hoy"}</span>`, l.proximo < hoy0())).join("") : `<div class="vacio">Nadie pendiente por hoy.</div>`}</section>`;
+  h += `<section class="seccion"><h2>3. Agendadas sin pago</h2><p>Recuérdales el pago y la ubicación para dejar la visita confirmada.</p>${sinPago.length ? sinPago.map(l =>
+    fila(l, `<span class="t ambar">Visita ${esc(l.visitaDia || "sin fecha")}${l.visitaHora ? ", " + esc(l.visitaHora) : ""}${l.resp ? " · la hace " + esc(l.resp) : ""}</span>`, false)).join("") : `<div class="vacio">No hay visitas esperando pago.</div>`}</section>`;
+  $("app").innerHTML = h;
+  $("ref").onclick = () => { $("ref").textContent = "…"; cargar(); };
+}
+function demo(){
+  const n = Date.now();
+  const L = (f, nombre, extra) => Object.assign({ "Folio": f, Token: "demo", "Nombre": nombre, "WhatsApp": "2221234567", "Prioridad": "Alta", "Fecha": n - 20*6e4,
+    "Zona": "Cholula o San Andrés", "Inversión": "$250,000 a $400,000", "Tiempo": "En 1 a 3 meses", "Seguimiento": "Nuevo", "Intentos": 0 }, extra);
+  return { ok: true, leads: [
+    L("AD-1", "Laura Méndez", { "Fecha": n - 6*60e3 }),
+    L("AD-2", "Ricardo Sosa", { "Fecha": n - 3.5*36e5, "Prioridad": "Media", "Zona": "Otra zona de Puebla", "Inversión": "$200,000 a $250,000" }),
+    L("AD-3", "Fernanda Ruiz", { "Seguimiento": "Contactado", "Primer contacto": n - DIA, "Último contacto": n - DIA, "Intentos": 1, "Próximo contacto": n }),
+    L("AD-4", "Jorge Castillo", { "Seguimiento": "Visita agendada", "Primer contacto": n - DIA, "Responsable": "Arq. Eric", "Visita día": "viernes, 6 de noviembre", "Visita horario": "por la mañana (9 a 12)" })
+  ] };
+}
+if(!K) $("app").innerHTML = `<div class="error"><b>Falta tu link</b>Abre esta página desde el link privado que te mandó Raúl.</div>`;
+else { cargar(); setInterval(() => { if(document.visibilityState === "visible") cargar(); }, 60000); }
+</script>
+</body>
+</html>
