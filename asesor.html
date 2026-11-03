@@ -98,7 +98,8 @@ a{color:inherit;text-decoration:none}
 /* ============ CONFIGURACIÓN ============ */
 const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec";
 const EQUIPO = ["Daniel", "Arq. Eric", "Arq. Omar"];           // quienes hacen las visitas
-const QUIENES = EQUIPO.concat(["Agendador"]);                     // quienes pueden registrar movimientos
+const AGENDADOR = "Daniel Romo";                                 // agendador externo
+const QUIENES = EQUIPO.concat([AGENDADOR]);                     // quienes pueden registrar movimientos
 const PAGO = "";   /* Datos de pago de la visita (CLABE o liga de Clip). Cuando Daniel los dé, se agregan solos al mensaje de confirmación. */
 const CADENCIA = [0, 1, 3, 7, 14];
 const MOTIVOS = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
@@ -170,7 +171,7 @@ function conIntento(c){
 
 /* ---------- Mensaje para el cliente según la etapa ---------- */
 function msj(){
-  const quien = yo === "Daniel" ? "el Ing. Daniel García" : yo && yo !== "Agendador" ? "el " + yo : "";
+  const quien = yo === "Daniel" ? "el Ing. Daniel García" : yo && yo !== AGENDADOR ? "el " + yo : "";
   const yoTxt = `Hola ${nombre1(L.nombre)}, ${quien ? "soy " + quien + " de" : "te escribo de"} Armadillo Diseño.`;
   switch(L.seg){
     case "Visita agendada": return `Hola ${nombre1(L.nombre)}, ${quien ? "soy " + quien + " de Armadillo Diseño. " : "gracias por tu tiempo. "}Te dejo los datos de tu visita técnica: ${L.visitaDia || "fecha por confirmar"}${L.visitaHora ? ", " + L.visitaHora : ""}${L.resp ? ", con " + (L.resp === "Daniel" ? "el Ing. Daniel García" : "el " + L.resp) : ""}. Tiene un costo de $1,000 que se abona completo a tu cocina, y si no avanzamos el render es tuyo. Puedes pagarla por transferencia o con tarjeta${PAGO ? ":\n" + PAGO + "\n\n" : ". "}En cuanto se refleje el pago tu visita queda confirmada. Y para llegar sin problema, ¿me mandas tu ubicación por aquí?`;
@@ -225,7 +226,7 @@ function pintar(){
   h += `<section class="siguiente"><small>Siguiente paso</small><b>${esc(sigT)}</b><span>${esc(sigS)}</span></section>`;
 
   h += `<p class="titulo">¿Quién eres?</p><div class="yo" role="group" aria-label="Quién eres">${QUIENES.map(p => `<button data-yo="${p}" aria-pressed="${yo === p}">${p}</button>`).join("")}</div>`;
-  if(yo && yo !== "Agendador" && L.resp !== yo && L.seg !== "Ganado" && L.seg !== "Perdido") h += `<button class="tomar" id="tomar">${L.resp ? `Pasármelo a mí (ahora es de ${esc(L.resp)})` : "Tomar este prospecto"}</button>`;
+  if(yo && yo !== AGENDADOR && L.resp !== yo && L.seg !== "Ganado" && L.seg !== "Perdido") h += `<button class="tomar" id="tomar">${L.resp ? `Pasármelo a mí (ahora es de ${esc(L.resp)})` : "Tomar este prospecto"}</button>`;
 
   h += `<p class="titulo">Contactar</p><div class="contacto">
     <a class="gran wa" id="b-wa" href="https://wa.me/52${esc(L.tel)}?text=${encodeURIComponent(msj())}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg>WhatsApp</a>

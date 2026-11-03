@@ -111,7 +111,7 @@ function pintar(){
   const vencidos = nuevos.filter(l => ahora > limite(l.fecha)).length;
   const fecha = new Date().toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
   let h = DEMO ? `<div class="aviso"><b>Ejemplo.</b> Así se ve la lista con prospectos reales.</div>` : "";
-  h += `<header><div><small>Armadillo Diseño · Agendador</small><h1>Llamadas de hoy</h1><p>${fecha.charAt(0).toUpperCase() + fecha.slice(1)} · actualizado ${hace(ultima)}</p></div><button class="ref" id="ref" aria-label="Actualizar">↻</button></header>`;
+  h += `<header><div><small>Armadillo Diseño · Daniel Romo</small><h1>Llamadas de hoy</h1><p>${fecha.charAt(0).toUpperCase() + fecha.slice(1)} · actualizado ${hace(ultima)}</p></div><button class="ref" id="ref" aria-label="Actualizar">↻</button></header>`;
   h += `<div class="tiles"><div class="tile ${vencidos ? "rojo" : ""}"><b>${nuevos.length}</b><span>Llamar ya${vencidos ? ` · ${vencidos} tarde` : ""}</span></div>
     <div class="tile"><b>${volver.length}</b><span>Volver a llamar</span></div><div class="tile"><b>${sinPago.length}</b><span>Agendadas sin pago</span></div></div>`;
   h += `<section class="seccion"><h2>1. Llamar ya</h2><p>Prospectos nuevos, el más antiguo primero. La meta es llamar en menos de 5 minutos.</p>${nuevos.length ? nuevos.map(l => {
