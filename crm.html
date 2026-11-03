@@ -275,6 +275,48 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
   .ficha-cab .grab{display:block;position:absolute;left:50%;top:6px;transform:translateX(-50%);width:36px;height:5px;border-radius:99px;background:var(--text3)}
   .tabla td:first-child{max-width:130px}
 }
+.sla{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;white-space:nowrap}
+.sla::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.sla.rojo{color:var(--red)}.sla.ambar{color:color-mix(in srgb,var(--orange) 85%,var(--text))}.sla.verde{color:color-mix(in srgb,var(--green) 72%,var(--text))}
+.resp{width:24px;height:24px;border-radius:50%;font-size:10px;font-weight:700;display:inline-grid;place-items:center;color:#fff;flex:none;letter-spacing:0}
+.resp.r0{background:var(--accent)}.resp.r1{background:var(--madera)}.resp.r2{background:var(--indigo)}.resp.rx{background:var(--fill);color:var(--text2);border:1.5px dashed var(--text3)}
+.tracker{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:14px 10px 6px}
+.tracker div{text-align:center;font-size:11.5px;line-height:1.3;color:var(--text2);display:grid;gap:5px;justify-items:center}
+.tracker i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700;background:var(--fill2);color:var(--text2)}
+.tracker .hecho i{background:var(--accent);color:#fff}
+.tracker .sig i{box-shadow:inset 0 0 0 2px var(--accent);color:var(--accent);background:transparent}
+.tracker .sig{color:var(--text);font-weight:600}
+.nota-caja{padding:6px 14px 12px;font-size:13.5px;color:var(--text2);line-height:1.45}
+.nota-caja.alerta{color:var(--text);background:color-mix(in srgb,var(--orange) 12%,transparent);margin:0 12px 12px;border-radius:10px;padding:10px 12px}
+.motivos{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px}
+.motivos p{width:100%;font-size:14px;font-weight:600;margin:2px 2px 4px}
+.motivos button{height:32px;padding:0 12px;border-radius:99px;background:color-mix(in srgb,var(--red) 11%,transparent);color:var(--red);font-size:13.5px;font-weight:500}
+.motivos.azul button{background:var(--accent-tint);color:var(--accent)}
+.motivos button.cancelar{background:var(--fill2);color:var(--text2)}
+.linea-t{position:relative;padding:6px 14px 8px 36px}
+.linea-t::before{content:"";position:absolute;left:19px;top:16px;bottom:16px;width:2px;background:var(--sep)}
+.linea-t p{position:relative;font-size:14px;padding:7px 0}
+.linea-t p::before{content:"";position:absolute;left:-21px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2.5px var(--accent)}
+.linea-t p:first-child::before{background:var(--accent)}
+.linea-t p small{display:block;font-size:12px;color:var(--text2);margin-bottom:1px}
+.equipo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.persona-t{background:var(--card);border-radius:16px;padding:16px;box-shadow:var(--shadow);display:grid;gap:12px;align-content:start}
+.persona-t .cab{display:flex;align-items:center;gap:10px}
+.persona-t .cab .resp{width:42px;height:42px;font-size:15px}
+.persona-t .cab b{font-size:17px;font-weight:600;display:block}
+.persona-t .cab span{display:block;font-size:12.5px;color:var(--text2)}
+.kpi4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.kpi4 div{background:var(--card2);border-radius:10px;padding:9px 10px}
+.kpi4 b{display:block;font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi4 span{font-size:12px;color:var(--text2)}
+.kpi4 .malo{background:color-mix(in srgb,var(--red) 10%,transparent)}.kpi4 .malo b{color:var(--red)}
+.carga{display:grid;gap:4px;font-size:12px;color:var(--text2)}
+.carga .barra{height:8px}
+.pie-t{display:flex;justify-content:space-between;gap:10px;font-size:13px;border-top:1px solid var(--sep);padding-top:10px}
+.pie-t b{font-weight:600}
+.barra-acciones{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 4px}
+.tile.rojo .num{color:var(--red)}
+@media (max-width:900px){.fila .der.urg .pill{display:none}.tabbar{grid-template-columns:repeat(4,1fr)}.equipo{grid-template-columns:1fr}}
 .rejilla>*{min-width:0}.tabla-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}.tabla-scroll .tabla{min-width:640px}.tabla td small{color:var(--text3);font-size:11px;margin-left:2px}
 </style>
 </head>
@@ -303,6 +345,7 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
     </div>
     <button class="nav-item" data-ir="hoy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Hoy<span class="badge oculto" data-badge></span></button>
     <button class="nav-item" data-ir="leads"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-3-2-5.6-4.8-6.3"/></svg>Leads</button>
+    <button class="nav-item" data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><circle cx="5" cy="10" r="2.3"/><circle cx="19" cy="10" r="2.3"/><path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M1.5 19c0-2.2 1.5-4 3.5-4.4M22.5 19c0-2.2-1.5-4-3.5-4.4"/></svg>Equipo<span class="badge oculto" data-badge-eq></span></button>
     <button class="nav-item" data-ir="metricas"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Métricas</button>
     <div class="pie">
       <span id="sync-lat">Sin sincronizar</span>
@@ -316,6 +359,7 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
   <nav class="tabbar" aria-label="Navegación">
     <button data-ir="hoy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Hoy<span class="badge oculto" data-badge></span></button>
     <button data-ir="leads"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-3-2-5.6-4.8-6.3"/></svg>Leads</button>
+    <button data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><circle cx="5" cy="10" r="2.3"/><circle cx="19" cy="10" r="2.3"/><path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M1.5 19c0-2.2 1.5-4 3.5-4.4M22.5 19c0-2.2-1.5-4-3.5-4.4"/></svg>Equipo<span class="badge oculto" data-badge-eq></span></button>
     <button data-ir="metricas"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Métricas</button>
   </nav>
 </div>
@@ -333,6 +377,9 @@ const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ip
 const WHATSAPP_DANIEL = "522221367108";
 const EQUIPO = ["Daniel", "Arq. Eric", "Arq. Omar"];
 const ETAPAS = ["Nuevo", "Contactado", "Visita agendada", "Visita pagada", "Visita realizada", "Propuesta enviada", "Ganado", "Perdido"];
+const CADENCIA = [0, 1, 3, 7, 14];   /* días de cada intento de seguimiento, contados desde el primero */
+const MOTIVOS_PERDIDO = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
+const MOTIVOS_REASIGNAR = ["No contestó a tiempo", "Carga de trabajo", "Zona", "Otro"];
 const PREGUNTAS = ["Etapa", "Uso", "Distribución", "Muro", "Acabados", "Inversión", "Tiempo", "Zona"];
 /* ======================================= */
 
@@ -367,6 +414,7 @@ let periodo = store.get("ad_crm_periodo") || "7";
 let embudoAnuncio = "todos";
 let filtro = "todos", busqueda = "", etapaFiltro = "";
 let fichaFolio = null, ultimaSync = 0, cargando = false;
+let pidiendo = null;   /* "perdido" o { resp } mientras se elige un motivo en la ficha */
 
 /* ---------- Utilidades de fecha y formato ---------- */
 const DIA = 864e5;
@@ -412,7 +460,9 @@ function normLead(l){
     notas: String(l["Notas"] || ""), historial: String(l["Historial"] || ""),
     seguimiento: ETAPAS.includes(l["Seguimiento"]) ? l["Seguimiento"] : "Nuevo",
     ultimoContacto: aFecha(l["Último contacto"])?.getTime() || 0, proximo: aFecha(l["Próximo contacto"]),
-    dispositivo: l["Dispositivo"] || "", ubic: l["Ubicación visita"] || "", responsable: l["Responsable"] || ""
+    dispositivo: l["Dispositivo"] || "", ubic: l["Ubicación visita"] || "", responsable: l["Responsable"] || "",
+    asignado: aFecha(l["Asignado"])?.getTime() || 0, primerContacto: aFecha(l["Primer contacto"])?.getTime() || 0,
+    intentos: Number(l["Intentos"]) || 0, motivo: l["Motivo perdido"] || ""
   };
 }
 function normSesion(s){
@@ -431,6 +481,38 @@ function limpiarSesiones(ses, leads){
 const apartoVisita = l => l.estado === "Visita apartada";
 const activo = l => l.seguimiento !== "Ganado" && l.seguimiento !== "Perdido";
 const porAtender = l => l.seguimiento === "Nuevo" && !l.ultimoContacto;
+
+/* ---------- Tiempos de respuesta (semáforo) ----------
+   De día (8 a 20 h): 2 horas para contactar. De noche: antes de las 10 am. Domingo pasa al lunes 10 am. */
+function limiteSLA(ms){
+  const d = new Date(ms), h = d.getHours(), lim = new Date(ms);
+  if(h >= 20){ lim.setDate(lim.getDate() + 1); lim.setHours(10,0,0,0); }
+  else if(h < 8) lim.setHours(10,0,0,0);
+  else lim.setTime(ms + 2 * 36e5);
+  if(lim.getDay() === 0){ lim.setDate(lim.getDate() + 1); lim.setHours(10,0,0,0); }
+  return lim.getTime();
+}
+function fmtDur(ms){
+  const m = Math.max(1, Math.round(Math.abs(ms) / 6e4));
+  if(m < 60) return m + " min";
+  const h = Math.floor(m / 60);
+  if(h < 24) return h + " h" + (h < 5 && m % 60 ? " " + (m % 60) + " min" : "");
+  return Math.round(h / 24) + (Math.round(h / 24) === 1 ? " día" : " días");
+}
+const contactoDe = l => l.primerContacto || l.ultimoContacto;
+function sla(l){
+  const c = contactoDe(l);
+  if(c) return { estado: "ok", clase: c <= limiteSLA(l.fecha) ? "verde" : "ambar", txt: "Respondió en " + fmtDur(c - l.fecha) };
+  if(!activo(l)) return null;
+  const falta = limiteSLA(l.fecha) - Date.now();
+  if(falta < 0) return { estado: "vencido", clase: "rojo", txt: "Vencido " + fmtDur(falta) };
+  return { estado: "atiempo", clase: falta < 30 * 6e4 ? "ambar" : "verde", txt: "Vence en " + fmtDur(falta) };
+}
+const fueraTiempo = l => sla(l)?.estado === "vencido";
+const sinAsignar = l => activo(l) && !l.responsable;
+const colorResp = p => { const i = EQUIPO.indexOf(p); return i < 0 ? "rx" : "r" + i; };
+const inicResp = p => p ? iniciales(p.replace(/^Arq\.\s*/, "")) : "?";
+const burbuja = p => `<span class="resp ${colorResp(p)}" title="${p ? "Responsable: " + esc(p) : "Sin responsable"}">${esc(inicResp(p))}</span>`;
 
 /* ---------- API ---------- */
 async function api(params){
@@ -476,7 +558,10 @@ function aplicarLocal(l, c){
   if(c.contacto) l.ultimoContacto = Date.now();
   if(c.proximo !== undefined) l.proximo = aFecha(c.proximo);
   if(c.monto !== undefined) l.monto = Number(c.monto) || 0;
-  if(c.responsable !== undefined) l.responsable = c.responsable;
+  if(c.responsable !== undefined){ l.responsable = c.responsable; l.asignado = c.responsable ? Date.now() : 0; }
+  if(c.contacto && !l.primerContacto) l.primerContacto = Date.now();
+  if(c.intento) l.intentos = (l.intentos || 0) + 1;
+  if(c.motivo !== undefined) l.motivo = c.motivo;
   if(c.nota) l.notas = (l.notas ? l.notas + "\n" : "") + sello + " · " + c.nota;
 }
 
@@ -499,7 +584,9 @@ function render(){
   document.querySelectorAll("[data-ir]").forEach(b => b.setAttribute("aria-current", b.dataset.ir === vista ? "page" : "false"));
   const n = pendientes().total;
   document.querySelectorAll("[data-badge]").forEach(b => { b.textContent = n; b.classList.toggle("oculto", !n); });
-  const html = vista === "leads" ? vistaLeads() : vista === "metricas" ? vistaMetricas() : vistaHoy();
+  const ne = datos.leads.filter(l => fueraTiempo(l) || sinAsignar(l)).length;
+  document.querySelectorAll("[data-badge-eq]").forEach(b => { b.textContent = ne; b.classList.toggle("oculto", !ne); });
+  const html = vista === "leads" ? vistaLeads() : vista === "metricas" ? vistaMetricas() : vista === "equipo" ? vistaEquipo() : vistaHoy();
   const p = $("principal");
   const enfocado = document.activeElement && document.activeElement.id === "buscar";
   const pos = enfocado ? document.activeElement.selectionStart : 0;
@@ -518,12 +605,12 @@ function actualizarSync(){ $("sync-lat").textContent = ultimaSync ? "Actualizado
 /* ---------- Filas ---------- */
 function filaLead(l, extra){
   const sub = extra || [l.zona, rangoTxt(l.inversion), l.tiempo].filter(Boolean).join(" · ");
-  const tarde = porAtender(l) && Date.now() - l.fecha > DIA;
+  const s = sla(l), urgente = s && s.estado !== "ok";
   return `<button class="fila" data-lead="${esc(l.folio)}">
     <span class="avatar ${esc(l.prioridad)}">${esc(iniciales(l.nombre))}</span>
     <span class="txt"><span class="t1">${esc(l.nombre)}${l.escribio ? ` <span class="wa-ok" title="Ya le escribió a Daniel por WhatsApp" aria-label="Ya le escribió a Daniel por WhatsApp">${I.wa}</span>` : ""}${apartoVisita(l) ? ` <span class="pill visita">Apartó visita</span>` : ""}</span><span class="t2">${esc(sub)}</span></span>
-    <span class="der"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span><span class="tiempo ${tarde ? "tarde" : ""}">${hace(l.fecha)}</span></span>
-    ${I.chev}</button>`;
+    <span class="der${urgente ? " urg" : ""}"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span>${urgente ? `<span class="sla ${s.clase}">${s.txt}</span>` : `<span class="tiempo">${hace(l.fecha)}</span>`}</span>
+    ${activo(l) ? burbuja(l.responsable) : ""}${I.chev}</button>`;
 }
 function rangoTxt(inv){
   return String(inv || "").replace(/\$(\d{3}),000/g, "$$$1k").replace(" a ", "–").replace("Más de ", "+").replace("Menos de ", "<");
@@ -548,8 +635,10 @@ function vistaHoy(){
   const visitasHoy = datos.sesiones.filter(s => s.inicio >= hoy).length;
   const semana = datos.leads.filter(l => l.visitaFecha && l.visitaFecha.getTime() >= hoy && l.visitaFecha.getTime() < hoy + 7*DIA && activo(l)).length;
   let h = encabezado("Hoy", fecha.charAt(0).toUpperCase() + fecha.slice(1));
+  const venc = [...p.confirmar, ...p.nuevos].filter(fueraTiempo);
+  const sa = datos.leads.filter(sinAsignar).length;
   h += `<div class="tiles">
-    <div class="tile"><div class="et">${I.persona}Por atender</div><div class="num">${p.total}</div><div class="sub">${p.confirmar.length} visitas por confirmar</div></div>
+    <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Por atender</div><div class="num">${p.total}</div><div class="sub">${venc.length} fuera de tiempo · ${sa} sin asignar</div></div>
     <div class="tile"><div class="et">${I.inicio}Leads hoy</div><div class="num">${leadsHoy}</div><div class="sub">${fmtNum(visitasHoy)} visitas a la página</div></div>
     <div class="tile ocultable"><div class="et">${I.cal}Visitas esta semana</div><div class="num">${semana}</div><div class="sub">en los próximos 7 días</div></div>
   </div>`;
@@ -557,6 +646,8 @@ function vistaHoy(){
   if(!p.total && !p.proximas.length){
     h += `<div class="grupo-titulo"><b>Pendientes</b></div><div class="lista">${vacio("Todo al día", "No hay leads por atender. Los nuevos aparecen aquí en cuanto llegan.")}</div>`;
   }
+  h += bloque("Fuera de tiempo", "Ya pasaron las 2 horas (o las 10 am si llegó de noche). Atiéndelos primero", venc, l => `${l.responsable ? "Responsable: " + l.responsable : "Sin responsable"} · llegó ${hace(l.fecha)}`);
+  p.confirmar = p.confirmar.filter(l => !venc.includes(l)); p.nuevos = p.nuevos.filter(l => !venc.includes(l));
   h += bloque("Visitas por confirmar", "Escríbeles para confirmar la dirección", p.confirmar, l => `${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""} · ${l.escribio ? "ya le escribió a Daniel" : l.zona}`);
   h += bloque("Nuevos sin contactar", "Los más antiguos primero", p.nuevos);
   h += bloque("Seguimientos para hoy", "Fecha de próximo contacto vencida o de hoy", p.seguimientos, l => `Contactar: ${l.proximo.toLocaleDateString("es-MX",{day:"numeric",month:"short"})} · ${l.zona}`);
@@ -568,6 +659,8 @@ function vistaHoy(){
 const FILTROS = [
   ["todos", "Todos", () => true],
   ["atender", "Por atender", porAtender],
+  ["fuera", "Fuera de tiempo", fueraTiempo],
+  ["sinasignar", "Sin asignar", sinAsignar],
   ["visita", "Apartó visita", apartoVisita],
   ["escribio", "Ya escribió a Daniel", l => l.escribio],
   ["alta", "Prioridad alta", l => l.prioridad === "Alta"],
@@ -579,7 +672,7 @@ function vistaLeads(){
   const q = busqueda.trim().toLowerCase();
   const f = (FILTROS.find(x => x[0] === filtro) || FILTROS[0])[2];
   const lista = datos.leads.filter(l => f(l) && (!etapaFiltro || l.seguimiento === etapaFiltro) &&
-    (!q || [l.nombre, l.tel, l.zona, l.folio, l.forma, l.anuncio].join(" ").toLowerCase().includes(q)));
+    (!q || [l.nombre, l.tel, l.zona, l.folio, l.forma, l.anuncio, l.responsable].join(" ").toLowerCase().includes(q)));
   let h = encabezado("Leads", `${fmtNum(datos.leads.length)} en total`);
   h += `<div class="pipe" aria-label="Embudo de seguimiento">${ETAPAS.map(e => {
     const n = datos.leads.filter(l => l.seguimiento === e).length;
@@ -712,9 +805,75 @@ function vistaMetricas(){
   return h;
 }
 
+/* ---------- Vista: Equipo ---------- */
+function statsPersona(p){
+  const manana = hoyInicio().getTime() + DIA;
+  const mios = datos.leads.filter(l => l.responsable === p), act = mios.filter(activo);
+  const cont = mios.filter(contactoDe);
+  const tiempos = cont.map(l => contactoDe(l) - l.fecha).filter(x => x >= 0);
+  return {
+    mios, act, venc: act.filter(fueraTiempo), sinC: act.filter(l => !contactoDe(l)),
+    seg: act.filter(l => l.proximo && l.proximo.getTime() < manana),
+    visitas: mios.filter(l => l.seguimiento === "Visita agendada" || l.seguimiento === "Visita pagada"),
+    ganados: mios.filter(l => l.seguimiento === "Ganado").length,
+    prom: tiempos.length ? tiempos.reduce((a, b) => a + b, 0) / tiempos.length : 0,
+    aTiempo: pct(cont.filter(l => contactoDe(l) <= limiteSLA(l.fecha)).length, cont.length), nCont: cont.length
+  };
+}
+function msjResumen(){
+  /* Sin emojis: el link de WhatsApp en computadora los convierte en "?". */
+  const fecha = new Date().toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
+  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo), sa = act.filter(l => !l.responsable);
+  const manana = hoyInicio().getTime() + DIA;
+  const seg = act.filter(l => l.proximo && l.proximo.getTime() < manana);
+  const lineas = [`*RESUMEN DEL EQUIPO · ${fecha}*`, `Activos: ${act.length} · Sin asignar: ${sa.length} · Fuera de tiempo: ${venc.length}`, ""];
+  EQUIPO.forEach(p => { const s = statsPersona(p);
+    lineas.push(`*${p}*: ${s.act.length} activos · ${s.sinC.length} sin contactar · ${s.venc.length} fuera de tiempo · ${s.seg.length} seguimientos hoy`); });
+  if(venc.length){ lineas.push("", "*Fuera de tiempo (atender ya)*"); venc.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · llegó ${hace(l.fecha)}`)); }
+  if(seg.length){ lineas.push("", "*Seguimientos de hoy*"); seg.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · intento ${Math.min(l.intentos + 1, 5)} de 5`)); }
+  if(sa.length){ lineas.push("", "*Sin asignar*"); sa.forEach(l => lineas.push(`- ${l.nombre} · ${l.zona || "sin zona"}`)); }
+  return lineas.join("\n");
+}
+function vistaEquipo(){
+  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo), sa = act.filter(l => !l.responsable);
+  const cont = datos.leads.filter(contactoDe), tiempos = cont.map(l => contactoDe(l) - l.fecha).filter(x => x >= 0);
+  const prom = tiempos.length ? tiempos.reduce((a, b) => a + b, 0) / tiempos.length : 0;
+  let h = encabezado("Equipo", "Quién tiene qué, cuánto tarda en responder y qué está pendiente");
+  h += `<div class="tiles">
+    <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Fuera de tiempo</div><div class="num">${venc.length}</div><div class="sub">sin contactar y ya pasó el tiempo</div></div>
+    <div class="tile ${sa.length ? "rojo" : ""}"><div class="et">${I.inicio}Sin asignar</div><div class="num">${sa.length}</div><div class="sub">de ${act.length} activos</div></div>
+    <div class="tile ocultable"><div class="et">${I.cal}Respuesta promedio</div><div class="num">${prom ? fmtDur(prom) : "—"}</div><div class="sub">${pct(cont.filter(l => contactoDe(l) <= limiteSLA(l.fecha)).length, cont.length)}% contactados a tiempo</div></div>
+  </div>`;
+  h += `<div class="barra-acciones"><a class="btn chico" href="https://wa.me/?text=${encodeURIComponent(msjResumen())}" target="_blank" rel="noopener">${I.enviar}Mandar resumen al grupo</a></div>`;
+  const maxC = Math.max(1, ...EQUIPO.map(p => statsPersona(p).act.length));
+  h += `<div class="grupo-titulo"><b>Por persona</b><span>Tiempo máximo: 2 horas de día, antes de las 10 am si llegó de noche</span></div><div class="equipo">${EQUIPO.map(p => { const s = statsPersona(p);
+    return `<div class="persona-t">
+      <div class="cab">${burbuja(p)}<div><b>${esc(p)}</b><span>${s.act.length} activos · ${s.ganados} ganados</span></div></div>
+      <div class="carga"><span>Carga de prospectos activos</span><div class="barra"><i style="width:${s.act.length / maxC * 100}%"></i></div></div>
+      <div class="kpi4">
+        <div class="${s.venc.length ? "malo" : ""}"><b>${s.venc.length}</b><span>Fuera de tiempo</span></div>
+        <div class="${s.sinC.length ? "" : ""}"><b>${s.sinC.length}</b><span>Sin contactar</span></div>
+        <div><b>${s.seg.length}</b><span>Seguimientos hoy</span></div>
+        <div><b>${s.visitas.length}</b><span>Visitas agendadas o pagadas</span></div>
+      </div>
+      <div class="pie-t"><span>Responde en <b>${s.prom ? fmtDur(s.prom) : "—"}</b></span><span><b>${s.nCont ? s.aTiempo + "%" : "—"}</b> a tiempo</span></div>
+    </div>`; }).join("")}</div>`;
+  const bloque = (titulo, ayuda, arr, extra) => arr.length ? `<div class="grupo-titulo"><b>${titulo}</b><span>${ayuda}</span></div><div class="lista">${arr.map(l => filaLead(l, extra && extra(l))).join("")}</div>` : "";
+  h += bloque("Fuera de tiempo", "Atiéndelos primero o reasígnalos", venc, l => `${l.responsable || "Sin responsable"} · llegó ${hace(l.fecha)}`);
+  h += bloque("Sin asignar", "Ábrelos y elige responsable", sa);
+  const manana = hoyInicio().getTime() + DIA;
+  h += bloque("Seguimientos de hoy", "Intento que toca según la cadencia de 5 en 14 días", act.filter(l => l.proximo && l.proximo.getTime() < manana && !venc.includes(l)), l => `${l.responsable || "Sin responsable"} · intento ${Math.min(l.intentos + 1, 5)} de 5`);
+  const perdidos = datos.leads.filter(l => l.seguimiento === "Perdido");
+  const mot = MOTIVOS_PERDIDO.map(m => [m, perdidos.filter(l => l.motivo === m).length]).concat([["Sin motivo", perdidos.filter(l => !l.motivo).length]]).filter(x => x[1]);
+  const maxM = Math.max(1, ...mot.map(x => x[1]));
+  h += `<div class="grupo-titulo"><b>Por qué se pierden</b><span>${perdidos.length} prospectos perdidos</span></div><div class="tarjeta">${mot.length ? `<div class="desglose">${mot.map(([m, n]) =>
+    `<div class="barra-fila"><span class="nom">${m}</span><span class="barra"><i style="width:${n / maxM * 100}%"></i></span><span class="v">${n}</span></div>`).join("")}</div>` : `<p class="ayuda">Todavía no hay prospectos perdidos.</p>`}</div>`;
+  return h;
+}
+
 /* ---------- Ficha del lead ---------- */
 function abrirFicha(folio){
-  fichaFolio = folio;
+  fichaFolio = folio; pidiendo = null;
   const f = $("ficha"); f.hidden = false;
   requestAnimationFrame(() => { f.classList.add("abierta"); $("velo").classList.add("abierto"); });
   pintarFicha();
@@ -773,11 +932,12 @@ function pintarFicha(){
   const l = datos.leads.find(x => x.folio === fichaFolio); if(!l){ cerrarFicha(); return; }
   const dato = (k, v) => v ? `<div class="dato"><span>${k}</span><b>${esc(v)}</b></div>` : "";
   const notas = l.notas ? l.notas.split("\n").filter(Boolean).reverse().map(n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; }).join("") : "";
-  const hist = l.historial ? l.historial.split("\n").filter(Boolean).reverse().map(n => `<p>${esc(n)}</p>`).join("") : "";
+  const evt = n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; };
+  const histArr = l.historial ? l.historial.split("\n").filter(Boolean).reverse() : [];
   const vf = l.visitaFecha;
   let h = `<div class="persona"><span class="avatar ${esc(l.prioridad)}">${esc(iniciales(l.nombre))}</span>
     <h2 id="ficha-nombre">${esc(l.nombre)}</h2><p>Folio ${esc(l.folio)} · llegó ${hace(l.fecha)}</p>
-    <div class="pills"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span><span class="pill" style="background:var(--fill2)"><span class="punto ${esc(l.prioridad)}"></span>Prioridad ${esc(l.prioridad.toLowerCase())}</span>${l.escribio ? `<span class="pill wa">${I.wa}Ya le escribió a Daniel</span>` : ""}${l.pago ? `<span class="pill e-Visita-pagada">Abrió el link de pago</span>` : ""}</div></div>`;
+    <div class="pills"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span><span class="pill" style="background:var(--fill2)"><span class="punto ${esc(l.prioridad)}"></span>Prioridad ${esc(l.prioridad.toLowerCase())}</span>${l.escribio ? `<span class="pill wa">${I.wa}Ya le escribió a Daniel</span>` : ""}${l.pago ? `<span class="pill e-Visita-pagada">Abrió el link de pago</span>` : ""}${(s => s ? `<span class="pill" style="background:var(--fill2)"><span class="sla ${s.clase}">${s.txt}</span></span>` : "")(sla(l))}</div></div>`;
   h += `<div class="acciones">
     <a class="accion" id="a-wa" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjCliente(l))}" target="_blank" rel="noopener">${I.wa}WhatsApp</a>
     <a class="accion" id="a-tel" href="tel:+52${esc(l.tel)}">${I.tel}Llamar</a>
@@ -790,12 +950,25 @@ function pintarFicha(){
       ${l.seguimiento === "Nuevo" || l.seguimiento === "Contactado" ? `<button class="btn chico" id="confirmar-visita">Confirmar</button>` : ""}</div></div>`;
   }
   const sugerido = turno();
+  const pr = pidiendo && pidiendo.resp;
   h += `<p class="seccion-t">Responsable</p><div class="caja"><div class="etapas" role="group" aria-label="Responsable">${EQUIPO.map(p =>
     `<button data-resp="${p}" aria-pressed="${l.responsable === p}">${p}</button>`).join("")}</div>
-    ${l.responsable ? "" : `<div class="dato"><span>Le toca a</span><b>${sugerido}</b></div>`}</div>`;
-  h += `<p class="seccion-t">Seguimiento</p><div class="caja"><div class="etapas" role="group" aria-label="Etapa de seguimiento">${ETAPAS.map(e =>
+    ${pr ? `<div class="motivos azul"><p>¿Por qué pasa a ${esc(pr)}?</p>${MOTIVOS_REASIGNAR.map(m => `<button data-motivo-resp="${m}">${m}</button>`).join("")}<button class="cancelar" data-cancelar>Cancelar</button></div>` : ""}
+    ${l.responsable ? `<div class="dato"><span>Asignado</span><b>${l.asignado ? hace(l.asignado) : "sin fecha"}</b></div>` : `<div class="dato"><span>Le toca a</span><b>${sugerido}</b></div>`}</div>`;
+  h += `<p class="seccion-t">Etapa</p><div class="caja"><div class="etapas" role="group" aria-label="Etapa de seguimiento">${ETAPAS.map(e =>
     `<button data-etapa="${e}" aria-pressed="${l.seguimiento === e}">${e}</button>`).join("")}</div>
+    ${pidiendo === "perdido" ? `<div class="motivos"><p>¿Por qué se perdió?</p>${MOTIVOS_PERDIDO.map(m => `<button data-motivo="${m}">${m}</button>`).join("")}<button class="cancelar" data-cancelar>Cancelar</button></div>` : ""}
+    ${l.seguimiento === "Perdido" && l.motivo ? `<div class="dato"><span>Motivo</span><b>${esc(l.motivo)}</b></div>` : ""}
     ${l.ultimoContacto ? `<div class="dato"><span>Último contacto</span><b>${hace(l.ultimoContacto)}</b></div>` : `<div class="dato"><span>Último contacto</span><b style="color:var(--red)">Sin contactar</b></div>`}</div>`;
+  if(l.seguimiento === "Nuevo" || l.seguimiento === "Contactado"){
+    const base = l.primerContacto ? new Date(l.primerContacto) : null; if(base) base.setHours(0,0,0,0);
+    const fechaI = i => base ? new Date(base.getTime() + CADENCIA[i] * DIA).toLocaleDateString("es-MX", { day:"numeric", month:"short" }) : "";
+    h += `<p class="seccion-t">Seguimiento · intento ${Math.min(l.intentos, 5)} de 5</p><div class="caja">
+      <div class="tracker">${CADENCIA.map((d, i) => `<div class="${i < l.intentos ? "hecho" : i === l.intentos ? "sig" : ""}"><i>${i + 1}</i><span>Día ${d}${base ? "<br>" + fechaI(i) : ""}</span></div>`).join("")}</div>
+      ${l.intentos >= 5
+        ? `<p class="nota-caja alerta">Ya van 5 intentos. Si no respondió, márcalo como <b>Perdido</b> y elige el motivo.</p>`
+        : `<p class="nota-caja">Cada vez que tocas WhatsApp o Llamar se registra un intento (uno por día) y la fecha del siguiente se pone sola${l.proximo ? `: <b>${l.proximo.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"short"})}</b>` : ""}.</p>`}</div>`;
+  }
   h += `<p class="seccion-t">Próximo contacto</p><div class="caja">
     <div class="linea-form"><input type="date" id="f-proximo" value="${l.proximo ? isoDia(l.proximo) : ""}" aria-label="Fecha de próximo contacto"><button class="btn chico sec" id="g-proximo">Guardar</button></div>
     <div class="rapidos"><button data-dias="1">Mañana</button><button data-dias="3">En 3 días</button><button data-dias="7">En 1 semana</button>${l.proximo ? `<button data-dias="0">Quitar</button>` : ""}</div></div>`;
@@ -807,16 +980,37 @@ function pintarFicha(){
   h += `<p class="seccion-t">Cierre</p><div class="caja"><div class="linea-form"><input type="number" inputmode="numeric" id="f-monto" placeholder="Monto cerrado en pesos" value="${l.monto || ""}" aria-label="Monto cerrado"><button class="btn chico sec" id="g-monto">Guardar</button></div></div>`;
   h += `<p class="seccion-t">Notas</p><div class="caja"><div class="linea-form"><textarea id="f-nota" placeholder="Agrega una nota de la llamada o la visita" aria-label="Nueva nota"></textarea></div>
     <div class="rapidos"><button class="btn chico" id="g-nota" style="color:#fff">Agregar nota</button></div>${notas ? `<div class="notas">${notas}</div>` : ""}</div>`;
-  if(hist) h += `<div class="caja" style="margin-top:12px"><details class="hist"><summary>Ver historial</summary><div class="notas">${hist}</div></details></div>`;
+  if(histArr.length) h += `<p class="seccion-t">Historial</p><div class="caja"><div class="linea-t">${histArr.slice(0, 6).map(evt).join("")}</div>${histArr.length > 6 ? `<details class="hist"><summary>Ver ${histArr.length - 6} movimientos anteriores</summary><div class="linea-t">${histArr.slice(6).map(evt).join("")}</div></details>` : ""}</div>`;
   $("ficha-cuerpo").innerHTML = h;
 
-  const contacto = tipo => { const c = { contacto: tipo }; if(l.seguimiento === "Nuevo") c.seguimiento = "Contactado"; guardar(l.folio, c); };
+  const contacto = tipo => {
+    const c = { contacto: tipo };
+    if(l.seguimiento === "Nuevo") c.seguimiento = "Contactado";
+    const yaHoy = l.ultimoContacto >= hoyInicio().getTime();
+    if((l.seguimiento === "Nuevo" || l.seguimiento === "Contactado") && l.intentos < 5 && !yaHoy){
+      c.intento = 1;
+      const n = l.intentos + 1, base = new Date(l.primerContacto || Date.now()); base.setHours(0,0,0,0);
+      c.proximo = n < 5 ? isoDia(new Date(base.getTime() + CADENCIA[n] * DIA)) : "";
+    }
+    guardar(l.folio, c, c.intento ? `Intento ${l.intentos + 1} de 5 registrado` : null);
+  };
   $("a-wa").onclick = () => contacto("WhatsApp enviado");
   $("a-grupo").onclick = () => { if(!l.responsable) guardar(l.folio, { responsable: turno() }, "Asignado a " + turno()); };
   $("a-tel").onclick = () => contacto("Llamada");
   const cv = $("confirmar-visita"); if(cv) cv.onclick = () => guardar(l.folio, { seguimiento: "Visita agendada", contacto: "Visita confirmada" }, "Visita confirmada");
-  document.querySelectorAll("[data-resp]").forEach(b => b.onclick = () => { const r = b.dataset.resp === l.responsable ? "" : b.dataset.resp; guardar(l.folio, { responsable: r }, r ? "Asignado a " + r : "Sin responsable"); });
-  document.querySelectorAll("[data-etapa]").forEach(b => b.onclick = () => { if(b.dataset.etapa !== l.seguimiento) guardar(l.folio, { seguimiento: b.dataset.etapa }, "Seguimiento: " + b.dataset.etapa); });
+  document.querySelectorAll("[data-resp]").forEach(b => b.onclick = () => {
+    const p = b.dataset.resp;
+    if(l.responsable && p !== l.responsable){ pidiendo = { resp: p }; pintarFicha(); return; }
+    const r = p === l.responsable ? "" : p; guardar(l.folio, { responsable: r }, r ? "Asignado a " + r : "Sin responsable");
+  });
+  document.querySelectorAll("[data-motivo-resp]").forEach(b => b.onclick = () => { const p = pidiendo.resp; pidiendo = null; guardar(l.folio, { responsable: p, motivo_resp: b.dataset.motivoResp }, "Reasignado a " + p); });
+  document.querySelectorAll("[data-etapa]").forEach(b => b.onclick = () => {
+    const e = b.dataset.etapa; if(e === l.seguimiento) return;
+    if(e === "Perdido"){ pidiendo = "perdido"; pintarFicha(); return; }
+    guardar(l.folio, { seguimiento: e }, "Etapa: " + e);
+  });
+  document.querySelectorAll("[data-motivo]").forEach(b => b.onclick = () => { pidiendo = null; guardar(l.folio, { seguimiento: "Perdido", motivo: b.dataset.motivo }, "Perdido: " + b.dataset.motivo); });
+  document.querySelectorAll("[data-cancelar]").forEach(b => b.onclick = () => { pidiendo = null; pintarFicha(); });
   $("g-proximo").onclick = () => guardar(l.folio, { proximo: $("f-proximo").value }, $("f-proximo").value ? "Próximo contacto guardado" : "Próximo contacto quitado");
   document.querySelectorAll("[data-dias]").forEach(b => b.onclick = () => {
     const n = Number(b.dataset.dias); const d = hoyInicio(); d.setDate(d.getDate() + n);
@@ -901,7 +1095,11 @@ function demoApi(p){
         "Monto cerrado": seg === "Ganado" ? 180000 + Math.floor(r() * 18) * 10000 : "", "Seguimiento": seg,
         "Último contacto": seg !== "Nuevo" ? s["Inicio"] + DIA * .5 : "", "Próximo contacto": ["Contactado","Propuesta enviada"].includes(seg) && r() < .6 ? now - Math.floor(r()*2) * DIA : "",
         "Notas": seg !== "Nuevo" && r() < .5 ? "20/10 12:40 · Le interesa isla con barra. Quiere ver muestras de madera." : "",
-        "Historial": "20/10 11:02 · Llegó desde la landing", "Dispositivo": s["Dispositivo"] });
+        "Historial": "20/10 11:02 · Llegó desde la landing", "Dispositivo": s["Dispositivo"],
+        "Responsable": seg === "Nuevo" && r() < .5 ? "" : pick(EQUIPO), "Asignado": s["Inicio"] + 36e5,
+        "Primer contacto": seg !== "Nuevo" ? s["Inicio"] + Math.floor(r() * 20) * 36e5 : "",
+        "Intentos": seg === "Contactado" ? 1 + Math.floor(r() * 5) : seg !== "Nuevo" ? 1 : 0,
+        "Motivo perdido": seg === "Perdido" && r() < .8 ? pick(MOTIVOS_PERDIDO) : "" });
     });
     demoApi.d = { leads, sesiones: ses };
   }
@@ -912,7 +1110,10 @@ function demoApi(p){
     if(c.contacto) l["Último contacto"] = Date.now();
     if(c.proximo !== undefined) l["Próximo contacto"] = c.proximo;
     if(c.monto !== undefined) l["Monto cerrado"] = c.monto;
-    if(c.responsable !== undefined) l["Responsable"] = c.responsable;
+    if(c.responsable !== undefined){ l["Responsable"] = c.responsable; l["Asignado"] = c.responsable ? Date.now() : ""; }
+    if(c.contacto && !l["Primer contacto"]) l["Primer contacto"] = Date.now();
+    if(c.intento) l["Intentos"] = (Number(l["Intentos"]) || 0) + 1;
+    if(c.motivo !== undefined) l["Motivo perdido"] = c.motivo;
     if(c.nota) l["Notas"] = (l["Notas"] ? l["Notas"] + "\n" : "") + "ahora · " + c.nota;
     return Promise.resolve({ ok: true, lead: l });
   }
