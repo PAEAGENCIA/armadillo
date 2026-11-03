@@ -262,7 +262,7 @@ function conectar(){
     const p = b.dataset.paso;
     if(!yo){ toast("Primero toca tu nombre"); return; }
     if(p === "nocontesto") return guardar(conIntento({ contacto: "No contestó" }), `Intento ${Math.min(L.intentos + 1, 5)} de 5 registrado`);
-    if(p === "contesto") return guardar({ seguimiento: "Contactado", contacto: "Contestó" }, "Listo: contestó");
+    if(p === "contesto"){ const d = new Date(); d.setDate(d.getDate() + 2); return guardar({ seguimiento: "Contactado", contacto: "Contestó", proximo: iso(d) }, "Listo: contestó · seguimiento en 2 días"); }
     if(p === "pago") return guardar({ seguimiento: "Visita pagada", contacto: "Pagó la visita" }, "Visita pagada registrada");
     if(p === "visita") return guardar({ seguimiento: "Visita realizada" }, "Visita realizada registrada");
     if(p === "propuesta"){ const d = new Date(); d.setDate(d.getDate() + 3); return guardar({ seguimiento: "Propuesta enviada", proximo: iso(d) }, "Propuesta registrada · seguimiento en 3 días"); }

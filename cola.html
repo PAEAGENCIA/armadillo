@@ -54,6 +54,9 @@ header p{color:var(--text2);font-size:14px;margin-top:2px}
 .acc .llamar{background:var(--accent);color:#fff}
 .acc .ficha{background:var(--fill);color:var(--accent)}
 .acc svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.buscar{width:100%;height:44px;border:0;border-radius:12px;background:var(--card);box-shadow:var(--shadow);padding:0 14px;font-size:16px;color:var(--text)}
+.buscar:focus{outline:2px solid var(--accent)}
+.seccion h2 .n{font-size:14px;color:var(--text2);font-weight:600;margin-left:6px}
 .vacio{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:18px;text-align:center;color:var(--text2);font-size:14.5px}
 .aviso{background:var(--madera-tint);border-radius:12px;padding:10px 14px;font-size:14px}
 .error{text-align:center;padding:60px 20px;color:var(--text2)}
@@ -71,7 +74,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const K = new URLSearchParams(location.search).get("k") || "";
 const DEMO = K === "demo", DIA = 864e5;
-let leads = [], ultima = 0;
+let leads = [], ultima = 0, filtro = "";
 
 const aMs = v => { if(v === "" || v == null) return 0; if(typeof v === "number") return v; const s = String(v);
   if(/^\d{4}-\d{2}-\d{2}$/.test(s)){ const [a,m,d] = s.split("-").map(Number); return new Date(a, m-1, d).getTime(); } const d = new Date(s); return isNaN(d) ? 0 : d.getTime(); };
@@ -108,12 +111,16 @@ function pintar(){
   const nuevos = leads.filter(l => l.seg === "Nuevo" && !l.primer && !l.ultimo).sort((a,b) => a.fecha - b.fecha);
   const volver = leads.filter(l => (l.seg === "Nuevo" || l.seg === "Contactado") && (l.primer || l.ultimo) && l.proximo && l.proximo < manana && l.intentos < 5).sort((a,b) => a.proximo - b.proximo);
   const sinPago = leads.filter(l => l.seg === "Visita agendada").sort((a,b) => a.fecha - b.fecha);
+  /* Todos los que ya se contactaron y no están en otra sección: así ningún prospecto desaparece de la lista al actualizarlo. */
+  const enPlatica = leads.filter(l => (l.seg === "Nuevo" || l.seg === "Contactado") && (l.primer || l.ultimo) && !volver.includes(l)).sort((a,b) => (a.proximo || 9e15) - (b.proximo || 9e15));
+  const pagadas = leads.filter(l => l.seg === "Visita pagada" || l.seg === "Visita realizada" || l.seg === "Propuesta enviada").sort((a,b) => b.fecha - a.fecha);
   const vencidos = nuevos.filter(l => ahora > limite(l.fecha)).length;
   const fecha = new Date().toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
   let h = DEMO ? `<div class="aviso"><b>Ejemplo.</b> Así se ve la lista con prospectos reales.</div>` : "";
   h += `<header><div><small>Armadillo Diseño · Daniel Romo</small><h1>Llamadas de hoy</h1><p>${fecha.charAt(0).toUpperCase() + fecha.slice(1)} · actualizado ${hace(ultima)}</p></div><button class="ref" id="ref" aria-label="Actualizar">↻</button></header>`;
   h += `<div class="tiles"><div class="tile ${vencidos ? "rojo" : ""}"><b>${nuevos.length}</b><span>Llamar ya${vencidos ? ` · ${vencidos} tarde` : ""}</span></div>
-    <div class="tile"><b>${volver.length}</b><span>Volver a llamar</span></div><div class="tile"><b>${sinPago.length}</b><span>Agendadas sin pago</span></div></div>`;
+    <div class="tile"><b>${volver.length}</b><span>Volver a llamar</span></div><div class="tile"><b>${sinPago.length}</b><span>Agendadas sin pago</span></div></div>
+    <input class="buscar" id="buscar" type="search" placeholder="Buscar prospecto por nombre o teléfono" aria-label="Buscar prospecto">`;
   h += `<section class="seccion"><h2>1. Llamar ya</h2><p>Prospectos nuevos, el más antiguo primero. La meta es llamar en menos de 5 minutos.</p>${nuevos.length ? nuevos.map(l => {
     const falta = limite(l.fecha) - ahora, cls = falta < 0 ? "rojo" : falta < 30*6e4 ? "ambar" : "verde";
     return fila(l, `<span class="t ${cls}">Llegó ${hace(l.fecha)}${falta < 0 ? " · fuera de tiempo" : " · vence en " + dur(falta)}</span>`, falta < 0); }).join("") : `<div class="vacio">No hay prospectos nuevos por llamar.</div>`}</section>`;
@@ -121,7 +128,13 @@ function pintar(){
     fila(l, `<span class="t ${l.proximo < hoy0() ? "rojo" : "gris"}">Intento ${l.intentos + 1} de 5 · ${l.proximo < hoy0() ? "atrasado" : "toca hoy"}</span>`, l.proximo < hoy0())).join("") : `<div class="vacio">Nadie pendiente por hoy.</div>`}</section>`;
   h += `<section class="seccion"><h2>3. Agendadas sin pago</h2><p>Recuérdales el pago y la ubicación para dejar la visita confirmada.</p>${sinPago.length ? sinPago.map(l =>
     fila(l, `<span class="t ambar">Visita ${esc(l.visitaDia || "sin fecha")}${l.visitaHora ? ", " + esc(l.visitaHora) : ""}${l.resp ? " · la hace " + esc(l.resp) : ""}</span>`, false)).join("") : `<div class="vacio">No hay visitas esperando pago.</div>`}</section>`;
+  h += `<section class="seccion"><h2>4. En seguimiento<span class="n">${enPlatica.length}</span></h2><p>Ya los contactaste. Aquí siguen hasta que agenden o se pierdan. El siguiente intento aparece arriba el día que toca.</p>${enPlatica.length ? enPlatica.map(l =>
+    fila(l, `<span class="t ${l.proximo ? "gris" : "ambar"}">${l.proximo ? "Próximo contacto: " + new Date(l.proximo).toLocaleDateString("es-MX", { weekday:"short", day:"numeric", month:"short" }) : "Sin fecha de seguimiento: ábrelo y registra qué pasó"} · intento ${Math.min(l.intentos, 5)} de 5</span>`, false)).join("") : `<div class="vacio">Nadie en seguimiento.</div>`}</section>`;
+  h += `<section class="seccion"><h2>5. Visitas pagadas<span class="n">${pagadas.length}</span></h2><p>Tu trabajo terminado: estas visitas ya están en manos del equipo.</p>${pagadas.length ? pagadas.map(l =>
+    fila(l, `<span class="t verde">${esc(l.seg)}${l.visitaDia ? " · " + esc(l.visitaDia) : ""}${l.resp ? " · " + esc(l.resp) : ""}</span>`, false)).join("") : `<div class="vacio">Aún no hay visitas pagadas.</div>`}</section>`;
+  if(filtro) h += `<section class="seccion"><h2>Resultados de "${esc(filtro)}"</h2>${(r => r.length ? r.map(l => fila(l, `<span class="t gris">${esc(l.seg)}</span>`, false)).join("") : `<div class="vacio">No encontramos a nadie con ese nombre o teléfono.</div>`)(leads.filter(l => (l.nombre + " " + l.tel).toLowerCase().includes(filtro.toLowerCase())))}</section>`;
   $("app").innerHTML = h;
+  const b = $("buscar"); if(b){ b.value = filtro; b.oninput = () => { filtro = b.value.trim(); clearTimeout(pintar.t); pintar.t = setTimeout(() => { pintar(); const n = $("buscar"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 350); }; }
   $("ref").onclick = () => { $("ref").textContent = "…"; cargar(); };
 }
 function demo(){
@@ -132,13 +145,15 @@ function demo(){
     L("AD-1", "Laura Méndez", { "Fecha": n - 6*60e3 }),
     L("AD-2", "Ricardo Sosa", { "Fecha": n - 3.5*36e5, "Prioridad": "Media", "Zona": "Otra zona de Puebla", "Inversión": "$200,000 a $250,000" }),
     L("AD-3", "Fernanda Ruiz", { "Seguimiento": "Contactado", "Primer contacto": n - DIA, "Último contacto": n - DIA, "Intentos": 1, "Próximo contacto": n }),
+    L("AD-5", "Andrea Molina", { "Seguimiento": "Contactado", "Primer contacto": n - 2*DIA, "Último contacto": n - 2*36e5, "Intentos": 2, "Próximo contacto": n + 2*DIA }),
+    L("AD-6", "Héctor Ramírez", { "Seguimiento": "Visita pagada", "Primer contacto": n - 3*DIA, "Responsable": "Daniel", "Visita día": "lunes, 9 de noviembre" }),
     L("AD-4", "Jorge Castillo", { "Seguimiento": "Visita agendada", "Primer contacto": n - DIA, "Responsable": "Arq. Eric", "Visita día": "viernes, 6 de noviembre", "Visita horario": "por la mañana (9 a 12)" })
   ] };
 }
 /* Guarda el link de la lista para que la ficha muestre "‹ Lista de llamadas". */
 if(K && !DEMO){ try{ localStorage.setItem("ad_cola", location.href); }catch(e){} }
 if(!K) $("app").innerHTML = `<div class="error"><b>Falta tu link</b>Abre esta página desde el link privado que te mandó Raúl.</div>`;
-else { cargar(); setInterval(() => { if(document.visibilityState === "visible") cargar(); }, 60000); }
+else { cargar(); window.addEventListener("pageshow", e => { if(e.persisted) cargar(); }); setInterval(() => { if(document.visibilityState === "visible") cargar(); }, 60000); }
 </script>
 </body>
 </html>
