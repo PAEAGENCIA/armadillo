@@ -135,6 +135,8 @@ function demo(){
     L("AD-4", "Jorge Castillo", { "Seguimiento": "Visita agendada", "Primer contacto": n - DIA, "Responsable": "Arq. Eric", "Visita día": "viernes, 6 de noviembre", "Visita horario": "por la mañana (9 a 12)" })
   ] };
 }
+/* Guarda el link de la lista para que la ficha muestre "‹ Lista de llamadas". */
+if(K && !DEMO){ try{ localStorage.setItem("ad_cola", location.href); }catch(e){} }
 if(!K) $("app").innerHTML = `<div class="error"><b>Falta tu link</b>Abre esta página desde el link privado que te mandó Raúl.</div>`;
 else { cargar(); setInterval(() => { if(document.visibilityState === "visible") cargar(); }, 60000); }
 </script>

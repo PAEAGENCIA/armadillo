@@ -28,6 +28,7 @@ button{cursor:pointer;border:0;background:none}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px;border-radius:12px}
 .wrap{max-width:560px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));display:grid;gap:14px}
+.volver{display:inline-flex;align-items:center;gap:4px;height:40px;padding:0 14px 0 10px;border-radius:99px;background:var(--card);box-shadow:var(--shadow);color:var(--accent);font-weight:700;font-size:15px;justify-self:start}
 .marca{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);font-weight:600}
 .card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px}
 .persona{display:flex;gap:14px;align-items:center}
@@ -215,6 +216,9 @@ function pintar(){
   const [sigT, sigS] = siguiente();
   const tarde = L.seg === "Nuevo" && !L.primer && Date.now() - L.fecha > 2 * 36e5;
   let h = DEMO ? `<div class="demo"><b>Ejemplo.</b> Así lo verá el asesor; aquí no se guarda nada.</div>` : "";
+  const cola = store.get("ad_cola");
+  if(cola) h += `<a class="volver" href="${esc(cola)}">‹ Lista de llamadas</a>`;
+  else if(history.length > 1) h += `<button class="volver" type="button" onclick="history.back()">‹ Regresar</button>`;
   h += `<div class="marca">Armadillo Diseño · Prospecto ${esc(L.folio)}</div>`;
   h += `<section class="card"><div class="persona"><span class="avatar ${esc(L.prioridad)}">${esc(inic(L.nombre))}</span>
     <div><h1>${esc(L.nombre)}</h1><p>Llegó ${hace(L.fecha)} · ${L.resp ? "Responsable: " + esc(L.resp) : "Sin responsable"}</p></div></div>
