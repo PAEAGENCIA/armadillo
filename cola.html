@@ -44,6 +44,7 @@ header p{color:var(--text2);font-size:14px;margin-top:2px}
 .lead.urgente{box-shadow:inset 4px 0 0 var(--red),var(--shadow)}
 .lead .n{font-size:16.5px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .lead .s{font-size:13.5px;color:var(--text2);margin-top:2px}
+.lead .num{font-size:16px;font-weight:700;margin-top:3px;letter-spacing:.02em;font-variant-numeric:tabular-nums;user-select:all;-webkit-user-select:all}
 .lead .t{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;margin-top:5px}
 .lead .t::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
 .t.rojo{color:var(--red)}.t.ambar{color:color-mix(in srgb,var(--orange) 85%,var(--text))}.t.verde{color:color-mix(in srgb,var(--green) 72%,var(--text))}.t.gris{color:var(--text2)}
@@ -71,6 +72,7 @@ header p{color:var(--text2);font-size:14px;margin-top:2px}
 const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec";
 /* ======================================= */
 const $ = id => document.getElementById(id);
+const fmtTel = t => /^\d{10}$/.test(t) ? t.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3") : t;
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const K = new URLSearchParams(location.search).get("k") || "";
 const DEMO = K === "demo", DIA = 864e5;
@@ -103,6 +105,7 @@ const linkFicha = l => new URL("asesor.html", location.href).href.split("?")[0] 
 function fila(l, nota, urgente){
   const tel = `<svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>`;
   return `<div class="lead ${urgente ? "urgente" : ""}"><div><div class="n">${esc(l.nombre)} <span class="prio ${esc(l.prioridad)}">${esc(l.prioridad)}</span></div>
+    ${l.tel ? `<div class="num">${esc(fmtTel(l.tel))}</div>` : ""}
     <div class="s">${esc([l.zona, l.inversion, l.tiempo].filter(Boolean).join(" · "))}</div>${nota}</div>
     <div class="acc"><a class="llamar" href="tel:+52${esc(l.tel)}" aria-label="Llamar a ${esc(l.nombre)}">${tel}</a><a class="ficha" href="${linkFicha(l)}"><span>Ficha</span> ›</a></div></div>`;
 }
