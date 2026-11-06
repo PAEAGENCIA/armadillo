@@ -618,7 +618,7 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
 /* ============ CONFIGURACIÓN (editar antes de publicar) ============ */
 const CONFIG = {
   pixelId: "1686283536259740",                       // ID de tu píxel de Meta (solo números). Vacío = sin píxel.
-  whatsapp: "522221367108",           // WhatsApp del Ing. Daniel García, con lada 52 y sin espacios
+  whatsapp: "522227382691",           // WhatsApp de Daniel Romo (agendador), con lada 52 y sin espacios
   sheetEndpoint: "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec",                  // URL de Google Apps Script que guarda cada lead en el CRM. NECESARIO para no perder contactos.
   instagram: "https://www.instagram.com/armadillo.proyecto/",
   // Rangos internos (NO se muestran al cliente; llegan al CRM). Muro de 3 a 5 m. CONFIRMAR CON DANIEL.
@@ -630,7 +630,7 @@ const CONFIG = {
   // Prueba social: llenar SOLO con datos reales. Vacío = la sección no se muestra.
   prueba: { cocinas:"", anios:"", calificacion:"" },  // ej. cocinas:"+40", anios:"8", calificacion:"4.9 en Google"
   testimonios: [],                    // ej. { texto:"Cumplieron en tiempo y dejaron todo limpio.", nombre:"Laura M.", zona:"Lomas de Angelópolis" }
-  regalo: null                        // Regalo al apartar la visita: null = no se muestra. Daniel aún lo define. Formato: { titulo:"...", texto:"..." }
+  regalo: { titulo: "Render premium incluido", texto: "Tu visita incluye un render premium de tu cocina con valor de $1,500. Apartando hoy, tu visita queda en $1,000." }   // Regalo al apartar. null = no se muestra.
 };
 /* ================================================================= */
 
@@ -978,7 +978,7 @@ function resultado(){
   ["platicar","showroom-alt","wa-diag"].forEach(id => { const a = $(id); if(a) a.onclick = () => { guardar("clic_whatsapp"); if(typeof window.fbq === "function") window.fbq("track","Contact"); }; });
 }
 
-const HORARIOS = [{l:"por la mañana (10 a 12)", t:"Mañana", r:"10 a 12"},{l:"a mediodía (12 a 3)", t:"Mediodía", r:"12 a 3"},{l:"por la tarde (3 a 5)", t:"Tarde", r:"3 a 5"}];
+const HORARIOS = [{l:"a mediodía (12 a 2)", t:"Mediodía", r:"12 a 2"},{l:"por la tarde (2 a 5)", t:"Tarde", r:"2 a 5"}];   /* Visitas de lunes a viernes, de 12 a 5 */
 function diasVisita(){
   const out = [], d = new Date();
   d.setDate(d.getDate() + 1);

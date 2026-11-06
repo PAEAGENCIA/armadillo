@@ -185,7 +185,12 @@ function msj(){
     case "Visita realizada": return `${yoTxt} Gracias por recibirnos. Ya estamos trabajando en el render de tu cocina. ¿Hay algo que se te haya ocurrido después de la visita y quieras que tomemos en cuenta?`;
     case "Propuesta enviada": return `${yoTxt} ¿Qué te pareció el render de tu cocina? Si hay algo que quieras ajustar, lo platicamos y lo dejamos como te imaginas.`;
     case "Contactado": return `${yoTxt} Te escribo para dar seguimiento a tu cocina. ¿Pudiste pensar lo que platicamos? Esta semana tengo espacio para ir a medir.`;
-    default: return L.apartada
+    default:
+      if(yo === AGENDADOR || (!yo && store.get("ad_cola"))){
+        const h = new Date().getHours(), saludo = h < 12 ? "buenos días" : h < 19 ? "buenas tardes" : "buenas noches";
+        return `Hola ${nombre1(L.nombre)}, ${saludo}. Soy Daniel Romo, de Armadillo Diseño 👋 Recibimos el diagnóstico de tu cocina. En unos minutos te marco desde este número para platicar dos minutos de tu proyecto.\n\nSi gustas, guárdame como Daniel Romo · Armadillo Diseño para que identifiques la llamada. ¿Te queda bien que te marque ahorita?`;
+      }
+      return L.apartada
       ? `${yoTxt} Vi que apartaste tu visita técnica para el ${L.visitaDia}${L.visitaHora ? ", " + L.visitaHora : ""}. ¿Me compartes tu ubicación para dejarla confirmada?`
       : `${yoTxt} Recibí tu diagnóstico de cocina. Antes de proponerte algo, cuéntame: ¿qué es lo que más te gustaría cambiar de tu cocina?`;
   }
