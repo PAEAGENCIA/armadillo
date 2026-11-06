@@ -921,7 +921,7 @@ const DX = {
     Alta: [["Cubierta", "piedra de gran formato con detalles a la medida"], ["Herrajes", "sistemas premium, organizadores internos y apertura sin jaladeras"], ["Carpintería de autor", "chapas de madera, lambrines y luz integrada en cada mueble"]] }
 };
 function msjDiagnostico(l){
-  const n = primerNombre(l.nombre), quien = "Daniel";
+  const n = primerNombre(l.nombre), quien = "Daniel Romo";
   const nv = /^Alta/.test(l.acabado) ? "Alta" : /^Funcional/.test(l.acabado) ? "Funcional" : /^Diseño/.test(l.acabado) ? "Diseño"
     : /^Menos|^\$200,000|^\$150,000/.test(l.inversion) ? "Funcional" : /^Más/.test(l.inversion) ? "Alta" : "Diseño";
   const perfil = [(DX.titulo[l.forma] || "Cocina a la medida") + (DX.enfoque[l.uso] ? ", " + DX.enfoque[l.uso] : ""), l.acabado ? DX.nivel[nv] : ""].filter(Boolean).join(" · ");
@@ -1017,7 +1017,7 @@ function demoAgente(ruta, c){
   return Promise.resolve({ ok: true, estado: { fase: l.responsable ? "persona" : "asistente", responsable: l.responsable, motivo: l.responsable ? "Pidió que le llamen" : "", pausadoHasta: 0, ventanaAbierta: true }, historial });
 }
 function msjCliente(l){
-  const n = primerNombre(l.nombre), yo = `Hola ${n}, soy Daniel, de Armadillo Diseño.`;
+  const n = primerNombre(l.nombre), yo = `Hola ${n}, soy Daniel Romo, de Armadillo Diseño.`;
   const cocina = l.forma ? " " + l.forma.toLowerCase().replace(/^cocina /, "") : "";
   switch(l.seguimiento){
     case "Visita agendada": return `${yo} Te escribo para confirmar tu visita técnica${l.visitaDia ? " del " + l.visitaDia : ""}. La visita tiene un costo de $1,000 que se abona completo a tu cocina, y si no avanzamos el render es tuyo. Puedes pagarla por transferencia, en efectivo o con tarjeta. ¿Cómo te acomoda? Y para dejarla confirmada, ¿me mandas tu ubicación por aquí?`;

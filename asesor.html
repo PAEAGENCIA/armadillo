@@ -180,7 +180,7 @@ function msj(){
   const quien = yo === "Daniel" ? "el Ing. Daniel García" : yo && yo !== AGENDADOR ? "el " + yo : "";
   const yoTxt = `Hola ${nombre1(L.nombre)}, ${quien ? "soy " + quien + " de" : "te escribo de"} Armadillo Diseño.`;
   switch(L.seg){
-    case "Visita agendada": return `Hola ${nombre1(L.nombre)}, ${quien ? "soy " + quien + " de Armadillo Diseño. " : "gracias por tu tiempo. "}Te dejo los datos de tu visita técnica: ${L.visitaDia || "fecha por confirmar"}${L.visitaHora ? ", " + L.visitaHora : ""}${L.resp ? ", con " + (L.resp === "Daniel" ? "el Ing. Daniel García" : "el " + L.resp) : ""}. Incluye un render premium de tu cocina (valor de $1,500) y, por agendarla hoy, la visita queda en $1,000, que se abonan completos a tu cocina. Si no avanzamos, el render es tuyo. Puedes pagarla por transferencia o con tarjeta${PAGO ? ":\n" + PAGO + "\n\n" : ". "}En cuanto se refleje el pago tu visita queda confirmada. Y para llegar sin problema, ¿me mandas tu ubicación por aquí?`;
+    case "Visita agendada": return `Hola ${nombre1(L.nombre)}, ${quien ? "soy " + quien + " de Armadillo Diseño. " : "gracias por tu tiempo. "}Te dejo los datos de tu visita técnica: ${L.visitaDia || "fecha por confirmar"}${L.visitaHora ? ", " + L.visitaHora : ""}, con el Ing. Daniel García y el Arq. Omar. Incluye un render premium de tu cocina (valor de $1,500) y, por agendarla hoy, la visita queda en $1,000, que se abonan completos a tu cocina. Si no avanzamos, el render es tuyo. Puedes pagarla por transferencia o con tarjeta${PAGO ? ":\n" + PAGO + "\n\n" : ". "}En cuanto se refleje el pago tu visita queda confirmada. Y para llegar sin problema, ¿me mandas tu ubicación por aquí?`;
     case "Visita pagada": return `${yoTxt} Ya quedó registrado tu pago, gracias. Nos vemos en tu visita${L.visitaDia ? " el " + L.visitaDia : ""}. Si tienes fotos de tu cocina actual o planos, mándamelos y llego con ideas.`;
     case "Visita realizada": return `${yoTxt} Gracias por recibirnos. Ya estamos trabajando en el render de tu cocina. ¿Hay algo que se te haya ocurrido después de la visita y quieras que tomemos en cuenta?`;
     case "Propuesta enviada": return `${yoTxt} ¿Qué te pareció el render de tu cocina? Si hay algo que quieras ajustar, lo platicamos y lo dejamos como te imaginas.`;
@@ -196,6 +196,16 @@ function msj(){
   }
 }
 
+/* Confirmación de cita para el grupo de WhatsApp de marketing. Sin emojis: en computadora se vuelven "?". */
+function msjCita(){
+  return [`*CITA CONFIRMADA · ${L.folio}*`, "", `*${L.nombre}*`,
+    `Día: ${L.visitaDia || "sin fecha"}${L.visitaHora ? ", " + L.visitaHora : ""}`,
+    `Ubicación: ${L.ubic || "pendiente (pedírsela al cliente)"}`, `Zona: ${L.zona || "sin dato"}`,
+    `Cocina: ${[L.etapaCasa, L.forma, L.acabado].filter(Boolean).join(" · ") || "sin dato"}`,
+    `Inversión: ${L.inversion || "sin dato"} · Para cuándo: ${L.tiempo || "sin dato"}`,
+    `Pago de la visita ($1,000): ${L.seg === "Visita pagada" ? "PAGADO" : "PENDIENTE"}`,
+    "Van: Ing. Daniel García y Arq. Omar", "", `WhatsApp del cliente: https://wa.me/52${L.tel}`, `Ficha: ${location.href}`].join("\n");
+}
 /* ---------- Siguiente paso ---------- */
 function siguiente(){
   switch(L.seg){
@@ -231,7 +241,7 @@ function pintar(){
   else if(history.length > 1) h += `<button class="volver" type="button" onclick="history.back()">‹ Regresar</button>`;
   h += `<div class="marca">Armadillo Diseño · Prospecto ${esc(L.folio)}</div>`;
   h += `<section class="card"><div class="persona"><span class="avatar ${esc(L.prioridad)}">${esc(inic(L.nombre))}</span>
-    <div><h1>${esc(L.nombre)}</h1><p>Llegó ${hace(L.fecha)} · ${L.resp ? "Responsable: " + esc(L.resp) : "Sin responsable"}</p></div></div>
+    <div><h1>${esc(L.nombre)}</h1><p>Llegó ${hace(L.fecha)}</p></div></div>
     <div class="chips"><span class="chip etapa">${esc(L.seg)}</span><span class="chip">Prioridad ${esc(L.prioridad.toLowerCase())}</span>${tarde ? `<span class="chip rojo">Fuera de tiempo</span>` : ""}${L.apartada ? `<span class="chip">Apartó visita</span>` : ""}</div>
     <div class="datos">
       ${[["Zona", L.zona], ["Inversión", L.inversion], ["Para cuándo", L.tiempo], ["Cocina", [L.forma, L.acabado].filter(Boolean).join(" · ")], ["Situación", L.etapaCasa], ["Visita", L.visitaDia ? L.visitaDia + (L.visitaHora ? ", " + L.visitaHora : "") : ""]]
@@ -240,18 +250,18 @@ function pintar(){
   h += `<section class="siguiente"><small>Siguiente paso</small><b>${esc(sigT)}</b><span>${esc(sigS)}</span></section>`;
 
   h += `<p class="titulo">¿Quién eres?</p><div class="yo" role="group" aria-label="Quién eres">${QUIENES.map(p => `<button data-yo="${p}" aria-pressed="${yo === p}">${p}</button>`).join("")}</div>`;
-  if(yo && yo !== AGENDADOR && L.resp !== yo && L.seg !== "Ganado" && L.seg !== "Perdido") h += `<button class="tomar" id="tomar">${L.resp ? `Pasármelo a mí (ahora es de ${esc(L.resp)})` : "Tomar este prospecto"}</button>`;
 
   h += `<p class="titulo">Contactar</p><section class="card numero"><div><span>Teléfono</span><b id="num">${esc(fmtTel(L.tel)) || "Sin número"}</b></div>${L.tel ? `<button id="b-copiar">Copiar</button>` : ""}</section><div class="contacto">
     <a class="gran wa" id="b-wa" href="https://wa.me/52${esc(L.tel)}?text=${encodeURIComponent(msj())}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg>WhatsApp</a>
     <a class="gran tel" id="b-tel" href="tel:+52${esc(L.tel)}"><svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Llamar</a></div>`;
 
+  if(L.seg === "Visita agendada" || L.seg === "Visita pagada") h += `<a class="gran wa" id="b-cita" style="margin-top:10px;display:flex" href="https://wa.me/?text=${encodeURIComponent(msjCita())}" target="_blank" rel="noopener">Mandar cita al grupo de marketing</a>`;
   h += `<p class="titulo">¿Qué pasó?</p><div class="pasos">${PASOS.map(([id, ic, t, s, et]) =>
     `<button class="paso ${et === L.seg ? "actual" : ""} ${id === "nocontesto" || id === "perdido" ? "rojo" : id === "gano" ? "verde" : ""}" data-paso="${id}" ${id === "nocontesto" && L.intentos >= 5 ? "disabled" : ""}><i>${ic}</i><b>${t}</b><span>${s}</span></button>`).join("")}</div>`;
 
   if(panel === "agendo") h += `<section class="card panel"><p>¿Qué día es la visita? <span style="font-weight:400;color:var(--text2);font-size:14px">Lunes a viernes, de 12 a 5. Duran 1 hora y van dos personas.</span></p><input type="date" id="v-fecha" min="${iso(new Date())}">
     <div class="opciones" role="group" aria-label="Horario">${HORARIOS.map(x => `<button data-hora="${x}" aria-pressed="${horario === x}">${x}</button>`).join("")}</div>
-    <p>¿Quién hace la visita?</p><div class="opciones" role="group" aria-label="Quién hace la visita">${EQUIPO.map(x => `<button data-visitador="${x}" aria-pressed="${(visitador || L.resp) === x}">${x}</button>`).join("")}</div>
+    <p style="font-weight:400;color:var(--text2);font-size:14px">Van el Ing. Daniel García y el Arq. Omar.</p>
     <div class="fila-b"><button class="btn sec" data-cerrar>Cancelar</button><button class="btn" id="g-agendo">Guardar visita</button></div></section>`;
   if(panel === "gano") h += `<section class="card panel"><p>¿En cuánto cerró la cocina?</p><input type="number" inputmode="numeric" id="v-monto" placeholder="Monto en pesos">
     <div class="fila-b"><button class="btn sec" data-cerrar>Cancelar</button><button class="btn" id="g-gano">Guardar</button></div></section>`;
@@ -265,12 +275,12 @@ function pintar(){
 }
 function conectar(){
   document.querySelectorAll("[data-yo]").forEach(b => b.onclick = () => { yo = b.dataset.yo; store.set("ad_asesor", yo); pintar(); });
-  const t = $("tomar"); if(t) t.onclick = () => guardar({ responsable: yo }, "Ahora este prospecto es tuyo");
   $("b-wa").onclick = () => { yo ? guardar(conIntento({ contacto: "WhatsApp enviado" }), "WhatsApp registrado") : toast("Toca tu nombre para que quede registrado"); };
   const cp = $("b-copiar"); if(cp) cp.onclick = async () => {
     try{ await navigator.clipboard.writeText(L.tel); toast("Número copiado"); }
     catch(e){ const r = document.createRange(); r.selectNodeContents($("num")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast("Número seleccionado: cópialo con Ctrl+C"); }
   };
+  const bc = $("b-cita"); if(bc) bc.onclick = () => guardar({ nota: "Cita enviada al grupo de marketing" }, "Cita enviada al grupo");
   $("b-tel").onclick = () => { yo ? guardar(conIntento({ contacto: "Llamada" }), "Llamada registrada") : toast("Toca tu nombre para que quede registrado"); };
   document.querySelectorAll("[data-paso]").forEach(b => b.onclick = () => {
     const p = b.dataset.paso;
@@ -290,9 +300,7 @@ function conectar(){
     const v = $("v-fecha").value; if(!v){ toast("Elige el día de la visita"); return; } if(!horario){ toast("Elige el horario"); return; }
     { const [a1, m1, d1] = v.split("-").map(Number), ds = new Date(a1, m1 - 1, d1).getDay(); if(ds === 0 || ds === 6){ toast("Las visitas son de lunes a viernes"); return; } }
     const [a, m, d] = v.split("-").map(Number); const dia = new Date(a, m - 1, d).toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
-    const quienVisita = visitador || L.resp; if(!quienVisita){ toast("Elige quién hace la visita"); return; }
     const c = { seguimiento: "Visita agendada", visita_dia: dia, visita_horario: horario, visita_fecha: v, contacto: "Agendó visita" };
-    if(quienVisita !== L.resp) c.responsable = quienVisita;
     guardar(c, "Visita agendada · ahora mándale la confirmación y el pago por WhatsApp");
   };
   const gg = $("g-gano"); if(gg) gg.onclick = () => { const v = $("v-monto").value; if(!v){ toast("Escribe el monto"); return; } guardar({ seguimiento: "Ganado", monto: v }, "¡Cocina cerrada!"); };
