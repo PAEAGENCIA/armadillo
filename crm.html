@@ -206,7 +206,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .persona h2{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:10px}
 .persona p{color:var(--text2);font-size:14px;margin-top:2px}
 .persona .pills{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:10px}
-.acciones{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.acciones{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
 .siguiente{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--accent-tint);font-size:14px;line-height:1.4}
 .siguiente svg{color:var(--accent);margin-top:1px}
 .siguiente.vencido{background:color-mix(in srgb,var(--red) 12%,transparent)}
@@ -603,7 +603,7 @@ function render(){
   document.querySelectorAll("[data-ir]").forEach(b => b.setAttribute("aria-current", b.dataset.ir === vista ? "page" : "false"));
   const n = pendientes().total;
   document.querySelectorAll("[data-badge]").forEach(b => { b.textContent = n; b.classList.toggle("oculto", !n); });
-  const ne = datos.leads.filter(l => fueraTiempo(l) || sinAsignar(l)).length;
+  const ne = datos.leads.filter(l => fueraTiempo(l)).length;
   document.querySelectorAll("[data-badge-eq]").forEach(b => { b.textContent = ne; b.classList.toggle("oculto", !ne); });
   const html = vista === "leads" ? vistaLeads() : vista === "metricas" ? vistaMetricas() : vista === "equipo" ? vistaEquipo() : vistaHoy();
   const p = $("principal");
@@ -629,7 +629,7 @@ function filaLead(l, extra){
     <span class="avatar ${esc(l.prioridad)}">${esc(iniciales(l.nombre))}</span>
     <span class="txt"><span class="t1">${esc(l.nombre)}${l.escribio ? ` <span class="wa-ok" title="Ya le escribió a Daniel por WhatsApp" aria-label="Ya le escribió a Daniel por WhatsApp">${I.wa}</span>` : ""}${apartoVisita(l) ? ` <span class="pill visita">Apartó visita</span>` : ""}</span><span class="t2">${esc(sub)}</span></span>
     <span class="der${urgente ? " urg" : ""}"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span>${urgente ? `<span class="sla ${s.clase}">${s.txt}</span>` : `<span class="tiempo">${hace(l.fecha)}</span>`}</span>
-    ${activo(l) ? burbuja(l.responsable) : ""}${I.chev}</button>`;
+    ${I.chev}</button>`;
 }
 function rangoTxt(inv){
   return String(inv || "").replace(/\$(\d{3}),000/g, "$$$1k").replace(" a ", "–").replace("Más de ", "+").replace("Menos de ", "<");
@@ -655,9 +655,8 @@ function vistaHoy(){
   const semana = datos.leads.filter(l => l.visitaFecha && l.visitaFecha.getTime() >= hoy && l.visitaFecha.getTime() < hoy + 7*DIA && activo(l)).length;
   let h = encabezado("Hoy", fecha.charAt(0).toUpperCase() + fecha.slice(1));
   const venc = [...p.confirmar, ...p.nuevos].filter(fueraTiempo);
-  const sa = datos.leads.filter(sinAsignar).length;
   h += `<div class="tiles">
-    <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Por atender</div><div class="num">${p.total}</div><div class="sub">${venc.length} fuera de tiempo · ${sa} sin asignar</div></div>
+    <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Por atender</div><div class="num">${p.total}</div><div class="sub">${venc.length} fuera de tiempo</div></div>
     <div class="tile"><div class="et">${I.inicio}Leads hoy</div><div class="num">${leadsHoy}</div><div class="sub">${fmtNum(visitasHoy)} visitas a la página</div></div>
     <div class="tile ocultable"><div class="et">${I.cal}Visitas esta semana</div><div class="num">${semana}</div><div class="sub">en los próximos 7 días</div></div>
   </div>`;
@@ -665,7 +664,7 @@ function vistaHoy(){
   if(!p.total && !p.proximas.length){
     h += `<div class="grupo-titulo"><b>Pendientes</b></div><div class="lista">${vacio("Todo al día", "No hay leads por atender. Los nuevos aparecen aquí en cuanto llegan.")}</div>`;
   }
-  h += bloque("Fuera de tiempo", "Ya pasaron las 2 horas (o las 10 am si llegó de noche). Atiéndelos primero", venc, l => `${l.responsable ? "Responsable: " + l.responsable : "Sin responsable"} · llegó ${hace(l.fecha)}`);
+  h += bloque("Fuera de tiempo", "Ya pasaron las 2 horas (o las 10 am si llegó de noche). Atiéndelos primero", venc, l => `Llegó ${hace(l.fecha)}`);
   p.confirmar = p.confirmar.filter(l => !venc.includes(l)); p.nuevos = p.nuevos.filter(l => !venc.includes(l));
   h += bloque("Visitas por confirmar", "Escríbeles para confirmar la dirección", p.confirmar, l => `${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""} · ${l.escribio ? "ya le escribió a Daniel" : l.zona}`);
   h += bloque("Nuevos sin contactar", "Los más antiguos primero", p.nuevos);
@@ -679,7 +678,6 @@ const FILTROS = [
   ["todos", "Todos", () => true],
   ["atender", "Por atender", porAtender],
   ["fuera", "Fuera de tiempo", fueraTiempo],
-  ["sinasignar", "Sin asignar", sinAsignar],
   ["visita", "Apartó visita", apartoVisita],
   ["escribio", "Ya escribió a Daniel", l => l.escribio],
   ["alta", "Prioridad alta", l => l.prioridad === "Alta"],
@@ -827,7 +825,7 @@ function vistaMetricas(){
 /* ---------- Vista: Equipo ---------- */
 function statsPersona(p){
   const manana = hoyInicio().getTime() + DIA;
-  const mios = datos.leads.filter(l => l.responsable === p), act = mios.filter(activo);
+  const mios = datos.leads, act = mios.filter(activo);
   const cont = mios.filter(contactoDe);
   const tiempos = cont.map(l => contactoDe(l) - l.fecha).filter(x => x >= 0);
   return {
@@ -842,46 +840,40 @@ function statsPersona(p){
 function msjResumen(){
   /* Sin emojis: el link de WhatsApp en computadora los convierte en "?". */
   const fecha = new Date().toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
-  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo), sa = act.filter(l => !l.responsable);
+  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo);
   const manana = hoyInicio().getTime() + DIA;
   const seg = act.filter(l => l.proximo && l.proximo.getTime() < manana);
-  const lineas = [`*RESUMEN DEL EQUIPO · ${fecha}*`, `Activos: ${act.length} · Sin asignar: ${sa.length} · Fuera de tiempo: ${venc.length}`, ""];
-  EQUIPO.forEach(p => { const s = statsPersona(p);
-    lineas.push(`*${p}*: ${s.act.length} activos · ${s.sinC.length} sin contactar · ${s.venc.length} fuera de tiempo · ${s.seg.length} seguimientos hoy`); });
-  if(venc.length){ lineas.push("", "*Fuera de tiempo (atender ya)*"); venc.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · llegó ${hace(l.fecha)}`, `  ${linkAsesor(l)}`)); }
-  if(seg.length){ lineas.push("", "*Seguimientos de hoy*"); seg.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · intento ${Math.min(l.intentos + 1, 5)} de 5`, `  ${linkAsesor(l)}`)); }
-  if(sa.length){ lineas.push("", "*Sin asignar*"); sa.forEach(l => lineas.push(`- ${l.nombre} · ${l.zona || "sin zona"}`)); }
+  const lineas = [`*RESUMEN DEL EQUIPO · ${fecha}*`, `Activos: ${act.length} · Fuera de tiempo: ${venc.length}`, ""];
+  { const s = statsPersona(); lineas.push(`*Daniel Romo (agendador)*: ${s.sinC.length} sin contactar · ${s.venc.length} fuera de tiempo · ${s.seg.length} seguimientos hoy · ${s.visitas.length} visitas agendadas o pagadas`); }
+  if(venc.length){ lineas.push("", "*Fuera de tiempo (atender ya)*"); venc.forEach(l => lineas.push(`- ${l.nombre} · llegó ${hace(l.fecha)}`, `  ${linkAsesor(l)}`)); }
+  if(seg.length){ lineas.push("", "*Seguimientos de hoy*"); seg.forEach(l => lineas.push(`- ${l.nombre} · intento ${Math.min(l.intentos + 1, 5)} de 5`, `  ${linkAsesor(l)}`)); }
   return lineas.join("\n");
 }
 function vistaEquipo(){
-  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo), sa = act.filter(l => !l.responsable);
+  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo);
   const cont = datos.leads.filter(contactoDe), tiempos = cont.map(l => contactoDe(l) - l.fecha).filter(x => x >= 0);
   const prom = tiempos.length ? tiempos.reduce((a, b) => a + b, 0) / tiempos.length : 0;
-  let h = encabezado("Equipo", "Quién tiene qué, cuánto tarda en responder y qué está pendiente");
+  let h = encabezado("Equipo", "Daniel Romo atiende y agenda; a las visitas van el Ing. Daniel García y el Arq. Omar");
   h += `<div class="tiles">
     <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Fuera de tiempo</div><div class="num">${venc.length}</div><div class="sub">sin contactar y ya pasó el tiempo</div></div>
-    <div class="tile ${sa.length ? "rojo" : ""}"><div class="et">${I.inicio}Sin asignar</div><div class="num">${sa.length}</div><div class="sub">de ${act.length} activos</div></div>
+    <div class="tile"><div class="et">${I.inicio}Activos</div><div class="num">${act.length}</div><div class="sub">prospectos en seguimiento</div></div>
     <div class="tile ocultable"><div class="et">${I.cal}Respuesta promedio</div><div class="num">${prom ? fmtDur(prom) : "—"}</div><div class="sub">${pct(cont.filter(l => contactoDe(l) <= limiteSLA(l.fecha)).length, cont.length)}% contactados a tiempo</div></div>
   </div>`;
   h += `<div class="barra-acciones"><a class="btn chico" href="https://wa.me/?text=${encodeURIComponent(msjResumen())}" target="_blank" rel="noopener">${I.enviar}Mandar resumen al grupo</a></div>`;
-  const maxC = Math.max(1, ...EQUIPO.map(p => statsPersona(p).act.length));
-  h += `<div class="grupo-titulo"><b>Por persona</b><span>Tiempo máximo: 2 horas de día, antes de las 10 am si llegó de noche</span></div><div class="equipo">${EQUIPO.map(p => { const s = statsPersona(p);
-    return `<div class="persona-t">
-      <div class="cab">${burbuja(p)}<div><b>${esc(p)}</b><span>${s.act.length} activos · ${s.ganados} ganados</span></div></div>
-      <div class="carga"><span>Carga de prospectos activos</span><div class="barra"><i style="width:${s.act.length / maxC * 100}%"></i></div></div>
+  { const s = statsPersona();
+  h += `<div class="grupo-titulo"><b>Daniel Romo · agendador</b><span>Tiempo máximo: 2 horas de día, antes de las 10 am si llegó de noche</span></div><div class="equipo"><div class="persona-t">
       <div class="kpi4">
         <div class="${s.venc.length ? "malo" : ""}"><b>${s.venc.length}</b><span>Fuera de tiempo</span></div>
-        <div class="${s.sinC.length ? "" : ""}"><b>${s.sinC.length}</b><span>Sin contactar</span></div>
+        <div><b>${s.sinC.length}</b><span>Sin contactar</span></div>
         <div><b>${s.seg.length}</b><span>Seguimientos hoy</span></div>
         <div><b>${s.visitas.length}</b><span>Visitas agendadas o pagadas</span></div>
       </div>
       <div class="pie-t"><span>Responde en <b>${s.prom ? fmtDur(s.prom) : "—"}</b></span><span><b>${s.nCont ? s.aTiempo + "%" : "—"}</b> a tiempo</span></div>
-    </div>`; }).join("")}</div>`;
+    </div></div>`; }
   const bloque = (titulo, ayuda, arr, extra) => arr.length ? `<div class="grupo-titulo"><b>${titulo}</b><span>${ayuda}</span></div><div class="lista">${arr.map(l => filaLead(l, extra && extra(l))).join("")}</div>` : "";
-  h += bloque("Fuera de tiempo", "Atiéndelos primero o reasígnalos", venc, l => `${l.responsable || "Sin responsable"} · llegó ${hace(l.fecha)}`);
-  h += bloque("Sin asignar", "Ábrelos y elige responsable", sa);
+  h += bloque("Fuera de tiempo", "Atiéndelos primero", venc, l => `Llegó ${hace(l.fecha)}`);
   const manana = hoyInicio().getTime() + DIA;
-  h += bloque("Seguimientos de hoy", "Intento que toca según la cadencia de 5 en 14 días", act.filter(l => l.proximo && l.proximo.getTime() < manana && !venc.includes(l)), l => `${l.responsable || "Sin responsable"} · intento ${Math.min(l.intentos + 1, 5)} de 5`);
+  h += bloque("Seguimientos de hoy", "Intento que toca según la cadencia de 5 en 14 días", act.filter(l => l.proximo && l.proximo.getTime() < manana && !venc.includes(l)), l => `Intento ${Math.min(l.intentos + 1, 5)} de 5`);
   const perdidos = datos.leads.filter(l => l.seguimiento === "Perdido");
   const mot = MOTIVOS_PERDIDO.map(m => [m, perdidos.filter(l => l.motivo === m).length]).concat([["Sin motivo", perdidos.filter(l => !l.motivo).length]]).filter(x => x[1]);
   const maxM = Math.max(1, ...mot.map(x => x[1]));
@@ -929,7 +921,7 @@ const DX = {
     Alta: [["Cubierta", "piedra de gran formato con detalles a la medida"], ["Herrajes", "sistemas premium, organizadores internos y apertura sin jaladeras"], ["Carpintería de autor", "chapas de madera, lambrines y luz integrada en cada mueble"]] }
 };
 function msjDiagnostico(l){
-  const n = primerNombre(l.nombre), quien = NOMBRE_LARGO[l.responsable] || "el Ing. Daniel García";
+  const n = primerNombre(l.nombre), quien = "Daniel";
   const nv = /^Alta/.test(l.acabado) ? "Alta" : /^Funcional/.test(l.acabado) ? "Funcional" : /^Diseño/.test(l.acabado) ? "Diseño"
     : /^Menos|^\$200,000|^\$150,000/.test(l.inversion) ? "Funcional" : /^Más/.test(l.inversion) ? "Alta" : "Diseño";
   const perfil = [(DX.titulo[l.forma] || "Cocina a la medida") + (DX.enfoque[l.uso] ? ", " + DX.enfoque[l.uso] : ""), l.acabado ? DX.nivel[nv] : ""].filter(Boolean).join(" · ");
@@ -955,8 +947,7 @@ function msjDiagnostico(l){
 function siguientePaso(l){
   const s = l.seguimiento;
   if(s === "Perdido" || s === "Ganado") return null;
-  if(!l.responsable) return { txt: "Asignar responsable", vence: l.fecha };
-  if(s === "Visita agendada") return { txt: "Cobrar la visita ($1,000) y pedir la ubicación", vence: l.visitaFecha ? l.visitaFecha.getTime() - DIA : 0 };
+  if(s === "Visita agendada") return { txt: "Cobrar la visita ($1,000) y pedir la ubicación", vence: l.visitaFecha ? l.visitaFecha.getTime() - DIA + 18 * 36e5 : 0 };
   if(s === "Visita pagada") return { txt: "Hacer la visita técnica", vence: l.visitaFecha ? l.visitaFecha.getTime() + 18 * 36e5 : 0 };
   if(s === "Visita realizada") return { txt: "Presentar render y propuesta en showroom (7 a 10 días)", vence: l.proximo ? l.proximo.getTime() + 18 * 36e5 : 0 };
   if(s === "Propuesta enviada") return { txt: "Seguimiento de la propuesta y pedir decisión", vence: l.proximo ? l.proximo.getTime() + 18 * 36e5 : 0 };
@@ -1026,7 +1017,7 @@ function demoAgente(ruta, c){
   return Promise.resolve({ ok: true, estado: { fase: l.responsable ? "persona" : "asistente", responsable: l.responsable, motivo: l.responsable ? "Pidió que le llamen" : "", pausadoHasta: 0, ventanaAbierta: true }, historial });
 }
 function msjCliente(l){
-  const n = primerNombre(l.nombre), yo = `Hola ${n}, soy el Ing. Daniel García de Armadillo Diseño.`;
+  const n = primerNombre(l.nombre), yo = `Hola ${n}, soy Daniel, de Armadillo Diseño.`;
   const cocina = l.forma ? " " + l.forma.toLowerCase().replace(/^cocina /, "") : "";
   switch(l.seguimiento){
     case "Visita agendada": return `${yo} Te escribo para confirmar tu visita técnica${l.visitaDia ? " del " + l.visitaDia : ""}. La visita tiene un costo de $1,000 que se abona completo a tu cocina, y si no avanzamos el render es tuyo. Puedes pagarla por transferencia, en efectivo o con tarjeta. ¿Cómo te acomoda? Y para dejarla confirmada, ¿me mandas tu ubicación por aquí?`;
@@ -1056,11 +1047,26 @@ function msjGrupo(l){
     "*Cuando hables con el prospecto, actualiza aquí:*", linkAsesor(l), "",
     "*Turnos (prospectos activos)*", "```" + carga + "```"].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n");
 }
+/* Confirmación de cita para el grupo de WhatsApp de marketing. Sin emojis: en computadora se vuelven "?". */
+function msjCita(l){
+  const pagada = l.seguimiento === "Visita pagada";
+  return [`*CITA CONFIRMADA · ${l.folio}*`, "",
+    `*${l.nombre}*`,
+    `Día: ${l.visitaDia || "sin fecha"}${l.visitaHora ? ", " + l.visitaHora : ""}`,
+    `Ubicación: ${l.ubic || "pendiente (pedírsela al cliente)"}`,
+    `Zona: ${l.zona || "sin dato"}`,
+    `Cocina: ${[l.etapa, l.forma, l.tamano, l.acabado].filter(Boolean).join(" · ") || "sin dato"}`,
+    `Inversión: ${l.inversion || "sin dato"} · Para cuándo: ${l.tiempo || "sin dato"}`,
+    `Pago de la visita ($1,000): ${pagada ? "PAGADO" : "PENDIENTE"}`,
+    "Van: Ing. Daniel García y Arq. Omar", "",
+    `WhatsApp del cliente: https://wa.me/52${l.tel}`,
+    `Ficha: ${linkAsesor(l)}`].join("\n");
+}
 function fichaTexto(l){
   return [`Lead Armadillo · ${l.nombre} (prioridad ${l.prioridad})`, `WhatsApp: ${l.tel}`,
     [l.forma, l.acabado, l.inversion, l.tiempo, l.zona].filter(Boolean).join(" · "),
     apartoVisita(l) ? `Apartó visita: ${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""}` : "",
-    l.ubic ? `Ubicación: ${l.ubic}` : "", l.responsable ? `Responsable: ${l.responsable}` : "",
+    l.ubic ? `Ubicación: ${l.ubic}` : "",
     `Seguimiento: ${l.seguimiento}`, `Folio ${l.folio}`].filter(Boolean).join("\n");
 }
 function pintarFicha(){
@@ -1077,22 +1083,17 @@ function pintarFicha(){
   h += `<div class="acciones">
     <a class="accion" id="a-wa" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjCliente(l))}" target="_blank" rel="noopener">${I.wa}WhatsApp</a>
     <a class="accion" id="a-tel" href="tel:+52${esc(l.tel)}">${I.tel}Llamar</a>
-    <a class="accion" id="a-diag" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjDiagnostico(l))}" target="_blank" rel="noopener">${I.doc}Diagnóstico</a>
-    <a class="accion" id="a-grupo" href="https://wa.me/?text=${encodeURIComponent(msjGrupo(l))}" target="_blank" rel="noopener">${I.enviar}Al grupo</a></div>
+    <a class="accion" id="a-diag" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjDiagnostico(l))}" target="_blank" rel="noopener">${I.doc}Diagnóstico</a></div>
     ${cajaSiguiente(l)}
     ${l.escribio ? `<p class="aviso-wa">${I.ok}<span>Este lead tocó el botón de WhatsApp en la landing, así que el chat con Daniel se abrió con su diagnóstico ya escrito. No hace falta reenviárselo. Lo único que no podemos saber es si de verdad mandó el mensaje.</span></p>` : ""}`;
   if(apartoVisita(l) || l.visitaDia){
     h += `<p class="seccion-t">Visita técnica</p><div class="caja"><div class="visita-caja">
       <span class="cal"><small>${vf ? vf.toLocaleDateString("es-MX",{weekday:"short"}).replace(".","") : "—"}</small><b>${vf ? vf.getDate() : "?"}</b></span>
       <span class="txt"><b>${esc(l.visitaDia || "Sin fecha")}</b><span>${esc(l.visitaHora || "")}${l.ubic ? " · " + esc(l.ubic) : ""}</span></span>
-      ${l.seguimiento === "Nuevo" || l.seguimiento === "Contactado" ? `<button class="btn chico" id="confirmar-visita">Confirmar</button>` : ""}</div></div>`;
+      ${l.seguimiento === "Nuevo" || l.seguimiento === "Contactado" ? `<button class="btn chico" id="confirmar-visita">Confirmar</button>` : ""}</div>
+      <div class="dato"><span>Van a la visita</span><b>Ing. Daniel García y Arq. Omar</b></div>
+      ${l.seguimiento === "Visita agendada" || l.seguimiento === "Visita pagada" ? `<div class="rapidos"><a class="btn chico" id="cita-grupo" href="https://wa.me/?text=${encodeURIComponent(msjCita(l))}" target="_blank" rel="noopener" style="color:#fff">${I.enviar}Mandar cita al grupo de marketing</a></div>` : ""}</div>`;
   }
-  const sugerido = turno();
-  const pr = pidiendo && pidiendo.resp;
-  h += `<p class="seccion-t">Responsable</p><div class="caja"><div class="etapas" role="group" aria-label="Responsable">${EQUIPO.map(p =>
-    `<button data-resp="${p}" aria-pressed="${l.responsable === p}">${p}</button>`).join("")}</div>
-    ${pr ? `<div class="motivos azul"><p>¿Por qué pasa a ${esc(pr)}?</p>${MOTIVOS_REASIGNAR.map(m => `<button data-motivo-resp="${m}">${m}</button>`).join("")}<button class="cancelar" data-cancelar>Cancelar</button></div>` : ""}
-    ${l.responsable ? `<div class="dato"><span>Asignado</span><b>${l.asignado ? hace(l.asignado) : "sin fecha"}</b></div>` : `<div class="dato"><span>Le toca a</span><b>${sugerido}</b></div>`}</div>`;
   h += `<p class="seccion-t">Etapa</p><div class="caja"><div class="etapas" role="group" aria-label="Etapa de seguimiento">${ETAPAS.map(e =>
     `<button data-etapa="${e}" aria-pressed="${l.seguimiento === e}">${e}</button>`).join("")}</div>
     ${pidiendo === "perdido" ? `<div class="motivos"><p>¿Por qué se perdió?</p>${MOTIVOS_PERDIDO.map(m => `<button data-motivo="${m}">${m}</button>`).join("")}<button class="cancelar" data-cancelar>Cancelar</button></div>` : ""}
@@ -1135,9 +1136,9 @@ function pintarFicha(){
     guardar(l.folio, c, c.intento ? `Intento ${l.intentos + 1} de 5 registrado` : null);
   };
   $("a-wa").onclick = () => contacto("WhatsApp enviado");
-  $("a-grupo").onclick = () => { if(!l.responsable) guardar(l.folio, { responsable: turno() }, "Asignado a " + turno()); };
   $("a-tel").onclick = () => contacto("Llamada");
   $("a-diag").onclick = () => contacto("Diagnóstico enviado por WhatsApp");
+  const cg = $("cita-grupo"); if(cg) cg.onclick = () => guardar(l.folio, { nota: "Cita enviada al grupo de marketing" }, "Cita enviada al grupo");
   const cv = $("confirmar-visita"); if(cv) cv.onclick = () => guardar(l.folio, { seguimiento: "Visita agendada", contacto: "Visita confirmada" }, "Visita confirmada");
   document.querySelectorAll("[data-resp]").forEach(b => b.onclick = () => {
     const p = b.dataset.resp;
