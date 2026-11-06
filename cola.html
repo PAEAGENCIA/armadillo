@@ -111,7 +111,10 @@ function fila(l, nota, urgente){
 }
 function pintar(){
   const ahora = Date.now(), manana = hoy0() + DIA;
-  const nuevos = leads.filter(l => l.seg === "Nuevo" && !l.primer && !l.ultimo).sort((a,b) => a.fecha - b.fecha);
+  /* Menos de $200,000: no van a la lista de llamadas; se les manda un WhatsApp honesto. */
+  const bajo = l => /menos de \$?200/i.test(l.inversion || "");
+  const nuevos = leads.filter(l => l.seg === "Nuevo" && !l.primer && !l.ultimo && !bajo(l)).sort((a,b) => a.fecha - b.fecha);
+  const soloMensaje = leads.filter(l => l.seg === "Nuevo" && !l.primer && !l.ultimo && bajo(l)).sort((a,b) => b.fecha - a.fecha);
   const volver = leads.filter(l => (l.seg === "Nuevo" || l.seg === "Contactado") && (l.primer || l.ultimo) && l.proximo && l.proximo < manana && l.intentos < 5).sort((a,b) => a.proximo - b.proximo);
   const sinPago = leads.filter(l => l.seg === "Visita agendada").sort((a,b) => a.fecha - b.fecha);
   /* Todos los que ya se contactaron y no están en otra sección: así ningún prospecto desaparece de la lista al actualizarlo. */
@@ -133,6 +136,8 @@ function pintar(){
     fila(l, `<span class="t ambar">Visita ${esc(l.visitaDia || "sin fecha")}${l.visitaHora ? ", " + esc(l.visitaHora) : ""}${l.resp ? " · la hace " + esc(l.resp) : ""}</span>`, false)).join("") : `<div class="vacio">No hay visitas esperando pago.</div>`}</section>`;
   h += `<section class="seccion"><h2>4. En seguimiento<span class="n">${enPlatica.length}</span></h2><p>Ya los contactaste. Aquí siguen hasta que agenden o se pierdan. El siguiente intento aparece arriba el día que toca.</p>${enPlatica.length ? enPlatica.map(l =>
     fila(l, `<span class="t ${l.proximo ? "gris" : "ambar"}">${l.proximo ? "Próximo contacto: " + new Date(l.proximo).toLocaleDateString("es-MX", { weekday:"short", day:"numeric", month:"short" }) : "Sin fecha de seguimiento: ábrelo y registra qué pasó"} · intento ${Math.min(l.intentos, 5)} de 5</span>`, false)).join("") : `<div class="vacio">Nadie en seguimiento.</div>`}</section>`;
+  h += `<section class="seccion"><h2>Menos de $200,000: solo WhatsApp<span class="n">${soloMensaje.length}</span></h2><p>No se les llama. Mándales el mensaje honesto: nuestras cocinas parten de $200,000 y qué sí se puede hacer con su presupuesto.</p>${soloMensaje.length ? soloMensaje.map(l =>
+    fila(l, `<span class="t gris">Llegó ${hace(l.fecha)} · eligió menos de $200,000</span>`, false)).join("") : `<div class="vacio">Nadie en esta lista.</div>`}</section>`;
   h += `<section class="seccion"><h2>5. Visitas pagadas<span class="n">${pagadas.length}</span></h2><p>Tu trabajo terminado: estas visitas ya están en manos del equipo.</p>${pagadas.length ? pagadas.map(l =>
     fila(l, `<span class="t verde">${esc(l.seg)}${l.visitaDia ? " · " + esc(l.visitaDia) : ""}${l.resp ? " · " + esc(l.resp) : ""}</span>`, false)).join("") : `<div class="vacio">Aún no hay visitas pagadas.</div>`}</section>`;
   if(filtro) h += `<section class="seccion"><h2>Resultados de "${esc(filtro)}"</h2>${(r => r.length ? r.map(l => fila(l, `<span class="t gris">${esc(l.seg)}</span>`, false)).join("") : `<div class="vacio">No encontramos a nadie con ese nombre o teléfono.</div>`)(leads.filter(l => (l.nombre + " " + l.tel).toLowerCase().includes(filtro.toLowerCase())))}</section>`;
