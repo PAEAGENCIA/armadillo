@@ -206,7 +206,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .persona h2{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:10px}
 .persona p{color:var(--text2);font-size:14px;margin-top:2px}
 .persona .pills{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:10px}
-.acciones{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.acciones{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
 .accion{background:var(--card);border-radius:12px;padding:10px 6px 9px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--accent);box-shadow:var(--shadow)}
 .accion svg{width:22px;height:22px}
 .seccion-t{font-size:13px;color:var(--text2);margin:22px 4px 7px;text-transform:uppercase;letter-spacing:.02em}
@@ -275,49 +275,60 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
   .ficha-cab .grab{display:block;position:absolute;left:50%;top:6px;transform:translateX(-50%);width:36px;height:5px;border-radius:99px;background:var(--text3)}
   .tabla td:first-child{max-width:130px}
 }
-.sla{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;white-space:nowrap}
-.sla::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
-.sla.rojo{color:var(--red)}.sla.ambar{color:color-mix(in srgb,var(--orange) 85%,var(--text))}.sla.verde{color:color-mix(in srgb,var(--green) 72%,var(--text))}
-.resp{width:24px;height:24px;border-radius:50%;font-size:10px;font-weight:700;display:inline-grid;place-items:center;color:#fff;flex:none;letter-spacing:0}
-.resp.r0{background:var(--accent)}.resp.r1{background:var(--madera)}.resp.r2{background:var(--indigo)}.resp.rx{background:var(--fill);color:var(--text2);border:1.5px dashed var(--text3)}
-.tracker{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:14px 10px 6px}
-.tracker div{text-align:center;font-size:11.5px;line-height:1.3;color:var(--text2);display:grid;gap:5px;justify-items:center}
-.tracker i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700;background:var(--fill2);color:var(--text2)}
-.tracker .hecho i{background:var(--accent);color:#fff}
-.tracker .sig i{box-shadow:inset 0 0 0 2px var(--accent);color:var(--accent);background:transparent}
-.tracker .sig{color:var(--text);font-weight:600}
-.nota-caja{padding:6px 14px 12px;font-size:13.5px;color:var(--text2);line-height:1.45}
-.nota-caja.alerta{color:var(--text);background:color-mix(in srgb,var(--orange) 12%,transparent);margin:0 12px 12px;border-radius:10px;padding:10px 12px}
-.motivos{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px}
-.motivos p{width:100%;font-size:14px;font-weight:600;margin:2px 2px 4px}
-.motivos button{height:32px;padding:0 12px;border-radius:99px;background:color-mix(in srgb,var(--red) 11%,transparent);color:var(--red);font-size:13.5px;font-weight:500}
-.motivos.azul button{background:var(--accent-tint);color:var(--accent)}
-.motivos button.cancelar{background:var(--fill2);color:var(--text2)}
-.linea-t{position:relative;padding:6px 14px 8px 36px}
-.linea-t::before{content:"";position:absolute;left:19px;top:16px;bottom:16px;width:2px;background:var(--sep)}
-.linea-t p{position:relative;font-size:14px;padding:7px 0}
-.linea-t p::before{content:"";position:absolute;left:-21px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2.5px var(--accent)}
-.linea-t p:first-child::before{background:var(--accent)}
-.linea-t p small{display:block;font-size:12px;color:var(--text2);margin-bottom:1px}
-.equipo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.persona-t{background:var(--card);border-radius:16px;padding:16px;box-shadow:var(--shadow);display:grid;gap:12px;align-content:start}
-.persona-t .cab{display:flex;align-items:center;gap:10px}
-.persona-t .cab .resp{width:42px;height:42px;font-size:15px}
-.persona-t .cab b{font-size:17px;font-weight:600;display:block}
-.persona-t .cab span{display:block;font-size:12.5px;color:var(--text2)}
-.kpi4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.kpi4 div{background:var(--card2);border-radius:10px;padding:9px 10px}
-.kpi4 b{display:block;font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
-.kpi4 span{font-size:12px;color:var(--text2)}
-.kpi4 .malo{background:color-mix(in srgb,var(--red) 10%,transparent)}.kpi4 .malo b{color:var(--red)}
-.carga{display:grid;gap:4px;font-size:12px;color:var(--text2)}
-.carga .barra{height:8px}
-.pie-t{display:flex;justify-content:space-between;gap:10px;font-size:13px;border-top:1px solid var(--sep);padding-top:10px}
-.pie-t b{font-weight:600}
-.barra-acciones{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 4px}
-.tile.rojo .num{color:var(--red)}
-@media (max-width:900px){.fila .der.urg .pill{display:none}.tabbar{grid-template-columns:repeat(4,1fr)}.equipo{grid-template-columns:1fr}}
 .rejilla>*{min-width:0}.tabla-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}.tabla-scroll .tabla{min-width:640px}.tabla td small{color:var(--text3);font-size:11px;margin-left:2px}
+
+/* ---------- Sistema comercial: códigos, siguiente paso y KPIs ---------- */
+@media (max-width:900px){ .tabbar{grid-template-columns:repeat(4,1fr)} }
+.sem{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px;background:var(--text3)}
+.sem.v{background:var(--green)}.sem.a{background:var(--orange)}.sem.r{background:var(--red)}
+.codigos{display:flex;flex-wrap:wrap;gap:6px;padding:12px}
+.codigos button{height:32px;padding:0 11px;border-radius:99px;background:var(--fill2);font-size:13px;font-weight:600;color:var(--accent)}
+.codigos button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.registro{padding:0 12px 12px;display:grid;gap:10px}
+.registro label{font-size:13px;color:var(--text2);display:grid;gap:4px}
+.registro input,.registro select{border:0;background:var(--fill2);border-radius:9px;padding:9px 11px;font-size:16px;width:100%;min-width:0}
+.registro input:focus,.registro select:focus{outline:2px solid var(--accent)}
+.registro .check{display:flex;gap:10px;align-items:center;color:var(--text);font-size:14px}
+.registro .check input{width:20px;height:20px;flex:none;accent-color:var(--accent)}
+.siguiente{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--accent-tint);font-size:14px;line-height:1.4}
+.siguiente svg{color:var(--accent);margin-top:1px}
+.siguiente.vencido{background:color-mix(in srgb,var(--red) 12%,transparent)}
+.siguiente.vencido svg{color:var(--red)}
+.siguiente b{display:block;font-weight:600}
+.siguiente span{color:var(--text2)}
+.bitacora{padding:4px 14px 10px}
+.bitacora p{font-size:14px;padding:9px 0;border-top:1px solid var(--sep);display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:baseline}
+.bitacora p:first-child{border-top:0}
+.bitacora .cod{font-weight:700;color:var(--accent);font-size:12.5px}
+.bitacora small{color:var(--text2);font-size:12px;white-space:nowrap}
+.kpi-tabla td,.kpi-tabla th{text-align:left !important}
+.kpi-tabla td small{display:block;margin:2px 0 0 15px}
+.tablero-form{display:grid;gap:8px;margin-top:12px}
+.tablero-form input{border:0;background:var(--fill2);border-radius:9px;padding:9px 11px;font-size:16px;width:100%}
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+details.corregir summary{list-style:none;cursor:pointer;color:var(--text2);font-size:13.5px;padding:12px 14px}
+details.corregir summary::-webkit-details-marker{display:none}
+.agente-estado{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;font-size:14px;line-height:1.4}
+.agente-estado svg{color:var(--accent);margin-top:1px}
+.agente-estado b{display:block;font-weight:600}
+.agente-estado span{color:var(--text2)}
+.chat{padding:10px 12px;display:flex;flex-direction:column;gap:6px;max-height:420px;overflow-y:auto;background:var(--card2)}
+.burbuja{max-width:85%;padding:7px 10px 6px;border-radius:12px;font-size:14px;line-height:1.38;white-space:pre-wrap;word-wrap:break-word}
+.burbuja small{display:block;font-size:11px;color:var(--text2);margin-top:3px}
+.burbuja.cliente{align-self:flex-start;background:var(--card)}
+.burbuja.asistente{align-self:flex-end;background:color-mix(in srgb,var(--accent) 16%,var(--card))}
+.burbuja.equipo{align-self:flex-end;background:color-mix(in srgb,var(--madera) 20%,var(--card))}
+.burbuja.nota{align-self:center;background:none;color:var(--text2);font-size:12px;text-align:center;padding:2px 6px}
+.agente-btns{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 12px}
+.kpi-nota{font-size:12.5px;color:var(--text2);margin-top:10px;line-height:1.45}
+.kpi-movil{display:none}
+.kpi-fila{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:11px 0;border-top:1px solid var(--sep);font-size:14px}
+.kpi-fila:first-child{border-top:0}
+.kpi-fila b{font-weight:600}
+.kpi-fila small{display:block;color:var(--text2);font-size:12px;margin-top:1px}
+.kpi-fila .der{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+.kpi-fila .der small{font-weight:400}
+@media (max-width:900px){ .kpi-desk{display:none} .kpi-movil{display:block;margin-top:10px} }
 </style>
 </head>
 <body>
@@ -345,8 +356,8 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
     </div>
     <button class="nav-item" data-ir="hoy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Hoy<span class="badge oculto" data-badge></span></button>
     <button class="nav-item" data-ir="leads"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-3-2-5.6-4.8-6.3"/></svg>Leads</button>
-    <button class="nav-item" data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><circle cx="5" cy="10" r="2.3"/><circle cx="19" cy="10" r="2.3"/><path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M1.5 19c0-2.2 1.5-4 3.5-4.4M22.5 19c0-2.2-1.5-4-3.5-4.4"/></svg>Equipo<span class="badge oculto" data-badge-eq></span></button>
     <button class="nav-item" data-ir="metricas"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Métricas</button>
+    <button class="nav-item" data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Equipo</button>
     <div class="pie">
       <span id="sync-lat">Sin sincronizar</span>
       <button type="button" data-accion="actualizar">Actualizar datos</button>
@@ -359,8 +370,8 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
   <nav class="tabbar" aria-label="Navegación">
     <button data-ir="hoy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Hoy<span class="badge oculto" data-badge></span></button>
     <button data-ir="leads"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-3-2-5.6-4.8-6.3"/></svg>Leads</button>
-    <button data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><circle cx="5" cy="10" r="2.3"/><circle cx="19" cy="10" r="2.3"/><path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M1.5 19c0-2.2 1.5-4 3.5-4.4M22.5 19c0-2.2-1.5-4-3.5-4.4"/></svg>Equipo<span class="badge oculto" data-badge-eq></span></button>
     <button data-ir="metricas"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Métricas</button>
+    <button data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Equipo</button>
   </nav>
 </div>
 
@@ -377,10 +388,15 @@ const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ip
 const WHATSAPP_DANIEL = "522221367108";
 const EQUIPO = ["Daniel", "Arq. Eric", "Arq. Omar"];
 const ETAPAS = ["Nuevo", "Contactado", "Visita agendada", "Visita pagada", "Visita realizada", "Propuesta enviada", "Ganado", "Perdido"];
-const CADENCIA = [0, 1, 3, 7, 14];   /* días de cada intento de seguimiento, contados desde el primero */
-const MOTIVOS_PERDIDO = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
-const MOTIVOS_REASIGNAR = ["No contestó a tiempo", "Carga de trabajo", "Zona", "Otro"];
 const PREGUNTAS = ["Etapa", "Uso", "Distribución", "Muro", "Acabados", "Inversión", "Tiempo", "Zona"];
+/* Sistema comercial (PDF "Proceso comercial") */
+const AGENTE_URL = ""; // URL del agente de WhatsApp (Cloudflare). Vacío = el CRM funciona sin agente.
+const INICIO_SISTEMA = new Date(2026, 10, 2).getTime(); // Lunes 2 nov 2026: desde aquí cuentan los indicadores del equipo
+const META_VISITAS_SEMANA = 7, META_COCINAS_MES = 3;
+const NOMBRE_LARGO = { "Daniel": "el Ing. Daniel García", "Arq. Eric": "el Arq. Eric", "Arq. Omar": "el Arq. Omar" };
+const CADENCIA = [1, 3, 7, 14];          // días de seguimiento si no responde
+const CADENCIA_PROPUESTA = [2, 5, 10];   // días de seguimiento de la propuesta
+const RAZONES = ["No respondió", "Número equivocado", "Ya compró con alguien más", "Fuera de presupuesto", "Fuera de zona", "Lo pospuso", "Busca otro mueble", "Otra razón"];
 /* ======================================= */
 
 const $ = id => document.getElementById(id);
@@ -404,7 +420,8 @@ const I = {
   persona:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>',
   inicio:'<svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   pesos:'<svg class="i" viewBox="0 0 24 24"><path d="M12 3v18M16.5 7.5c0-1.9-2-3-4.5-3s-4.5 1.2-4.5 3.2c0 4.6 9 2.6 9 7.4 0 2-2 3.4-4.5 3.4s-4.5-1.3-4.5-3.3"/></svg>',
-  pct:'<svg class="i" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>'
+  pct:'<svg class="i" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>',
+  doc:'<svg class="i" viewBox="0 0 24 24"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>'
 };
 
 let clave = store.get("ad_crm_clave") || "";
@@ -413,8 +430,10 @@ let vista = store.get("ad_crm_vista") || "hoy";
 let periodo = store.get("ad_crm_periodo") || "7";
 let embudoAnuncio = "todos";
 let filtro = "todos", busqueda = "", etapaFiltro = "";
+let periodoEq = store.get("ad_crm_periodo_eq") || "semana";
+let regCod = null; // código que se está registrando en la ficha
+let kpiPersona = "Equipo";
 let fichaFolio = null, ultimaSync = 0, cargando = false;
-let pidiendo = null;   /* "perdido" o { resp } mientras se elige un motivo en la ficha */
 
 /* ---------- Utilidades de fecha y formato ---------- */
 const DIA = 864e5;
@@ -460,9 +479,7 @@ function normLead(l){
     notas: String(l["Notas"] || ""), historial: String(l["Historial"] || ""),
     seguimiento: ETAPAS.includes(l["Seguimiento"]) ? l["Seguimiento"] : "Nuevo",
     ultimoContacto: aFecha(l["Último contacto"])?.getTime() || 0, proximo: aFecha(l["Próximo contacto"]),
-    dispositivo: l["Dispositivo"] || "", ubic: l["Ubicación visita"] || "", responsable: l["Responsable"] || "",
-    asignado: aFecha(l["Asignado"])?.getTime() || 0, primerContacto: aFecha(l["Primer contacto"])?.getTime() || 0,
-    intentos: Number(l["Intentos"]) || 0, motivo: l["Motivo perdido"] || "", token: l["Token"] || ""
+    dispositivo: l["Dispositivo"] || "", ubic: l["Ubicación visita"] || "", responsable: l["Responsable"] || ""
   };
 }
 function normSesion(s){
@@ -480,40 +497,117 @@ function limpiarSesiones(ses, leads){
 }
 const apartoVisita = l => l.estado === "Visita apartada";
 const activo = l => l.seguimiento !== "Ganado" && l.seguimiento !== "Perdido";
-const porAtender = l => l.seguimiento === "Nuevo" && !l.ultimoContacto;
+const porAtender = l => activo(l) && !primerContacto(l);
 
-/* ---------- Tiempos de respuesta (semáforo) ----------
-   De día (8 a 20 h): 2 horas para contactar. De noche: antes de las 10 am. Domingo pasa al lunes 10 am. */
-function limiteSLA(ms){
-  const d = new Date(ms), h = d.getHours(), lim = new Date(ms);
-  if(h >= 20){ lim.setDate(lim.getDate() + 1); lim.setHours(10,0,0,0); }
-  else if(h < 8) lim.setHours(10,0,0,0);
-  else lim.setTime(ms + 2 * 36e5);
-  if(lim.getDay() === 0){ lim.setDate(lim.getDate() + 1); lim.setHours(10,0,0,0); }
-  return lim.getTime();
+/* ---------- Códigos del sistema comercial ----------
+   Cada avance se guarda como una nota: "#CODIGO detalle [t=milisegundos]".
+   La hora va dentro de la nota para no depender del servidor y poder registrar la hora real (la de la captura). */
+const COD = {
+  LLAMADA:     { t: "Llamada",        evid: true },
+  CONTACTADO:  { t: "Primer mensaje", evid: true },
+  RESPONDIO:   { t: "Respondió",      evid: true },
+  SEGUIMIENTO: { t: "Seguimiento",    evid: true },
+  APARTADA:    { t: "Visita apartada" },
+  PAGADA:      { t: "Visita pagada",  evid: true },
+  VISITADA:    { t: "Visita hecha" },
+  PROPUESTA:   { t: "Propuesta" },
+  VENDIDA:     { t: "Vendida" },
+  PERDIDO:     { t: "Perdido" }
+};
+const ETAPA_COD = { APARTADA: "Visita agendada", PAGADA: "Visita pagada", VISITADA: "Visita realizada", PROPUESTA: "Propuesta enviada", VENDIDA: "Ganado", PERDIDO: "Perdido" };
+const CONTACTO_COD = ["LLAMADA", "CONTACTADO", "SEGUIMIENTO", "RESPONDIO"];
+const INICIO = DEMO ? 0 : INICIO_SISTEMA;
+const HORA = 36e5;
+
+function eventos(l){
+  if(l._evSrc === l.notas && l._ev) return l._ev;
+  const out = [];
+  String(l.notas || "").split("\n").forEach(linea => {
+    const m = linea.match(/#([A-Z]+)(\d?)(.*?)\[t=(\d{12,})\]/);
+    if(m){ const det = m[3].replace(/^[\s·:-]+|[\s·:-]+$/g, ""); out.push({ cod: m[1], n: Number(m[2]) || 0, det, t: Number(m[4]), bot: /^asistente\b/.test(det) }); }
+  });
+  out.sort((a, b) => a.t - b.t);
+  l._evSrc = l.notas; l._ev = out;
+  return out;
 }
-function fmtDur(ms){
-  const m = Math.max(1, Math.round(Math.abs(ms) / 6e4));
-  if(m < 60) return m + " min";
-  const h = Math.floor(m / 60);
-  if(h < 24) return h + " h" + (h < 5 && m % 60 ? " " + (m % 60) + " min" : "");
-  return Math.round(h / 24) + (Math.round(h / 24) === 1 ? " día" : " días");
+const evDe = (l, ...cods) => eventos(l).filter(e => cods.includes(e.cod));
+const tCod = (l, cod) => (evDe(l, cod)[0] || {}).t || 0;
+const contesto = e => e.cod === "LLAMADA" && !/^no\b/i.test(e.det);
+/* Primer contacto real. En leads anteriores al sistema se usa el "último contacto" que ya existía. */
+function primerContacto(l){
+  const e = evDe(l, ...CONTACTO_COD)[0];
+  return e ? e.t : (l.fecha < INICIO && l.ultimoContacto) || 0;
 }
-const contactoDe = l => l.primerContacto || l.ultimoContacto;
-function sla(l){
-  const c = contactoDe(l);
-  if(c) return { estado: "ok", clase: c <= limiteSLA(l.fecha) ? "verde" : "ambar", txt: "Respondió en " + fmtDur(c - l.fecha) };
+function respondio(l){
+  return eventos(l).some(e => e.cod === "RESPONDIO" || contesto(e)) || llego(l, "APARTADA");
+}
+/* ¿Llegó a esta etapa? Por código, o por la etapa del CRM (leads anteriores al sistema). */
+function llego(l, cod){
+  if(tCod(l, cod)) return true;
+  const i = ETAPAS.indexOf(l.seguimiento), meta = ETAPAS.indexOf(ETAPA_COD[cod]);
+  return l.seguimiento !== "Perdido" && meta >= 0 && i >= meta;
+}
+function asignaciones(l){
+  const a = evDe(l, "ASIGNADO").map(e => ({ quien: e.det.split(" (")[0].trim(), t: e.t }));
+  if(!a.length && l.responsable) a.push({ quien: l.responsable, t: l.fecha });
+  return a;
+}
+const inicioReloj = l => { const a = asignaciones(l); return a.length ? a[a.length - 1].t : l.fecha; };
+/* Plazo del primer contacto: 1 hora en horario (lun a vie 9 a 18); fuera de horario, 10:00 del siguiente día hábil. */
+function limiteContacto(t){
+  const d = new Date(t), dia = d.getDay(), h = d.getHours() + d.getMinutes() / 60, habil = dia >= 1 && dia <= 5;
+  if(habil && h >= 9 && h < 18) return t + HORA;
+  const x = new Date(d);
+  if(!(habil && h < 9)) x.setDate(x.getDate() + 1);
+  x.setHours(10, 0, 0, 0);
+  while(x.getDay() === 0 || x.getDay() === 6) x.setDate(x.getDate() + 1);
+  return x.getTime();
+}
+const finDe = d => d ? d.getTime() + 18 * HORA : 0; // una fecha sin hora vence a las 18:00
+/* Lo que sigue con este lead y para cuándo. Es la misma secuencia del PDF. */
+function siguiente(l){
   if(!activo(l)) return null;
-  const falta = limiteSLA(l.fecha) - Date.now();
-  if(falta < 0) return { estado: "vencido", clase: "rojo", txt: "Vencido " + fmtDur(falta) };
-  return { estado: "atiempo", clase: falta < 30 * 6e4 ? "ambar" : "verde", txt: "Vence en " + fmtDur(falta) };
+  const ev = eventos(l);
+  if(!l.responsable) return ev.some(e => e.bot) ? { txt: "Lo atiende el asistente", vence: 0, bot: true } : { txt: "Asignar responsable", vence: l.fecha, raul: true };
+  // El asistente pasó el caso: lo primero es atender el motivo por el que lo pasó.
+  const asg = evDe(l, "ASIGNADO").slice(-1)[0];
+  if(asg && /asistente:/.test(asg.det) && !ev.some(e => !e.bot && e.t >= asg.t && e.cod !== "ASIGNADO")){
+    const motivo = (asg.det.match(/asistente:\s*([^)]*)/) || [])[1] || "";
+    if(tCod(l, "COMPROBANTE") && !llego(l, "PAGADA")) return { txt: "Verificar el pago y registrar #PAGADA", vence: limiteContacto(tCod(l, "COMPROBANTE")) };
+    if(/datos de pago/i.test(motivo) && !llego(l, "PAGADA")) return { txt: "Mandarle los datos de pago de la visita", vence: limiteContacto(asg.t) };
+    if(/visita/i.test(motivo) && !llego(l, "PAGADA")) return { txt: "Esperar su pago (el asistente se lo recuerda)", vence: 0, bot: true };
+    if(motivo && !/visita|comprobante/i.test(motivo)) return { txt: "Atender: " + motivo.charAt(0).toLowerCase() + motivo.slice(1), vence: limiteContacto(asg.t) };
+  }
+  const pc = primerContacto(l);
+  if(!pc) return { txt: l.escribio && !apartoVisita(l) ? "Mandar su diagnóstico y preguntar sus dudas" : "Llamar o mandar el primer mensaje", vence: limiteContacto(inicioReloj(l)) };
+  const ultimo = (eventos(l).slice(-1)[0] || {}).t || l.ultimoContacto || pc;
+  if(llego(l, "PROPUESTA")){
+    const tp = tCod(l, "PROPUESTA") || ultimo, n = evDe(l, "SEGUIMIENTO").filter(e => e.t > tp).length;
+    if(n >= CADENCIA_PROPUESTA.length) return { txt: "Pedir decisión o cerrar como perdido", vence: l.proximo ? finDe(l.proximo) : tp + 10 * DIA };
+    return { txt: `Seguimiento de la propuesta (día ${CADENCIA_PROPUESTA[n]})`, vence: tp + CADENCIA_PROPUESTA[n] * DIA, seg: true };
+  }
+  if(llego(l, "VISITADA")) return { txt: "Presentar render y propuesta en showroom", vence: (tCod(l, "VISITADA") || ultimo) + 10 * DIA };
+  if(llego(l, "PAGADA")) return { txt: "Hacer la visita técnica", vence: finDe(l.visitaFecha) };
+  if(tCod(l, "COMPROBANTE") && !llego(l, "PAGADA")) return { txt: "Verificar el pago y registrar #PAGADA", vence: limiteContacto(tCod(l, "COMPROBANTE")) };
+  if(llego(l, "APARTADA")){
+    const ta = tCod(l, "APARTADA") || ultimo, recordo = evDe(l, "SEGUIMIENTO").some(e => e.t > ta);
+    return recordo ? { txt: "Si no pagó, liberar el horario (48 h)", vence: ta + 2 * DIA } : { txt: "Recordar el pago de la visita (24 h)", vence: ta + DIA, seg: true };
+  }
+  if(respondio(l)) return { txt: "Llamada para conocer su proyecto y proponer la visita", vence: l.proximo ? finDe(l.proximo) : ultimo + DIA };
+  const n = evDe(l, "SEGUIMIENTO").length;
+  if(n >= CADENCIA.length) return { txt: "Cerrar como perdido: no respondió", vence: pc + 14 * DIA };
+  return { txt: `Seguimiento ${n + 1} (día ${CADENCIA[n]})`, vence: pc + CADENCIA[n] * DIA, seg: true };
 }
-const fueraTiempo = l => sla(l)?.estado === "vencido";
-const sinAsignar = l => activo(l) && !l.responsable;
-const colorResp = p => { const i = EQUIPO.indexOf(p); return i < 0 ? "rx" : "r" + i; };
-const inicResp = p => p ? iniciales(p.replace(/^Arq\.\s*/, "")) : "?";
-const linkAsesor = l => new URL("asesor.html", location.href).href.split("?")[0] + "?f=" + encodeURIComponent(l.folio) + "&k=" + (l.token || (DEMO ? "demo" : ""));
-const burbuja = p => `<span class="resp ${colorResp(p)}" title="${p ? "Responsable: " + esc(p) : "Sin responsable"}">${esc(inicResp(p))}</span>`;
+const vencido = s => s && s.vence && s.vence < Date.now();
+const fmtHora = ms => new Date(ms).toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", hour12: false });
+const fmtDiaHora = ms => new Date(ms).toLocaleString("es-MX", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false }).replace(/\./g, "");
+function fmtVence(v){
+  if(!v) return "sin fecha";
+  if(v < Date.now()) return "venció " + hace(v);
+  const hoy = hoyInicio().getTime();
+  return v < hoy + DIA ? "hoy " + fmtHora(v) : v < hoy + 2 * DIA ? "mañana " + fmtHora(v) : fmtDiaHora(v);
+}
+const aInputLocal = ms => { const d = new Date(ms); return isoDia(d) + "T" + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); };
 
 /* ---------- API ---------- */
 async function api(params){
@@ -559,23 +653,23 @@ function aplicarLocal(l, c){
   if(c.contacto) l.ultimoContacto = Date.now();
   if(c.proximo !== undefined) l.proximo = aFecha(c.proximo);
   if(c.monto !== undefined) l.monto = Number(c.monto) || 0;
-  if(c.responsable !== undefined){ l.responsable = c.responsable; l.asignado = c.responsable ? Date.now() : 0; }
-  if(c.contacto && !l.primerContacto) l.primerContacto = Date.now();
-  if(c.intento) l.intentos = (l.intentos || 0) + 1;
-  if(c.motivo !== undefined) l.motivo = c.motivo;
+  if(c.responsable !== undefined) l.responsable = c.responsable;
   if(c.nota) l.notas = (l.notas ? l.notas + "\n" : "") + sello + " · " + c.nota;
 }
 
 /* ---------- Navegación ---------- */
 function ir(v){ vista = v; store.set("ad_crm_vista", v); render(); window.scrollTo(0,0); }
 document.addEventListener("click", e => {
-  const b = e.target.closest("[data-ir],[data-accion],[data-lead],[data-filtro],[data-periodo],[data-etapa-filtro],[data-embudo]");
+  const b = e.target.closest("[data-ir],[data-accion],[data-lead],[data-filtro],[data-periodo],[data-periodo-eq],[data-kpi-p],[data-etapa-filtro],[data-embudo]");
   if(!b) return;
   if(b.dataset.ir) ir(b.dataset.ir);
   else if(b.dataset.lead) abrirFicha(b.dataset.lead);
   else if(b.dataset.filtro){ filtro = b.dataset.filtro; etapaFiltro = ""; render(); }
   else if(b.dataset.etapaFiltro !== undefined){ etapaFiltro = etapaFiltro === b.dataset.etapaFiltro ? "" : b.dataset.etapaFiltro; filtro = "todos"; render(); }
   else if(b.dataset.periodo){ periodo = b.dataset.periodo; store.set("ad_crm_periodo", periodo); render(); }
+  else if(b.dataset.periodoEq){ periodoEq = b.dataset.periodoEq; store.set("ad_crm_periodo_eq", periodoEq); render(); }
+  else if(b.dataset.kpiP){ kpiPersona = b.dataset.kpiP; render(); }
+  else if(b.dataset.accion === "copiar-tablero") copiarTablero();
   else if(b.dataset.embudo){ embudoAnuncio = b.dataset.embudo; render(); }
   else if(b.dataset.accion === "actualizar") sincronizar(true);
   else if(b.dataset.accion === "salir") salir();
@@ -585,8 +679,6 @@ function render(){
   document.querySelectorAll("[data-ir]").forEach(b => b.setAttribute("aria-current", b.dataset.ir === vista ? "page" : "false"));
   const n = pendientes().total;
   document.querySelectorAll("[data-badge]").forEach(b => { b.textContent = n; b.classList.toggle("oculto", !n); });
-  const ne = datos.leads.filter(l => fueraTiempo(l) || sinAsignar(l)).length;
-  document.querySelectorAll("[data-badge-eq]").forEach(b => { b.textContent = ne; b.classList.toggle("oculto", !ne); });
   const html = vista === "leads" ? vistaLeads() : vista === "metricas" ? vistaMetricas() : vista === "equipo" ? vistaEquipo() : vistaHoy();
   const p = $("principal");
   const enfocado = document.activeElement && document.activeElement.id === "buscar";
@@ -605,13 +697,13 @@ function actualizarSync(){ $("sync-lat").textContent = ultimaSync ? "Actualizado
 
 /* ---------- Filas ---------- */
 function filaLead(l, extra){
-  const sub = extra || [l.zona, rangoTxt(l.inversion), l.tiempo].filter(Boolean).join(" · ");
-  const s = sla(l), urgente = s && s.estado !== "ok";
+  const sub = extra || [activo(l) ? (l.responsable || (eventos(l).some(e => e.bot) ? "Asistente" : "Sin asignar")) : "", l.zona, rangoTxt(l.inversion), l.tiempo].filter(Boolean).join(" · ");
+  const tarde = vencido(siguiente(l));
   return `<button class="fila" data-lead="${esc(l.folio)}">
     <span class="avatar ${esc(l.prioridad)}">${esc(iniciales(l.nombre))}</span>
     <span class="txt"><span class="t1">${esc(l.nombre)}${l.escribio ? ` <span class="wa-ok" title="Ya le escribió a Daniel por WhatsApp" aria-label="Ya le escribió a Daniel por WhatsApp">${I.wa}</span>` : ""}${apartoVisita(l) ? ` <span class="pill visita">Apartó visita</span>` : ""}</span><span class="t2">${esc(sub)}</span></span>
-    <span class="der${urgente ? " urg" : ""}"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span>${urgente ? `<span class="sla ${s.clase}">${s.txt}</span>` : `<span class="tiempo">${hace(l.fecha)}</span>`}</span>
-    ${activo(l) ? burbuja(l.responsable) : ""}${I.chev}</button>`;
+    <span class="der"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span><span class="tiempo ${tarde ? "tarde" : ""}">${hace(l.fecha)}</span></span>
+    ${I.chev}</button>`;
 }
 function rangoTxt(inv){
   return String(inv || "").replace(/\$(\d{3}),000/g, "$$$1k").replace(" a ", "–").replace("Más de ", "+").replace("Menos de ", "<");
@@ -620,48 +712,46 @@ function vacio(titulo, texto){ return `<div class="vacio">${I.ok}<b>${titulo}</b
 
 /* ---------- Vista: Hoy ---------- */
 function pendientes(){
-  const hoy = hoyInicio().getTime(), manana = hoy + DIA;
-  const ls = datos.leads;
-  const confirmar = ls.filter(l => apartoVisita(l) && l.seguimiento === "Nuevo");
-  const nuevos = ls.filter(l => porAtender(l) && !confirmar.includes(l)).sort((a,b) => a.fecha - b.fecha);
-  const seguimientos = ls.filter(l => activo(l) && l.proximo && l.proximo.getTime() < manana && !confirmar.includes(l) && !nuevos.includes(l)).sort((a,b) => a.proximo - b.proximo);
-  const proximas = ls.filter(l => l.seguimiento === "Visita agendada" && l.visitaFecha && l.visitaFecha.getTime() >= hoy).sort((a,b) => a.visitaFecha - b.visitaFecha);
-  return { confirmar, nuevos, seguimientos, proximas, total: confirmar.length + nuevos.length + seguimientos.length };
+  const ahora = Date.now(), finHoy = hoyInicio().getTime() + DIA, hoy = hoyInicio().getTime();
+  const act = datos.leads.filter(activo).map(l => [l, siguiente(l)]).filter(x => x[1]);
+  const sinAsignar = act.filter(x => x[1].raul).map(x => x[0]).sort((a, b) => a.fecha - b.fecha);
+  const vencidos = act.filter(x => !x[1].raul && x[1].vence && x[1].vence < ahora).sort((a, b) => a[1].vence - b[1].vence);
+  const deHoy = act.filter(x => !x[1].raul && x[1].vence >= ahora && x[1].vence < finHoy).sort((a, b) => a[1].vence - b[1].vence);
+  const proximas = datos.leads.filter(l => activo(l) && llego(l, "PAGADA") && !llego(l, "VISITADA") && l.visitaFecha && l.visitaFecha.getTime() >= hoy).sort((a, b) => a.visitaFecha - b.visitaFecha);
+  return { sinAsignar, vencidos, deHoy, proximas, total: sinAsignar.length + vencidos.length + deHoy.length };
 }
+const inicioSemana = () => { const d = hoyInicio(); d.setDate(d.getDate() - (d.getDay() + 6) % 7); return d.getTime(); };
+const pagadasDesde = desde => datos.leads.filter(l => tCod(l, "PAGADA") >= Math.max(desde, INICIO)).length;
 function vistaHoy(){
   const p = pendientes();
-  const hoy = hoyInicio().getTime();
   const fecha = new Date().toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
-  const leadsHoy = datos.leads.filter(l => l.fecha >= hoy).length;
-  const visitasHoy = datos.sesiones.filter(s => s.inicio >= hoy).length;
-  const semana = datos.leads.filter(l => l.visitaFecha && l.visitaFecha.getTime() >= hoy && l.visitaFecha.getTime() < hoy + 7*DIA && activo(l)).length;
+  const pagSemana = pagadasDesde(inicioSemana());
   let h = encabezado("Hoy", fecha.charAt(0).toUpperCase() + fecha.slice(1));
-  const venc = [...p.confirmar, ...p.nuevos].filter(fueraTiempo);
-  const sa = datos.leads.filter(sinAsignar).length;
   h += `<div class="tiles">
-    <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Por atender</div><div class="num">${p.total}</div><div class="sub">${venc.length} fuera de tiempo · ${sa} sin asignar</div></div>
-    <div class="tile"><div class="et">${I.inicio}Leads hoy</div><div class="num">${leadsHoy}</div><div class="sub">${fmtNum(visitasHoy)} visitas a la página</div></div>
-    <div class="tile ocultable"><div class="et">${I.cal}Visitas esta semana</div><div class="num">${semana}</div><div class="sub">en los próximos 7 días</div></div>
+    <div class="tile"><div class="et">${I.persona}Sin asignar</div><div class="num">${p.sinAsignar.length}</div><div class="sub">los asigna Raúl en el grupo</div></div>
+    <div class="tile"><div class="et">${I.cal}Vencidos</div><div class="num" style="${p.vencidos.length ? "color:var(--red)" : ""}">${p.vencidos.length}</div><div class="sub">${p.deHoy.length} más vencen hoy</div></div>
+    <div class="tile ocultable"><div class="et">${I.ok}Visitas pagadas</div><div class="num">${pagSemana}<small style="font-size:16px;color:var(--text2)"> de ${META_VISITAS_SEMANA}</small></div><div class="sub">esta semana, meta del equipo</div></div>
   </div>`;
-  const bloque = (titulo, ayuda, arr, extra) => arr.length ? `<div class="grupo-titulo"><b>${titulo}</b><span>${ayuda}</span></div><div class="lista">${arr.map(l => filaLead(l, extra && extra(l))).join("")}</div>` : "";
+  const conPaso = (titulo, ayuda, arr) => arr.length ? `<div class="grupo-titulo"><b>${titulo}</b><span>${ayuda}</span></div><div class="lista">${arr.map(([l, s]) =>
+    filaLead(l, `${l.responsable} · ${s.txt} · ${fmtVence(s.vence)}`)).join("")}</div>` : "";
   if(!p.total && !p.proximas.length){
-    h += `<div class="grupo-titulo"><b>Pendientes</b></div><div class="lista">${vacio("Todo al día", "No hay leads por atender. Los nuevos aparecen aquí en cuanto llegan.")}</div>`;
+    h += `<div class="grupo-titulo"><b>Pendientes</b></div><div class="lista">${vacio("Todo al día", "No hay nada vencido ni por asignar. Los nuevos aparecen aquí en cuanto llegan.")}</div>`;
   }
-  h += bloque("Fuera de tiempo", "Ya pasaron las 2 horas (o las 10 am si llegó de noche). Atiéndelos primero", venc, l => `${l.responsable ? "Responsable: " + l.responsable : "Sin responsable"} · llegó ${hace(l.fecha)}`);
-  p.confirmar = p.confirmar.filter(l => !venc.includes(l)); p.nuevos = p.nuevos.filter(l => !venc.includes(l));
-  h += bloque("Visitas por confirmar", "Escríbeles para confirmar la dirección", p.confirmar, l => `${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""} · ${l.escribio ? "ya le escribió a Daniel" : l.zona}`);
-  h += bloque("Nuevos sin contactar", "Los más antiguos primero", p.nuevos);
-  h += bloque("Seguimientos para hoy", "Fecha de próximo contacto vencida o de hoy", p.seguimientos, l => `Contactar: ${l.proximo.toLocaleDateString("es-MX",{day:"numeric",month:"short"})} · ${l.zona}`);
-  h += bloque("Próximas visitas", "Visitas técnicas confirmadas", p.proximas, l => `${l.visitaFecha.toLocaleDateString("es-MX",{weekday:"short",day:"numeric",month:"short"})}${l.visitaHora ? " · " + l.visitaHora : ""}`);
+  if(p.sinAsignar.length) h += `<div class="grupo-titulo"><b>Sin asignar</b><span>Asígnalo y mándalo al grupo desde su ficha</span></div><div class="lista">${p.sinAsignar.map(l =>
+    filaLead(l, `Llegó ${hace(l.fecha)} · ${[l.zona, rangoTxt(l.inversion)].filter(Boolean).join(" · ")}`)).join("")}</div>`;
+  h += conPaso("Vencidos", "Recuérdalo en el grupo; si el primer contacto sigue sin captura una hora después, reasígnalo", p.vencidos);
+  h += conPaso("Para hoy", "Lo que vence antes de terminar el día", p.deHoy);
+  h += p.proximas.length ? `<div class="grupo-titulo"><b>Próximas visitas</b><span>Visitas técnicas pagadas</span></div><div class="lista">${p.proximas.map(l =>
+    filaLead(l, `${l.responsable || "Sin responsable"} · ${l.visitaFecha.toLocaleDateString("es-MX",{weekday:"short",day:"numeric",month:"short"})}${l.visitaHora ? " · " + l.visitaHora : ""}`)).join("")}</div>` : "";
   return h;
 }
 
 /* ---------- Vista: Leads ---------- */
 const FILTROS = [
   ["todos", "Todos", () => true],
-  ["atender", "Por atender", porAtender],
-  ["fuera", "Fuera de tiempo", fueraTiempo],
-  ["sinasignar", "Sin asignar", sinAsignar],
+  ["vencidos", "Vencidos", l => vencido(siguiente(l))],
+  ["atender", "Sin contactar", porAtender],
+  ...EQUIPO.map(p => [p, p, l => activo(l) && l.responsable === p]),
   ["visita", "Apartó visita", apartoVisita],
   ["escribio", "Ya escribió a Daniel", l => l.escribio],
   ["alta", "Prioridad alta", l => l.prioridad === "Alta"],
@@ -673,7 +763,7 @@ function vistaLeads(){
   const q = busqueda.trim().toLowerCase();
   const f = (FILTROS.find(x => x[0] === filtro) || FILTROS[0])[2];
   const lista = datos.leads.filter(l => f(l) && (!etapaFiltro || l.seguimiento === etapaFiltro) &&
-    (!q || [l.nombre, l.tel, l.zona, l.folio, l.forma, l.anuncio, l.responsable].join(" ").toLowerCase().includes(q)));
+    (!q || [l.nombre, l.tel, l.zona, l.folio, l.forma, l.anuncio].join(" ").toLowerCase().includes(q)));
   let h = encabezado("Leads", `${fmtNum(datos.leads.length)} en total`);
   h += `<div class="pipe" aria-label="Embudo de seguimiento">${ETAPAS.map(e => {
     const n = datos.leads.filter(l => l.seguimiento === e).length;
@@ -806,75 +896,129 @@ function vistaMetricas(){
   return h;
 }
 
-/* ---------- Vista: Equipo ---------- */
-function statsPersona(p){
-  const manana = hoyInicio().getTime() + DIA;
-  const mios = datos.leads.filter(l => l.responsable === p), act = mios.filter(activo);
-  const cont = mios.filter(contactoDe);
-  const tiempos = cont.map(l => contactoDe(l) - l.fecha).filter(x => x >= 0);
-  return {
-    mios, act, venc: act.filter(fueraTiempo), sinC: act.filter(l => !contactoDe(l)),
-    seg: act.filter(l => l.proximo && l.proximo.getTime() < manana),
-    visitas: mios.filter(l => l.seguimiento === "Visita agendada" || l.seguimiento === "Visita pagada"),
-    ganados: mios.filter(l => l.seguimiento === "Ganado").length,
-    prom: tiempos.length ? tiempos.reduce((a, b) => a + b, 0) / tiempos.length : 0,
-    aTiempo: pct(cont.filter(l => contactoDe(l) <= limiteSLA(l.fecha)).length, cont.length), nCont: cont.length
-  };
+/* ---------- Vista: Equipo (KPIs del PDF) ---------- */
+function desdeEq(){
+  const base = periodoEq === "semana" ? inicioSemana() : periodoEq === "30" ? hoyInicio().getTime() - 29 * DIA : 0;
+  return Math.max(base, INICIO);
 }
-function msjResumen(){
-  /* Sin emojis: el link de WhatsApp en computadora los convierte en "?". */
-  const fecha = new Date().toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
-  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo), sa = act.filter(l => !l.responsable);
-  const manana = hoyInicio().getTime() + DIA;
-  const seg = act.filter(l => l.proximo && l.proximo.getTime() < manana);
-  const lineas = [`*RESUMEN DEL EQUIPO · ${fecha}*`, `Activos: ${act.length} · Sin asignar: ${sa.length} · Fuera de tiempo: ${venc.length}`, ""];
-  EQUIPO.forEach(p => { const s = statsPersona(p);
-    lineas.push(`*${p}*: ${s.act.length} activos · ${s.sinC.length} sin contactar · ${s.venc.length} fuera de tiempo · ${s.seg.length} seguimientos hoy`); });
-  if(venc.length){ lineas.push("", "*Fuera de tiempo (atender ya)*"); venc.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · llegó ${hace(l.fecha)}`, `  ${linkAsesor(l)}`)); }
-  if(seg.length){ lineas.push("", "*Seguimientos de hoy*"); seg.forEach(l => lineas.push(`- ${l.nombre} · ${l.responsable || "SIN ASIGNAR"} · intento ${Math.min(l.intentos + 1, 5)} de 5`, `  ${linkAsesor(l)}`)); }
-  if(sa.length){ lineas.push("", "*Sin asignar*"); sa.forEach(l => lineas.push(`- ${l.nombre} · ${l.zona || "sin zona"}`)); }
-  return lineas.join("\n");
+function kpis(persona){
+  const desde = desdeEq(), ahora = Date.now();
+  const ls = datos.leads.filter(l => l.fecha >= desde && (!persona || l.responsable === persona));
+  // 1. Velocidad: cada asignación cuenta para quien la recibió; a tiempo si hubo llamada o mensaje antes del plazo.
+  let vOk = 0, vTot = 0;
+  datos.leads.forEach(l => {
+    const as = asignaciones(l), cont = evDe(l, "LLAMADA", "CONTACTADO").filter(e => !e.bot).map(e => e.t);
+    as.forEach((a, i) => {
+      if(a.t < desde || (persona && a.quien !== persona) || cont.some(t => t < a.t)) return;
+      const fin = i + 1 < as.length ? as[i + 1].t : Infinity, lim = limiteContacto(a.t);
+      const c = cont.find(t => t >= a.t && t < fin);
+      if(!c && fin === Infinity && ahora < lim) return; // todavía está en tiempo
+      vTot++; if(c && c <= lim) vOk++;
+    });
+  });
+  // 2. Seguimiento: de los que no responden, cuántos seguimientos se hicieron de los que ya tocaban (días 1, 3, 7 y 14).
+  let sOk = 0, sTot = 0;
+  ls.forEach(l => {
+    if(respondio(l)) return;
+    const hum = evDe(l, ...CONTACTO_COD).filter(e => !e.bot);
+    const pc = (hum[0] || {}).t; if(!pc) return;
+    const fin = tCod(l, "PERDIDO") || ahora;
+    const tocaban = CADENCIA.filter(d => fin - pc >= (d + 0.5) * DIA).length;
+    sTot += tocaban; sOk += Math.min(hum.filter(e => e.cod === "SEGUIMIENTO").length, tocaban);
+  });
+  // 3 a 6
+  const asign = ls.filter(l => l.responsable && (primerContacto(l) || ahora > limiteContacto(inicioReloj(l))));
+  const contestadas = asign.filter(l => eventos(l).some(contesto)).length;
+  const pagadas = asign.filter(l => llego(l, "PAGADA"));
+  let rOk = 0, rTot = 0;
+  ls.forEach(l => { const tv = tCod(l, "VISITADA"), tp = tCod(l, "PROPUESTA"); if(!tv) return;
+    if(tp){ rTot++; if(tp - tv <= 10 * DIA) rOk++; } else if(ahora - tv > 10 * DIA) rTot++; });
+  return { vel: [vOk, vTot], seg: [sOk, sTot], lla: [contestadas, asign.length], pag: [pagadas.length, asign.length],
+    ren: [rOk, rTot], cie: [pagadas.filter(l => llego(l, "VENDIDA")).length, pagadas.length] };
 }
+const KPI = [
+  ["vel", "1 · Velocidad", "Primer contacto antes del plazo", [90, 70]],
+  ["seg", "2 · Seguimiento", "Seguimientos hechos de los que tocaban", [90, 70]],
+  ["lla", "3 · Llamadas", "Leads con una llamada contestada", null],
+  ["pag", "4 · Visitas pagadas", "Leads que pagaron su visita", [20, 10]],
+  ["ren", "5 · Render a tiempo", "Propuesta en 10 días o menos", [90, 90]],
+  ["cie", "6 · Cierre", "Visitas pagadas que compraron", null]
+];
+function semaforo(k, par){
+  const [a, b] = par; if(!b) return "";
+  const def = KPI.find(x => x[0] === k)[3]; if(!def) return "";
+  const p = a / b * 100; return p >= def[0] ? "v" : p >= def[1] ? "a" : "r";
+}
+const celdaKpi = (k, par) => par[1] ? `<span class="sem ${semaforo(k, par)}"></span>${pct(par[0], par[1])}%<small>${par[0]} de ${par[1]}</small>` : `<span style="color:var(--text3)">—</span>`;
 function vistaEquipo(){
-  const act = datos.leads.filter(activo), venc = act.filter(fueraTiempo), sa = act.filter(l => !l.responsable);
-  const cont = datos.leads.filter(contactoDe), tiempos = cont.map(l => contactoDe(l) - l.fecha).filter(x => x >= 0);
-  const prom = tiempos.length ? tiempos.reduce((a, b) => a + b, 0) / tiempos.length : 0;
-  let h = encabezado("Equipo", "Quién tiene qué, cuánto tarda en responder y qué está pendiente");
+  const k = Object.fromEntries(EQUIPO.map(p => [p, kpis(p)])), eq = kpis();
+  const mes = new Date(); mes.setDate(1); mes.setHours(0, 0, 0, 0);
+  const vendidasMes = datos.leads.filter(l => tCod(l, "VENDIDA") >= Math.max(mes.getTime(), INICIO)).length;
+  const pagSemana = pagadasDesde(inicioSemana());
+  let h = encabezado("Equipo", "Indicadores del proceso comercial");
+  h += `<div class="segmentado" role="group" aria-label="Periodo" style="margin-bottom:16px">${[["semana","Esta semana"],["30","30 días"],["todo","Todo"]].map(([c,t]) =>
+    `<button data-periodo-eq="${c}" aria-pressed="${periodoEq === c}">${t}</button>`).join("")}</div>`;
   h += `<div class="tiles">
-    <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Fuera de tiempo</div><div class="num">${venc.length}</div><div class="sub">sin contactar y ya pasó el tiempo</div></div>
-    <div class="tile ${sa.length ? "rojo" : ""}"><div class="et">${I.inicio}Sin asignar</div><div class="num">${sa.length}</div><div class="sub">de ${act.length} activos</div></div>
-    <div class="tile ocultable"><div class="et">${I.cal}Respuesta promedio</div><div class="num">${prom ? fmtDur(prom) : "—"}</div><div class="sub">${pct(cont.filter(l => contactoDe(l) <= limiteSLA(l.fecha)).length, cont.length)}% contactados a tiempo</div></div>
+    <div class="tile"><div class="et">${I.ok}Visitas pagadas</div><div class="num">${pagSemana}<small style="font-size:16px;color:var(--text2)"> de ${META_VISITAS_SEMANA}</small></div><div class="sub">esta semana</div></div>
+    <div class="tile"><div class="et">${I.pesos}Cocinas vendidas</div><div class="num">${vendidasMes}<small style="font-size:16px;color:var(--text2)"> de ${META_COCINAS_MES}</small></div><div class="sub">este mes</div></div>
+    <div class="tile ocultable"><div class="et">${I.cal}Vencidos ahora</div><div class="num">${pendientes().vencidos.length}</div><div class="sub">pasos fuera de tiempo</div></div>
   </div>`;
-  h += `<div class="barra-acciones"><a class="btn chico" href="https://wa.me/?text=${encodeURIComponent(msjResumen())}" target="_blank" rel="noopener">${I.enviar}Mandar resumen al grupo</a></div>`;
-  const maxC = Math.max(1, ...EQUIPO.map(p => statsPersona(p).act.length));
-  h += `<div class="grupo-titulo"><b>Por persona</b><span>Tiempo máximo: 2 horas de día, antes de las 10 am si llegó de noche</span></div><div class="equipo">${EQUIPO.map(p => { const s = statsPersona(p);
-    return `<div class="persona-t">
-      <div class="cab">${burbuja(p)}<div><b>${esc(p)}</b><span>${s.act.length} activos · ${s.ganados} ganados</span></div></div>
-      <div class="carga"><span>Carga de prospectos activos</span><div class="barra"><i style="width:${s.act.length / maxC * 100}%"></i></div></div>
-      <div class="kpi4">
-        <div class="${s.venc.length ? "malo" : ""}"><b>${s.venc.length}</b><span>Fuera de tiempo</span></div>
-        <div class="${s.sinC.length ? "" : ""}"><b>${s.sinC.length}</b><span>Sin contactar</span></div>
-        <div><b>${s.seg.length}</b><span>Seguimientos hoy</span></div>
-        <div><b>${s.visitas.length}</b><span>Visitas agendadas o pagadas</span></div>
-      </div>
-      <div class="pie-t"><span>Responde en <b>${s.prom ? fmtDur(s.prom) : "—"}</b></span><span><b>${s.nCont ? s.aTiempo + "%" : "—"}</b> a tiempo</span></div>
-    </div>`; }).join("")}</div>`;
-  const bloque = (titulo, ayuda, arr, extra) => arr.length ? `<div class="grupo-titulo"><b>${titulo}</b><span>${ayuda}</span></div><div class="lista">${arr.map(l => filaLead(l, extra && extra(l))).join("")}</div>` : "";
-  h += bloque("Fuera de tiempo", "Atiéndelos primero o reasígnalos", venc, l => `${l.responsable || "Sin responsable"} · llegó ${hace(l.fecha)}`);
-  h += bloque("Sin asignar", "Ábrelos y elige responsable", sa);
-  const manana = hoyInicio().getTime() + DIA;
-  h += bloque("Seguimientos de hoy", "Intento que toca según la cadencia de 5 en 14 días", act.filter(l => l.proximo && l.proximo.getTime() < manana && !venc.includes(l)), l => `${l.responsable || "Sin responsable"} · intento ${Math.min(l.intentos + 1, 5)} de 5`);
-  const perdidos = datos.leads.filter(l => l.seguimiento === "Perdido");
-  const mot = MOTIVOS_PERDIDO.map(m => [m, perdidos.filter(l => l.motivo === m).length]).concat([["Sin motivo", perdidos.filter(l => !l.motivo).length]]).filter(x => x[1]);
-  const maxM = Math.max(1, ...mot.map(x => x[1]));
-  h += `<div class="grupo-titulo"><b>Por qué se pierden</b><span>${perdidos.length} prospectos perdidos</span></div><div class="tarjeta">${mot.length ? `<div class="desglose">${mot.map(([m, n]) =>
-    `<div class="barra-fila"><span class="nom">${m}</span><span class="barra"><i style="width:${n / maxM * 100}%"></i></span><span class="v">${n}</span></div>`).join("")}</div>` : `<p class="ayuda">Todavía no hay prospectos perdidos.</p>`}</div>`;
+  h += `<div class="rejilla"><div class="tarjeta ancho"><h2>Indicadores por responsable</h2>
+    <p class="ayuda">Salen de los códigos registrados en cada ficha. Verde: en meta · Amarillo: cerca · Rojo: abajo · Sin color: todavía sin meta.</p>
+    <div class="tabla-scroll kpi-desk"><table class="tabla kpi-tabla"><thead><tr><th>Indicador</th>${EQUIPO.map(p => `<th>${esc(p)}</th>`).join("")}<th>Equipo</th></tr></thead><tbody>
+    ${KPI.map(([c, t, ayuda]) => `<tr><td><b style="font-weight:600">${t}</b><small style="margin-left:0">${ayuda}</small></td>${EQUIPO.map(p => `<td>${celdaKpi(c, k[p][c])}</td>`).join("")}<td>${celdaKpi(c, eq[c])}</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="kpi-movil"><div class="chips" role="group" aria-label="Responsable">${["Equipo", ...EQUIPO].map(p =>
+      `<button class="chip" data-kpi-p="${p}" aria-pressed="${kpiPersona === p}">${esc(p)}</button>`).join("")}</div>
+      ${KPI.map(([c, t, ayuda]) => { const par = (kpiPersona === "Equipo" ? eq : (k[kpiPersona] || eq))[c];
+        return `<div class="kpi-fila"><span><b>${t}</b><small>${ayuda}</small></span><span class="der">${par[1] ? `<span class="sem ${semaforo(c, par)}"></span>${pct(par[0], par[1])}%<small>${par[0]} de ${par[1]}</small>` : `<span style="color:var(--text3)">—</span>`}</span></div>`; }).join("")}</div>
+    <p class="kpi-nota">Cuentan los leads que llegaron desde el ${new Date(INICIO || Date.now()).toLocaleDateString("es-MX", { day: "numeric", month: "long" })}. Metas: velocidad y seguimiento 90% o más; visitas pagadas 20% o más; render a tiempo 90% o más. Llamadas y cierre se miden 30 días antes de fijarles meta.</p></div>
+    ${tarjetaAsistente()}
+    <div class="tarjeta ancho"><h2>Tablero del viernes</h2><p class="ayuda">Arma el mensaje con los números de este periodo para mandarlo al grupo.</p>
+      <div class="tablero-form"><input id="t-aprendimos" placeholder="Lo que aprendimos (una línea)"><input id="t-cambiamos" placeholder="Lo que cambiamos la próxima semana (una línea)"></div>
+      <div class="botones"><button class="btn chico" data-accion="copiar-tablero">Copiar y enviar al grupo</button></div></div></div>`;
   return h;
+}
+/* Lo que hizo el asistente de WhatsApp en el periodo (sirve como caso de éxito). */
+function tarjetaAsistente(){
+  const desde = desdeEq();
+  const ls = datos.leads.filter(l => eventos(l).some(e => e.bot && e.t >= desde));
+  if(!ls.length) return "";
+  const contactados = ls.filter(l => evDe(l, "CONTACTADO").some(e => e.bot));
+  const respondieron = ls.filter(l => evDe(l, "RESPONDIO").some(e => e.bot));
+  const apartadas = ls.filter(l => evDe(l, "APARTADA").some(e => e.bot));
+  const pasados = ls.filter(l => evDe(l, "ASIGNADO").some(e => /asistente:/.test(e.det)));
+  const tiempos = contactados.map(l => (evDe(l, "CONTACTADO").find(e => e.bot).t - l.fecha) / 6e4).filter(x => x >= 0).sort((a, b) => a - b);
+  const med = tiempos.length ? tiempos[Math.floor(tiempos.length / 2)] : 0;
+  const fila = (t, v, sub) => `<div class="kpi-fila"><span><b>${t}</b><small>${sub}</small></span><span class="der">${v}</span></div>`;
+  return `<div class="tarjeta ancho"><h2>Asistente de WhatsApp</h2><p class="ayuda">Lo que hizo el asistente con los leads de este periodo.</p><div style="margin-top:8px">
+    ${fila("Leads atendidos", fmtNum(contactados.length), "recibieron su primer mensaje del asistente")}
+    ${fila("Primera respuesta", med < 1 ? "menos de 1 min" : med < 60 ? Math.round(med) + " min" : (med / 60).toFixed(1).replace(".0", "") + " h", "tiempo típico desde que llegó el lead")}
+    ${fila("Respondieron", contactados.length ? pct(respondieron.length, contactados.length) + "%" : "—", "de los leads que atendió")}
+    ${fila("Visitas apartadas", fmtNum(apartadas.length), "apartadas por el asistente")}
+    ${fila("Pasados al equipo", fmtNum(pasados.length), "llamadas, comprobantes y casos especiales")}</div></div>`;
+}
+function textoTablero(){
+  const titulo = periodoEq === "semana" ? "semana del " + new Date(inicioSemana()).toLocaleDateString("es-MX", { day: "numeric", month: "short" }).replace(".", "")
+    : periodoEq === "30" ? "últimos 30 días" : "desde el inicio";
+  const mes = new Date(); mes.setDate(1); mes.setHours(0, 0, 0, 0);
+  const vend = datos.leads.filter(l => tCod(l, "VENDIDA") >= Math.max(mes.getTime(), INICIO)).length;
+  const p = (par) => par[1] ? pct(par[0], par[1]) + "%" : "sin datos";
+  const lineas = EQUIPO.map(x => { const k = kpis(x);
+    return `*${x}* · Velocidad ${p(k.vel)} · Seguimiento ${p(k.seg)} · Llamadas contestadas ${k.lla[0]} de ${k.lla[1]} · Visitas pagadas ${k.pag[0]} de ${k.pag[1]}`; });
+  const ap = ($("t-aprendimos") || {}).value || "", ca = ($("t-cambiamos") || {}).value || "";
+  return [`*TABLERO · ${titulo}*`, `Equipo: ${pagadasDesde(inicioSemana())} visitas pagadas de ${META_VISITAS_SEMANA} esta semana · ${vend} cocinas vendidas en el mes`, "",
+    ...lineas, "", `Lo que aprendimos: ${ap.trim() || "…"}`, `Lo que cambiamos la próxima semana: ${ca.trim() || "…"}`].join("\n");
+}
+async function copiarTablero(){
+  const t = textoTablero();
+  try{ await navigator.clipboard.writeText(t); toast("Tablero copiado"); }catch(e){}
+  window.open("https://wa.me/?text=" + encodeURIComponent(t), "_blank", "noopener");
 }
 
 /* ---------- Ficha del lead ---------- */
 function abrirFicha(folio){
-  fichaFolio = folio; pidiendo = null;
+  fichaFolio = folio; regCod = null; verChat = false;
   const f = $("ficha"); f.hidden = false;
   requestAnimationFrame(() => { f.classList.add("abierta"); $("velo").classList.add("abierto"); });
   pintarFicha();
@@ -890,36 +1034,93 @@ $("cerrar-ficha").onclick = cerrarFicha;
 $("velo").onclick = cerrarFicha;
 document.addEventListener("keydown", e => { if(e.key === "Escape" && fichaFolio) cerrarFicha(); });
 
+function saludo(){ const h = new Date().getHours(); return h < 12 ? "buen día" : h < 19 ? "buenas tardes" : "buenas noches"; }
+function datoClave(l){
+  const FORMAS = { "En L": "en L", "En U": "en U", "Con isla": "con isla", "Un muro": "en un solo muro" };
+  const forma = l.forma && !/no estoy/i.test(l.forma) ? "una cocina " + (FORMAS[l.forma] || l.forma.charAt(0).toLowerCase() + l.forma.slice(1)) : "una cocina a la medida";
+  const cuando = l.tiempo && !/sin fecha/i.test(l.tiempo) ? " y le gustaría tenerla " + l.tiempo.toLowerCase() : "";
+  return `busca ${forma}${cuando}`;
+}
+/* Diagnóstico por WhatsApp: el mismo contenido que vio el cliente en la página, en mensaje y de usted. */
+const DX = {
+  titulo: { "Un muro": "Cocina de un muro", "En L": "Cocina en L", "En U": "Cocina en U", "Con isla": "Cocina con isla" },
+  enfoque: { "Se cocina a diario": "hecha para cocinar todos los días", "Ahí se reúne la familia": "pensada para reunir a la familia",
+    "Desayunos y cenas rápidas": "práctica para el día a día", "Cocina alguien más": "con área de trabajo independiente" },
+  nivel: { Funcional: "proyecto funcional", Diseño: "proyecto de diseño", Alta: "proyecto de alta gama" },
+  plano: { "Un muro": "el refrigerador va en un extremo para no cortar la cubierta, y se deja un tramo libre entre tarja y parrilla para preparar sin estorbos.",
+    "En L": "tarja y parrilla en muros distintos para que dos personas cocinen sin estorbarse, y la esquina se resuelve con herraje especial para no perder guarda.",
+    "En U": "tres frentes de trabajo y la mayor capacidad de guarda, con esquinas diseñadas para que puertas y cajones abran sin chocar.",
+    "Con isla": "la isla como centro, con trabajo de un lado y convivencia del otro, dejando paso cómodo alrededor y conexiones previstas antes de instalar." },
+  error: { "Un muro": "el refrigerador pegado a la parrilla, que lo calienta y desgasta.", "En L": "la esquina muerta donde nada se alcanza.",
+    "En U": "cajones de esquina que chocan entre sí.", "Con isla": "una isla sin las conexiones de agua y contactos previstas." },
+  dec: { Funcional: [["Cubierta", "resistente y fácil de mantener, sin pagar de más"], ["Herrajes", "cierre suave en puertas y cajones de uso diario"], ["Frentes", "acabados lisos y durables que no pasan de moda"]],
+    Diseño: [["Cubierta", "piedra o superficie de alto desempeño con buen veteado"], ["Herrajes", "cajones de extensión total y cierre suave en todo"], ["Madera y luz", "combinación de madera con iluminación LED integrada"]],
+    Alta: [["Cubierta", "piedra de gran formato con detalles a la medida"], ["Herrajes", "sistemas premium, organizadores internos y apertura sin jaladeras"], ["Carpintería de autor", "chapas de madera, lambrines y luz integrada en cada mueble"]] }
+};
+function msjDiagnostico(l){
+  const n = primerNombre(l.nombre), quien = NOMBRE_LARGO[l.responsable] || "el Ing. Daniel García";
+  const nv = /^Alta/.test(l.acabado) ? "Alta" : /^Funcional/.test(l.acabado) ? "Funcional" : /^Diseño/.test(l.acabado) ? "Diseño"
+    : /^Menos|^\$200,000|^\$150,000/.test(l.inversion) ? "Funcional" : /^Más/.test(l.inversion) ? "Alta" : "Diseño";
+  const perfil = [(DX.titulo[l.forma] || "Cocina a la medida") + (DX.enfoque[l.uso] ? ", " + DX.enfoque[l.uso] : ""), l.acabado ? DX.nivel[nv] : ""].filter(Boolean).join(" · ");
+  const etapa = { "Casa nueva": "Es casa nueva, así que es buen momento: todavía no hay nada instalado y la cocina se planea completa.",
+    "Quiero renovarla": "Como ya tiene cocina, en la visita revisamos qué se puede aprovechar de lo que hay.",
+    "Estoy en obra": "Está en obra, que es el mejor momento para definir la cocina: se deja todo previsto antes de cerrar instalaciones y no hay que romper después.",
+    "Estoy viendo ideas": "Está viendo ideas, y este diagnóstico le sirve para tener claro qué pedir cuando decida." }[l.etapa] || "";
+  const tiempo = /antes posible/i.test(l.tiempo) ? "La fabricación toma alrededor de 6 semanas, así que conviene medir pronto."
+    : /1 a 3/.test(l.tiempo) ? "La fabricación toma alrededor de 6 semanas después de aprobar el diseño, así que conviene empezar a diseñar pronto para tenerla en 1 a 3 meses."
+    : /3 a 6/.test(l.tiempo) ? "Para tenerla en 3 a 6 meses, lo ideal es ir definiendo el diseño con calma desde ahora." : "";
+  const inv = /^Menos/.test(l.inversion) ? "*Sobre la inversión:* nuestras cocinas parten de $200,000. Con gusto le digo con honestidad qué se puede hacer bien con su presupuesto, o cómo hacerla por etapas."
+    : /orienten/i.test(l.inversion) ? "*Sobre la inversión:* le podemos mostrar opciones en tres niveles para que elija con calma." : "";
+  return [`Hola, ${n}, ${saludo()}. Soy ${quien}, de Armadillo Diseño. Le comparto su diagnóstico (folio ${l.folio}):`,
+    `*Su proyecto:* ${perfil}.`,
+    [etapa, tiempo].filter(Boolean).length ? `*Su momento:* ${[etapa, tiempo].filter(Boolean).join(" ")}` : "",
+    DX.plano[l.forma] ? `*Su distribución:* ${DX.plano[l.forma]}` : "*Su distribución:* la definimos al medir, con el triángulo de trabajo como guía para saber dónde va cada cosa.",
+    `*Lo que más define su cocina:*\n${DX.dec[nv].map(([t, d]) => `• ${t}: ${d}`).join("\n")}`,
+    `*Error común a evitar:* ${DX.error[l.forma] || "diseñar con una foto de internet sin medir el espacio."}`,
+    inv,
+    "¿Qué dudas tiene? Se las resuelvo por aquí, o si le queda más fácil, le marco 5 minutos."].filter(Boolean).join("\n\n");
+}
+/* Mensaje sugerido según el paso que sigue (guiones del PDF, de usted). */
 function msjCliente(l){
-  const n = primerNombre(l.nombre), yo = `Hola ${n}, soy el Ing. Daniel García de Armadillo Diseño.`;
-  const cocina = l.forma ? " " + l.forma.toLowerCase().replace(/^cocina /, "") : "";
-  switch(l.seguimiento){
-    case "Visita agendada": return `${yo} Te escribo para confirmar tu visita técnica${l.visitaDia ? " del " + l.visitaDia : ""}. La visita tiene un costo de $1,000 que se abona completo a tu cocina, y si no avanzamos el render es tuyo. Puedes pagarla por transferencia, en efectivo o con tarjeta. ¿Cómo te acomoda? Y para dejarla confirmada, ¿me mandas tu ubicación por aquí?`;
-    case "Visita pagada": return `${yo} Ya quedó registrado tu pago, gracias. Nos vemos en tu visita${l.visitaDia ? " el " + l.visitaDia : ""}. Si tienes fotos de tu cocina actual o planos, mándamelos y llego con ideas.`;
-    case "Visita realizada": return `${yo} Gracias por recibirnos. Ya estamos trabajando en el render de tu cocina. ¿Hay algo que se te haya ocurrido después de la visita y quieras que tomemos en cuenta?`;
-    case "Propuesta enviada": return `${yo} ¿Qué te pareció el render de tu cocina? Si hay algo que quieras ajustar, lo platicamos y lo dejamos como te imaginas.`;
-    case "Contactado": return `${yo} Te escribo para dar seguimiento a tu cocina. ¿Pudiste pensar lo que platicamos? Esta semana tengo espacio para ir a medir.`;
-    default: return apartoVisita(l)
-      ? `${yo} Vi que apartaste tu visita técnica para el ${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""}. ¿Me compartes la dirección para dejarla confirmada?`
-      : `${yo} Recibí tu diagnóstico de cocina${cocina ? " (" + cocina.trim() + ")" : ""}. Antes de proponerte algo, cuéntame: ¿qué es lo que más te gustaría cambiar de tu cocina?`;
+  const n = primerNombre(l.nombre), quien = NOMBRE_LARGO[l.responsable] || "el Ing. Daniel García";
+  const yo = `Hola, ${n}, ${saludo()}. Soy ${quien}, de Armadillo Diseño.`;
+  const s = siguiente(l) || {};
+  if(!primerContacto(l)){
+    if(l.escribio && !apartoVisita(l)) return msjDiagnostico(l);
+    if(apartoVisita(l)) return `${yo} Vi que apartó su visita técnica para el ${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""}. Para dejarla confirmada solo necesito su ubicación por aquí y el pago de la visita por $1,000, que se abona completo a su cocina. ¿Le comparto los datos para el pago?`;
+    return `${yo} Revisé el diagnóstico que hizo para su cocina y vi que ${datoClave(l)}. Para orientarle bien, ¿la cocina es para la casa donde vive ahora o para una casa nueva? Si le queda más fácil, dígame a qué hora le marco 5 minutos.`;
   }
+  if(llego(l, "PROPUESTA")) return /decisión/.test(s.txt || "") ? `Hola, ${n}. Quiero saber cómo va su decisión. ¿Hay algo de la propuesta que le gustaría ajustar?` : `Hola, ${n}. ¿Pudieron revisar la propuesta con calma? ¿Les surgió alguna duda?`;
+  if(llego(l, "VISITADA")) return `Hola, ${n}. Gracias por recibirnos. Ya estamos trabajando en el render de su cocina; queda listo en 7 a 10 días. ¿Le parece si nos vemos en el showroom para presentárselo? Si pueden venir los dos, mejor.`;
+  if(llego(l, "PAGADA")) return `Listo, ${n}. Su visita técnica quedó confirmada${l.visitaDia ? " para el " + l.visitaDia : ""}. Ayuda mucho que la zona de la cocina esté despejada y que estén las personas que van a decidir. Su pago de $1,000 se abona a su cocina si decide hacerla con nosotros.`;
+  if(llego(l, "APARTADA")) return /liberar/.test(s.txt || "") ? `Hola, ${n}. Como no me llegó la confirmación, liberé el horario de su visita. Cuando quiera retomarlo, me escribe y buscamos otra fecha.` : `Hola, ${n}. Le sigo guardando el horario de su visita. ¿Pudo hacer el pago de la visita?`;
+  if(respondio(l)) return `Qué bueno, ${n}. Para entender bien su espacio y no hacerle escribir tanto, ¿le marco 5 minutos? ¿Le queda bien ahorita o más tarde?`;
+  const k = evDe(l, "SEGUIMIENTO").length;
+  if(k === 0) return `Hola, ${n}. Le marqué por lo de su cocina. Si le queda más fácil, dígame un horario y le marco 5 minutos.`;
+  if(k === 1) return `Hola, ${n}. Le comparto un proyecto que hicimos. Si quiere, le cuento qué materiales le convienen para su espacio.`;
+  if(k === 2) return `Hola, ${n}. (Este seguimiento va en audio de 30 segundos: su nombre, un dato de su diagnóstico y una pregunta.)`;
+  return `Hola, ${n}. No quiero ser insistente, así que este es mi último mensaje. Si más adelante retoma lo de su cocina, aquí estamos y con gusto le ayudamos.`;
 }
 function turno(){
   // Le toca a quien tiene menos leads activos; en empate, el primero de la lista.
   return EQUIPO.map(p => [p, datos.leads.filter(x => activo(x) && x.responsable === p).length]).sort((a,b) => a[1] - b[1])[0][0];
 }
+/* Mensaje de asignación para el grupo (formato del PDF). Sin emojis: el link en computadora los convierte en "?". */
 function msjGrupo(l){
-  // Sin emojis: el link de WhatsApp en computadora los convierte en "?". Solo caracteres simples.
-  const quien = l.responsable || turno();
-  const carga = EQUIPO.map(p => `${p === quien ? ">" : " "} ${p.padEnd(10)} ${datos.leads.filter(x => activo(x) && (x.responsable === p || (x === l && p === quien))).length}`).join("\n");
-  return [`*NUEVO PROSPECTO · ${l.folio}*`, `Prioridad *${l.prioridad.toUpperCase()}*`, "",
-    `*${l.nombre}*`, `Zona: ${l.zona || "sin zona"}${l.ubic ? " · " + l.ubic : ""}`,
-    `Cocina: ${[l.forma, l.acabado].filter(Boolean).join(" · ") || "sin dato"}`,
-    `Inversión: ${l.inversion || "sin dato"}`, `Para cuándo: ${l.tiempo || "sin dato"}`,
-    apartoVisita(l) ? `*Apartó visita:* ${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""}` : "", "",
-    `*LE TOCA A: ${quien.toUpperCase()}*`, `Escríbele aquí: https://wa.me/52${l.tel}`, "",
-    "*Cuando hables con el prospecto, actualiza aquí:*", linkAsesor(l), "",
-    "*Turnos (prospectos activos)*", "```" + carga + "```"].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n");
+  const quien = l.responsable || turno(), ahora = Date.now(), lim = limiteContacto(ahora), enHorario = lim - ahora <= HORA;
+  const plazo = enHorario ? `Llamar antes de: ${fmtHora(ahora + 15 * 6e4)} · Mensaje máximo: ${fmtHora(lim)}`
+    : `Mensaje antes de: ${fmtDiaHora(lim)} (llegó fuera de horario: no llamar de noche)`;
+  const copia = Object.assign({}, l, { responsable: quien, _evSrc: null });
+  return [`*LEAD NUEVO · ${l.folio}*`,
+    `Nombre: ${l.nombre} · Zona: ${l.zona || "sin zona"}${l.ubic ? " · " + l.ubic : ""}`,
+    `Rango: ${l.inversion || "sin dato"} · Para cuándo: ${l.tiempo || "sin dato"}`,
+    `Dato clave: ${[l.forma, l.acabado, l.etapa].filter(Boolean).join(" · ") || "sin dato"}`,
+    l.escribio && !apartoVisita(l) ? "*Pidió su diagnóstico por WhatsApp:* el mensaje listo ya es su diagnóstico. Mándalo y pregúntale sus dudas antes de proponer la visita." : "",
+    apartoVisita(l) ? `*Apartó visita en la página:* ${l.visitaDia}${l.visitaHora ? ", " + l.visitaHora : ""}` : "",
+    `Responsable: *${quien.toUpperCase()}*`, plazo, "",
+    `Teléfono: ${l.tel}`,
+    `Mensaje listo (tócalo, revisa y envía): https://wa.me/52${l.tel}?text=${encodeURIComponent(msjCliente(copia))}`, "",
+    "Responde a este mensaje con *#RECIBIDO* y después con *#LLAMADA* o *#CONTACTADO* + captura."].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n");
 }
 function fichaTexto(l){
   return [`Lead Armadillo · ${l.nombre} (prioridad ${l.prioridad})`, `WhatsApp: ${l.tel}`,
@@ -928,97 +1129,168 @@ function fichaTexto(l){
     l.ubic ? `Ubicación: ${l.ubic}` : "", l.responsable ? `Responsable: ${l.responsable}` : "",
     `Seguimiento: ${l.seguimiento}`, `Folio ${l.folio}`].filter(Boolean).join("\n");
 }
+function formRegistro(l){
+  if(!regCod) return "";
+  const nSeg = evDe(l, "SEGUIMIENTO").length + 1;
+  let h = `<div class="registro">
+    <label>Fecha y hora en que pasó (la de la captura)<input type="datetime-local" id="r-t" value="${aInputLocal(Date.now())}" max="${aInputLocal(Date.now() + 5 * 6e4)}"></label>`;
+  if(regCod === "LLAMADA") h += `<label>Resultado<select id="r-res"><option value="contestó">Contestó</option><option value="no contestó">No contestó</option></select></label>`;
+  if(regCod === "VENDIDA") h += `<label>Monto total de la cocina<input type="number" inputmode="numeric" id="r-monto" placeholder="Ej. 285000"></label>`;
+  if(regCod === "PERDIDO") h += `<label>Razón<select id="r-razon"><option value="">Elige la razón</option>${RAZONES.map(r => `<option>${r}</option>`).join("")}</select></label>`;
+  const ph = { APARTADA: ["Día y hora de la visita", "Ej. jueves 6 nov, 11:00"], VISITADA: ["Fecha de la cita en showroom", "Ej. martes 18 nov, 17:00"],
+    PROPUESTA: ["Opción recomendada y monto", "Ej. Diseño · $290,000"], SEGUIMIENTO: [`Detalle del seguimiento ${nSeg} (opcional)`, "Ej. Mandé foto de proyecto"] }[regCod] || ["Detalle (opcional)", "Ej. Pide visita el jueves"];
+  h += `<label>${ph[0]}<input id="r-det" placeholder="${ph[1]}" maxlength="140"></label>`;
+  if(COD[regCod].evid) h += `<label class="check"><input type="checkbox" id="r-ev"> La captura ya está en el grupo</label>`;
+  h += `<button class="btn chico" id="r-ok" style="color:#fff">Registrar #${regCod}${regCod === "SEGUIMIENTO" ? nSeg : ""}</button></div>`;
+  return h;
+}
+function registrar(l){
+  const cod = regCod, t = new Date($("r-t").value).getTime() || Date.now();
+  if(t > Date.now() + 5 * 6e4){ toast("La hora no puede estar en el futuro."); return; }
+  if(t < l.fecha - 6e4){ toast("La hora es anterior a la llegada del lead."); return; }
+  if(!l.responsable && cod !== "PERDIDO"){ toast("Primero asigna un responsable."); return; }
+  if(COD[cod].evid && !$("r-ev").checked){ toast("Primero confirma que la captura ya está en el grupo."); return; }
+  let det = ($("r-det") || {}).value ? $("r-det").value.trim().replace(/[\n\[\]#]/g, " ") : "";
+  const c = {};
+  if((cod === "APARTADA" || cod === "VISITADA") && !det){ toast(cod === "APARTADA" ? "Escribe el día y la hora de la visita." : "Escribe la fecha de la cita en showroom."); $("r-det").focus(); return; }
+  if(cod === "LLAMADA") det = $("r-res").value + (det ? " · " + det : "");
+  if(cod === "VENDIDA"){ const m = Number($("r-monto").value); if(!m){ toast("Escribe el monto de la cocina."); return; } c.monto = m; det = fmtPesos(m) + (det ? " · " + det : ""); }
+  if(cod === "PERDIDO"){ const r = $("r-razon").value; if(!r){ toast("Elige la razón."); return; } det = r + (det ? " · " + det : ""); }
+  const n = cod === "SEGUIMIENTO" ? evDe(l, "SEGUIMIENTO").length + 1 : "";
+  c.nota = `#${cod}${n}${det ? " " + det : ""} [t=${t}]`;
+  // Etapa: solo avanza (o se reabre si estaba perdido); el primer contacto pasa de Nuevo a Contactado.
+  const destino = ETAPA_COD[cod] || (CONTACTO_COD.includes(cod) && (l.seguimiento === "Nuevo" || l.seguimiento === "Perdido") ? "Contactado" : null);
+  if(destino && (cod === "PERDIDO" || l.seguimiento === "Perdido" || ETAPAS.indexOf(destino) > ETAPAS.indexOf(l.seguimiento))) c.seguimiento = destino;
+  if(CONTACTO_COD.includes(cod)) c.contacto = COD[cod].t;
+  // Próximo contacto: la fecha del siguiente paso del proceso.
+  const tmp = Object.assign({}, l, { notas: (l.notas ? l.notas + "\n" : "") + c.nota, seguimiento: c.seguimiento || l.seguimiento, proximo: null, _evSrc: null });
+  const sig = siguiente(tmp);
+  c.proximo = sig && sig.vence ? isoDia(new Date(Math.max(sig.vence, Date.now()))) : "";
+  regCod = null;
+  guardar(l.folio, c, `Registrado: #${cod}${n}`).then(() => {
+    if(AGENTE_URL && ["PAGADA", "PERDIDO", "VENDIDA", "LLAMADA", "CONTACTADO", "RESPONDIO", "VISITADA", "PROPUESTA"].includes(cod))
+      agente("/evento", { tel: l.tel, cod, det, folio: l.folio, responsable: l.responsable, quien: l.responsable }).then(() => { delete agenteCache[l.tel]; }).catch(() => {});
+  });
+}
+/* ---------- Asistente de WhatsApp ---------- */
+const agenteCache = {};
+let verChat = false;
+async function agente(ruta, cuerpo, metodo = "POST"){
+  if(DEMO) return demoAgente(ruta, cuerpo);
+  const u = AGENTE_URL.replace(/\/$/, "") + ruta;
+  const r = metodo === "GET" ? await fetch(u + "?" + new URLSearchParams(Object.assign({ clave }, cuerpo)), { cache: "no-store" })
+    : await fetch(u, { method: "POST", headers: { "content-type": "text/plain" }, body: JSON.stringify(Object.assign({ clave }, cuerpo)) });
+  return r.json();
+}
+async function cargarAgente(l, forzar){
+  if(!forzar && agenteCache[l.tel] && Date.now() - agenteCache[l.tel].t < 30000) return agenteCache[l.tel];
+  try{ const r = await agente("/conversacion", { tel: l.tel }, "GET"); agenteCache[l.tel] = Object.assign({ t: Date.now() }, r); }
+  catch(e){ agenteCache[l.tel] = { t: Date.now(), ok: false }; }
+  return agenteCache[l.tel];
+}
+function pintarAgente(l){
+  const caja = $("agente-caja"); if(!caja) return;
+  const a = agenteCache[l.tel];
+  if(!a){ caja.innerHTML = `<div class="dato"><span>Cargando conversación…</span></div>`; cargarAgente(l).then(() => { if(fichaFolio === l.folio) pintarAgente(l); }); return; }
+  if(!a.ok){ caja.innerHTML = `<div class="dato"><span>No pudimos conectar con el asistente.</span></div>`; return; }
+  const e = a.estado, pausado = e.pausadoHasta > Date.now();
+  const titulo = !a.historial.length ? "El asistente todavía no habla con este cliente" : pausado ? "Asistente en pausa en este chat" : e.fase === "persona" ? `Pasó el caso a ${e.responsable || "el equipo"}` : "El asistente está atendiendo";
+  const sub = pausado ? "Hasta " + fmtDiaHora(e.pausadoHasta) + ". No contesta solo mientras tanto." : e.fase === "persona" ? (e.motivo || "") + ". Sigue contestando si el cliente escribe." : e.ventanaAbierta ? "Ventana de 24 h abierta: puedes contestarle por aquí." : "Fuera de la ventana de 24 h: solo puede mandar plantillas.";
+  let h = `<div class="agente-estado">${I.wa}<div><b>${titulo}</b><span>${esc(sub)}</span></div></div>`;
+  if(a.historial.length) h += `<div class="agente-btns"><button class="btn chico sec" id="ag-ver">${verChat ? "Ocultar" : "Ver"} conversación (${a.historial.filter(x => x.rol !== "nota").length})</button>
+    <button class="btn chico sec" id="ag-pausa">${pausado ? "Reanudar asistente" : "Pausar asistente"}</button></div>`;
+  if(verChat) h += `<div class="chat" id="ag-chat">${a.historial.map(x => x.rol === "nota" ? `<div class="burbuja nota">${esc(x.texto)}</div>`
+    : `<div class="burbuja ${x.rol}">${esc(x.texto)}<small>${x.rol === "equipo" ? esc(x.quien || "Equipo") + " · " : x.rol === "asistente" ? "Asistente · " : ""}${fmtDiaHora(x.t)}</small></div>`).join("")}</div>`;
+  if(e.ventanaAbierta) h += `<div class="linea-form"><textarea id="ag-txt" placeholder="Contestarle por el número del asistente (lo pausa 24 h en este chat)"></textarea></div>
+    <div class="agente-btns"><button class="btn chico" id="ag-env">Enviar por el asistente</button></div>`;
+  caja.innerHTML = h;
+  const ch = $("ag-chat"); if(ch) ch.scrollTop = ch.scrollHeight;
+  const bv = $("ag-ver"); if(bv) bv.onclick = () => { verChat = !verChat; pintarAgente(l); };
+  const bp = $("ag-pausa"); if(bp) bp.onclick = async () => {
+    const r = await agente("/pausa", { tel: l.tel, pausar: !pausado, horas: 72, quien: l.responsable || "Equipo" }).catch(() => ({}));
+    toast(r.ok ? (pausado ? "Asistente reanudado" : "Asistente en pausa 72 h") : "No se pudo cambiar"); await cargarAgente(l, true); pintarAgente(l);
+  };
+  const be = $("ag-env"); if(be) be.onclick = async () => {
+    const t = $("ag-txt").value.trim(); if(!t){ toast("Escribe el mensaje."); return; }
+    be.disabled = true;
+    const r = await agente("/enviar", { tel: l.tel, texto: t, quien: l.responsable || "Equipo" }).catch(() => ({}));
+    toast(r.ok ? "Enviado. El asistente queda en pausa 24 h en este chat." : (r.error || "No se pudo enviar"));
+    await cargarAgente(l, true); verChat = true; pintarAgente(l);
+  };
+}
+function demoAgente(ruta, c){
+  const l = datos.leads.find(x => x.tel === c.tel) || {};
+  if(ruta !== "/conversacion") return Promise.resolve({ ok: true });
+  const n = primerNombre(l.nombre), bot = eventos(l).some(e => e.bot), t0 = l.fecha;
+  const historial = !bot ? [] : [
+    { rol: "asistente", texto: `[Plantilla de bienvenida] Hola, ${n}. Gracias por hacer su diagnóstico de cocina con Armadillo Diseño (folio ${l.folio}). Soy el asistente del equipo. ¿Le comparto aquí su diagnóstico para resolver sus dudas?`, t: t0 + 18e4 },
+    { rol: "cliente", texto: "Sí, compártamelo", t: t0 + 9e5 },
+    { rol: "asistente", texto: msjDiagnostico(l).split("\n\n").slice(1).join("\n\n"), t: t0 + 92e4 },
+    { rol: "asistente", texto: "¿Qué dudas tiene o qué le gustaría resolver primero?", t: t0 + 93e4 },
+    { rol: "cliente", texto: "Más o menos cuánto me saldría y si la visita se cobra aunque no la haga", t: t0 + 15e5 },
+    { rol: "asistente", texto: "Claro. ¿Ya tiene una idea del tamaño y los materiales, o le gustaría que le oriente?", t: t0 + 152e4 }];
+  return Promise.resolve({ ok: true, estado: { fase: l.responsable ? "persona" : "asistente", responsable: l.responsable, motivo: l.responsable ? "Pidió que le llamen" : "", pausadoHasta: 0, ventanaAbierta: true }, historial });
+}
+function asignar(l, quien){
+  const c = { responsable: quien };
+  if(quien) c.nota = `#ASIGNADO ${quien}${l.responsable && l.responsable !== quien ? " (antes " + l.responsable + ")" : ""} [t=${Date.now()}]`;
+  guardar(l.folio, c, quien ? "Asignado a " + quien : "Sin responsable");
+}
 function pintarFicha(){
   if(!fichaFolio) return;
   const l = datos.leads.find(x => x.folio === fichaFolio); if(!l){ cerrarFicha(); return; }
   const dato = (k, v) => v ? `<div class="dato"><span>${k}</span><b>${esc(v)}</b></div>` : "";
-  const notas = l.notas ? l.notas.split("\n").filter(Boolean).reverse().map(n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; }).join("") : "";
-  const evt = n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; };
-  const histArr = l.historial ? l.historial.split("\n").filter(Boolean).reverse() : [];
-  const vf = l.visitaFecha;
+  const libres = l.notas ? l.notas.split("\n").filter(n => n && !/\[t=\d{12,}\]/.test(n)).reverse() : [];
+  const notas = libres.map(n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; }).join("");
+  const hist = l.historial ? l.historial.split("\n").filter(Boolean).reverse().map(n => `<p>${esc(n)}</p>`).join("") : "";
+  const ev = eventos(l), sig = siguiente(l), vf = l.visitaFecha;
   let h = `<div class="persona"><span class="avatar ${esc(l.prioridad)}">${esc(iniciales(l.nombre))}</span>
     <h2 id="ficha-nombre">${esc(l.nombre)}</h2><p>Folio ${esc(l.folio)} · llegó ${hace(l.fecha)}</p>
-    <div class="pills"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span><span class="pill" style="background:var(--fill2)"><span class="punto ${esc(l.prioridad)}"></span>Prioridad ${esc(l.prioridad.toLowerCase())}</span>${l.escribio ? `<span class="pill wa">${I.wa}Ya le escribió a Daniel</span>` : ""}${l.pago ? `<span class="pill e-Visita-pagada">Abrió el link de pago</span>` : ""}${(s => s ? `<span class="pill" style="background:var(--fill2)"><span class="sla ${s.clase}">${s.txt}</span></span>` : "")(sla(l))}</div></div>`;
+    <div class="pills"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span><span class="pill" style="background:var(--fill2)"><span class="punto ${esc(l.prioridad)}"></span>Prioridad ${esc(l.prioridad.toLowerCase())}</span>${l.escribio ? `<span class="pill wa">${I.wa}Abrió WhatsApp</span>` : ""}${l.pago ? `<span class="pill e-Visita-pagada">Abrió el link de pago</span>` : ""}</div></div>`;
+  if(sig) h += `<div class="siguiente ${vencido(sig) ? "vencido" : ""}">${I.inicio}<div><b>Sigue: ${esc(sig.txt)}</b><span>${sig.raul ? "Lo hace Raúl" : esc(l.responsable)} · ${fmtVence(sig.vence)}</span></div></div>`;
   h += `<div class="acciones">
     <a class="accion" id="a-wa" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjCliente(l))}" target="_blank" rel="noopener">${I.wa}WhatsApp</a>
     <a class="accion" id="a-tel" href="tel:+52${esc(l.tel)}">${I.tel}Llamar</a>
+    <a class="accion" id="a-diag" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjDiagnostico(l))}" target="_blank" rel="noopener">${I.doc}Diagnóstico</a>
     <a class="accion" id="a-grupo" href="https://wa.me/?text=${encodeURIComponent(msjGrupo(l))}" target="_blank" rel="noopener">${I.enviar}Al grupo</a></div>
-    ${l.escribio ? `<p class="aviso-wa">${I.ok}<span>Este lead tocó el botón de WhatsApp en la landing, así que el chat con Daniel se abrió con su diagnóstico ya escrito. No hace falta reenviárselo. Lo único que no podemos saber es si de verdad mandó el mensaje.</span></p>` : ""}`;
+    ${l.escribio && !primerContacto(l) ? `<p class="aviso-wa">${I.doc}<span>Este cliente pidió su diagnóstico por WhatsApp. Lo primero es mandárselo y preguntarle qué dudas tiene, antes de proponer la visita.</span></p>` : ""}
+    <p class="ayuda" style="font-size:12.5px;color:var(--text2);margin:8px 4px 0">Abrir WhatsApp o llamar no registra nada: cada avance se registra abajo con su código cuando llega la captura al grupo.</p>`;
+  if(AGENTE_URL || DEMO) h += `<p class="seccion-t">Asistente de WhatsApp</p><div class="caja" id="agente-caja"></div>`;
   if(apartoVisita(l) || l.visitaDia){
-    h += `<p class="seccion-t">Visita técnica</p><div class="caja"><div class="visita-caja">
+    h += `<p class="seccion-t">Visita técnica (de la página)</p><div class="caja"><div class="visita-caja">
       <span class="cal"><small>${vf ? vf.toLocaleDateString("es-MX",{weekday:"short"}).replace(".","") : "—"}</small><b>${vf ? vf.getDate() : "?"}</b></span>
-      <span class="txt"><b>${esc(l.visitaDia || "Sin fecha")}</b><span>${esc(l.visitaHora || "")}${l.ubic ? " · " + esc(l.ubic) : ""}</span></span>
-      ${l.seguimiento === "Nuevo" || l.seguimiento === "Contactado" ? `<button class="btn chico" id="confirmar-visita">Confirmar</button>` : ""}</div></div>`;
+      <span class="txt"><b>${esc(l.visitaDia || "Sin fecha")}</b><span>${esc(l.visitaHora || "")}${l.ubic ? " · " + esc(l.ubic) : ""}</span></span></div></div>`;
   }
   const sugerido = turno();
-  const pr = pidiendo && pidiendo.resp;
   h += `<p class="seccion-t">Responsable</p><div class="caja"><div class="etapas" role="group" aria-label="Responsable">${EQUIPO.map(p =>
     `<button data-resp="${p}" aria-pressed="${l.responsable === p}">${p}</button>`).join("")}</div>
-    ${pr ? `<div class="motivos azul"><p>¿Por qué pasa a ${esc(pr)}?</p>${MOTIVOS_REASIGNAR.map(m => `<button data-motivo-resp="${m}">${m}</button>`).join("")}<button class="cancelar" data-cancelar>Cancelar</button></div>` : ""}
-    ${l.responsable ? `<div class="dato"><span>Asignado</span><b>${l.asignado ? hace(l.asignado) : "sin fecha"}</b></div>` : `<div class="dato"><span>Le toca a</span><b>${sugerido}</b></div>`}</div>`;
-  h += `<p class="seccion-t">Etapa</p><div class="caja"><div class="etapas" role="group" aria-label="Etapa de seguimiento">${ETAPAS.map(e =>
-    `<button data-etapa="${e}" aria-pressed="${l.seguimiento === e}">${e}</button>`).join("")}</div>
-    ${pidiendo === "perdido" ? `<div class="motivos"><p>¿Por qué se perdió?</p>${MOTIVOS_PERDIDO.map(m => `<button data-motivo="${m}">${m}</button>`).join("")}<button class="cancelar" data-cancelar>Cancelar</button></div>` : ""}
-    ${l.seguimiento === "Perdido" && l.motivo ? `<div class="dato"><span>Motivo</span><b>${esc(l.motivo)}</b></div>` : ""}
-    ${l.ultimoContacto ? `<div class="dato"><span>Último contacto</span><b>${hace(l.ultimoContacto)}</b></div>` : `<div class="dato"><span>Último contacto</span><b style="color:var(--red)">Sin contactar</b></div>`}</div>`;
-  if(l.seguimiento === "Nuevo" || l.seguimiento === "Contactado"){
-    const base = l.primerContacto ? new Date(l.primerContacto) : null; if(base) base.setHours(0,0,0,0);
-    const fechaI = i => base ? new Date(base.getTime() + CADENCIA[i] * DIA).toLocaleDateString("es-MX", { day:"numeric", month:"short" }) : "";
-    h += `<p class="seccion-t">Seguimiento · intento ${Math.min(l.intentos, 5)} de 5</p><div class="caja">
-      <div class="tracker">${CADENCIA.map((d, i) => `<div class="${i < l.intentos ? "hecho" : i === l.intentos ? "sig" : ""}"><i>${i + 1}</i><span>Día ${d}${base ? "<br>" + fechaI(i) : ""}</span></div>`).join("")}</div>
-      ${l.intentos >= 5
-        ? `<p class="nota-caja alerta">Ya van 5 intentos. Si no respondió, márcalo como <b>Perdido</b> y elige el motivo.</p>`
-        : `<p class="nota-caja">Cada vez que tocas WhatsApp o Llamar se registra un intento (uno por día) y la fecha del siguiente se pone sola${l.proximo ? `: <b>${l.proximo.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"short"})}</b>` : ""}.</p>`}</div>`;
-  }
-  h += `<p class="seccion-t">Próximo contacto</p><div class="caja">
-    <div class="linea-form"><input type="date" id="f-proximo" value="${l.proximo ? isoDia(l.proximo) : ""}" aria-label="Fecha de próximo contacto"><button class="btn chico sec" id="g-proximo">Guardar</button></div>
-    <div class="rapidos"><button data-dias="1">Mañana</button><button data-dias="3">En 3 días</button><button data-dias="7">En 1 semana</button>${l.proximo ? `<button data-dias="0">Quitar</button>` : ""}</div></div>`;
+    ${l.responsable ? "" : `<div class="dato"><span>Le toca a</span><b>${sugerido}</b></div>`}</div>`;
+  h += `<p class="seccion-t">Registrar avance</p><div class="caja"><div class="codigos" role="group" aria-label="Código">${Object.keys(COD).map(c =>
+    `<button data-cod="${c}" aria-pressed="${regCod === c}">#${c}</button>`).join("")}</div>${formRegistro(l)}</div>`;
+  h += `<p class="seccion-t">Bitácora</p><div class="caja">${ev.length ? `<div class="bitacora">${ev.slice().reverse().map(e =>
+    `<p><span class="cod">#${esc(e.cod)}${e.n || ""}</span><span>${esc(e.det)}</span><small>${fmtDiaHora(e.t)}</small></p>`).join("")}</div>`
+    : `<div class="dato"><span>Sin códigos registrados</span><b style="color:var(--red)">${primerContacto(l) ? "" : "Sin contactar"}</b></div>`}</div>`;
   h += `<p class="seccion-t">Diagnóstico</p><div class="caja">
     ${dato("WhatsApp", l.tel)}${dato("Zona", l.zona)}${dato("Inversión", l.inversion)}${dato("Tiempo", l.tiempo)}
     ${dato("Etapa", l.etapa)}${dato("Uso", l.uso)}${dato("Distribución", l.forma)}${dato("Muro", l.tamano)}${dato("Acabados", l.acabado)}
     ${l.rango.length === 2 ? dato("Rango interno", fmtPesos(l.rango[0]) + " – " + fmtPesos(l.rango[1])) : ""}
-    ${dato("Anuncio", l.anuncio)}${dato("Dispositivo", l.dispositivo)}</div>`;
-  h += `<p class="seccion-t">Cierre</p><div class="caja"><div class="linea-form"><input type="number" inputmode="numeric" id="f-monto" placeholder="Monto cerrado en pesos" value="${l.monto || ""}" aria-label="Monto cerrado"><button class="btn chico sec" id="g-monto">Guardar</button></div></div>`;
+    ${dato("Anuncio", l.anuncio)}${dato("Dispositivo", l.dispositivo)}${l.monto ? dato("Monto cerrado", fmtPesos(l.monto)) : ""}</div>`;
   h += `<p class="seccion-t">Notas</p><div class="caja"><div class="linea-form"><textarea id="f-nota" placeholder="Agrega una nota de la llamada o la visita" aria-label="Nueva nota"></textarea></div>
     <div class="rapidos"><button class="btn chico" id="g-nota" style="color:#fff">Agregar nota</button></div>${notas ? `<div class="notas">${notas}</div>` : ""}</div>`;
-  if(histArr.length) h += `<p class="seccion-t">Historial</p><div class="caja"><div class="linea-t">${histArr.slice(0, 6).map(evt).join("")}</div>${histArr.length > 6 ? `<details class="hist"><summary>Ver ${histArr.length - 6} movimientos anteriores</summary><div class="linea-t">${histArr.slice(6).map(evt).join("")}</div></details>` : ""}</div>`;
+  h += `<div class="caja" style="margin-top:12px"><details class="corregir"><summary>Corregir etapa o próximo contacto (solo si hubo un error)</summary>
+    <div class="etapas" role="group" aria-label="Etapa de seguimiento">${ETAPAS.map(e => `<button data-etapa="${e}" aria-pressed="${l.seguimiento === e}">${e}</button>`).join("")}</div>
+    <div class="linea-form"><input type="date" id="f-proximo" value="${l.proximo ? isoDia(l.proximo) : ""}" aria-label="Fecha de próximo contacto"><button class="btn chico sec" id="g-proximo">Guardar</button></div></details></div>`;
+  if(hist) h += `<div class="caja" style="margin-top:12px"><details class="hist"><summary>Ver historial</summary><div class="notas">${hist}</div></details></div>`;
   $("ficha-cuerpo").innerHTML = h;
 
-  const contacto = tipo => {
-    const c = { contacto: tipo };
-    if(l.seguimiento === "Nuevo") c.seguimiento = "Contactado";
-    const yaHoy = l.ultimoContacto >= hoyInicio().getTime();
-    if((l.seguimiento === "Nuevo" || l.seguimiento === "Contactado") && l.intentos < 5 && !yaHoy){
-      c.intento = 1;
-      const n = l.intentos + 1, base = new Date(l.primerContacto || Date.now()); base.setHours(0,0,0,0);
-      c.proximo = n < 5 ? isoDia(new Date(base.getTime() + CADENCIA[n] * DIA)) : "";
-    }
-    guardar(l.folio, c, c.intento ? `Intento ${l.intentos + 1} de 5 registrado` : null);
-  };
-  $("a-wa").onclick = () => contacto("WhatsApp enviado");
-  $("a-grupo").onclick = () => { if(!l.responsable) guardar(l.folio, { responsable: turno() }, "Asignado a " + turno()); };
-  $("a-tel").onclick = () => contacto("Llamada");
-  const cv = $("confirmar-visita"); if(cv) cv.onclick = () => guardar(l.folio, { seguimiento: "Visita agendada", contacto: "Visita confirmada" }, "Visita confirmada");
-  document.querySelectorAll("[data-resp]").forEach(b => b.onclick = () => {
-    const p = b.dataset.resp;
-    if(l.responsable && p !== l.responsable){ pidiendo = { resp: p }; pintarFicha(); return; }
-    const r = p === l.responsable ? "" : p; guardar(l.folio, { responsable: r }, r ? "Asignado a " + r : "Sin responsable");
-  });
-  document.querySelectorAll("[data-motivo-resp]").forEach(b => b.onclick = () => { const p = pidiendo.resp; pidiendo = null; guardar(l.folio, { responsable: p, motivo_resp: b.dataset.motivoResp }, "Reasignado a " + p); });
-  document.querySelectorAll("[data-etapa]").forEach(b => b.onclick = () => {
-    const e = b.dataset.etapa; if(e === l.seguimiento) return;
-    if(e === "Perdido"){ pidiendo = "perdido"; pintarFicha(); return; }
-    guardar(l.folio, { seguimiento: e }, "Etapa: " + e);
-  });
-  document.querySelectorAll("[data-motivo]").forEach(b => b.onclick = () => { pidiendo = null; guardar(l.folio, { seguimiento: "Perdido", motivo: b.dataset.motivo }, "Perdido: " + b.dataset.motivo); });
-  document.querySelectorAll("[data-cancelar]").forEach(b => b.onclick = () => { pidiendo = null; pintarFicha(); });
+  if(AGENTE_URL || DEMO) pintarAgente(l);
+  $("a-grupo").onclick = () => { if(!l.responsable) asignar(l, turno()); };
+  document.querySelectorAll("[data-resp]").forEach(b => b.onclick = () => asignar(l, b.dataset.resp === l.responsable ? "" : b.dataset.resp));
+  document.querySelectorAll("[data-cod]").forEach(b => b.onclick = () => { regCod = regCod === b.dataset.cod ? null : b.dataset.cod; pintarFicha(); const t = $("r-det") || $("r-t"); if(t) t.scrollIntoView({ block: "nearest" }); });
+  const ok = $("r-ok"); if(ok) ok.onclick = () => registrar(l);
+  document.querySelectorAll("[data-etapa]").forEach(b => b.onclick = () => { if(b.dataset.etapa !== l.seguimiento) guardar(l.folio, { seguimiento: b.dataset.etapa, nota: `Etapa corregida a mano: ${b.dataset.etapa}` }, "Etapa corregida: " + b.dataset.etapa); });
   $("g-proximo").onclick = () => guardar(l.folio, { proximo: $("f-proximo").value }, $("f-proximo").value ? "Próximo contacto guardado" : "Próximo contacto quitado");
-  document.querySelectorAll("[data-dias]").forEach(b => b.onclick = () => {
-    const n = Number(b.dataset.dias); const d = hoyInicio(); d.setDate(d.getDate() + n);
-    guardar(l.folio, { proximo: n ? isoDia(d) : "" }, n ? "Próximo contacto guardado" : "Próximo contacto quitado");
-  });
-  $("g-monto").onclick = () => guardar(l.folio, { monto: $("f-monto").value }, "Monto guardado");
-  $("g-nota").onclick = () => { const t = $("f-nota").value.trim(); if(!t){ $("f-nota").focus(); toast("Escribe la nota antes de agregarla."); return; } guardar(l.folio, { nota: t }, "Nota agregada"); };
+  $("g-nota").onclick = () => { const t = $("f-nota").value.trim(); if(!t){ $("f-nota").focus(); toast("Escribe la nota antes de agregarla."); return; } guardar(l.folio, { nota: t.replace(/\[t=/g, "[t ") }, "Nota agregada"); };
 }
 
 /* ---------- Sesión ---------- */
@@ -1096,11 +1368,39 @@ function demoApi(p){
         "Monto cerrado": seg === "Ganado" ? 180000 + Math.floor(r() * 18) * 10000 : "", "Seguimiento": seg,
         "Último contacto": seg !== "Nuevo" ? s["Inicio"] + DIA * .5 : "", "Próximo contacto": ["Contactado","Propuesta enviada"].includes(seg) && r() < .6 ? now - Math.floor(r()*2) * DIA : "",
         "Notas": seg !== "Nuevo" && r() < .5 ? "20/10 12:40 · Le interesa isla con barra. Quiere ver muestras de madera." : "",
-        "Historial": "20/10 11:02 · Llegó desde la landing", "Dispositivo": s["Dispositivo"],
-        "Responsable": seg === "Nuevo" && r() < .5 ? "" : pick(EQUIPO), "Asignado": s["Inicio"] + 36e5,
-        "Primer contacto": seg !== "Nuevo" ? s["Inicio"] + Math.floor(r() * 20) * 36e5 : "",
-        "Intentos": seg === "Contactado" ? 1 + Math.floor(r() * 5) : seg !== "Nuevo" ? 1 : 0,
-        "Motivo perdido": seg === "Perdido" && r() < .8 ? pick(MOTIVOS_PERDIDO) : "" });
+        "Historial": "20/10 11:02 · Llegó desde la landing", "Dispositivo": s["Dispositivo"] });
+    });
+    // Códigos de ejemplo, coherentes con la etapa de cada lead
+    leads.forEach(l => {
+      const seg = l["Seguimiento"], f = l["Fecha"], ev = [];
+      let dt = 0; const add = (c, d, horas) => { dt += horas * 36e5; if(f + dt < now) ev.push(`#${c}${d ? " " + d : ""} [t=${Math.round(f + dt)}]`); };
+      if(["Nuevo", "Contactado"].includes(seg) && r() < .45){
+        // Atendido por el asistente de WhatsApp
+        l["Seguimiento"] = "Contactado"; l["Responsable"] = "";
+        add("CONTACTADO", "asistente · le contestó al instante", .02);
+        if(r() < .75){ add("RESPONDIO", "asistente · por WhatsApp", .3);
+          if(r() < .5){ const quien = pick(EQUIPO); l["Responsable"] = quien; add("ASIGNADO", `${quien} (asistente: ${pick(["Pidió que le llamen", "Quiere conocer el showroom", "Tiene una pregunta que el asistente no puede contestar"])})`, .5); } }
+        else add("SEGUIMIENTO1", "asistente · seguimiento 1 de 4", 22);
+        l["Notas"] = ev.join("\n"); l["Escribió por WhatsApp"] = "Sí"; return;
+      }
+      if(seg === "Nuevo" && r() < .5){ l["Último contacto"] = ""; return; }
+      const resp = pick(EQUIPO); l["Responsable"] = resp; add("ASIGNADO", resp, .3);
+      if(seg === "Nuevo"){ l["Notas"] = ev.join("\n"); l["Último contacto"] = ""; return; }
+      const avanza = ["Visita agendada","Visita pagada","Visita realizada","Propuesta enviada","Ganado"].includes(seg);
+      if(r() < .65) add("LLAMADA", avanza && r() < .7 ? "contestó" : "no contestó", r() < .75 ? .4 : 20);
+      else add("CONTACTADO", "", r() < .75 ? .6 : 22);
+      if(avanza){
+        if(!ev.some(e => e.includes("contestó") && !e.includes("no contestó"))) add("RESPONDIO", "", 3);
+        add("APARTADA", "jueves 11:00", 6);
+        if(seg !== "Visita agendada"){ add("PAGADA", "", 10);
+          if(seg !== "Visita pagada"){ add("VISITADA", "showroom martes 17:00", 40);
+            if(seg !== "Visita realizada"){ add("PROPUESTA", "Diseño · $290,000", 24 * (6 + Math.floor(r() * 6)));
+              if(seg === "Ganado") add("VENDIDA", "$" + Number(l["Monto cerrado"]).toLocaleString("es-MX"), 72); } } }
+      } else {
+        const k = Math.floor(r() * 5); [1,3,7,14].slice(0, k).forEach((d, i) => add("SEGUIMIENTO" + (i + 1), "", i ? ([1,3,7,14][i] - [1,3,7,14][i-1]) * 24 : 24));
+        if(seg === "Perdido") add("PERDIDO", pick(["No respondió","Fuera de presupuesto","Ya compró con alguien más"]), 24);
+      }
+      l["Notas"] = [ev.join("\n"), l["Notas"]].filter(Boolean).join("\n");
     });
     demoApi.d = { leads, sesiones: ses };
   }
@@ -1111,10 +1411,7 @@ function demoApi(p){
     if(c.contacto) l["Último contacto"] = Date.now();
     if(c.proximo !== undefined) l["Próximo contacto"] = c.proximo;
     if(c.monto !== undefined) l["Monto cerrado"] = c.monto;
-    if(c.responsable !== undefined){ l["Responsable"] = c.responsable; l["Asignado"] = c.responsable ? Date.now() : ""; }
-    if(c.contacto && !l["Primer contacto"]) l["Primer contacto"] = Date.now();
-    if(c.intento) l["Intentos"] = (Number(l["Intentos"]) || 0) + 1;
-    if(c.motivo !== undefined) l["Motivo perdido"] = c.motivo;
+    if(c.responsable !== undefined) l["Responsable"] = c.responsable;
     if(c.nota) l["Notas"] = (l["Notas"] ? l["Notas"] + "\n" : "") + "ahora · " + c.nota;
     return Promise.resolve({ ok: true, lead: l });
   }
