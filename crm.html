@@ -206,7 +206,25 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .persona h2{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:10px}
 .persona p{color:var(--text2);font-size:14px;margin-top:2px}
 .persona .pills{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:10px}
-.acciones{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.acciones{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.siguiente{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--accent-tint);font-size:14px;line-height:1.4}
+.siguiente svg{color:var(--accent);margin-top:1px}
+.siguiente.vencido{background:color-mix(in srgb,var(--red) 12%,transparent)}
+.siguiente.vencido svg{color:var(--red)}
+.siguiente b{display:block;font-weight:600}
+.siguiente span{color:var(--text2)}
+.agente-estado{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;font-size:14px;line-height:1.4}
+.agente-estado svg{color:var(--accent);margin-top:1px}
+.agente-estado b{display:block;font-weight:600}
+.agente-estado span{color:var(--text2)}
+.chat{padding:10px 12px;display:flex;flex-direction:column;gap:6px;max-height:420px;overflow-y:auto;background:var(--card2)}
+.burbuja{max-width:85%;padding:7px 10px 6px;border-radius:12px;font-size:14px;line-height:1.38;white-space:pre-wrap;word-wrap:break-word}
+.burbuja small{display:block;font-size:11px;color:var(--text2);margin-top:3px}
+.burbuja.cliente{align-self:flex-start;background:var(--card)}
+.burbuja.asistente{align-self:flex-end;background:color-mix(in srgb,var(--accent) 16%,var(--card))}
+.burbuja.equipo{align-self:flex-end;background:color-mix(in srgb,var(--madera) 20%,var(--card))}
+.burbuja.nota{align-self:center;background:none;color:var(--text2);font-size:12px;text-align:center;padding:2px 6px}
+.agente-btns{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 12px}
 .accion{background:var(--card);border-radius:12px;padding:10px 6px 9px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--accent);box-shadow:var(--shadow)}
 .accion svg{width:22px;height:22px}
 .seccion-t{font-size:13px;color:var(--text2);margin:22px 4px 7px;text-transform:uppercase;letter-spacing:.02em}
@@ -404,7 +422,7 @@ const I = {
   persona:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>',
   inicio:'<svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   pesos:'<svg class="i" viewBox="0 0 24 24"><path d="M12 3v18M16.5 7.5c0-1.9-2-3-4.5-3s-4.5 1.2-4.5 3.2c0 4.6 9 2.6 9 7.4 0 2-2 3.4-4.5 3.4s-4.5-1.3-4.5-3.3"/></svg>',
-  pct:'<svg class="i" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>'
+  pct:'<svg class="i" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>',  doc:'<svg class="i" viewBox="0 0 24 24"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>'
 };
 
 let clave = store.get("ad_crm_clave") || "";
@@ -890,6 +908,123 @@ $("cerrar-ficha").onclick = cerrarFicha;
 $("velo").onclick = cerrarFicha;
 document.addEventListener("keydown", e => { if(e.key === "Escape" && fichaFolio) cerrarFicha(); });
 
+const NOMBRE_LARGO = { "Daniel": "el Ing. Daniel García", "Arq. Eric": "el Arq. Eric", "Arq. Omar": "el Arq. Omar" };
+const AGENTE_URL = ""; // URL del agente de WhatsApp (Cloudflare). Vacío = el CRM funciona sin agente.
+const fmtDiaHora = ms => new Date(ms).toLocaleString("es-MX", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false }).replace(/\./g, "");
+function saludo(){ const h = new Date().getHours(); return h < 12 ? "buen día" : h < 19 ? "buenas tardes" : "buenas noches"; }
+/* Diagnóstico por WhatsApp: el mismo contenido que vio el cliente en la página, en mensaje y de usted. */
+const DX = {
+  titulo: { "Un muro": "Cocina de un muro", "En L": "Cocina en L", "En U": "Cocina en U", "Con isla": "Cocina con isla" },
+  enfoque: { "Se cocina a diario": "hecha para cocinar todos los días", "Ahí se reúne la familia": "pensada para reunir a la familia",
+    "Desayunos y cenas rápidas": "práctica para el día a día", "Cocina alguien más": "con área de trabajo independiente" },
+  nivel: { Funcional: "proyecto funcional", Diseño: "proyecto de diseño", Alta: "proyecto de alta gama" },
+  plano: { "Un muro": "el refrigerador va en un extremo para no cortar la cubierta, y se deja un tramo libre entre tarja y parrilla para preparar sin estorbos.",
+    "En L": "tarja y parrilla en muros distintos para que dos personas cocinen sin estorbarse, y la esquina se resuelve con herraje especial para no perder guarda.",
+    "En U": "tres frentes de trabajo y la mayor capacidad de guarda, con esquinas diseñadas para que puertas y cajones abran sin chocar.",
+    "Con isla": "la isla como centro, con trabajo de un lado y convivencia del otro, dejando paso cómodo alrededor y conexiones previstas antes de instalar." },
+  error: { "Un muro": "el refrigerador pegado a la parrilla, que lo calienta y desgasta.", "En L": "la esquina muerta donde nada se alcanza.",
+    "En U": "cajones de esquina que chocan entre sí.", "Con isla": "una isla sin las conexiones de agua y contactos previstas." },
+  dec: { Funcional: [["Cubierta", "resistente y fácil de mantener, sin pagar de más"], ["Herrajes", "cierre suave en puertas y cajones de uso diario"], ["Frentes", "acabados lisos y durables que no pasan de moda"]],
+    Diseño: [["Cubierta", "piedra o superficie de alto desempeño con buen veteado"], ["Herrajes", "cajones de extensión total y cierre suave en todo"], ["Madera y luz", "combinación de madera con iluminación LED integrada"]],
+    Alta: [["Cubierta", "piedra de gran formato con detalles a la medida"], ["Herrajes", "sistemas premium, organizadores internos y apertura sin jaladeras"], ["Carpintería de autor", "chapas de madera, lambrines y luz integrada en cada mueble"]] }
+};
+function msjDiagnostico(l){
+  const n = primerNombre(l.nombre), quien = NOMBRE_LARGO[l.responsable] || "el Ing. Daniel García";
+  const nv = /^Alta/.test(l.acabado) ? "Alta" : /^Funcional/.test(l.acabado) ? "Funcional" : /^Diseño/.test(l.acabado) ? "Diseño"
+    : /^Menos|^\$200,000|^\$150,000/.test(l.inversion) ? "Funcional" : /^Más/.test(l.inversion) ? "Alta" : "Diseño";
+  const perfil = [(DX.titulo[l.forma] || "Cocina a la medida") + (DX.enfoque[l.uso] ? ", " + DX.enfoque[l.uso] : ""), l.acabado ? DX.nivel[nv] : ""].filter(Boolean).join(" · ");
+  const etapa = { "Casa nueva": "Es casa nueva, así que es buen momento: todavía no hay nada instalado y la cocina se planea completa.",
+    "Quiero renovarla": "Como ya tiene cocina, en la visita revisamos qué se puede aprovechar de lo que hay.",
+    "Estoy en obra": "Está en obra, que es el mejor momento para definir la cocina: se deja todo previsto antes de cerrar instalaciones y no hay que romper después.",
+    "Estoy viendo ideas": "Está viendo ideas, y este diagnóstico le sirve para tener claro qué pedir cuando decida." }[l.etapa] || "";
+  const tiempo = /antes posible/i.test(l.tiempo) ? "La fabricación toma alrededor de 6 semanas, así que conviene medir pronto."
+    : /1 a 3/.test(l.tiempo) ? "La fabricación toma alrededor de 6 semanas después de aprobar el diseño, así que conviene empezar a diseñar pronto para tenerla en 1 a 3 meses."
+    : /3 a 6/.test(l.tiempo) ? "Para tenerla en 3 a 6 meses, lo ideal es ir definiendo el diseño con calma desde ahora." : "";
+  const inv = /^Menos/.test(l.inversion) ? "*Sobre la inversión:* nuestras cocinas parten de $200,000. Con gusto le digo con honestidad qué se puede hacer bien con su presupuesto, o cómo hacerla por etapas."
+    : /orienten/i.test(l.inversion) ? "*Sobre la inversión:* le podemos mostrar opciones en tres niveles para que elija con calma." : "";
+  return [`Hola, ${n}, ${saludo()}. Soy ${quien}, de Armadillo Diseño. Le comparto su diagnóstico (folio ${l.folio}):`,
+    `*Su proyecto:* ${perfil}.`,
+    [etapa, tiempo].filter(Boolean).length ? `*Su momento:* ${[etapa, tiempo].filter(Boolean).join(" ")}` : "",
+    DX.plano[l.forma] ? `*Su distribución:* ${DX.plano[l.forma]}` : "*Su distribución:* la definimos al medir, con el triángulo de trabajo como guía para saber dónde va cada cosa.",
+    `*Lo que más define su cocina:*\n${DX.dec[nv].map(([t, d]) => `• ${t}: ${d}`).join("\n")}`,
+    `*Error común a evitar:* ${DX.error[l.forma] || "diseñar con una foto de internet sin medir el espacio."}`,
+    inv,
+    "¿Qué dudas tiene? Se las resuelvo por aquí, o si le queda más fácil, le marco 5 minutos."].filter(Boolean).join("\n\n");
+}
+/* Siguiente paso de cada prospecto, con los datos que ya tiene el CRM. */
+function siguientePaso(l){
+  const s = l.seguimiento;
+  if(s === "Perdido" || s === "Ganado") return null;
+  if(!l.responsable) return { txt: "Asignar responsable", vence: l.fecha };
+  if(s === "Visita agendada") return { txt: "Cobrar la visita ($1,000) y pedir la ubicación", vence: l.visitaFecha ? l.visitaFecha.getTime() - DIA : 0 };
+  if(s === "Visita pagada") return { txt: "Hacer la visita técnica", vence: l.visitaFecha ? l.visitaFecha.getTime() + 18 * 36e5 : 0 };
+  if(s === "Visita realizada") return { txt: "Presentar render y propuesta en showroom (7 a 10 días)", vence: l.proximo ? l.proximo.getTime() + 18 * 36e5 : 0 };
+  if(s === "Propuesta enviada") return { txt: "Seguimiento de la propuesta y pedir decisión", vence: l.proximo ? l.proximo.getTime() + 18 * 36e5 : 0 };
+  if(!l.primerContacto && !l.ultimoContacto) return { txt: l.escribio ? "Mandar su diagnóstico (botón Diagnóstico) y preguntar sus dudas" : "Llamar o mandar el primer mensaje", vence: limiteSLA(l.fecha) };
+  if(l.intentos >= 5) return { txt: "Ya van 5 intentos: cerrar como perdido con su motivo", vence: 0 };
+  return { txt: l.proximo ? `Seguimiento: intento ${Math.min(l.intentos + 1, 5)} de 5` : "Registrar qué pasó y poner fecha de próximo contacto", vence: l.proximo ? l.proximo.getTime() + 18 * 36e5 : 0 };
+}
+function cajaSiguiente(l){
+  const s = siguientePaso(l); if(!s) return "";
+  const venc = s.vence && s.vence < Date.now();
+  const cuando = !s.vence ? "" : venc ? "Venció " + hace(s.vence) : "Para " + new Date(s.vence).toLocaleString("es-MX", { weekday:"short", day:"numeric", month:"short", hour:"2-digit", minute:"2-digit", hour12:false }).replace(/\./g, "");
+  return `<div class="siguiente ${venc ? "vencido" : ""}">${I.ok}<div><b>Siguiente paso: ${esc(s.txt)}</b>${cuando ? `<span>${cuando}</span>` : ""}</div></div>`;
+}
+const agenteCache = {};
+let verChat = false;
+async function agente(ruta, cuerpo, metodo = "POST"){
+  if(DEMO) return demoAgente(ruta, cuerpo);
+  const u = AGENTE_URL.replace(/\/$/, "") + ruta;
+  const r = metodo === "GET" ? await fetch(u + "?" + new URLSearchParams(Object.assign({ clave }, cuerpo)), { cache: "no-store" })
+    : await fetch(u, { method: "POST", headers: { "content-type": "text/plain" }, body: JSON.stringify(Object.assign({ clave }, cuerpo)) });
+  return r.json();
+}
+async function cargarAgente(l, forzar){
+  if(!forzar && agenteCache[l.tel] && Date.now() - agenteCache[l.tel].t < 30000) return agenteCache[l.tel];
+  try{ const r = await agente("/conversacion", { tel: l.tel }, "GET"); agenteCache[l.tel] = Object.assign({ t: Date.now() }, r); }
+  catch(e){ agenteCache[l.tel] = { t: Date.now(), ok: false }; }
+  return agenteCache[l.tel];
+}
+function pintarAgente(l){
+  const caja = $("agente-caja"); if(!caja) return;
+  const a = agenteCache[l.tel];
+  if(!a){ caja.innerHTML = `<div class="dato"><span>Cargando conversación…</span></div>`; cargarAgente(l).then(() => { if(fichaFolio === l.folio) pintarAgente(l); }); return; }
+  if(!a.ok){ caja.innerHTML = `<div class="dato"><span>No pudimos conectar con el asistente.</span></div>`; return; }
+  const e = a.estado, pausado = e.pausadoHasta > Date.now();
+  const titulo = !a.historial.length ? "El asistente todavía no habla con este cliente" : pausado ? "Asistente en pausa en este chat" : e.fase === "persona" ? `Pasó el caso a ${e.responsable || "el equipo"}` : "El asistente está atendiendo";
+  const sub = pausado ? "Hasta " + fmtDiaHora(e.pausadoHasta) + ". No contesta solo mientras tanto." : e.fase === "persona" ? (e.motivo || "") + ". Sigue contestando si el cliente escribe." : e.ventanaAbierta ? "Ventana de 24 h abierta: puedes contestarle por aquí." : "Fuera de la ventana de 24 h: solo puede mandar plantillas.";
+  let h = `<div class="agente-estado">${I.wa}<div><b>${titulo}</b><span>${esc(sub)}</span></div></div>`;
+  if(a.historial.length) h += `<div class="agente-btns"><button class="btn chico sec" id="ag-ver">${verChat ? "Ocultar" : "Ver"} conversación (${a.historial.filter(x => x.rol !== "nota").length})</button>
+    <button class="btn chico sec" id="ag-pausa">${pausado ? "Reanudar asistente" : "Pausar asistente"}</button></div>`;
+  if(verChat) h += `<div class="chat" id="ag-chat">${a.historial.map(x => x.rol === "nota" ? `<div class="burbuja nota">${esc(x.texto)}</div>`
+    : `<div class="burbuja ${x.rol}">${esc(x.texto)}<small>${x.rol === "equipo" ? esc(x.quien || "Equipo") + " · " : x.rol === "asistente" ? "Asistente · " : ""}${fmtDiaHora(x.t)}</small></div>`).join("")}</div>`;
+  if(e.ventanaAbierta) h += `<div class="linea-form"><textarea id="ag-txt" placeholder="Contestarle por el número del asistente (lo pausa 24 h en este chat)"></textarea></div>
+    <div class="agente-btns"><button class="btn chico" id="ag-env">Enviar por el asistente</button></div>`;
+  caja.innerHTML = h;
+  const ch = $("ag-chat"); if(ch) ch.scrollTop = ch.scrollHeight;
+  const bv = $("ag-ver"); if(bv) bv.onclick = () => { verChat = !verChat; pintarAgente(l); };
+  const bp = $("ag-pausa"); if(bp) bp.onclick = async () => {
+    const r = await agente("/pausa", { tel: l.tel, pausar: !pausado, horas: 72, quien: l.responsable || "Equipo" }).catch(() => ({}));
+    toast(r.ok ? (pausado ? "Asistente reanudado" : "Asistente en pausa 72 h") : "No se pudo cambiar"); await cargarAgente(l, true); pintarAgente(l);
+  };
+  const be = $("ag-env"); if(be) be.onclick = async () => {
+    const t = $("ag-txt").value.trim(); if(!t){ toast("Escribe el mensaje."); return; }
+    be.disabled = true;
+    const r = await agente("/enviar", { tel: l.tel, texto: t, quien: l.responsable || "Equipo" }).catch(() => ({}));
+    toast(r.ok ? "Enviado. El asistente queda en pausa 24 h en este chat." : (r.error || "No se pudo enviar"));
+    await cargarAgente(l, true); verChat = true; pintarAgente(l);
+  };
+}
+function demoAgente(ruta, c){
+  const l = datos.leads.find(x => x.tel === c.tel) || {};
+  if(ruta !== "/conversacion") return Promise.resolve({ ok: true });
+  const n = primerNombre(l.nombre), t0 = l.fecha;
+  const historial = [
+    { rol: "asistente", texto: `[Plantilla de bienvenida] Hola, ${n}. Gracias por hacer su diagnóstico de cocina con Armadillo Diseño (folio ${l.folio}). Soy el asistente del equipo. ¿Le comparto aquí su diagnóstico para resolver sus dudas?`, t: t0 + 18e4 },
+    { rol: "cliente", texto: "Sí, compártamelo", t: t0 + 9e5 },
+    { rol: "asistente", texto: msjDiagnostico(l).split("\n\n").slice(1).join("\n\n"), t: t0 + 92e4 }];
+  return Promise.resolve({ ok: true, estado: { fase: l.responsable ? "persona" : "asistente", responsable: l.responsable, motivo: l.responsable ? "Pidió que le llamen" : "", pausadoHasta: 0, ventanaAbierta: true }, historial });
+}
 function msjCliente(l){
   const n = primerNombre(l.nombre), yo = `Hola ${n}, soy el Ing. Daniel García de Armadillo Diseño.`;
   const cocina = l.forma ? " " + l.forma.toLowerCase().replace(/^cocina /, "") : "";
@@ -942,7 +1077,9 @@ function pintarFicha(){
   h += `<div class="acciones">
     <a class="accion" id="a-wa" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjCliente(l))}" target="_blank" rel="noopener">${I.wa}WhatsApp</a>
     <a class="accion" id="a-tel" href="tel:+52${esc(l.tel)}">${I.tel}Llamar</a>
+    <a class="accion" id="a-diag" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjDiagnostico(l))}" target="_blank" rel="noopener">${I.doc}Diagnóstico</a>
     <a class="accion" id="a-grupo" href="https://wa.me/?text=${encodeURIComponent(msjGrupo(l))}" target="_blank" rel="noopener">${I.enviar}Al grupo</a></div>
+    ${cajaSiguiente(l)}
     ${l.escribio ? `<p class="aviso-wa">${I.ok}<span>Este lead tocó el botón de WhatsApp en la landing, así que el chat con Daniel se abrió con su diagnóstico ya escrito. No hace falta reenviárselo. Lo único que no podemos saber es si de verdad mandó el mensaje.</span></p>` : ""}`;
   if(apartoVisita(l) || l.visitaDia){
     h += `<p class="seccion-t">Visita técnica</p><div class="caja"><div class="visita-caja">
@@ -978,11 +1115,13 @@ function pintarFicha(){
     ${dato("Etapa", l.etapa)}${dato("Uso", l.uso)}${dato("Distribución", l.forma)}${dato("Muro", l.tamano)}${dato("Acabados", l.acabado)}
     ${l.rango.length === 2 ? dato("Rango interno", fmtPesos(l.rango[0]) + " – " + fmtPesos(l.rango[1])) : ""}
     ${dato("Anuncio", l.anuncio)}${dato("Dispositivo", l.dispositivo)}</div>`;
+  if(AGENTE_URL || DEMO) h += `<p class="seccion-t">Asistente de WhatsApp</p><div class="caja" id="agente-caja"></div>`;
   h += `<p class="seccion-t">Cierre</p><div class="caja"><div class="linea-form"><input type="number" inputmode="numeric" id="f-monto" placeholder="Monto cerrado en pesos" value="${l.monto || ""}" aria-label="Monto cerrado"><button class="btn chico sec" id="g-monto">Guardar</button></div></div>`;
   h += `<p class="seccion-t">Notas</p><div class="caja"><div class="linea-form"><textarea id="f-nota" placeholder="Agrega una nota de la llamada o la visita" aria-label="Nueva nota"></textarea></div>
     <div class="rapidos"><button class="btn chico" id="g-nota" style="color:#fff">Agregar nota</button></div>${notas ? `<div class="notas">${notas}</div>` : ""}</div>`;
   if(histArr.length) h += `<p class="seccion-t">Historial</p><div class="caja"><div class="linea-t">${histArr.slice(0, 6).map(evt).join("")}</div>${histArr.length > 6 ? `<details class="hist"><summary>Ver ${histArr.length - 6} movimientos anteriores</summary><div class="linea-t">${histArr.slice(6).map(evt).join("")}</div></details>` : ""}</div>`;
   $("ficha-cuerpo").innerHTML = h;
+  if(AGENTE_URL || DEMO) pintarAgente(l);
 
   const contacto = tipo => {
     const c = { contacto: tipo };
@@ -998,6 +1137,7 @@ function pintarFicha(){
   $("a-wa").onclick = () => contacto("WhatsApp enviado");
   $("a-grupo").onclick = () => { if(!l.responsable) guardar(l.folio, { responsable: turno() }, "Asignado a " + turno()); };
   $("a-tel").onclick = () => contacto("Llamada");
+  $("a-diag").onclick = () => contacto("Diagnóstico enviado por WhatsApp");
   const cv = $("confirmar-visita"); if(cv) cv.onclick = () => guardar(l.folio, { seguimiento: "Visita agendada", contacto: "Visita confirmada" }, "Visita confirmada");
   document.querySelectorAll("[data-resp]").forEach(b => b.onclick = () => {
     const p = b.dataset.resp;
