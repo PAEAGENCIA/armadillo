@@ -84,6 +84,18 @@ svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .hero h1 em{font-style:normal;color:var(--madera)}
 .hero .sub{margin:22px auto 0;font-size:17px;color:var(--gris);max-width:56ch}
 .hero .ctas{margin-top:34px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.arranque{margin:30px auto 0;max-width:640px;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(234,229,220,.16);border-radius:22px;padding:18px}
+.arr-t{margin:0;font-size:13px;color:var(--gris)}
+.arr-t b{color:var(--madera);font-weight:500}
+.arr-q{margin:6px 0 14px;font-size:20px;font-weight:500;line-height:1.25;color:#fff;letter-spacing:-.01em}
+.arr-ops{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.arr-ops button{min-height:72px;text-align:left;padding:12px 14px;border-radius:16px;border:1px solid rgba(234,229,220,.22);background:rgba(255,255,255,.03);color:#fff;font:inherit;font-size:15px;font-weight:500;line-height:1.25;cursor:pointer;transition:border-color .2s,background .2s,transform .1s}
+.arr-ops button:hover,.arr-ops button:focus-visible{border-color:var(--madera);background:rgba(255,255,255,.07)}
+.arr-ops button:active{transform:scale(.98)}
+.arr-ops button[aria-pressed="true"]{border-color:var(--madera);background:rgba(200,160,110,.16)}
+.arr-ops small{display:block;margin-top:4px;font-size:12.5px;font-weight:300;color:var(--gris)}
+.arr-ver{display:inline-block;margin-top:12px;font-size:13.5px;color:var(--gris);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:600px){.hero{padding-top:20px}.hero .insignia{font-size:12px}.hero h1{margin-top:14px;font-size:36px}.hero .sub{margin-top:12px;font-size:15px;line-height:1.45}.sub-mas{display:none}.arr-ops small{display:none}.arr-ver{margin-top:10px}.arranque{margin-top:20px;padding:14px}.arr-q{font-size:18px}.arr-ops{gap:8px}.arr-ops button{min-height:52px;padding:10px 12px;font-size:14.5px}}
 .checks{margin-top:26px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--gris)}
 .checks span{display:inline-flex;align-items:center;gap:8px}
 .checks svg{color:var(--madera);width:16px;height:16px}
@@ -97,6 +109,7 @@ svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-widt
 }
 
 /* Escenario del diagnóstico */
+.escenario.esperando{display:none}
 .escenario{position:relative;max-width:1040px;margin:64px auto 0;z-index:2;scroll-margin-top:16px}
 @media (max-width:640px){.escenario{margin-top:30px}}
 .ventana{position:relative;z-index:2;background:var(--hueso);color:var(--tinta);border-radius:28px;padding:10px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06);text-align:left}
@@ -435,10 +448,17 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
   <div class="cont">
     <span class="insignia"><b>Gratis</b>Diagnóstico en línea de tu cocina, en 2 minutos</span>
     <h1>Tu cocina, hecha por quien <em>sí cumple</em>.</h1>
-    <p class="sub">Alta carpintería a la medida en Puebla, con render antes de fabricar, planta propia y un solo responsable de principio a fin. Haz tu diagnóstico gratuito y descubre qué necesita tu cocina antes de invertir un peso.</p>
-    <div class="ctas">
-      <a class="btn" href="#diagnostico">Empezar mi diagnóstico <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="btn-linea" href="https://www.instagram.com/armadillo.proyecto/" target="_blank" rel="noopener">Ver proyectos</a>
+    <p class="sub">Alta carpintería a la medida en Puebla, con render antes de fabricar, planta propia y un solo responsable de principio a fin.<span class="sub-mas"> Haz tu diagnóstico gratuito y descubre qué necesita tu cocina antes de invertir un peso.</span></p>
+    <div class="arranque" id="arranque">
+      <p class="arr-t"><b>Diagnóstico gratis · Paso 1 de 8</b></p>
+      <h2 class="arr-q">Para empezar, ¿en qué punto está tu cocina?</h2>
+      <div class="arr-ops">
+        <button type="button" data-v="nueva">Casa nueva<small>La cocina está por hacerse</small></button>
+        <button type="button" data-v="renovar">Quiero renovarla<small>Ya tengo cocina, pero no me funciona</small></button>
+        <button type="button" data-v="obra">Estoy en obra<small>Construyendo o remodelando</small></button>
+        <button type="button" data-v="ideas">Estoy viendo ideas<small>Todavía no decido</small></button>
+      </div>
+      <a class="arr-ver" href="https://www.instagram.com/armadillo.proyecto/" target="_blank" rel="noopener">Ver proyectos</a>
     </div>
     <div class="checks">
       <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Planta propia en Puebla</span>
@@ -448,7 +468,7 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
       <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>+75 proyectos de carpintería entregados</span>
     </div>
 
-    <div class="escenario" id="diagnostico">
+    <div class="escenario esperando" id="diagnostico">
       <div class="flota f-foto" aria-hidden="true">
         <img loading="lazy" decoding="async" src="img/cocina-isla.webp" alt="">
         <p>Cocina con isla y plafón de madera<span>Proyecto Armadillo</span></p>
@@ -776,6 +796,22 @@ function elegir(p, b){
   }, reduce ? 0 : 230);
 }
 
+/* Portada: la primera pregunta se contesta desde la primera pantalla y lleva directo a la pregunta 2. */
+/* El recuadro del diagnóstico aparece hasta que la persona contesta la primera pregunta en la portada. */
+const esperando = () => $("diagnostico").classList.contains("esperando");
+function irArranque(){
+  $("arranque").scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+  const b = document.querySelector("#arranque [data-v]"); if(b) setTimeout(() => b.focus({ preventScroll: true }), reduce ? 0 : 450);
+}
+document.querySelectorAll('a[href="#diagnostico"]').forEach(a => a.addEventListener("click", e => { if(esperando()){ e.preventDefault(); irArranque(); } }));
+document.querySelectorAll("#arranque [data-v]").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#arranque [data-v]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("diagnostico").classList.remove("esperando");
+  if(fase !== "preguntas" || paso !== 0) pintarPrimera();
+  const op = zona.querySelector(`.op[data-v="${b.dataset.v}"]`);
+  if(op) op.click(); else $("diagnostico").scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+});
+function pintarPrimera(){ paso = 0; acuse = ""; pintar(); }
 let tocado = false;
 function enfocar(){
   const h = zona.querySelector(".q");
@@ -1117,13 +1153,15 @@ function guardar(evento){
 
 /* ===== Botón fijo en celular: siempre lleva al siguiente paso ===== */
 const flot = $("flotante");
-let flotDestino = null, flotVisible = false;
+let flotDestino = null, flotVisible = false, arrVisible = false;
 const io = "IntersectionObserver" in window ? new IntersectionObserver(es => {
   es.forEach(e => { flotVisible = e.isIntersecting; });
   mostrarFlotante();
 }, { threshold: 0.2 }) : null;
+/* Mientras se ve la primera pregunta en la portada, el botón fijo no hace falta. */
+if("IntersectionObserver" in window) new IntersectionObserver(es => { es.forEach(e => { arrVisible = e.isIntersecting; }); mostrarFlotante(); }, { threshold: 0.3 }).observe($("arranque"));
 function mostrarFlotante(){
-  const ocultar = flotVisible || !flotDestino;
+  const ocultar = flotVisible || arrVisible || !flotDestino;
   flot.classList.toggle("oculto", ocultar);
   flot.tabIndex = ocultar ? -1 : 0;
   flot.setAttribute("aria-hidden", ocultar);
@@ -1150,6 +1188,7 @@ function actualizarFlotante(){
   mostrarFlotante();
 }
 flot.onclick = () => {
+  if(esperando()){ irArranque(); return; }
   if(!flotDestino) return;
   flotDestino.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
   const foco = flotDestino.querySelector("#apartar, .op, #f-nombre, #wa, .q");
