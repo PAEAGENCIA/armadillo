@@ -44,6 +44,10 @@ a{color:inherit;text-decoration:none}
 .datos div{min-width:0}
 .datos span{display:block;font-size:12px;color:var(--text2)}
 .datos b{display:block;font-size:14.5px;font-weight:500;overflow-wrap:anywhere}
+.copiable{background:var(--card);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);display:grid;gap:10px}
+.copiable small{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);font-weight:600}
+.copiable p{margin:0;white-space:pre-wrap;font-size:15px;line-height:1.45;user-select:text;-webkit-user-select:text}
+.copiable button{height:44px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer}
 .siguiente{background:var(--accent);color:#fff;border-radius:18px;padding:14px 16px;display:grid;gap:2px}
 .siguiente small{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:600}
 .siguiente b{font-size:18px;font-weight:700;line-height:1.25}
@@ -86,6 +90,11 @@ a{color:inherit;text-decoration:none}
 .linea p::before{content:"";position:absolute;left:-21px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2.5px var(--accent)}
 .linea p:first-child::before{background:var(--accent)}
 .linea small{display:block;font-size:12px;color:var(--text2)}
+.notas-eq{padding:14px 16px}
+.notas-eq p{font-size:15px;line-height:1.45;padding:10px 0;border-top:1px solid var(--sep);white-space:pre-wrap;overflow-wrap:anywhere}
+.notas-eq p:first-of-type{border-top:0;padding-top:2px}
+.notas-eq small{display:block;font-size:12px;color:var(--text2);margin-bottom:2px}
+.notas-eq details summary{cursor:pointer;font-size:13.5px;color:var(--accent);font-weight:600;padding-top:8px}
 .vacio{text-align:center;padding:60px 20px;color:var(--text2)}
 .vacio b{display:block;color:var(--text);font-size:18px;margin-bottom:6px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(30,30,32,.94);color:#fff;padding:12px 18px;border-radius:14px;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;max-width:calc(100% - 32px);text-align:center;z-index:9}
@@ -104,7 +113,7 @@ a{color:inherit;text-decoration:none}
 const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec";
 const EQUIPO = ["Daniel", "Arq. Eric", "Arq. Omar"];           // quienes hacen las visitas
 const AGENDADOR = "Daniel Romo";                                 // agendador externo
-const QUIENES = EQUIPO.concat([AGENDADOR]);                     // quienes pueden registrar movimientos
+const QUIENES = [AGENDADOR, "Daniel", "Arq. Omar"];                     // quienes pueden registrar movimientos
 const PAGO = "";   /* Datos de pago de la visita (CLABE o liga de Clip). Cuando Daniel los dé, se agregan solos al mensaje de confirmación. */
 const CADENCIA = [0, 1, 3, 7, 14];
 const MOTIVOS = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
@@ -138,7 +147,8 @@ function norm(r){
     visitaDia: r["Visita día"] || "", visitaHora: r["Visita horario"] || "", ubic: r["Ubicación visita"] || "",
     seg: r["Seguimiento"] || "Nuevo", resp: r["Responsable"] || "", primer: aMs(r["Primer contacto"]), ultimo: aMs(r["Último contacto"]),
     proximo: aMs(r["Próximo contacto"]), intentos: Number(r["Intentos"]) || 0, motivo: r["Motivo perdido"] || "", monto: Number(r["Monto cerrado"]) || 0,
-    hist: String(r["Historial"] || "").split("\n").filter(Boolean).reverse() };
+    hist: String(r["Historial"] || "").split("\n").filter(Boolean).reverse(),
+    notas: String(r["Notas"] || "").split("\n").filter(Boolean).reverse() };
 }
 
 /* ---------- API ---------- */
@@ -206,6 +216,11 @@ function msjCita(){
     `Pago de la visita ($1,000): ${L.seg === "Visita pagada" ? "PAGADO" : "PENDIENTE"}`,
     "Van: Ing. Daniel García y Arq. Omar", "", `WhatsApp del cliente: https://wa.me/52${L.tel}`, `Ficha: ${location.href}`].join("\n");
 }
+/* Primer mensaje de Daniel Romo, para copiarlo desde la ficha. */
+function msjPrimero(){
+  const h = new Date().getHours(), saludo = h < 12 ? "buenos días" : h < 19 ? "buenas tardes" : "buenas noches";
+  return `Hola ${nombre1(L.nombre)}, ${saludo}. Soy Daniel Romo, de Armadillo Diseño 👋 Recibimos el diagnóstico de tu cocina. En unos minutos te marco desde este número para platicar dos minutos de tu proyecto.\n\nSi gustas, guárdame como Daniel Romo · Armadillo Diseño para que identifiques la llamada. ¿Te queda bien que te marque ahorita?`;
+}
 /* ---------- Siguiente paso ---------- */
 function siguiente(){
   switch(L.seg){
@@ -247,6 +262,10 @@ function pintar(){
       ${[["Zona", L.zona], ["Inversión", L.inversion], ["Para cuándo", L.tiempo], ["Cocina", [L.forma, L.acabado].filter(Boolean).join(" · ")], ["Situación", L.etapaCasa], ["Visita", L.visitaDia ? L.visitaDia + (L.visitaHora ? ", " + L.visitaHora : "") : ""]]
         .filter(x => x[1]).map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}
     </div></section>`;
+  /* Notas que deja el equipo (aquí o en el CRM principal), la más reciente primero. */
+  const nota1 = n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; };
+  if(L.notas.length) h += `<p class="titulo">Notas del equipo</p><section class="card notas-eq">${L.notas.slice(0, 3).map(nota1).join("")}${L.notas.length > 3 ? `<details><summary>Ver ${L.notas.length - 3} notas anteriores</summary>${L.notas.slice(3).map(nota1).join("")}</details>` : ""}</section>`;
+  h += `<section class="copiable"><small>Primer mensaje para WhatsApp</small><p id="txt-primero">${esc(msjPrimero())}</p><button id="copiar-primero">Copiar mensaje</button></section>`;
   h += `<section class="siguiente"><small>Siguiente paso</small><b>${esc(sigT)}</b><span>${esc(sigS)}</span></section>`;
 
   h += `<p class="titulo">¿Quién eres?</p><div class="yo" role="group" aria-label="Quién eres">${QUIENES.map(p => `<button data-yo="${p}" aria-pressed="${yo === p}">${p}</button>`).join("")}</div>`;
@@ -279,6 +298,11 @@ function conectar(){
   const cp = $("b-copiar"); if(cp) cp.onclick = async () => {
     try{ await navigator.clipboard.writeText(L.tel); toast("Número copiado"); }
     catch(e){ const r = document.createRange(); r.selectNodeContents($("num")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast("Número seleccionado: cópialo con Ctrl+C"); }
+  };
+  $("copiar-primero").onclick = async () => {
+    const t = msjPrimero();
+    try{ await navigator.clipboard.writeText(t); toast("Mensaje copiado"); }
+    catch(e){ const r = document.createRange(); r.selectNodeContents($("txt-primero")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast("Mensaje seleccionado: cópialo"); }
   };
   const bc = $("b-cita"); if(bc) bc.onclick = () => guardar({ nota: "Cita enviada al grupo de marketing" }, "Cita enviada al grupo");
   $("b-tel").onclick = () => { yo ? guardar(conIntento({ contacto: "Llamada" }), "Llamada registrada") : toast("Toca tu nombre para que quede registrado"); };
@@ -313,7 +337,8 @@ function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("
 function demo(p){
   if(!demo.l) demo.l = { "Folio": F || "AD-5279", "Fecha": Date.now() - 3 * 36e5, "Nombre": "Laura Méndez", "WhatsApp": "2221234567", "Prioridad": "Alta", "Estado": "Diagnóstico completo",
     "Etapa": "Casa nueva", "Distribución": "Con isla", "Acabados": "Diseño y materiales seleccionados", "Inversión": "$250,000 a $400,000", "Tiempo": "En 1 a 3 meses",
-    "Zona": "Cholula o San Andrés", "Seguimiento": "Nuevo", "Responsable": "Arq. Eric", "Intentos": 0, "Historial": "03/11 08:40 · Llegó desde la landing\n03/11 08:52 · Responsable: Arq. Eric" };
+    "Zona": "Cholula o San Andrés", "Seguimiento": "Nuevo", "Responsable": "Arq. Eric", "Intentos": 0, "Historial": "03/11 08:40 · Llegó desde la landing\n03/11 08:52 · Responsable: Arq. Eric",
+    "Notas": "03/11 09:30 · Quiere isla con barra para 4. Pidió ver muestras de madera.\n03/11 12:10 · Daniel: le marcamos después de las 6, en el día no contesta." };
   const l = demo.l;
   if(p.accion === "asesor"){
     const c = JSON.parse(p.cambios), s = new Date().toLocaleString("es-MX", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" });
@@ -322,6 +347,7 @@ function demo(p){
     if(c.intento) l["Intentos"] = (l["Intentos"] || 0) + 1; if(c.proximo !== undefined) l["Próximo contacto"] = c.proximo;
     if(c.visita_dia){ l["Visita día"] = c.visita_dia; l["Visita horario"] = c.visita_horario; }
     if(c.motivo) l["Motivo perdido"] = c.motivo; if(c.monto) l["Monto cerrado"] = c.monto;
+    if(c.nota) l["Notas"] = (l["Notas"] ? l["Notas"] + "\n" : "") + s + " · " + c.nota;
     l["Historial"] += `\n${s} · ${p.quien}: ${[c.contacto, c.seguimiento, c.nota, c.motivo].filter(Boolean).join(" · ")}`;
   }
   return Promise.resolve({ ok: true, lead: Object.assign({}, l) });

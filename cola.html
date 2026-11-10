@@ -44,6 +44,8 @@ header p{color:var(--text2);font-size:14px;margin-top:2px}
 .lead.urgente{box-shadow:inset 4px 0 0 var(--red),var(--shadow)}
 .lead .n{font-size:16.5px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .lead .s{font-size:13.5px;color:var(--text2);margin-top:2px}
+.lead .nota{font-size:13.5px;line-height:1.4;margin-top:6px;padding-left:9px;border-left:2px solid var(--sep);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.lead .nota small{color:var(--text2);font-size:12px;margin-right:4px}
 .lead .num{font-size:16px;font-weight:700;margin-top:3px;letter-spacing:.02em;font-variant-numeric:tabular-nums;user-select:all;-webkit-user-select:all}
 .lead .t{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;margin-top:5px}
 .lead .t::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
@@ -91,7 +93,7 @@ function limite(ms){ const d = new Date(ms), h = d.getHours(), l = new Date(ms);
 function norm(r){ return { folio: r["Folio"], token: r.Token, nombre: r["Nombre"] || "Sin nombre", tel: String(r["WhatsApp"] || "").replace(/\D/g,"").replace(/^52(?=\d{10}$)/,""),
   prioridad: r["Prioridad"] || "Media", fecha: aMs(r["Fecha"]), zona: r["Zona"] || "", inversion: r["Inversión"] || "", tiempo: r["Tiempo"] || "",
   seg: r["Seguimiento"] || "Nuevo", resp: r["Responsable"] || "", primer: aMs(r["Primer contacto"]), ultimo: aMs(r["Último contacto"]),
-  proximo: aMs(r["Próximo contacto"]), intentos: Number(r["Intentos"]) || 0, visitaDia: r["Visita día"] || "", visitaHora: r["Visita horario"] || "", apartada: r["Estado"] === "Visita apartada" }; }
+  proximo: aMs(r["Próximo contacto"]), intentos: Number(r["Intentos"]) || 0, visitaDia: r["Visita día"] || "", visitaHora: r["Visita horario"] || "", apartada: r["Estado"] === "Visita apartada", nota: String(r["Última nota"] || "") }; }
 
 async function cargar(){
   try{
@@ -102,11 +104,14 @@ async function cargar(){
 }
 const linkFicha = l => new URL("asesor.html", location.href).href.split("?")[0] + "?f=" + encodeURIComponent(l.folio) + "&k=" + (DEMO ? "demo" : l.token);
 
+/* Última nota del equipo, para tener contexto antes de llamar. */
+function ultNota(l){ if(!l.nota) return ""; const m = l.nota.match(/^(.+?) · (.*)$/);
+  return `<div class="nota">${m ? `<small>${esc(m[1])}</small>${esc(m[2])}` : esc(l.nota)}</div>`; }
 function fila(l, nota, urgente){
   const tel = `<svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>`;
   return `<div class="lead ${urgente ? "urgente" : ""}"><div><div class="n">${esc(l.nombre)} <span class="prio ${esc(l.prioridad)}">${esc(l.prioridad)}</span></div>
     ${l.tel ? `<div class="num">${esc(fmtTel(l.tel))}</div>` : ""}
-    <div class="s">${esc([l.zona, l.inversion, l.tiempo].filter(Boolean).join(" · "))}</div>${nota}</div>
+    <div class="s">${esc([l.zona, l.inversion, l.tiempo].filter(Boolean).join(" · "))}</div>${nota}${ultNota(l)}</div>
     <div class="acc"><a class="llamar" href="tel:+52${esc(l.tel)}" aria-label="Llamar a ${esc(l.nombre)}">${tel}</a><a class="ficha" href="${linkFicha(l)}"><span>Ficha</span> ›</a></div></div>`;
 }
 function pintar(){
@@ -126,7 +131,8 @@ function pintar(){
   h += `<header><div><small>Armadillo Diseño · Daniel Romo</small><h1>Llamadas de hoy</h1><p>${fecha.charAt(0).toUpperCase() + fecha.slice(1)} · actualizado ${hace(ultima)}</p></div><button class="ref" id="ref" aria-label="Actualizar">↻</button></header>`;
   h += `<div class="tiles"><div class="tile ${vencidos ? "rojo" : ""}"><b>${nuevos.length}</b><span>Llamar ya${vencidos ? ` · ${vencidos} tarde` : ""}</span></div>
     <div class="tile"><b>${volver.length}</b><span>Volver a llamar</span></div><div class="tile"><b>${sinPago.length}</b><span>Agendadas sin pago</span></div></div>
-    <input class="buscar" id="buscar" type="search" placeholder="Buscar prospecto por nombre o teléfono" aria-label="Buscar prospecto">`;
+    <input class="buscar" id="buscar" type="search" placeholder="Buscar por nombre, teléfono o folio" aria-label="Buscar prospecto">`;
+  const corte = h.length;
   h += `<section class="seccion"><h2>1. Llamar ya</h2><p>Prospectos nuevos, el más antiguo primero. La meta es llamar en menos de 5 minutos.</p>${nuevos.length ? nuevos.map(l => {
     const falta = limite(l.fecha) - ahora, cls = falta < 0 ? "rojo" : falta < 30*6e4 ? "ambar" : "verde";
     return fila(l, `<span class="t ${cls}">Llegó ${hace(l.fecha)}${falta < 0 ? " · fuera de tiempo" : " · vence en " + dur(falta)}</span>`, falta < 0); }).join("") : `<div class="vacio">No hay prospectos nuevos por llamar.</div>`}</section>`;
@@ -140,7 +146,13 @@ function pintar(){
     fila(l, `<span class="t gris">Llegó ${hace(l.fecha)} · eligió menos de $200,000</span>`, false)).join("") : `<div class="vacio">Nadie en esta lista.</div>`}</section>`;
   h += `<section class="seccion"><h2>5. Visitas pagadas<span class="n">${pagadas.length}</span></h2><p>Tu trabajo terminado: estas visitas ya están en manos del equipo.</p>${pagadas.length ? pagadas.map(l =>
     fila(l, `<span class="t verde">${esc(l.seg)}${l.visitaDia ? " · " + esc(l.visitaDia) : ""}${l.resp ? " · " + esc(l.resp) : ""}</span>`, false)).join("") : `<div class="vacio">Aún no hay visitas pagadas.</div>`}</section>`;
-  if(filtro) h += `<section class="seccion"><h2>Resultados de "${esc(filtro)}"</h2>${(r => r.length ? r.map(l => fila(l, `<span class="t gris">${esc(l.seg)}</span>`, false)).join("") : `<div class="vacio">No encontramos a nadie con ese nombre o teléfono.</div>`)(leads.filter(l => (l.nombre + " " + l.tel).toLowerCase().includes(filtro.toLowerCase())))}</section>`;
+  /* Con búsqueda: los resultados van justo debajo del buscador y se ocultan las listas. Ignora acentos, mayúsculas y espacios del teléfono. */
+  if(filtro){
+    const norma = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const q = norma(filtro), qNum = filtro.replace(/\D/g, "");
+    const r = leads.filter(l => norma(l.nombre + " " + l.folio).includes(q) || (qNum.length >= 3 && String(l.tel).includes(qNum)));
+    h = h.slice(0, corte) + `<section class="seccion"><h2>Resultados de "${esc(filtro)}"<span class="n">${r.length}</span></h2>${r.length ? r.map(l => fila(l, `<span class="t gris">${esc(l.seg)} · llegó ${hace(l.fecha)}</span>`, false)).join("") : `<div class="vacio">No encontramos a nadie con ese nombre, teléfono o folio.</div>`}</section>`;
+  }
   $("app").innerHTML = h;
   const b = $("buscar"); if(b){ b.value = filtro; b.oninput = () => { filtro = b.value.trim(); clearTimeout(pintar.t); pintar.t = setTimeout(() => { pintar(); const n = $("buscar"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 350); }; }
   $("ref").onclick = () => { $("ref").textContent = "…"; cargar(); };
@@ -152,7 +164,7 @@ function demo(){
   return { ok: true, leads: [
     L("AD-1", "Laura Méndez", { "Fecha": n - 6*60e3 }),
     L("AD-2", "Ricardo Sosa", { "Fecha": n - 3.5*36e5, "Prioridad": "Media", "Zona": "Otra zona de Puebla", "Inversión": "$200,000 a $250,000" }),
-    L("AD-3", "Fernanda Ruiz", { "Seguimiento": "Contactado", "Primer contacto": n - DIA, "Último contacto": n - DIA, "Intentos": 1, "Próximo contacto": n }),
+    L("AD-3", "Fernanda Ruiz", { "Última nota": "05/11 18:20 · Contestó su esposo. Prefiere que le marquen después de las 6 pm.", "Seguimiento": "Contactado", "Primer contacto": n - DIA, "Último contacto": n - DIA, "Intentos": 1, "Próximo contacto": n }),
     L("AD-5", "Andrea Molina", { "Seguimiento": "Contactado", "Primer contacto": n - 2*DIA, "Último contacto": n - 2*36e5, "Intentos": 2, "Próximo contacto": n + 2*DIA }),
     L("AD-6", "Héctor Ramírez", { "Seguimiento": "Visita pagada", "Primer contacto": n - 3*DIA, "Responsable": "Daniel", "Visita día": "lunes, 9 de noviembre" }),
     L("AD-4", "Jorge Castillo", { "Seguimiento": "Visita agendada", "Primer contacto": n - DIA, "Responsable": "Arq. Eric", "Visita día": "viernes, 6 de noviembre", "Visita horario": "por la mañana (9 a 12)" })
