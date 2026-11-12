@@ -94,8 +94,10 @@ svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .arr-ops button:active{transform:scale(.98)}
 .arr-ops button[aria-pressed="true"]{border-color:var(--madera);background:rgba(200,160,110,.16)}
 .arr-ops small{display:block;margin-top:4px;font-size:12.5px;font-weight:300;color:var(--gris)}
+.arr-promesa{margin:14px 0 0;padding-left:12px;border-left:2px solid var(--madera);font-size:14.5px;line-height:1.5;color:var(--gris)}
+.arr-promesa b{color:#fff;font-weight:500}
 .arr-ver{display:inline-block;margin-top:12px;font-size:13.5px;color:var(--gris);text-decoration:underline;text-underline-offset:3px}
-@media (max-width:600px){.hero{padding-top:20px}.hero .insignia{font-size:12px}.hero h1{margin-top:14px;font-size:36px}.hero .sub{margin-top:12px;font-size:15px;line-height:1.45}.sub-mas{display:none}.arr-ops small{display:none}.arr-ver{margin-top:10px}.arranque{margin-top:20px;padding:14px}.arr-q{font-size:18px}.arr-ops{gap:8px}.arr-ops button{min-height:52px;padding:10px 12px;font-size:14.5px}}
+@media (max-width:600px){.hero{padding-top:20px}.hero .insignia{font-size:12px}.hero h1{margin-top:14px;font-size:36px}.hero .sub{margin-top:12px;font-size:15px;line-height:1.45}.arr-ops small{display:none}.arr-promesa{margin-top:12px;font-size:13.5px}.arr-ver{margin-top:10px}.arranque{margin-top:20px;padding:14px}.arr-q{font-size:18px}.arr-ops{gap:8px}.arr-ops button{min-height:52px;padding:10px 12px;font-size:14.5px}}
 .checks{margin-top:26px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--gris)}
 .checks span{display:inline-flex;align-items:center;gap:8px}
 .checks svg{color:var(--madera);width:16px;height:16px}
@@ -448,7 +450,7 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
   <div class="cont">
     <span class="insignia"><b>Gratis</b>Diagnóstico en línea de tu cocina, en 2 minutos</span>
     <h1>Tu cocina, hecha por quien <em>sí cumple</em>.</h1>
-    <p class="sub">Alta carpintería a la medida en Puebla, con render antes de fabricar, planta propia y un solo responsable de principio a fin.<span class="sub-mas"> Haz tu diagnóstico gratuito y descubre qué necesita tu cocina antes de invertir un peso.</span></p>
+    <p class="sub">Alta carpintería a la medida en Puebla y Tlaxcala.</p>
     <div class="arranque" id="arranque">
       <p class="arr-t"><b>Diagnóstico gratis · Paso 1 de 8</b></p>
       <h2 class="arr-q">Para empezar, ¿en qué punto está tu cocina?</h2>
@@ -458,6 +460,7 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
         <button type="button" data-v="obra">Estoy en obra<small>Construyendo o remodelando</small></button>
         <button type="button" data-v="ideas">Estoy viendo ideas<small>Todavía no decido</small></button>
       </div>
+      <p class="arr-promesa"><b>Antes de invertir, ves tu cocina terminada en render.</b> La diseñamos con las medidas de tu casa, la fabricamos en nuestra planta y un solo responsable te la entrega instalada.</p>
       <a class="arr-ver" href="https://www.instagram.com/armadillo.proyecto/" target="_blank" rel="noopener">Ver proyectos</a>
     </div>
     <div class="checks">
@@ -850,8 +853,10 @@ function formulario(){
     contacto.nombre = n; contacto.tel = t;
     guardar("lead");
     if(typeof window.fbq === "function"){
-      // Menos de $200,000 no cuenta como prospecto para Meta (para que no busque más gente así).
-      if(R.presupuesto === "hasta200") window.fbq("trackCustom","LeadBajoPresupuesto"); else window.fbq("track","Lead");
+      // Todo prospecto manda "Lead" (es la señal con la que aprenden las campañas).
+      window.fbq("track","Lead");
+      // Etiqueta extra para reportes: eligió menos de $200,000.
+      if(R.presupuesto === "hasta200") window.fbq("trackCustom","LeadBajoPresupuesto");
       // Calificado: zona atendida, inversión desde $200,000 (o "aún no lo sé, pero desde $200,000") y con fecha. Sirve para medir y optimizar en Meta.
       if(R.presupuesto !== "hasta200" && R.tiempo !== "explorar" && R.zona !== "Fuera de Puebla") window.fbq("trackCustom","LeadCalificado");
     }
