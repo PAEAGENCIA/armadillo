@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Armadillo Diseño · Cocinas integrales a la medida en Puebla</title>
+<meta name="description" content="Descubre en dos minutos qué cocina necesita tu casa antes de invertir. Diagnóstico gratuito de Armadillo Diseño, alta carpintería residencial a la medida en Puebla.">
+<link rel="icon" href="img/logo.webp">
+<link rel="preload" href="fonts/lexend.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Lexend";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/lexend.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/cormorant-500.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --noche:#0B1413;
+  --noche-2:#101C1B;
+  --noche-3:#162523;
+  --petroleo:#245A59;
+  --petroleo-2:#2E6E6C;
+  --madera:#D9AE73;
+  --madera-2:#E6C08C;
+  --madera-osc:#3A2614;
+  --hueso:#F5F0E8;
+  --hueso-2:#ECE5D9;
+  --tinta:#15201F;
+  --claro:#EAE5DC;
+  --gris:#94A19E;
+  --gris-osc:#6B7472;
+  --linea:rgba(234,229,220,.09);
+  --linea-c:#E2DACD;
+  --sans:"Lexend", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --serif:"Cormorant Garamond", Georgia, serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--noche);color:var(--claro);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;text-align:left}
+:focus-visible{outline:2px solid var(--madera);outline-offset:3px}
+svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.cont{width:min(1200px,100% - 40px);margin-inline:auto}
+@media (max-width:640px){.cont{width:calc(100% - 28px)}}
+
+/* Fondo: lambrín de madera (listones verticales) */
+.lambrin{position:absolute;inset:0 0 auto 0;height:1100px;pointer-events:none;
+  background:repeating-linear-gradient(90deg, rgba(217,174,115,.055) 0 1px, transparent 1px 72px);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 55%,transparent 100%)}
+.brillo{position:absolute;left:50%;top:520px;width:min(1100px,100%);height:620px;transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(closest-side, rgba(46,110,108,.45), rgba(46,110,108,0))}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 8px 0 24px;border-radius:99px;background:var(--madera);color:var(--madera-osc);font-weight:500;font-size:15px;transition:background .2s,transform .1s}
+.btn:hover{background:var(--madera-2)}
+.btn:active{transform:scale(.98)}
+.btn .flecha{width:36px;height:36px;border-radius:50%;background:var(--madera-osc);color:var(--madera);display:grid;place-items:center}
+.btn.solo{padding:0 26px}
+.btn-linea{display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:99px;border:1px solid rgba(234,229,220,.22);font-size:15px;font-weight:400;color:var(--claro);transition:border-color .2s,background .2s}
+.btn-linea:hover{border-color:var(--claro);background:rgba(255,255,255,.04)}
+
+/* Navegación */
+.nav{position:relative;z-index:5}
+.nav .cont{display:flex;align-items:center;justify-content:space-between;height:88px;gap:20px}
+.marca{display:flex;align-items:center;gap:12px}
+.marca img{width:42px;height:42px;border-radius:50%}
+.marca b{font-family:var(--serif);font-weight:500;font-size:26px;line-height:1;letter-spacing:.01em;color:#fff}
+.marca span{display:block;font-size:11px;letter-spacing:.24em;color:var(--madera);margin-top:3px;font-weight:400}
+.nav nav{display:flex;gap:32px;font-size:14px;color:var(--gris)}
+.nav nav a:hover{color:var(--claro)}
+.nav .acciones{display:flex;gap:10px;align-items:center}
+.nav .btn{height:44px;font-size:14px;padding-left:18px}
+.nav .btn .flecha{width:30px;height:30px}
+.nav .btn-linea{height:44px;font-size:14px;padding:0 18px}
+@media (max-width:900px){.nav nav,.nav .btn-linea{display:none}}
+@media (max-width:640px){.nav .cont{height:72px}.marca b{font-size:22px}.marca img{width:36px;height:36px}.nav .btn{display:none}}
+
+/* Hero */
+.hero{position:relative;text-align:center;padding:36px 0 0;z-index:2}
+.insignia{display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border-radius:99px;border:1px solid var(--linea);background:rgba(255,255,255,.03);font-size:13px;color:var(--gris)}
+.insignia b{background:var(--madera);color:var(--madera-osc);font-weight:500;border-radius:99px;padding:3px 10px}
+.hero h1{margin:26px auto 0;font-weight:400;font-size:clamp(40px,6.2vw,80px);line-height:1.04;letter-spacing:-.035em;color:#fff;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--madera)}
+.hero .sub{margin:22px auto 0;font-size:17px;color:var(--gris);max-width:56ch}
+.hero .ctas{margin-top:34px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.arranque{margin:30px auto 0;max-width:640px;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(234,229,220,.16);border-radius:22px;padding:18px}
+.arr-t{margin:0;font-size:13px;color:var(--gris)}
+.arr-t b{color:var(--madera);font-weight:500}
+.arr-q{margin:6px 0 14px;font-size:20px;font-weight:500;line-height:1.25;color:#fff;letter-spacing:-.01em}
+.arr-ops{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.arr-ops button{min-height:72px;text-align:left;padding:12px 14px;border-radius:16px;border:1px solid rgba(234,229,220,.22);background:rgba(255,255,255,.03);color:#fff;font:inherit;font-size:15px;font-weight:500;line-height:1.25;cursor:pointer;transition:border-color .2s,background .2s,transform .1s}
+.arr-ops button:hover,.arr-ops button:focus-visible{border-color:var(--madera);background:rgba(255,255,255,.07)}
+.arr-ops button:active{transform:scale(.98)}
+.arr-ops button[aria-pressed="true"]{border-color:var(--madera);background:rgba(200,160,110,.16)}
+.arr-ops small{display:block;margin-top:4px;font-size:12.5px;font-weight:300;color:var(--gris)}
+.arr-promesa{margin:14px 0 0;padding-left:12px;border-left:2px solid var(--madera);font-size:14.5px;line-height:1.5;color:var(--gris)}
+.arr-promesa b{color:#fff;font-weight:500}
+.arr-ver{display:inline-block;margin-top:12px;font-size:13.5px;color:var(--gris);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:600px){.hero{padding-top:20px}.hero .insignia{font-size:12px}.hero h1{margin-top:14px;font-size:36px}.hero .sub{margin-top:12px;font-size:15px;line-height:1.45}.arr-ops small{display:none}.arr-promesa{margin-top:12px;font-size:13.5px}.arr-ver{margin-top:10px}.arranque{margin-top:20px;padding:14px}.arr-q{font-size:18px}.arr-ops{gap:8px}.arr-ops button{min-height:52px;padding:10px 12px;font-size:14.5px}}
+.checks{margin-top:26px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--gris)}
+.checks span{display:inline-flex;align-items:center;gap:8px}
+.checks svg{color:var(--madera);width:16px;height:16px}
+@media (max-width:640px){
+  .hero{padding-top:14px}
+  .hero h1{margin-top:20px}
+  .hero .sub{font-size:15px;margin-top:16px}
+  .hero .ctas .btn-linea{display:none}
+  .checks{gap:6px 16px;font-size:12px}
+  
+}
+
+/* Escenario del diagnóstico */
+.escenario.esperando{display:none}
+.escenario{position:relative;max-width:1040px;margin:64px auto 0;z-index:2;scroll-margin-top:16px}
+@media (max-width:640px){.escenario{margin-top:30px}}
+.ventana{position:relative;z-index:2;background:var(--hueso);color:var(--tinta);border-radius:28px;padding:10px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06);text-align:left}
+.ventana-int{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:600px;border-radius:20px;overflow:hidden}
+.lateral{background:var(--hueso-2);padding:22px 16px;display:flex;flex-direction:column;gap:18px}
+.lateral .mini{display:flex;align-items:center;gap:10px;padding:0 6px}
+.lateral .mini img{width:30px;height:30px;border-radius:50%}
+.lateral .mini b{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1}
+.lateral h4{font-size:11px;letter-spacing:.12em;color:var(--gris-osc);font-weight:400;padding:0 8px}
+.pasos-lat{list-style:none;display:grid;gap:3px}
+.pasos-lat li button{width:100%;display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:12px;font-size:14px;font-weight:400;color:#4A5352;transition:background .15s}
+.pasos-lat li button:hover{background:rgba(21,32,31,.05)}
+.pasos-lat li button[disabled]{cursor:default}
+.pasos-lat li button[disabled]:hover{background:none}
+.pasos-lat .txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.pasos-lat .txt small{font-size:12px;color:var(--gris-osc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.pasos-lat li.actual button{background:var(--madera);color:var(--madera-osc);font-weight:500}
+.pasos-lat li.hecho svg.i{color:var(--petroleo)}
+.lateral .nota-lat{margin-top:auto;background:var(--petroleo);color:#E6F0EE;border-radius:16px;padding:14px;font-size:12.5px;line-height:1.45}
+.lateral .nota-lat b{display:block;font-weight:500;font-size:13.5px;color:#fff;margin-bottom:2px}
+
+.principal{background:#FBF8F3;padding:26px 30px 24px;display:flex;flex-direction:column}
+.barra-sup{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.barra-sup .paso-txt{font-size:13px;color:var(--gris-osc)}
+.barra-sup .folio{font-size:12px;border:1px solid var(--linea-c);border-radius:99px;padding:5px 12px;color:#4A5352}
+.segs{display:none}
+.acuse{margin-top:22px;display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#4A5352;background:#F1ECE3;border-radius:14px;padding:11px 14px;max-width:560px}
+.acuse svg{color:var(--petroleo);margin-top:2px}
+.q{margin-top:18px;font-size:clamp(26px,2.8vw,36px);font-weight:400;letter-spacing:-.03em;line-height:1.1;color:var(--tinta);max-width:20ch}
+.q-ayuda{margin-top:6px;font-size:14px;color:var(--gris-osc)}
+.anim{animation:entra .35s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.anim{animation:none}}
+
+.ops{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.op{background:#fff;border:1px solid var(--linea-c);border-radius:18px;padding:16px 16px;min-height:84px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;font-size:15px;font-weight:500;color:var(--tinta);line-height:1.3;transition:border-color .15s,background .15s,transform .1s}
+.op small{display:block;font-weight:300;font-size:13px;color:var(--gris-osc);margin-top:3px}
+.op .ico{width:32px;height:32px;border-radius:10px;background:var(--hueso-2);display:grid;place-items:center;color:var(--petroleo)}
+.op:hover{border-color:var(--tinta)}
+.op:active{transform:scale(.985)}
+.op[aria-pressed="true"]{background:var(--madera);border-color:var(--madera);color:var(--madera-osc)}
+.op[aria-pressed="true"] small{color:#5C4126}
+.op[aria-pressed="true"] .ico{background:rgba(58,38,20,.12);color:var(--madera-osc)}
+.op .plano{width:64px;height:44px;color:var(--petroleo)}
+.op[aria-pressed="true"] .plano{color:var(--madera-osc)}
+.ops.tres{grid-template-columns:repeat(3,1fr)}
+.pie-p{margin-top:auto;padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--gris-osc)}
+.pie-p button{font-weight:500;color:var(--tinta);display:inline-flex;align-items:center;gap:6px}
+.pie-p button[hidden]{visibility:hidden}
+.pie-p span{display:inline-flex;align-items:center;gap:6px}
+
+/* Formulario */
+.form{margin-top:20px;display:grid;gap:10px;max-width:460px}
+.campo label{display:block;font-size:13px;font-weight:500;color:var(--tinta);margin-bottom:6px}
+.campo input{width:100%;height:54px;border-radius:14px;border:1px solid var(--linea-c);background:#fff;padding:0 16px;font-size:16px;font-weight:400;color:var(--tinta)}
+.campo input:focus{outline:none;border-color:var(--petroleo);box-shadow:0 0 0 3px rgba(36,90,89,.15)}
+.campo .err{font-size:12.5px;color:#A3301E;min-height:16px;margin-top:4px}
+.form .btn{justify-content:space-between;width:100%;margin-top:4px}
+.legal{font-size:12.5px;color:var(--gris-osc);line-height:1.5}
+.legal button{color:var(--tinta);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+
+/* Resultado */
+.res-grid{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.w{background:#fff;border:1px solid var(--linea-c);border-radius:18px;padding:18px}
+.w h3{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--gris-osc)}
+.w h3 svg{color:var(--petroleo)}
+.w p,.w li{font-size:14px;line-height:1.5;margin-top:8px;color:#323B3A}
+.w ul{list-style:none}
+.w li{display:flex;gap:8px}
+.w li svg{color:var(--petroleo);width:16px;height:16px;margin-top:2px}
+.w.perfil{grid-column:span 2;background:var(--petroleo);border-color:var(--petroleo);color:#fff;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.w.perfil img{width:96px;height:72px;border-radius:12px;object-fit:cover}
+.w.perfil h3{color:#B9D3CF;justify-content:flex-start}.w.perfil h3 svg{color:var(--madera)}
+.w.perfil strong{display:block;font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;margin-top:4px}
+.w.paso{grid-column:span 2;background:var(--madera);border-color:var(--madera);color:var(--madera-osc);display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.w.paso h3{color:#6B4B2A}
+.w.paso h3 svg{color:var(--madera-osc)}
+.w.paso p{color:#4A321B}
+.w.paso .btn{background:var(--madera-osc);color:var(--madera)}
+.w.paso .btn .flecha{background:var(--madera);color:var(--madera-osc)}
+.res-nota{margin-top:12px;font-size:12.5px;color:var(--gris-osc)}
+.res-nota a{color:var(--tinta);text-decoration:underline;text-underline-offset:2px}
+
+
+.w.plano-w{grid-column:span 2;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:center}
+.plano-res{width:100%;height:auto;background:#FBF8F3;border-radius:14px;display:block}
+.leyenda{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:10px !important;font-size:12px !important;color:var(--gris-osc) !important}
+.leyenda span{display:inline-flex;align-items:center;gap:6px}
+.leyenda i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.leyenda i.tri{border-radius:2px;background:rgba(217,174,115,.35);border:1px dashed #C9965A}
+.notas{list-style:none;counter-reset:n;margin-top:4px}
+.notas li{counter-increment:n;display:grid;grid-template-columns:26px 1fr;gap:10px;margin-top:12px !important}
+.notas li::before{content:counter(n);width:26px;height:26px;border-radius:50%;background:var(--madera);color:var(--madera-osc);display:grid;place-items:center;font-size:12px;font-weight:500}
+.dec li{display:block !important;padding:10px 0;border-bottom:1px solid var(--linea-c);margin-top:0 !important}
+.dec li:last-child{border-bottom:0}
+.dec b{display:block;font-weight:500;font-size:14px;color:var(--tinta)}
+.dec span{display:block;font-size:13.5px;color:#4A5352;margin-top:2px}
+.w.alerta{background:#FBF3EA;border-color:#EAD9C2}
+.w.alerta li svg{color:#B0553A}
+.mini-nota{font-size:12.5px !important;color:var(--gris-osc) !important;margin-top:12px !important}
+@media (max-width:820px){.w.plano-w{grid-column:auto;grid-template-columns:1fr}}
+
+.res-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.btn-osc{flex:none;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:99px;background:var(--tinta);color:#fff;font-size:13.5px;font-weight:500;margin-top:18px}
+.btn-osc svg{color:var(--madera)}
+.w.agenda{grid-column:span 2;background:var(--tinta);border-color:var(--tinta);color:#fff;padding:24px;scroll-margin-top:20px}
+.ag-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.w.agenda h3{color:var(--madera)}
+.w.agenda h3 svg{color:var(--madera)}
+.ag-tit{font-size:21px !important;font-weight:400;letter-spacing:-.02em;color:#fff !important;margin-top:6px !important}
+.regalo-pill{flex:none;display:inline-flex;align-items:center;gap:6px;background:var(--madera);color:var(--madera-osc);border-radius:99px;padding:6px 12px;font-size:12px;font-weight:500}
+.regalo-pill svg{width:15px;height:15px}
+.regalo{margin-top:16px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;background:rgba(217,174,115,.12);border:1px dashed rgba(217,174,115,.55);border-radius:16px;padding:12px 14px}
+.regalo .ico-reg{width:42px;height:42px;border-radius:12px;background:var(--madera);color:var(--madera-osc);display:grid;place-items:center}
+.regalo b{display:block;font-weight:500;font-size:15px;color:#fff}
+.regalo span{display:block;font-size:13px;color:#C8CFCD;margin-top:2px}
+.ag-lab{font-size:12.5px !important;color:#9FB0AD !important;margin-top:18px !important}
+.chips{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:8px}
+.chips.horas{grid-template-columns:repeat(3,1fr)}
+.chip{border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:10px 6px;text-align:center;font-size:18px;font-weight:400;color:#fff;line-height:1.15;transition:background .15s,border-color .15s}
+.chip small{display:block;font-size:11.5px;color:#9FB0AD}#ag-dias .chip small{text-transform:capitalize}
+.chips.horas .chip{font-size:15px}
+.chip:hover{border-color:rgba(255,255,255,.4)}
+.chip[aria-pressed="true"]{background:var(--madera);border-color:var(--madera);color:var(--madera-osc)}
+.chip[aria-pressed="true"] small{color:#5C4126}
+.w.agenda .err{font-size:12.5px;color:#F0A88F;min-height:16px;margin-top:10px}
+.ag-pie{margin-top:6px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.ag-pie p{font-size:13px !important;color:#C8CFCD !important;margin-top:0 !important}
+.ag-pie b{color:#fff;font-weight:500}
+.ag-ok{display:grid;grid-template-columns:48px 1fr;gap:14px}
+.ico-ok{width:48px;height:48px;border-radius:50%;background:var(--madera);color:var(--madera-osc);display:grid;place-items:center}
+.ok-tit{font-size:20px !important;font-weight:400 !important;color:#fff !important;letter-spacing:-.02em;line-height:1.25}
+.ag-ok p{color:#C8CFCD !important}
+.regalo.mini{margin:14px 0 16px}
+@media (max-width:820px){
+  .res-cab{flex-direction:column;gap:0}
+  .btn-osc{margin-top:14px}
+  .w.agenda{grid-column:auto;padding:18px}
+  .ag-cab{flex-direction:column}
+  .chips{grid-template-columns:repeat(3,1fr)}
+  .ag-pie{grid-template-columns:1fr}
+  .ag-pie .btn{justify-content:space-between}
+  .ag-ok{grid-template-columns:1fr}
+}
+
+.propuesta{margin-top:14px;width:100%;display:grid;grid-template-columns:58px 1fr auto;gap:14px;align-items:center;background:var(--madera);color:var(--madera-osc);border-radius:18px;padding:12px 16px 12px 12px;text-align:left}
+.propuesta .cal{width:58px;height:58px;border-radius:14px;background:var(--madera-osc);color:var(--madera);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.propuesta .cal small{font-size:11px;text-transform:capitalize}
+.propuesta .cal b{font-size:22px;font-weight:500;margin-top:3px}
+.propuesta .p-txt b{display:block;font-weight:500;font-size:16px}
+.propuesta .p-txt span{display:block;font-size:13.5px;color:#5C4126;margin-top:2px}
+.propuesta .p-ok{width:30px;height:30px;border-radius:50%;background:var(--madera-osc);color:var(--madera);display:grid;place-items:center}
+.cambiar{margin-top:10px;font-size:13px;color:#C8CFCD;text-decoration:underline;text-underline-offset:3px}
+.otros{margin-top:4px}
+.otros[hidden]{display:none}
+.precio-visita{margin-top:18px;display:grid;grid-template-columns:auto 1fr;gap:12px 22px;align-items:center;padding:16px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.pv-monto b{display:block;font-size:30px;font-weight:400;letter-spacing:-.03em;color:#fff;line-height:1}
+.pv-monto span{display:block;font-size:12px;color:#9FB0AD;margin-top:4px;max-width:20ch}
+.precio-visita ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+.precio-visita li{display:flex;gap:6px;align-items:center;font-size:13px !important;color:#E6EBEA !important;margin-top:0 !important}
+.precio-visita li svg{color:var(--madera);width:15px;height:15px}
+.ok-fecha{font-size:15px !important;color:var(--madera) !important;margin-top:4px !important}
+.enlace-wa{display:inline-block;font-size:13.5px;color:#fff;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:820px){.precio-visita{grid-template-columns:1fr}.precio-visita ul{grid-template-columns:1fr 1fr}}
+
+
+.aviso-bajo{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;background:rgba(217,174,115,.14);border:1px solid rgba(217,174,115,.4);border-radius:14px;padding:12px 14px;margin-bottom:16px}
+.aviso-bajo svg{color:var(--madera);margin-top:2px}
+.aviso-bajo p{font-size:13.5px !important;color:#E6EBEA !important;margin-top:0 !important;line-height:1.5}
+.aviso-bajo b{color:#fff;font-weight:500}
+.alt-wa{margin-top:12px !important;text-align:center}
+.alt-wa a{font-size:13.5px;color:#C8CFCD;text-decoration:underline;text-underline-offset:3px}
+/* Botón fijo en celular */
+.flotante{display:none}
+@media (max-width:820px){
+  .flotante{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:40;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:58px;padding:8px 8px 8px 20px;
+    border-radius:99px;background:var(--madera);color:var(--madera-osc);text-align:left;
+    box-shadow:0 14px 32px -10px rgba(0,0,0,.7),0 0 0 1px rgba(58,38,20,.08);
+    transition:transform .3s ease,opacity .3s ease}
+  .flotante .f-txt{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+  .flotante b{font-weight:500;font-size:15px}
+  .flotante small{font-size:12px;color:#5C4126;margin-top:2px}
+  .flotante .flecha{flex:none;width:42px;height:42px;border-radius:50%;background:var(--madera-osc);color:var(--madera);display:grid;place-items:center}
+  .flotante.oculto{transform:translateY(160%);opacity:0;pointer-events:none}
+  body{padding-bottom:88px}
+}
+@media (max-width:820px) and (prefers-reduced-motion:reduce){.flotante{transition:none}}
+/* Tarjetas flotantes */
+.flota{position:absolute;z-index:3;border-radius:18px;box-shadow:0 24px 48px -16px rgba(0,0,0,.55)}
+.f-visita{left:-210px;bottom:150px;background:#fff;color:var(--tinta);padding:12px 16px 12px 12px;display:flex;align-items:center;gap:12px;width:250px;transform:rotate(-2deg)}
+.f-visita .ok{width:36px;height:36px;border-radius:10px;background:var(--madera);display:grid;place-items:center;color:var(--madera-osc)}
+.f-visita b{display:block;font-size:14px;font-weight:500}
+.f-visita span{font-size:12px;color:var(--gris-osc)}
+.f-foto{right:-170px;top:-250px;width:230px;background:#fff;padding:8px;transform:rotate(3deg)}
+.f-foto img{width:100%;height:150px;object-fit:cover;border-radius:12px}
+.f-foto p{font-size:12px;color:var(--tinta);padding:8px 6px 4px;font-weight:500}
+.f-foto p span{display:block;font-weight:300;color:var(--gris-osc)}
+.f-render{right:-140px;bottom:-34px;background:var(--madera);color:var(--madera-osc);padding:14px 18px;width:200px;transform:rotate(-3deg)}
+.f-render small{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500}
+.f-render b{display:block;font-size:30px;font-weight:400;letter-spacing:-.03em;line-height:1.1;margin-top:4px}
+.f-render span{font-size:12px;color:#5C4126}
+@media (max-width:1380px){.flota{display:none}}
+
+@media (max-width:820px){
+  .ventana{padding:6px;border-radius:24px}
+  .ventana-int{grid-template-columns:1fr;min-height:0;border-radius:18px}
+  .lateral{display:none}
+  .principal{padding:20px 16px 18px}
+  .segs{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:14px}
+  .segs i{height:4px;border-radius:99px;background:var(--linea-c)}
+  .segs i.on{background:var(--petroleo)}
+  .segs i.act{background:var(--madera)}
+  .ops{gap:8px}
+  .op{min-height:76px;padding:13px;font-size:14px}
+  .ops.tres{grid-template-columns:1fr}
+  .res-grid{grid-template-columns:1fr}
+  .w.perfil,.w.paso{grid-column:auto}
+  .w.paso{grid-template-columns:1fr}
+  .w.paso .btn{justify-content:space-between}
+}
+
+/* Aviso */
+dialog{border:0;border-radius:24px;padding:0;max-width:620px;width:calc(100% - 24px);color:var(--tinta);background:var(--hueso)}
+dialog::backdrop{background:rgba(5,10,10,.7)}
+.aviso{padding:30px 28px 24px;max-height:80vh;overflow:auto}
+.aviso h2{font-size:24px;font-weight:400;letter-spacing:-.02em}
+.aviso h3{font-size:14px;font-weight:500;margin-top:16px}
+.aviso p{font-size:14px;margin-top:4px;color:#3A4342}
+.aviso .btn{margin-top:22px}
+
+.sec{position:relative;padding:130px 0 0}
+.sec .cab{text-align:center;max-width:720px;margin:0 auto}
+.sec .eti{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--madera);border:1px solid rgba(217,174,115,.3);border-radius:99px;padding:5px 14px}
+.sec h2{margin-top:18px;font-weight:400;font-size:clamp(32px,4.4vw,56px);line-height:1.06;letter-spacing:-.035em;color:#fff}
+.sec .cab p{margin-top:16px;font-size:16px;color:var(--gris)}
+.galeria{margin-top:48px;display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:240px 240px;gap:12px}
+.galeria figure{position:relative;border-radius:24px;overflow:hidden;background:var(--noche-3)}
+.galeria img{width:100%;height:100%;object-fit:cover}
+.galeria figcaption{position:absolute;left:12px;bottom:12px;background:rgba(11,20,19,.72);backdrop-filter:blur(6px);border-radius:99px;padding:6px 12px;font-size:12px;color:#fff}
+.galeria .g1{grid-row:span 2}
+.galeria .g2{grid-row:span 2}
+.ventajas{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ventaja{background:var(--noche-2);border:1px solid var(--linea);border-radius:24px;padding:28px 26px}
+.ventaja .ic{width:44px;height:44px;border-radius:14px;background:rgba(217,174,115,.14);color:var(--madera);display:grid;place-items:center}
+.ventaja h3{margin-top:22px;font-weight:400;font-size:20px;color:#fff;letter-spacing:-.02em;line-height:1.25}
+.ventaja p{margin-top:8px;font-size:15px;color:var(--gris)}
+.estandar{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center}
+.estandar .cab{text-align:left;margin:0}
+.lista-blanca{background:var(--hueso);color:var(--tinta);border-radius:28px;padding:10px}
+.lista-blanca li{list-style:none;display:grid;grid-template-columns:40px 1fr;gap:14px;padding:16px 16px;border-radius:18px;background:#FBF8F3;margin-top:6px}
+.lista-blanca li:first-child{margin-top:0}
+.lista-blanca .ok{width:40px;height:40px;border-radius:12px;background:var(--petroleo);color:#fff;display:grid;place-items:center}
+.lista-blanca strong{display:block;font-weight:500;font-size:16px}
+.lista-blanca span{display:block;font-size:14px;color:var(--gris-osc);margin-top:2px}
+.lista-blanca li.arm{background:var(--madera);color:var(--madera-osc)}
+.lista-blanca li.arm .ok{background:var(--madera-osc);color:var(--madera)}
+.lista-blanca li.arm span{color:#5C4126}
+.proceso{margin-top:48px;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:p}
+.proceso li{counter-increment:p;background:var(--noche-2);border:1px solid var(--linea);border-radius:22px;padding:22px 20px 24px}
+.proceso li::before{content:"0" counter(p);font-size:13px;color:var(--madera)}
+.proceso h3{margin-top:28px;font-weight:400;font-size:18px;color:#fff;letter-spacing:-.015em}
+.proceso p{margin-top:6px;font-size:14px;color:var(--gris)}
+.proceso li.dest{background:var(--madera);border-color:var(--madera)}
+.proceso li.dest::before,.proceso li.dest h3{color:var(--madera-osc)}
+.proceso li.dest p{color:#5C4126}
+.showroom{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:12px}
+.showroom .foto{border-radius:28px;overflow:hidden;min-height:340px}
+.showroom .foto{position:relative}.showroom .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.showroom .txt{background:var(--noche-2);border:1px solid var(--linea);border-radius:28px;padding:38px 34px;display:flex;flex-direction:column}
+.showroom h2{margin-top:18px}
+.showroom p{margin-top:14px;color:var(--gris);font-size:16px}
+.showroom .btn-linea{margin-top:auto;align-self:flex-start}
+.cita{position:relative;overflow:hidden;margin-top:130px;background:var(--petroleo);border-radius:32px;padding:clamp(36px,6vw,80px);color:#fff}
+.cita img.sello{position:absolute;right:-60px;bottom:-60px;width:340px;height:340px;border-radius:50%;opacity:.18}
+.cita blockquote{position:relative;font-family:var(--serif);font-weight:500;font-size:clamp(30px,4vw,54px);line-height:1.12;max-width:20ch}
+.cita .quien{position:relative;margin-top:26px;font-size:15px;color:#B9D3CF}
+.cita .quien b{display:block;color:#fff;font-weight:500;font-size:17px}
+.cita .btn{position:relative;margin-top:34px}
+.pie{margin-top:80px;border-top:1px solid var(--linea)}
+.pie .cont{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px 0 44px;font-size:13px;color:var(--gris)}
+.pie .marca img{width:32px;height:32px}
+.pie .marca b{font-size:20px}
+@media (max-width:900px){
+  .sec{padding-top:88px}
+  .galeria{grid-template-columns:1fr 1fr;grid-template-rows:200px 160px 160px}
+  .galeria .g1{grid-column:span 2;grid-row:auto}
+  .galeria .g2{grid-row:span 2}
+  .ventajas,.proceso{grid-template-columns:1fr}
+  .proceso h3{margin-top:12px}
+  .estandar,.showroom{grid-template-columns:1fr;gap:28px}
+  .showroom{gap:12px}
+  .showroom .foto{min-height:220px}
+  .showroom .txt{padding:28px 22px}
+  .showroom .btn-linea{margin-top:24px}
+  .cita{margin-top:88px}
+  .cita img.sello{width:220px;height:220px}
+}
+
+/* Modo anuncio: si llega desde un anuncio (utm_source o fbclid), en celular abre directo en la primera pregunta */
+@media (max-width:820px){
+  .desde-anuncio .hero h1,.desde-anuncio .hero .sub,.desde-anuncio .hero .ctas,.desde-anuncio .hero .checks{display:none}
+  .desde-anuncio .hero{padding-top:2px}
+  .desde-anuncio .escenario{margin-top:14px}
+}
+.sr-ctas{margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sr-ctas .btn-linea{margin-top:0}
+.sr-nota{margin-top:12px!important;font-size:14px!important}
+.res-ctas{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ok-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+@media(max-width:820px){.res-ctas{width:100%}.res-ctas .btn{width:100%;justify-content:space-between}}
+.campo.ubic{margin-top:16px}.campo.ubic label{color:#E6EBEA}
+
+/* ===== Variante residencial ===== */
+.arr-wa{margin:10px 0 0;font-size:13.5px;color:var(--gris)}
+.arr-wa a{color:var(--madera);text-decoration:underline;text-underline-offset:3px}
+.h-fotos{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:10px;max-width:900px;margin:26px auto 0;height:clamp(150px,24vw,300px)}
+.h-fotos figure{margin:0;position:relative;border-radius:16px;overflow:hidden;height:100%;background:#132120}
+.h-fotos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.h-fotos figure:hover img{transform:scale(1.03)}
+.h-fotos figure::after,.reales figure::after,.renders figure::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(to top,rgba(8,14,13,.82),rgba(8,14,13,0));pointer-events:none}
+.h-fotos figcaption{position:absolute;z-index:1;left:14px;bottom:12px;font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+@media (max-width:600px){.h-fotos{grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;height:220px;gap:6px;margin-top:16px}.h-fotos figure:first-child{grid-row:1 / 3}.h-fotos figure{border-radius:12px}.h-fotos figcaption{font-size:9.5px;left:9px;bottom:8px;letter-spacing:.12em}}
+@media (prefers-reduced-motion:reduce){.h-fotos img{transition:none}}
+.ad{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.ad figure{margin:0;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/4;background:#132120}
+.ad img{width:100%;height:100%;object-fit:cover;display:block}
+.ad figcaption{position:absolute;z-index:1;font-weight:500;left:12px;top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:0;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.ad .despues figcaption{color:var(--madera)}
+.reales{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.reales figure{margin:0;position:relative;border-radius:14px;overflow:hidden;aspect-ratio:3/4;background:#132120}
+.reales img{width:100%;height:100%;object-fit:cover;display:block}
+.reales figcaption{position:absolute;z-index:1;left:10px;right:10px;bottom:10px;font-size:12.5px;line-height:1.3;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+.reales figcaption span{display:block;font-size:11px;color:var(--madera);letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:760px){.reales{grid-template-columns:1fr 1fr}}
+.renders{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-top:10px;-webkit-overflow-scrolling:touch}
+.renders figure{flex:0 0 min(78%,520px);margin:0;scroll-snap-align:start;position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/9;background:#132120}
+.renders img{width:100%;height:100%;object-fit:cover;display:block}
+.renders figcaption{position:absolute;z-index:1;left:10px;bottom:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+.sub-h{margin:34px 0 4px;font-size:15px;font-weight:500;color:var(--claro)}
+.sub-h small{display:block;font-weight:400;color:var(--gris);font-size:13.5px;margin-top:2px}
+.testi{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:28px;align-items:center}
+.testi video{width:100%;aspect-ratio:9/16;border-radius:18px;background:#000;display:block}
+.testi blockquote{margin:0;font-family:var(--serif);font-size:clamp(26px,3.4vw,38px);line-height:1.15;color:#fff}
+.testi .quien{margin-top:14px;color:var(--gris);font-size:14px}
+.testi .quien b{display:block;color:var(--claro);font-weight:500}
+.testi ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px}
+.testi li{font-size:14.5px;color:var(--claro)}
+.testi li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--madera);margin-right:10px;vertical-align:middle}
+.testi + .testi{margin-top:72px}
+.testi.inv{grid-template-columns:1fr minmax(220px,320px)}
+.testi.inv video{order:2}
+@media (max-width:760px){.testi,.testi.inv{grid-template-columns:1fr;gap:18px}.testi video{max-width:300px;margin:0 auto}.testi.inv video{order:0}.testi + .testi{margin-top:56px}}
+
+#arranque[hidden] + .escenario{margin-top:30px}
+@media (max-width:600px){.arranque{padding:16px}#arranque[hidden] + .escenario{margin-top:20px}}
+
+/* ===== Acabado Noche y madera: tarjeta de arranque y diagnóstico completo ===== */
+.arranque,.escenario .ventana{background:linear-gradient(160deg,rgba(28,44,42,.96),rgba(10,18,17,.98));color:var(--claro);border:none;box-shadow:0 40px 80px -30px rgba(0,0,0,.8),inset 0 0 0 1px rgba(217,174,115,.38)}
+.arranque{border-radius:26px;padding:24px 20px}
+.arr-t,.barra-sup .paso-txt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris)}
+.arr-t b{color:var(--madera);font-weight:500}
+.arr-q{font-family:var(--serif);font-size:28px;font-weight:500;line-height:1.1;color:#fff;margin:10px 0 18px;padding-bottom:14px;border-bottom:1px solid rgba(217,174,115,.3)}
+.arr-ops button{background:rgba(255,255,255,.04);border:1px solid rgba(217,174,115,.28);color:#fff;border-radius:14px}
+.arr-ops button:hover,.arr-ops button:focus-visible{border-color:var(--madera);background:rgba(255,255,255,.07)}
+.arr-ops button[aria-pressed="true"]{background:var(--madera);border-color:var(--madera);color:var(--madera-osc)}
+.arr-ops small{color:var(--gris)}
+.arr-promesa{color:var(--gris)}.arr-promesa b{color:#fff}
+.arr-ver,.arr-wa{color:var(--gris)}.arr-wa a{color:var(--madera)}
+.escenario .lateral{background:rgba(255,255,255,.03);border-right:1px solid rgba(217,174,115,.16)}
+.escenario .lateral .mini b{color:#fff}
+.escenario .lateral h4{color:var(--gris)}
+.escenario .pasos-lat li button{color:#C8CFCD}
+.escenario .pasos-lat li button:hover{background:rgba(255,255,255,.05)}
+.escenario .pasos-lat .txt small{color:var(--gris)}
+.escenario .pasos-lat li.actual button{background:var(--madera);color:var(--madera-osc)}
+.escenario .pasos-lat li.hecho svg.i{color:var(--madera)}
+.escenario .lateral .nota-lat{background:rgba(217,174,115,.1);border:1px solid rgba(217,174,115,.28);color:#C8CFCD}
+.escenario .lateral .nota-lat b{color:var(--madera)}
+.escenario .principal{background:transparent}
+.escenario .barra-sup .folio{border-color:rgba(217,174,115,.3);color:#C8CFCD}
+.escenario .segs i{background:rgba(255,255,255,.1)}
+.escenario .segs i.on{background:rgba(217,174,115,.55)}
+.escenario .segs i.act{background:var(--madera)}
+.escenario .acuse{background:rgba(217,174,115,.1);color:#E6EBEA}
+.escenario .acuse svg{color:var(--madera)}
+.escenario .q{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;color:#fff;font-size:clamp(30px,3.2vw,42px)}
+.escenario .q-ayuda{color:var(--gris)}
+.escenario .op{background:rgba(255,255,255,.04);border-color:rgba(217,174,115,.28);color:#fff}
+.escenario .op small{color:var(--gris)}
+.escenario .op .ico{background:rgba(217,174,115,.12);color:var(--madera)}
+.escenario .op .plano{color:var(--madera)}
+.escenario .op:hover{border-color:var(--madera)}
+.escenario .op[aria-pressed="true"]{background:var(--madera);border-color:var(--madera);color:var(--madera-osc)}
+.escenario .op[aria-pressed="true"] small{color:#5C4126}
+.escenario .op[aria-pressed="true"] .ico{background:rgba(58,38,20,.12);color:var(--madera-osc)}
+.escenario .op[aria-pressed="true"] .plano{color:var(--madera-osc)}
+.escenario .pie-p{color:var(--gris)}
+.escenario .pie-p button{color:#fff}
+.escenario .campo label{color:var(--claro)}
+.escenario .campo input{background:rgba(255,255,255,.05);border-color:rgba(217,174,115,.3);color:#fff}
+.escenario .campo input::placeholder{color:#6F7B79}
+.escenario .campo input:focus{border-color:var(--madera);box-shadow:0 0 0 3px rgba(217,174,115,.2)}
+.escenario .campo .err{color:#F0A88F}
+.escenario .legal{color:var(--gris)}
+.escenario .legal button{color:#fff}
+.escenario .w{background:rgba(255,255,255,.04);border-color:rgba(217,174,115,.22)}
+.escenario .w h3{color:var(--gris)}
+.escenario .w h3 svg,.escenario .w li svg{color:var(--madera)}
+.escenario .w p,.escenario .w li{color:#D7DDDB}
+.escenario .w.perfil{background:var(--petroleo);border-color:var(--petroleo)}
+.escenario .w.perfil p,.escenario .w.perfil strong{color:#fff}
+.escenario .w.paso{background:var(--madera);border-color:var(--madera)}
+.escenario .w.paso p{color:#4A321B}
+.escenario .w.paso h3{color:#6B4B2A}
+.escenario .w.agenda{background:rgba(0,0,0,.25);border-color:rgba(217,174,115,.3)}
+.escenario .dec li{border-color:rgba(255,255,255,.08)}
+.escenario .dec b{color:#fff}
+.escenario .dec span{color:#B5BFBD}
+.escenario .w.alerta{background:rgba(176,85,58,.12);border-color:rgba(176,85,58,.35)}
+.escenario .w.alerta li svg{color:#E08A6E}
+.escenario .leyenda,.escenario .mini-nota{color:var(--gris)!important}
+.escenario .res-nota{color:var(--gris)}
+.escenario .res-nota a{color:#fff}
+.escenario .btn-osc{background:var(--madera);color:var(--madera-osc)}
+.escenario .btn-osc svg{color:var(--madera-osc)}
+@media (max-width:600px){.arranque{padding:18px 16px}.arr-q{font-size:25px}}
+</style>
+<script>try{if(/[?&](utm_source|fbclid)=/.test(location.search))document.documentElement.classList.add("desde-anuncio")}catch(e){}</script>
+</head>
+<body>
+<div class="lambrin" aria-hidden="true"></div>
+<div class="brillo" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="cont">
+    <a class="marca" href="#" aria-label="Armadillo Diseño, inicio">
+      <img decoding="async" src="img/logo.webp" alt="">
+      <div><b>Armadillo</b><span>DISEÑO</span></div>
+    </a>
+    <nav aria-label="Secciones"><a href="#proyectos">Proyectos</a><a href="#proceso">Cómo trabajamos</a><a href="#showroom">Showroom</a></nav>
+    <div class="acciones">
+      <a class="btn-linea" href="https://www.instagram.com/armadillo.proyecto/" target="_blank" rel="noopener">Ver proyectos</a>
+      <a class="btn" href="#diagnostico">Hacer diagnóstico <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="cont">
+        <h1>Tu cocina a la medida, <em>vista en render</em> antes de invertir.</h1>
+    <p class="sub">Diseño, fabricación en nuestra planta en Puebla e instalación, con un solo responsable de principio a fin.</p>
+    <div class="h-fotos">
+      <figure><img decoding="async" src="img/residencial/gustavo-isla.webp" alt="Cocina terminada con isla, cubierta en cascada y plafón de listones de madera"><figcaption>Cocina terminada</figcaption></figure>
+      <figure><img decoding="async" src="img/residencial/render-4.webp" alt="Render de cocina con isla de mármol y madera"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img decoding="async" src="img/residencial/eunice-centro.webp" alt="Centro de entretenimiento con chimenea en Lomas de Angelópolis"><figcaption>Lomas de Angelópolis</figcaption></figure>
+    </div>
+    <div class="arranque" id="arranque">
+      <p class="arr-t"><b>Diagnóstico en línea · Paso 1 de 7</b></p>
+      <h2 class="arr-q">Para empezar, ¿en qué punto está tu cocina?</h2>
+      <div class="arr-ops">
+        <button type="button" data-v="nueva">Casa nueva<small>La cocina está por hacerse</small></button>
+        <button type="button" data-v="renovar">Quiero renovarla<small>Ya tengo cocina, pero no me funciona</small></button>
+        <button type="button" data-v="obra">Estoy en obra<small>Construyendo o remodelando</small></button>
+        <button type="button" data-v="ideas">Estoy viendo ideas<small>Todavía no decido</small></button>
+      </div>
+      <p class="arr-promesa"><b>Antes de invertir, ves tu cocina terminada en render.</b> La diseñamos con las medidas de tu casa, con materiales y herrajes definidos por escrito, y la fabricamos en nuestra planta.</p>
+      <a class="arr-ver" href="#proyectos">Ver proyectos</a>
+      <p class="arr-wa">¿Prefieres platicarlo? <a id="arr-wa" href="#" target="_blank" rel="noopener">Escríbele a Daniel Romo por WhatsApp</a></p>
+    </div>
+    <div class="escenario esperando" id="diagnostico">
+      <div class="flota f-foto" aria-hidden="true">
+        <img loading="lazy" decoding="async" src="img/cocina-isla.webp" alt="">
+        <p>Cocina con isla y plafón de madera<span>Proyecto Armadillo</span></p>
+      </div>
+      <div class="flota f-visita" aria-hidden="true">
+        <span class="ok"><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+        <div><b>Visita técnica agendada</b><span>Medidas, instalaciones y ficha técnica</span></div>
+      </div>
+      <div class="flota f-render" aria-hidden="true">
+        <small><svg class="i" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Tu render</small>
+        <b>~2 semanas</b>
+        <span>después de la visita</span>
+      </div>
+
+      <div class="ventana">
+        <div class="ventana-int">
+          <aside class="lateral" aria-label="Pasos del diagnóstico">
+            <div class="mini"><img loading="lazy" decoding="async" src="img/logo.webp" alt=""><b>Armadillo</b></div>
+            <h4>TU DIAGNÓSTICO</h4>
+            <ol class="pasos-lat" id="pasos-lat"></ol>
+            <div class="nota-lat"><b>Diagnóstico en línea</b>Si después quieres que vayamos a tu casa, la visita técnica cuesta $1,000 y se abona completa a tu cocina.</div>
+          </aside>
+          <section class="principal" aria-label="Diagnóstico de cocina">
+            <div class="barra-sup"><span class="paso-txt" id="paso-txt">Paso 1 de 7</span><span class="folio" id="folio"></span></div>
+            <div class="segs" id="segs" aria-hidden="true"></div>
+            <div id="zona" aria-live="polite"></div>
+            <div class="pie-p">
+              <button type="button" id="atras" hidden><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Anterior</button>
+              <span><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Tus datos están protegidos</span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="checks">
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Planta propia en Puebla</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Render 3D antes de fabricar</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Pagas por etapas</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>12 meses de garantía</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>+75 proyectos de carpintería entregados</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="sec" id="proyectos">
+  <div class="cont">
+    <div class="cab">
+      <span class="eti">Proyectos reales</span>
+      <h2>Así la ves en render, así queda en tu casa</h2>
+      <p>Cada proyecto se diseña sobre medidas reales y se fabrica en nuestra planta en Puebla.</p>
+    </div>
+    <p class="sub-h">De obra negra a cocina terminada<small>Un mismo espacio, antes y después de nuestro trabajo.</small></p>
+    <div class="ad">
+      <figure><img loading="lazy" decoding="async" src="img/residencial/gustavo-antes.webp" alt="Espacio de cocina en obra negra antes del proyecto"><figcaption>Antes</figcaption></figure>
+      <figure class="despues"><img loading="lazy" decoding="async" src="img/residencial/gustavo-despues.webp" alt="La misma cocina terminada con isla y plafón de madera"><figcaption>Después</figcaption></figure>
+    </div>
+    <p class="sub-h">Trabajos entregados</p>
+    <div class="reales">
+      <figure><img loading="lazy" decoding="async" src="img/residencial/gustavo-cascada.webp" alt="Isla con cubierta en cascada"><figcaption><span>Cocina</span>Isla con cubierta en cascada</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/gustavo-detalle.webp" alt="Detalle de isla con listones de madera"><figcaption><span>Cocina</span>Isla con listones de madera</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/eunice-centro.webp" alt="Centro de entretenimiento con chimenea"><figcaption><span>Lomas de Angelópolis</span>Centro de entretenimiento</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/eunice-recibidor.webp" alt="Recibidor con espejo e iluminación"><figcaption><span>Lomas de Angelópolis</span>Recibidor a la medida</figcaption></figure>
+    </div>
+    <p class="sub-h">Así presentamos cada cocina antes de fabricarla<small>Renders de proyecto. Desliza para ver más.</small></p>
+    <div class="renders">
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-4.webp" alt="Render de cocina con isla de mármol y madera"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-1.webp" alt="Render de cocina con isla de mármol y nogal"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-3.webp" alt="Render de cocina blanca con isla de listones"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-2.webp" alt="Render de cocina con barra y cubierta de mármol"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-5.webp" alt="Render de cocina en madera y negro"><figcaption>Render de proyecto</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cliente">
+  <div class="cont testi">
+    <video controls playsinline preload="none" poster="img/residencial/daniel-poster.webp" src="img/residencial/daniel-cocina.mp4"></video>
+    <div>
+      <span class="eti" style="align-self:flex-start">Clientes</span>
+      <blockquote>Un cliente de Lomas de Angelópolis nos cuenta cómo quedó su cocina.</blockquote>
+      <p class="quien"><b>Daniel Saldaña</b>Cocina integral y mueble de TV</p>
+      <ul>
+        <li>Nos conoció por redes y revisó nuestros proyectos</li>
+        <li>Le presentamos 2 o 3 propuestas en render 3D y él eligió</li>
+        <li>“Se adaptan a lo que tú quieres y al presupuesto”</li>
+        <li>“Calidad, servicio, honestidad”</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cont testi inv">
+    <video controls playsinline preload="none" poster="img/residencial/eunice-poster.webp" src="img/residencial/eunice.mp4"></video>
+    <div>
+      <blockquote>Una clienta de Lomas de Angelópolis nos cuenta cómo le fue con su proyecto.</blockquote>
+      <p class="quien"><b>Eunice</b>Centro de entretenimiento con chimenea y recibidor a la medida</p>
+      <ul>
+        <li>“Facilidades de pago”</li>
+        <li>Entrega rápida del proyecto</li>
+        <li>Un solo equipo responsable del diseño a la instalación</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="showroom">
+  <div class="cont showroom">
+    <div class="foto"><img loading="lazy" decoding="async" src="img/fachada.webp" alt="Fachada del showroom de Armadillo Diseño"></div>
+    <div class="txt">
+      <span class="eti" style="align-self:flex-start">Showroom</span>
+      <h2>Conoce nuestros materiales y la planta</h2>
+      <p>Te mostramos muestras de acabados y herrajes, la planta donde fabricamos tu cocina, y platicamos de tu proyecto sin prisa.</p>
+      <div class="sr-ctas"><a class="btn" id="sr-wa" href="#" target="_blank" rel="noopener">Agendar recorrido <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="btn-linea" href="https://maps.app.goo.gl/8gG1xvHt7NSWsRBt9" target="_blank" rel="noopener">Cómo llegar</a></div>
+      <p class="sr-nota">Sin costo, con cita, de lunes a viernes de 10:00 a 5:00. Ideal si todavía estás comparando opciones.</p>
+    </div>
+  </div>
+  <div class="cont">
+    <div class="cita">
+      <img loading="lazy" decoding="async" class="sello" src="img/logo.webp" alt="">
+      <blockquote>“Tu dinero te costó ganarlo. Lo mínimo que puedes esperar es que quien haga tu cocina cumpla lo que te prometió.”</blockquote>
+      <p class="quien"><b>Ing. Daniel García</b>Fundador de Armadillo Diseño</p>
+      <a class="btn" href="#diagnostico">Hacer mi diagnóstico <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="prueba" hidden>
+  <div class="cont">
+    <div class="cab">
+      <span class="eti">Clientes</span>
+      <h2>Lo que dicen quienes ya tienen su cocina</h2>
+    </div>
+    <div class="ventajas" id="prueba-datos"></div>
+    <div class="ventajas" id="prueba-testimonios" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="cont">
+    <div class="cab">
+      <span class="eti">Por qué Armadillo</span>
+      <h2>Lo que compras es tranquilidad</h2>
+      <p>Saber que tu dinero está bien cuidado y que alguien responde por tu proyecto de principio a fin.</p>
+    </div>
+    <div class="ventajas">
+      <div class="ventaja"><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18M6 21V9l6-5 6 5v12"/><path d="M10 21v-5h4v5"/></svg></span><h3>Fabricamos en nuestra planta en Puebla</h3><p>Controlamos materiales, cortes y acabados en nuestro propio taller.</p></div>
+      <div class="ventaja"><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></span><h3>Ves tu cocina en render antes del anticipo</h3><p>Medidas, acabados y herrajes definidos antes de fabricar una sola pieza.</p></div>
+      <div class="ventaja"><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span><h3>Un solo responsable, del diseño a la entrega</h3><p>Sin intermediarios ni carpinteros que desaparecen a media obra.</p></div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="sec" id="proceso">
+  <div class="cont">
+    <div class="cab">
+      <span class="eti">Cómo trabajamos</span>
+      <h2>De tu diagnóstico a tu cocina terminada</h2>
+    </div>
+    <ol class="proceso">
+      <li><h3>Diagnóstico</h3><p>Dos minutos para entender tu proyecto.</p></li>
+      <li class="dest"><h3>Visita técnica</h3><p>Medimos y revisamos instalaciones. $1,000, abonables.</p></li>
+      <li><h3>Proyecto y render</h3><p>Tu cocina en 3D con presupuesto, en unas dos semanas. Nuestras cocinas integrales parten de $200,000.</p></li>
+      <li><h3>Fabricación</h3><p>En nuestra planta propia en Puebla, en unas 6 semanas.</p></li>
+      <li><h3>Instalación y entrega</h3><p>Cuando todo abre, cierra y funciona como se diseñó. Con 12 meses de garantía.</p></li>
+    </ol>
+    <div class="ventajas" style="margin-top:12px">
+      <div class="ventaja"><h3>Pagas por etapas</h3><p>Un anticipo cuando apruebas tu render y el resto cuando entregamos tu cocina. Nunca pagas todo por adelantado.</p></div>
+      <div class="ventaja"><h3>12 meses de garantía</h3><p>Cubre herrajes, materiales y fabricación. No cubre golpes, quemaduras ni daños por mascotas o mal uso.</p></div>
+      <div class="ventaja"><h3>Tu render es tuyo</h3><p>Si pagas la visita y decides no avanzar, te quedas con el render de tu proyecto. Pagas por transferencia, efectivo o tarjeta.</p></div>
+    </div>
+  </div>
+</section>
+
+
+
+</main>
+<footer class="pie"><div class="cont"><a class="marca" href="#"><img loading="lazy" decoding="async" src="img/logo.webp" alt=""><div><b>Armadillo</b><span>DISEÑO</span></div></a><span>Alta carpintería residencial a la medida en Puebla</span><a href="https://www.instagram.com/armadillo.proyecto/" target="_blank" rel="noopener">@armadillo.proyecto</a></div></footer>
+
+<button type="button" class="flotante oculto" id="flotante" aria-controls="diagnostico" tabindex="-1">
+  <span class="f-txt"><b id="f-tit">Hacer mi diagnóstico</b><small id="f-sub">2 minutos, sin compromiso</small></span>
+  <span class="flecha"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</button>
+
+<dialog id="aviso" aria-labelledby="aviso-t">
+  <div class="aviso">
+    <h2 id="aviso-t">Aviso de privacidad</h2>
+    <p>Daniel García (Armadillo Diseño), con domicilio en Avenida Rosendo Márquez 17, colonia La Paz, Puebla, Puebla, es responsable del tratamiento de tus datos personales.</p>
+    <h3>Qué datos recabamos</h3>
+    <p>Tu nombre, tu número de teléfono o WhatsApp y las respuestas que das en este diagnóstico sobre tu cocina.</p>
+    <h3>Para qué los usamos</h3>
+    <p>Para contactarte, agendar tu visita técnica, preparar la propuesta de tu proyecto y darle seguimiento. De forma secundaria, para enviarte información sobre nuestros proyectos y servicios; si no lo deseas, puedes indicarlo en cualquier momento al correo de abajo.</p>
+    <h3>Con quién los compartimos</h3>
+    <p>No vendemos ni compartimos tus datos con terceros, salvo con los proveedores que nos ayudan a almacenarlos y gestionarlos, quienes están obligados a protegerlos.</p>
+    <h3>Tus derechos</h3>
+    <p>Puedes acceder, rectificar, cancelar u oponerte al uso de tus datos (derechos ARCO), o revocar tu consentimiento, escribiendo a armadillodiseno8@gmail.com.</p>
+    <h3>Cambios a este aviso</h3>
+    <p>Cualquier cambio se publicará en esta misma página. Última actualización: 24 de octubre de 2026.</p>
+    <button type="button" class="btn solo" id="cerrar-aviso">Entendido</button>
+  </div>
+</dialog>
+
+<script>
+/* ============ CONFIGURACIÓN (editar antes de publicar) ============ */
+const CONFIG = {
+  pixelId: "1686283536259740",                       // ID de tu píxel de Meta (solo números). Vacío = sin píxel.
+  whatsapp: "522227382691",           // WhatsApp de Daniel Romo (agendador), con lada 52 y sin espacios
+  sheetEndpoint: "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec",                  // URL de Google Apps Script que guarda cada lead en el CRM. NECESARIO para no perder contactos.
+  instagram: "https://www.instagram.com/armadillo.proyecto/",
+  // Rangos internos (NO se muestran al cliente; llegan al CRM). Muro de 3 a 5 m. CONFIRMAR CON DANIEL.
+  rangos: { funcional:[200000,250000], diseno:[250000,330000], alta:[330000,450000] },
+  factorTamano: { chico:0.8, medio:1, grande:1.3, muy:1.6, nose:1 },
+  // Regalo por agendar desde el diagnóstico. CONFIRMAR CON DANIEL que lo puede cumplir.
+  respuesta: "en menos de 24 horas",          // Promesa de tiempo de respuesta tras apartar.
+  pagoVisita: "",                     // Link de pago de la visita de $1,000 (Mercado Pago, Clip, etc.). Vacío = no se muestra el botón de pago.
+  // Prueba social: llenar SOLO con datos reales. Vacío = la sección no se muestra.
+  prueba: { cocinas:"", anios:"", calificacion:"" },  // ej. cocinas:"+40", anios:"8", calificacion:"4.9 en Google"
+  testimonios: [],                    // ej. { texto:"Cumplieron en tiempo y dejaron todo limpio.", nombre:"Laura M.", zona:"Lomas de Angelópolis" }
+  regalo: { titulo: "Render premium incluido", texto: "Tu visita incluye un render premium de tu cocina con valor de $1,500. Apartando hoy, tu visita queda en $1,000." }   // Regalo al apartar. null = no se muestra.
+};
+/* ================================================================= */
+
+if(CONFIG.pixelId){
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+  fbq("init", CONFIG.pixelId);
+  fbq("track", "PageView");
+}
+let iniciado = false;
+
+const FOTO_PERFIL = "img/cocina-cascada.webp";
+const I = {
+  etapa:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  uso:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/>',
+  forma:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 9v12"/>',
+  tamano:'<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
+  acabado:'<path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18M9 3l3 6 3-6"/>',
+  tiempo:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  zona:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  contacto:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>',
+  check:'<path d="M5 12l5 5 9-10"/>',
+  flecha:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+  regla:'<path d="M4 7h16v10H4z"/><path d="M8 7v4M12 7v3M16 7v4"/>',
+  lupa:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  casa:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>',
+  llave:'<path d="M14 7a4 4 0 1 1-3.9 5H3v3h3v3h3v-3h1.1A4 4 0 0 1 14 7z"/>',
+  obra:'<path d="M3 21h18M6 21V9l6-5 6 5v12"/><path d="M10 21v-5h4v5"/>',
+  dinero:'<rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/><circle cx="16" cy="14.5" r="1.5"/>',
+  regalo:'<rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13h18M12 9v12"/><path d="M12 9C10 6 6.5 6 6.5 8c0 1.2 1.8 1 5.5 1zM12 9c2-3 5.5-3 5.5-1 0 1.2-1.8 1-5.5 1z"/>',
+  x:'<path d="M7 7l10 10M17 7L7 17"/>',
+  idea:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>'
+};
+const svg = (k, cls="i") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${I[k]}</svg>`;
+const plano = {
+  lineal:'<path d="M3 6 H61" stroke-width="2.4"/><rect x="5" y="8" width="54" height="11" rx="2"/>',
+  l:'<path d="M3 6 H61 M3 6 V42" stroke-width="2.4"/><rect x="5" y="8" width="54" height="11" rx="2"/><rect x="5" y="19" width="11" height="22" rx="2"/>',
+  u:'<path d="M3 42 V6 H61 V42" stroke-width="2.4"/><rect x="5" y="8" width="54" height="11" rx="2"/><rect x="5" y="19" width="11" height="22" rx="2"/><rect x="48" y="19" width="11" height="22" rx="2"/>',
+  isla:'<path d="M3 6 H61" stroke-width="2.4"/><rect x="5" y="8" width="54" height="11" rx="2"/><rect x="17" y="28" width="30" height="11" rx="2"/>',
+  nose:'<path d="M3 6 H61 M3 6 V42" stroke-width="2.4" stroke-dasharray="3 4"/><circle cx="33" cy="26" r="2" fill="currentColor"/>'
+};
+
+const preguntas = [
+  { id:"etapa", campo:"Etapa", q:"Para empezar, ¿en qué punto está tu cocina?", op:[
+      {v:"nueva", t:"Casa nueva", s:"La cocina está por hacerse", ic:"llave", a:"Buen momento: es más fácil planear cuando todavía no hay nada instalado."},
+      {v:"renovar", t:"Quiero renovarla", s:"Ya tengo cocina, pero no me funciona", ic:"casa", a:"Bien. En la visita vemos qué se puede aprovechar de lo que ya tienes."},
+      {v:"obra", t:"Estoy en obra", s:"Construyendo o remodelando", ic:"obra", a:"Ideal: definir la cocina antes de cerrar instalaciones evita romper después."},
+      {v:"ideas", t:"Estoy viendo ideas", s:"Todavía no decido", ic:"idea", a:"Perfecto, para eso sirve este diagnóstico."} ]},
+  { id:"uso", campo:"Uso", q:"¿Cómo se vive la cocina en tu casa?", op:[
+      {v:"diario", t:"Se cocina a diario", s:"Uso intensivo todos los días", a:"Entonces la resistencia de la cubierta y los herrajes es prioridad."},
+      {v:"reunion", t:"Ahí se reúne la familia", s:"Es el corazón de la casa", a:"Entonces conviene pensar en barra o isla para convivir mientras se cocina."},
+      {v:"rapido", t:"Desayunos y cenas rápidas", s:"Práctica para el día a día", a:"Entonces la clave es tener lo de todos los días a la mano."},
+      {v:"personal", t:"Cocina alguien más", s:"Personal de apoyo en casa", a:"Entonces conviene separar el área de trabajo del área social."} ]},
+  { id:"forma", campo:"Distribución", q:"¿Qué forma tiene el espacio?", tipo:"planos", op:[
+      {v:"lineal", t:"Un muro", a:"Un muro bien resuelto rinde más de lo que parece."},
+      {v:"l", t:"En L", a:"La L es de las distribuciones más cómodas para trabajar."},
+      {v:"u", t:"En U", a:"La U da mucha guarda. Las esquinas son lo que hay que cuidar."},
+      {v:"isla", t:"Con isla", a:"Una isla cambia por completo la forma de convivir en la cocina."},
+      {v:"nose", t:"No estoy seguro", a:"No te preocupes, eso lo resolvemos al medir."} ]},
+  { id:"acabado", campo:"Acabados", q:"¿Qué nivel de acabados tienes en mente?", tipo:"tres", op:[
+      {v:"funcional", t:"Funcional y muy bien hecha", s:"Buenos materiales, diseño limpio"},
+      {v:"diseno", t:"Diseño y materiales seleccionados", s:"Más detalle y mejores herrajes"},
+      {v:"alta", t:"Alta gama, sin concesiones", s:"Lo mejor en materiales y herrajes"} ], acuse:"Anotado." },
+  { id:"presupuesto", campo:"Inversión", q:"Para proponerte materiales que encajen contigo, ¿qué inversión tienes contemplada?", ayuda:"Es solo una referencia. Nos ayuda a no proponerte algo fuera de lo que buscas.", op:[
+      {v:"mas400", t:"Más de $400,000", a:"Excelente. Hay espacio para materiales de alta gama y piezas especiales."},
+      {v:"250a400", t:"$250,000 a $400,000", a:"Excelente. Con ese rango ya se eligen materiales y herrajes de mejor nivel."},
+      {v:"200a250", t:"$200,000 a $250,000", a:"Perfecto. Es un rango donde se logran cocinas muy bien resueltas."},
+      {v:"hasta200", t:"Menos de $200,000", a:"Gracias por decirlo. Te contamos con honestidad qué se puede hacer bien con ese presupuesto."},
+      {v:"orientar", t:"Aún no lo sé, pero puedo invertir desde $200,000", s:"Quiero que me orienten", a:"Claro. En la visita te mostramos opciones en distintos niveles."} ]},
+  { id:"tiempo", campo:"Tiempo", q:"¿Para cuándo te gustaría tenerla?", op:[
+      {v:"ya", t:"Lo antes posible", a:"Entonces conviene agendar tu visita cuanto antes."},
+      {v:"1a3", t:"En 1 a 3 meses"}, {v:"3a6", t:"En 3 a 6 meses"}, {v:"explorar", t:"Todavía sin fecha"} ], acuse:"Anotado." },
+  { id:"zona", campo:"Zona", q:"Por último, ¿en qué zona está tu casa?", op:[
+      {v:"Angelópolis / Lomas", t:"Angelópolis, Lomas o La Vista"}, {v:"Cholula / San Andrés", t:"Cholula o San Andrés"},
+      {v:"La Paz / Zavaleta", t:"La Paz, Zavaleta o Huexotitla"}, {v:"Atlixco", t:"Atlixco"}, {v:"Cuautlancingo / norte", t:"Cuautlancingo o zona norte"},
+      {v:"Tlaxcala", t:"Tlaxcala"}, {v:"Otra zona de Puebla", t:"Otra zona o municipio de Puebla"}, {v:"Fuera de Puebla", t:"Vivo fuera de Puebla y Tlaxcala"} ]}
+];
+const TOTAL = preguntas.length;
+const $ = id => document.getElementById(id);
+const zona = $("zona"), atras = $("atras");
+const R = {}, contacto = {nombre:"", tel:""};
+let paso = 0, acuse = "", fase = "preguntas", apartado = false;
+const folio = "AD-" + String(Math.floor(1000 + Math.random()*9000));
+$("folio").textContent = "Folio " + folio;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const opcion = p => p.op.find(o => o.v === R[p.id]);
+const etiqueta = p => (opcion(p) || {}).t || "";
+const pendiente = () => preguntas.findIndex(p => !R[p.id]);
+
+function lateral(){
+  const actual = fase === "preguntas" ? paso : fase === "contacto" ? TOTAL : TOTAL + 1;
+  const filas = preguntas.map((p,i) => {
+    const hecho = !!R[p.id], es = i === actual;
+    return `<li class="${es ? "actual" : hecho ? "hecho" : ""}"><button type="button" data-ir="${i}" ${hecho && !es ? "" : "disabled"} aria-label="${p.campo}${hecho ? ": " + esc(etiqueta(p)) : ""}">
+      ${svg(hecho && !es ? "check" : p.id)}<span class="txt">${p.campo}${hecho && !es ? `<small>${esc(etiqueta(p))}</small>` : ""}</span></button></li>`;
+  });
+  filas.push(`<li class="${actual === TOTAL ? "actual" : contacto.nombre ? "hecho" : ""}"><button type="button" disabled>${svg(contacto.nombre && actual !== TOTAL ? "check" : "contacto")}<span class="txt">Tus datos${contacto.nombre && actual !== TOTAL ? `<small>${esc(contacto.nombre)}</small>` : ""}</span></button></li>`);
+  $("pasos-lat").innerHTML = filas.join("");
+  $("pasos-lat").querySelectorAll("button[data-ir]:not([disabled])").forEach(b => b.onclick = () => { acuse = ""; fase = "preguntas"; paso = +b.dataset.ir; pintar(); enfocar(); });
+  $("segs").innerHTML = Array.from({length:TOTAL+1}, (_,i) => `<i class="${i < actual ? "on" : i === actual ? "act" : ""}"></i>`).join("");
+}
+
+function pintar(){
+  fase = "preguntas";
+  const p = preguntas[paso];
+  avanzar(paso + 1);
+  $("paso-txt").textContent = `Paso ${paso + 1} de ${TOTAL}`;
+  atras.hidden = paso === 0;
+  const cls = p.tipo === "tres" ? "ops tres" : "ops";
+  const ops = p.op.map(o => `<button type="button" class="op" data-v="${esc(o.v)}" aria-pressed="${R[p.id] === o.v}">
+      ${p.tipo === "planos" ? `<svg class="plano" viewBox="0 0 64 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">${plano[o.v]}</svg>` : o.ic ? `<span class="ico">${svg(o.ic)}</span>` : ""}
+      <span>${o.t}${o.s ? `<small>${o.s}</small>` : ""}</span></button>`).join("");
+  zona.innerHTML = `<div class="anim">
+      ${acuse ? `<p class="acuse">${svg("info")}<span>${esc(acuse)}</span></p>` : ""}
+      <h2 class="q" tabindex="-1">${p.q}</h2>
+      ${p.ayuda ? `<p class="q-ayuda">${p.ayuda}</p>` : ""}
+      <div class="${cls}">${ops}</div></div>`;
+  zona.querySelectorAll(".op").forEach(b => b.onclick = () => elegir(p, b));
+  lateral(); actualizarFlotante();
+}
+
+atras.onclick = () => {
+  acuse = "";
+  if(fase === "contacto"){ paso = TOTAL - 1; } else paso = Math.max(0, paso - 1);
+  pintar(); enfocar();
+};
+
+function elegir(p, b){
+  if(!iniciado){ iniciado = true; if(typeof window.fbq === "function") window.fbq("trackCustom","DiagnosticoIniciado"); }
+  R[p.id] = b.dataset.v;
+  zona.querySelectorAll(".op").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const o = opcion(p);
+  acuse = (o && o.a) || p.acuse || "";
+  setTimeout(() => {
+    const sig = pendiente();
+    if(sig === -1){ contacto.nombre ? resultado() : formulario(); }
+    else { paso = sig; pintar(); }
+    enfocar();
+  }, reduce ? 0 : 230);
+}
+
+/* Portada: la primera pregunta se contesta desde la primera pantalla y lleva directo a la pregunta 2. */
+/* El recuadro del diagnóstico aparece hasta que la persona contesta la primera pregunta en la portada. */
+const esperando = () => $("diagnostico").classList.contains("esperando");
+function irArranque(){
+  $("arranque").scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+  const b = document.querySelector("#arranque [data-v]"); if(b) setTimeout(() => b.focus({ preventScroll: true }), reduce ? 0 : 450);
+}
+document.querySelectorAll('a[href="#diagnostico"]').forEach(a => a.addEventListener("click", e => { if(esperando()){ e.preventDefault(); irArranque(); } }));
+document.querySelectorAll("#arranque [data-v]").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#arranque [data-v]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("diagnostico").classList.remove("esperando");
+  $("arranque").hidden = true;
+  if(fase !== "preguntas" || paso !== 0) pintarPrimera();
+  const op = zona.querySelector(`.op[data-v="${b.dataset.v}"]`);
+  if(op) op.click(); else $("diagnostico").scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+});
+function pintarPrimera(){ paso = 0; acuse = ""; pintar(); }
+let tocado = false;
+function enfocar(){
+  const h = zona.querySelector(".q");
+  if(h) h.focus({preventScroll:true});
+  const top = $("diagnostico").getBoundingClientRect().top;
+  if(top < -20 || top > window.innerHeight * .3){ $("diagnostico").scrollIntoView({block:"start", behavior: reduce ? "auto" : "smooth"}); }
+}
+
+function formulario(){
+  fase = "contacto";
+  avanzar(TOTAL + 1);
+  $("paso-txt").textContent = "Último paso";
+  atras.hidden = false;
+  zona.innerHTML = `<div class="anim">
+      <p class="acuse">${svg("check")}<span>Listo, ya tenemos lo necesario para entender tu proyecto.</span></p>
+      <h2 class="q" tabindex="-1">¿A nombre de quién preparamos tu diagnóstico?</h2>
+      <p class="q-ayuda">Te mostramos tu recomendación al instante. Después te escribe Daniel Romo, de nuestro equipo, por WhatsApp y en horario de oficina, para resolver tus dudas. Nada de llamadas insistentes.</p>
+      <form class="form" id="form" novalidate>
+        <div class="campo"><label for="f-nombre">Nombre</label><input id="f-nombre" type="text" autocomplete="name" maxlength="60" value="${esc(contacto.nombre)}"><p class="err" id="e-nombre"></p></div>
+        <div class="campo"><label for="f-tel">WhatsApp</label><input id="f-tel" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="222 123 4567" value="${esc(contacto.tel)}"><p class="err" id="e-tel"></p></div>
+        <button type="submit" class="btn">Ver mi diagnóstico <span class="flecha">${svg("flecha")}</span></button>
+        <p class="legal">Al dar clic en "Ver mi diagnóstico" aceptas nuestro <button type="button" id="abrir-aviso">aviso de privacidad</button>.</p>
+      </form></div>`;
+  lateral(); actualizarFlotante();
+  $("abrir-aviso").onclick = () => $("aviso").showModal();
+  const nombre = $("f-nombre"), tel = $("f-tel");
+  nombre.oninput = () => $("e-nombre").textContent = "";
+  tel.oninput = () => $("e-tel").textContent = "";
+  $("form").onsubmit = e => {
+    e.preventDefault();
+    const n = nombre.value.trim(), t = tel.value.replace(/\D/g, "").replace(/^52(?=\d{10}$)/, "");
+    let ok = true;
+    if(n.length < 2){ $("e-nombre").textContent = "Escribe tu nombre."; ok = false; }
+    if(t.length !== 10){ $("e-tel").textContent = "Escribe tu número a 10 dígitos."; ok = false; }
+    if(!ok){ (n.length < 2 ? nombre : tel).focus(); return; }
+    contacto.nombre = n; contacto.tel = t;
+    guardar("lead");
+    if(typeof window.fbq === "function"){
+      // Todo prospecto manda "Lead" (es la señal con la que aprenden las campañas).
+      window.fbq("track","Lead");
+      // Etiqueta extra para reportes: eligió menos de $200,000.
+      if(R.presupuesto === "hasta200") window.fbq("trackCustom","LeadBajoPresupuesto");
+      // Calificado: zona atendida, inversión desde $200,000 (o "aún no lo sé, pero desde $200,000") y con fecha. Sirve para medir y optimizar en Meta.
+      if(R.presupuesto !== "hasta200" && R.tiempo !== "explorar" && R.zona !== "Fuera de Puebla") window.fbq("trackCustom","LeadCalificado");
+    }
+    resultado(); enfocar();
+  };
+}
+$("cerrar-aviso").onclick = () => $("aviso").close();
+
+const titulo = { lineal:"Cocina de un muro", l:"Cocina en L", u:"Cocina en U", isla:"Cocina con isla", nose:"Cocina a la medida" };
+const enfoque = { diario:"hecha para cocinar todos los días", reunion:"pensada para reunir a la familia", rapido:"práctica para el día a día", personal:"con área de trabajo independiente" };
+const nivel = { funcional:"proyecto funcional", diseno:"proyecto de diseño", alta:"proyecto de alta gama" };
+const zonaTxt = () => etiqueta(preguntas.find(p => p.id === "zona"));
+
+const notasPlano = {
+  lineal:["Refrigerador en un extremo, para no cortar tu cubierta de trabajo.","Un tramo de cubierta libre entre tarja y parrilla para preparar sin estorbos."],
+  l:["Tarja y parrilla en muros distintos: dos personas cocinan sin estorbarse.","La esquina se resuelve con herraje especial para no perder guarda."],
+  u:["Tres frentes de trabajo y la mayor capacidad de guarda.","Esquinas diseñadas para que puertas y cajones abran sin chocar."],
+  isla:["La isla como centro: trabajo de un lado y convivencia del otro.","Paso cómodo alrededor y conexiones previstas antes de instalar."],
+  nose:["Al medir definimos la distribución que mejor funciona en tu espacio.","El triángulo de trabajo guía dónde va cada cosa."]
+};
+const errores = {
+  lineal:["Refrigerador pegado a la parrilla, que lo calienta y desgasta.","Sin espacio libre para picar entre tarja y estufa.","Alacenas tan altas que nadie las usa."],
+  l:["La esquina muerta donde nada se alcanza.","Una puerta de gabinete que choca con el refrigerador.","Tarja y parrilla juntas en el mismo tramo."],
+  u:["Cajones de esquina que chocan entre sí.","Pasillo tan angosto que no caben dos personas.","Sobrecargar los tres muros y perder luz."],
+  isla:["Isla sin paso suficiente alrededor.","Contactos y salida de agua que no se previeron en la isla.","Una isla de adorno que no se puede usar para trabajar."],
+  nose:["Diseñar con una foto de internet sin medir el espacio.","Comprar electrodomésticos antes de definir la distribución.","Una cubierta que escurre agua dentro de los cajones."]
+};
+const decisiones = {
+  funcional:[["Cubierta","Resistente y fácil de mantener, sin pagar de más."],["Herrajes","Cierre suave en puertas y cajones de uso diario."],["Frentes","Acabados lisos y durables que no pasan de moda."]],
+  diseno:[["Cubierta","Piedra o superficie de alto desempeño con buen veteado."],["Herrajes","Cajones de extensión total y cierre suave en todo."],["Madera y luz","Combinación de madera con iluminación LED integrada."]],
+  alta:[["Cubierta","Piedra de gran formato con detalles a la medida."],["Herrajes","Sistemas premium, organizadores internos y apertura sin jaladeras."],["Carpintería de autor","Chapas de madera, lambrines y luz integrada en cada mueble."]]
+};
+const preguntasCarpintero = ["¿Me entregas un render con medidas antes del anticipo?","¿Dónde se fabrica mi cocina y puedo visitar el taller?","¿Qué materiales y herrajes exactos incluye la cotización?","¿Quién responde por mi proyecto de principio a fin?"];
+
+function planoSVG(forma, uso){
+  const f = forma === "nose" ? "l" : forma;
+  const muro = 'stroke="#15201F" stroke-width="4" stroke-linecap="round"';
+  const gab = 'fill="#F1ECE3" stroke="#B9B0A2" stroke-width="1"';
+  const pts = {
+    lineal:{R:[48,52],T:[160,52],P:[268,52]},
+    l:{R:[42,160],T:[150,52],P:[262,52]},
+    u:{R:[42,160],T:[160,52],P:[278,150]},
+    isla:{R:[48,52],T:[160,146],P:[268,52]}
+  }[f];
+  let g = "";
+  g += `<path d="M20 30 H300" ${muro}/>`;
+  if(f !== "lineal" && f !== "isla") g += `<path d="M20 30 V190" ${muro}/>`;
+  if(f === "u") g += `<path d="M300 30 V190" ${muro}/>`;
+  g += `<rect x="24" y="34" width="272" height="36" rx="5" ${gab}/>`;
+  if(f === "l" || f === "u") g += `<rect x="24" y="70" width="36" height="116" rx="5" ${gab}/>`;
+  if(f === "u") g += `<rect x="260" y="70" width="36" height="116" rx="5" ${gab}/>`;
+  if(f === "isla"){
+    g += `<rect x="96" y="128" width="128" height="36" rx="6" fill="#FFFFFF" stroke="#B9B0A2"/>`;
+    if(uso === "reunion" || uso === "diario") [116,148,180,212].forEach(x => g += `<circle cx="${x-4}" cy="180" r="7" fill="none" stroke="#B9B0A2"/>`);
+  }
+  const [R,T,P] = [pts.R,pts.T,pts.P];
+  g += `<path d="M${R[0]} ${R[1]} L${T[0]} ${T[1]} L${P[0]} ${P[1]} Z" fill="rgba(217,174,115,.16)" stroke="#C9965A" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+  const nodo = (p,l) => `<g><circle cx="${p[0]}" cy="${p[1]}" r="13" fill="#245A59"/><text x="${p[0]}" y="${p[1]+4.5}" text-anchor="middle" font-size="12" font-weight="500" fill="#fff" font-family="Lexend, sans-serif">${l}</text></g>`;
+  g += nodo(R,"R") + nodo(T,"T") + nodo(P,"P");
+  return `<svg viewBox="0 0 320 200" class="plano-res" role="img" aria-label="Plano esquemático de ${titulo[forma] || "tu cocina"} con el triángulo de trabajo entre refrigerador, tarja y parrilla">${g}</svg>`;
+}
+
+function fechaRender(){
+  const d = new Date(); d.setDate(d.getDate() + 21);
+  return d.toLocaleDateString("es-MX", {day:"numeric", month:"long"});
+}
+
+function resultado(){
+  fase = "resultado";
+  avanzar(TOTAL + 2);
+  $("paso-txt").textContent = "Diagnóstico listo";
+  atras.hidden = true;
+  const revisar = ["Medidas exactas, niveles de muros y piso","Instalaciones de agua, luz y gas","Electrodomésticos que conservas o vas a comprar"];
+  if(R.etapa === "renovar") revisar.push("Qué se puede aprovechar de tu cocina actual");
+  if(R.etapa === "obra") revisar.unshift("Coordinar con tu obra antes de cerrar instalaciones");
+  if(R.etapa === "nueva") revisar.push("Si las instalaciones de la constructora sirven para tu distribución");
+  const primer = esc(contacto.nombre.split(" ")[0]);
+  const sinPrisa = R.tiempo === "explorar" || R.etapa === "ideas";
+  const lejos = R.zona === "Fuera de Puebla";
+  const bajo = R.presupuesto === "hasta200";
+  const dec = (decisiones[R.acabado] || decisiones.diseno).map(([t,d]) => t === "Cubierta" && R.uso === "diario" ? [t, d + " Con uso diario, la resistencia va primero."] : [t,d]);
+
+  let paso;
+  if(bajo){
+    paso = `<div><h3>${svg("tiempo")}Tu siguiente paso</h3>
+      <p><b style="font-weight:500">Nuestras cocinas integrales parten de $200,000.</b> Si tu inversión es menor, escríbenos: te decimos con honestidad qué sí se puede hacer bien con ese presupuesto y qué conviene dejar para una segunda etapa.</p></div>
+      <a class="btn" id="wa" href="${linkWA("Me gustaría platicar mi caso.")}" target="_blank" rel="noopener">Platicar mi caso <span class="flecha">${svg("flecha")}</span></a>`;
+  } else {
+    paso = "";
+  }
+  const prop = diasVisita()[1];
+  if(!visita.dia){ visita.dia = prop.iso; visita.diaL = prop.largo; visita.hora = HORARIOS[0].l; }
+  const agendaHTML = `
+        <div class="w agenda" id="agenda">
+          ${bajo ? `<div class="aviso-bajo">${svg("info")}<p><b>Nuestras cocinas integrales parten de $200,000.</b> Si tu presupuesto es menor, en la visita te decimos con honestidad qué se puede hacer bien con él, o cómo hacer tu cocina por etapas.</p></div>` : ""}
+          <div class="ag-cab">
+            <div><h3>${svg("tiempo")}Tu siguiente paso: la visita técnica a tu casa</h3>
+              <p class="ag-tit">Te proponemos este horario</p></div>
+            ${CONFIG.regalo ? `<span class="regalo-pill">${svg("regalo")}Regalo al apartar</span>` : ""}
+          </div>
+          <button type="button" class="propuesta" id="propuesta" aria-pressed="true">
+            <span class="cal"><small id="p-dia">${prop.dia}</small><b id="p-num">${prop.num}</b></span>
+            <span class="p-txt"><b id="p-largo">${esc(cap(visita.diaL))}</b><span id="p-hora">${esc(cap(visita.hora))}</span></span>
+            <span class="p-ok">${svg("check")}</span>
+          </button>
+          <button type="button" class="cambiar" id="cambiar" aria-expanded="false">Elegir otro día u horario</button>
+          <div class="otros" id="otros" hidden>
+            <div class="chips" id="ag-dias">${diasVisita().map(d => `<button type="button" class="chip" data-d="${d.iso}" data-l="${d.largo}" data-dia="${d.dia}" data-num="${d.num}" aria-pressed="${d.iso === visita.dia}"><small>${d.dia}</small>${d.num}</button>`).join("")}</div>
+            <div class="chips horas" id="ag-horas">${HORARIOS.map(h => `<button type="button" class="chip" data-h="${h.l}" aria-pressed="${h.l === visita.hora}">${h.t}<small>${h.r}</small></button>`).join("")}</div>
+          </div>
+          <div class="precio-visita">
+            <div class="pv-monto"><b>$1,000</b><span>se abonan al 100% a tu cocina si contratas</span></div>
+            <ul><li>${svg("check")}Medidas en tu casa</li><li>${svg("check")}Revisión de instalaciones</li><li>${svg("check")}Ficha técnica</li><li>${svg("check")}Render 3D de tu cocina</li></ul>
+          </div>
+          ${CONFIG.regalo ? `<div class="regalo">
+            <span class="ico-reg">${svg("regalo")}</span>
+            <div><b>${CONFIG.regalo.titulo}</b><span>${CONFIG.regalo.texto}</span></div>
+          </div>` : ""}
+          <div class="campo ubic"><label for="f-ubic">¿En qué colonia o fraccionamiento está tu casa?</label>
+            <input id="f-ubic" type="text" maxlength="120" autocomplete="address-level3" placeholder="Ej. Lomas de Angelópolis, Cluster Toscana" value="${esc(visita.ubic || "")}"><p class="err" id="e-ubic"></p></div>
+          <div class="ag-pie">
+            <p><b>¿Por qué tiene costo?</b> Porque vamos a tu casa a medir de verdad y te entregamos un proyecto con render, no una cotización al aire. Por eso se abona completo cuando contratas, y si decides no avanzar, el render es tuyo.</p>
+            <button type="button" class="btn" id="apartar">Apartar mi visita <span class="flecha">${svg("flecha")}</span></button>
+          </div>
+          <p class="alt-wa"><a id="platicar" href="${linkWA("Antes de agendar, me gustaría platicar mi caso.")}" target="_blank" rel="noopener">Prefiero platicar mi caso por WhatsApp primero</a><br>
+            <a id="showroom-alt" href="${linkWA("Antes de la visita a mi casa, me gustaría conocer sus materiales y la planta.")}" target="_blank" rel="noopener">O conoce primero nuestros materiales y la planta, sin costo</a></p>
+        </div>`;
+  zona.innerHTML = `<div class="anim">
+      <div class="res-cab"><div><h2 class="q" tabindex="-1">${primer}, este es tu diagnóstico</h2>
+      <p class="q-ayuda">Lo preparamos con tus respuestas y con lo que hemos aprendido en cada cocina que fabricamos.</p></div>
+      <div class="res-ctas"><a class="btn" id="wa-diag" href="${linkWA("Quiero recibir mi diagnóstico por aquí y resolver unas dudas antes de agendar mi visita.")}" target="_blank" rel="noopener">Recibir mi diagnóstico por WhatsApp <span class="flecha">${svg("flecha")}</span></a>
+      <a class="btn-osc" href="#agenda">${svg("tiempo")}Agendar visita</a></div></div>
+      <div class="res-grid">
+        <div class="w perfil"><img loading="lazy" decoding="async" src="${FOTO_PERFIL}" alt="Cocina con lámparas colgantes y madera, proyecto de Armadillo">
+          <div><h3>${svg("forma")}Perfil de tu proyecto</h3><strong>${titulo[R.forma] || titulo.nose} ${enfoque[R.uso] || ""}</strong></div></div>
+
+        <div class="w plano-w">
+          <div>${planoSVG(R.forma, R.uso)}<p class="leyenda"><span><i style="background:#245A59"></i>R refrigerador · T tarja · P parrilla</span><span><i class="tri"></i>Triángulo de trabajo</span></p></div>
+          <div><h3>${svg("forma")}Así funcionaría tu distribución</h3>
+            <ol class="notas">${notasPlano[R.forma].map(n => `<li>${n}</li>`).join("")}</ol>
+            ${R.forma === "nose" ? `<p class="mini-nota">Te mostramos una cocina en L como ejemplo. La forma real se define al medir.</p>` : ""}
+          </div>
+        </div>
+
+        <div class="w"><h3>${svg("acabado")}Tres decisiones que definen tu cocina</h3>
+          <ul class="dec">${dec.map(([t,d]) => `<li><b>${t}</b><span>${d}</span></li>`).join("")}</ul></div>
+        <div class="w alerta"><h3>${svg("info")}Errores comunes en cocinas como la tuya</h3>
+          <ul>${errores[R.forma].map(e => `<li>${svg("x")}<span>${e}</span></li>`).join("")}</ul>
+          <p class="mini-nota">Los revisamos uno por uno antes de fabricar.</p></div>
+
+        <div class="w"><h3>${svg("regla")}Lo que revisaríamos en tu visita técnica</h3><ul>${revisar.map(x => `<li>${svg("check")}<span>${x}</span></li>`).join("")}</ul><p class="mini-nota">La visita a tu casa cuesta $1,000 y se abona al 100% a tu cocina.</p></div>
+        <div class="w"><h3>${svg("lupa")}Antes de contratar a cualquier carpintero, pregunta</h3>
+          <ul>${preguntasCarpintero.map(x => `<li>${svg("check")}<span>${x}</span></li>`).join("")}</ul>
+          <p class="mini-nota">En Armadillo la respuesta a las cuatro es sí.</p></div>
+
+        ${agendaHTML}
+      </div>
+      <p class="res-nota">${sinPrisa ? `¿Todavía explorando? <a href="${CONFIG.instagram}" target="_blank" rel="noopener">Mira nuestros proyectos en Instagram</a>. ` : ""}Folio ${folio}.${lejos ? " Para casas fuera de Puebla confirmamos cobertura por mensaje." : ""}</p></div>`;
+  lateral(); actualizarFlotante();
+  conectarAgenda();
+  ["platicar","showroom-alt","wa-diag"].forEach(id => { const a = $(id); if(a) a.onclick = () => { guardar("clic_whatsapp"); if(typeof window.fbq === "function") window.fbq("track","Contact"); }; });
+}
+
+const HORARIOS = [{l:"a mediodía (12 a 2)", t:"Mediodía", r:"12 a 2"},{l:"por la tarde (2 a 5)", t:"Tarde", r:"2 a 5"}];   /* Visitas de lunes a viernes, de 12 a 5 */
+function diasVisita(){
+  const out = [], d = new Date();
+  d.setDate(d.getDate() + 1);
+  while(out.length < 6){
+    if(d.getDay() !== 0 && d.getDay() !== 6){
+      out.push({ iso:d.toISOString().slice(0,10),
+        dia:d.toLocaleDateString("es-MX",{weekday:"short"}).replace(".",""),
+        num:d.getDate(),
+        largo:d.toLocaleDateString("es-MX",{weekday:"long", day:"numeric", month:"long"}) });
+    }
+    d.setDate(d.getDate() + 1);
+  }
+  return out;
+}
+const visita = {dia:"", diaL:"", hora:"", ubic:""};
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+function conectarAgenda(){
+  const marcar = (grupo, b) => grupo.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const refrescar = () => { $("p-largo").textContent = cap(visita.diaL); $("p-hora").textContent = cap(visita.hora); };
+  $("cambiar").onclick = () => { const o = $("otros"); o.hidden = !o.hidden; $("cambiar").setAttribute("aria-expanded", !o.hidden); $("cambiar").textContent = o.hidden ? "Elegir otro día u horario" : "Listo"; };
+  $("ag-dias").querySelectorAll(".chip").forEach(b => b.onclick = () => { visita.dia = b.dataset.d; visita.diaL = b.dataset.l; $("p-dia").textContent = b.dataset.dia; $("p-num").textContent = b.dataset.num; marcar($("ag-dias"), b); refrescar(); });
+  $("ag-horas").querySelectorAll(".chip").forEach(b => b.onclick = () => { visita.hora = b.dataset.h; marcar($("ag-horas"), b); refrescar(); });
+  $("propuesta").onclick = () => $("apartar").focus();
+  $("f-ubic").oninput = () => $("e-ubic").textContent = "";
+  $("apartar").onclick = () => {
+    // José apartó y nunca mandó su ubicación: la pedimos aquí para que la visita quede lista.
+    const u = $("f-ubic").value.trim();
+    if(u.length < 3){ $("e-ubic").textContent = "Escribe tu colonia para poder confirmar la visita."; $("f-ubic").focus(); return; }
+    visita.ubic = u;
+    apartado = true; setTimeout(actualizarFlotante, 0);
+    guardar("visita_solicitada");
+    if(typeof window.fbq === "function") window.fbq("track","Schedule");
+    const msg = `Quiero confirmar mi visita técnica para el ${visita.diaL}, ${visita.hora}, en ${visita.ubic}. Te comparto mi ubicación por aquí.`;
+    const conCRM = !!CONFIG.sheetEndpoint;
+    const nombre = esc(contacto.nombre.split(" ")[0]);
+    $("agenda").innerHTML = `
+      <div class="ag-ok anim">
+        <span class="ico-ok">${svg("check")}</span>
+        <div>
+          <h3 class="ok-tit">${conCRM ? `Listo, ${nombre}. Tu visita quedó apartada` : `Casi listo, ${nombre}. Confirma tu visita`}</h3>
+          <p class="ok-fecha">${esc(cap(visita.diaL))}, ${esc(visita.hora)}</p>
+          <p>${conCRM ? `Te escribimos por WhatsApp ${CONFIG.respuesta} para confirmar tu dirección. La visita cuesta $1,000 y se abona completa a tu cocina.` : `Mándanos el mensaje por WhatsApp para dejarla confirmada. Ya va escrito con tu diagnóstico. La visita cuesta $1,000 y se abona completa a tu cocina.`}</p>
+          ${CONFIG.regalo ? `<div class="regalo mini"><span class="ico-reg">${svg("regalo")}</span><div><b>${CONFIG.regalo.titulo}</b><span>Incluido en tu visita.</span></div></div>` : ""}
+          <div class="ok-ctas">
+            ${CONFIG.pagoVisita ? `<a class="btn" id="pagar" href="${CONFIG.pagoVisita}" target="_blank" rel="noopener">Pagar mi visita ($1,000) <span class="flecha">${svg("flecha")}</span></a>` : ""}
+            <a class="${CONFIG.pagoVisita ? "btn-osc" : "btn"}" id="wa" href="${linkWA(msg)}" target="_blank" rel="noopener">Confirmar ahora por WhatsApp ${CONFIG.pagoVisita ? "" : `<span class="flecha">${svg("flecha")}</span>`}</a>
+          </div>
+        </div>
+      </div>`;
+    $("wa").onclick = () => { guardar("clic_whatsapp"); if(typeof window.fbq === "function") window.fbq("track","Contact"); };
+    const pg = $("pagar"); if(pg) pg.onclick = () => { guardar("clic_pago"); if(typeof window.fbq === "function") window.fbq("track","InitiateCheckout",{value:1000,currency:"MXN"}); };
+  };
+}
+
+function prioridad(){
+  const p = {hasta200:0, "200a250":2, "250a400":3, mas400:3, orientar:2}[R.presupuesto] || 0;
+  const t = {ya:3, "1a3":2, "3a6":1, explorar:0}[R.tiempo] || 0;
+  const e = {nueva:2, renovar:2, obra:2, ideas:0}[R.etapa] || 0;
+  const z = R.zona === "Fuera de Puebla" ? 0 : 1;
+  const s = p + t + e + z;
+  return s >= 8 ? "Alta" : s >= 5 ? "Media" : "Baja";
+}
+
+function rangoInterno(){
+  if(!CONFIG.rangos[R.acabado]) return "";
+  const f = CONFIG.factorTamano[R.tamano] || 1, [a,b] = CONFIG.rangos[R.acabado];
+  const r = n => Math.round(n*f/10000)*10000;
+  return `${r(a)}-${r(b)}`;
+}
+function linkWA(final){
+  const lineas = preguntas.map(p => `• ${p.campo}: ${etiqueta(p)}`);
+  const msg = `Hola, soy ${contacto.nombre}. Hice el diagnóstico de cocina (folio ${folio}):\n${lineas.join("\n")}\n\n${final || "Me interesa agendar mi visita técnica."}`;
+  return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+}
+/* ===== Showroom y prueba social ===== */
+(() => {
+  const sr = $("sr-wa");
+  if(sr){ sr.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Hola, quiero agendar un recorrido para conocer sus materiales y la planta, y platicar de mi cocina. ¿Qué día tienen disponible entre semana?")}`;
+    sr.onclick = () => { enviar({ evento: "info", nivel: 6 }); if(typeof window.fbq === "function") window.fbq("track","Contact"); }; }
+  const aw = $("arr-wa");
+  if(aw){ aw.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Hola, vi su página y me interesa una cocina a la medida. ¿Me pueden orientar?")}`;
+    aw.onclick = () => { enviar({ evento: "info", nivel: 6 }); if(typeof window.fbq === "function") window.fbq("track","Contact"); }; }
+  const P = CONFIG.prueba || {}, T = CONFIG.testimonios || [];
+  const datosP = [[P.cocinas, "cocinas entregadas"], [P.anios, "años fabricando"], [P.calificacion, "calificación de clientes"]].filter(x => x[0]);
+  if(!datosP.length && !T.length) return;
+  $("prueba").hidden = false;
+  $("prueba-datos").innerHTML = datosP.map(([v,t]) => `<div class="ventaja"><h3 style="font-size:34px">${esc(v)}</h3><p>${esc(t)}</p></div>`).join("");
+  $("prueba-testimonios").innerHTML = T.map(t => `<div class="ventaja"><p style="font-size:16px">“${esc(t.texto)}”</p><h3 style="margin-top:14px;font-size:15px">${esc(t.nombre)}${t.zona ? ` · <span style="font-weight:400">${esc(t.zona)}</span>` : ""}</h3></div>`).join("");
+})();
+/* ===== Medición: una sesión por visitante, enviada al CRM ===== */
+const SID = (() => {
+  try{ const s = sessionStorage.getItem("ad_sid"); if(s) return s; }catch(e){}
+  const n = "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  try{ sessionStorage.setItem("ad_sid", n); }catch(e){}
+  return n;
+})();
+const ORIGEN = (() => {
+  const q = new URLSearchParams(location.search);
+  return {
+    anuncio: q.get("utm_content") || "", campana: (q.get("utm_campaign") || "") + " · residencial", fuente: q.get("utm_source") || "",
+    dispositivo: /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "Celular" : "Computadora",
+    referencia: (document.referrer || "").replace(/^https?:\/\//, "").split("/")[0]
+  };
+})();
+function enviar(d){
+  if(!CONFIG.sheetEndpoint) return;
+  const cuerpo = JSON.stringify(Object.assign({ sid: SID }, ORIGEN, d));
+  try{
+    if(navigator.sendBeacon && navigator.sendBeacon(CONFIG.sheetEndpoint, new Blob([cuerpo], { type: "text/plain" }))) return;
+  }catch(e){}
+  try{ fetch(CONFIG.sheetEndpoint, { method: "POST", mode: "no-cors", keepalive: true, body: cuerpo }); }catch(e){}
+}
+let pasoMax = 0;
+function avanzar(n){ if(n > pasoMax){ pasoMax = n; enviar({ evento: "progreso", paso: n }); } }
+/* Medición: hasta qué sección de información bajó la persona (1 proyectos ... 5 showroom) */
+let infoMax = 0;
+(() => {
+  const secs = [...document.querySelectorAll("main > section.sec")].slice(0, 5);
+  if(!secs.length || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if(!en.isIntersecting) return;
+      const nivel = secs.indexOf(en.target) + 1;
+      if(nivel > infoMax){ infoMax = nivel; enviar({ evento: "info", nivel, antes: pasoMax < 2 }); }
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0, rootMargin: "0px 0px -40% 0px" });
+  secs.forEach(sx => io.observe(sx));
+})();
+function guardar(evento){
+  const d = { evento, folio, fecha:new Date().toISOString(), nombre:contacto.nombre, telefono:contacto.tel,
+    rango_estimado:rangoInterno(), prioridad:prioridad() };
+  if(apartado){ d.visita_dia = visita.diaL; d.visita_horario = visita.hora; d.visita_fecha = visita.dia; d.visita_ubicacion = visita.ubic; }
+  preguntas.forEach(p => d[p.id] = etiqueta(p));
+  enviar(d);
+}
+
+
+/* ===== Botón fijo en celular: siempre lleva al siguiente paso ===== */
+const flot = $("flotante");
+let flotDestino = null, flotVisible = false, arrVisible = false;
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => {
+  es.forEach(e => { flotVisible = e.isIntersecting; });
+  mostrarFlotante();
+}, { threshold: 0.2 }) : null;
+/* Mientras se ve la primera pregunta en la portada, el botón fijo no hace falta. */
+if("IntersectionObserver" in window) new IntersectionObserver(es => { es.forEach(e => { arrVisible = e.isIntersecting; }); mostrarFlotante(); }, { threshold: 0.3 }).observe($("arranque"));
+function mostrarFlotante(){
+  const ocultar = flotVisible || arrVisible || !flotDestino;
+  flot.classList.toggle("oculto", ocultar);
+  flot.tabIndex = ocultar ? -1 : 0;
+  flot.setAttribute("aria-hidden", ocultar);
+}
+function actualizarFlotante(){
+  const hechas = preguntas.filter(x => R[x.id]).length;
+  let tit, sub, destino;
+  if(fase === "resultado"){
+    destino = $("agenda");
+    tit = apartado ? "Ver mi visita apartada" : "Apartar mi visita técnica";
+    sub = apartado ? "Confírmala por WhatsApp" : "Ya te propusimos un horario";
+  } else if(fase === "contacto"){
+    tit = "Ver mi diagnóstico"; sub = "Solo falta tu nombre y WhatsApp"; destino = zona;
+  } else if(hechas === 0){
+    tit = "Hacer mi diagnóstico"; sub = "2 minutos, sin compromiso"; destino = zona;
+  } else {
+    tit = "Continuar mi diagnóstico"; sub = `Vas en el paso ${paso + 1} de ${TOTAL}`; destino = zona;
+  }
+  $("f-tit").textContent = tit; $("f-sub").textContent = sub;
+  if(destino !== flotDestino){
+    flotDestino = destino;
+    if(io){ io.disconnect(); if(destino){ flotVisible = false; io.observe(destino); } }
+  }
+  mostrarFlotante();
+}
+flot.onclick = () => {
+  if(esperando()){ irArranque(); return; }
+  if(!flotDestino) return;
+  flotDestino.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+  const foco = flotDestino.querySelector("#apartar, .op, #f-nombre, #wa, .q");
+  if(foco) setTimeout(() => foco.focus({ preventScroll: true }), reduce ? 0 : 450);
+};
+
+enviar({ evento: "visita" });
+pintar();
+</script>
+</body>
+</html>
