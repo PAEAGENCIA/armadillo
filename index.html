@@ -424,6 +424,121 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
 .ok-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 @media(max-width:820px){.res-ctas{width:100%}.res-ctas .btn{width:100%;justify-content:space-between}}
 .campo.ubic{margin-top:16px}.campo.ubic label{color:#E6EBEA}
+
+/* ===== Variante residencial ===== */
+.arr-wa{margin:10px 0 0;font-size:13.5px;color:var(--gris)}
+.arr-wa a{color:var(--madera);text-decoration:underline;text-underline-offset:3px}
+.h-fotos{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:10px;max-width:900px;margin:26px auto 0;height:clamp(150px,24vw,300px)}
+.h-fotos figure{margin:0;position:relative;border-radius:16px;overflow:hidden;height:100%;background:#132120}
+.h-fotos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.h-fotos figure:hover img{transform:scale(1.03)}
+.h-fotos figure::after,.reales figure::after,.renders figure::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(to top,rgba(8,14,13,.82),rgba(8,14,13,0));pointer-events:none}
+.h-fotos figcaption{position:absolute;z-index:1;left:14px;bottom:12px;font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+@media (max-width:600px){.h-fotos{grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;height:220px;gap:6px;margin-top:16px}.h-fotos figure:first-child{grid-row:1 / 3}.h-fotos figure{border-radius:12px}.h-fotos figcaption{font-size:9.5px;left:9px;bottom:8px;letter-spacing:.12em}}
+@media (prefers-reduced-motion:reduce){.h-fotos img{transition:none}}
+.ad{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.ad figure{margin:0;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/4;background:#132120}
+.ad img{width:100%;height:100%;object-fit:cover;display:block}
+.ad figcaption{position:absolute;z-index:1;font-weight:500;left:12px;top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:0;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.ad .despues figcaption{color:var(--madera)}
+.reales{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.reales figure{margin:0;position:relative;border-radius:14px;overflow:hidden;aspect-ratio:3/4;background:#132120}
+.reales img{width:100%;height:100%;object-fit:cover;display:block}
+.reales figcaption{position:absolute;z-index:1;left:10px;right:10px;bottom:10px;font-size:12.5px;line-height:1.3;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+.reales figcaption span{display:block;font-size:11px;color:var(--madera);letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:760px){.reales{grid-template-columns:1fr 1fr}}
+.renders{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-top:10px;-webkit-overflow-scrolling:touch}
+.renders figure{flex:0 0 min(78%,520px);margin:0;scroll-snap-align:start;position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/9;background:#132120}
+.renders img{width:100%;height:100%;object-fit:cover;display:block}
+.renders figcaption{position:absolute;z-index:1;left:10px;bottom:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+.sub-h{margin:34px 0 4px;font-size:15px;font-weight:500;color:var(--claro)}
+.sub-h small{display:block;font-weight:400;color:var(--gris);font-size:13.5px;margin-top:2px}
+.testi{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:28px;align-items:center}
+.testi video{width:100%;aspect-ratio:9/16;border-radius:18px;background:#000;display:block}
+.testi blockquote{margin:0;font-family:var(--serif);font-size:clamp(26px,3.4vw,38px);line-height:1.15;color:#fff}
+.testi .quien{margin-top:14px;color:var(--gris);font-size:14px}
+.testi .quien b{display:block;color:var(--claro);font-weight:500}
+.testi ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px}
+.testi li{font-size:14.5px;color:var(--claro)}
+.testi li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--madera);margin-right:10px;vertical-align:middle}
+.testi + .testi{margin-top:72px}
+.testi.inv{grid-template-columns:1fr minmax(220px,320px)}
+.testi.inv video{order:2}
+@media (max-width:760px){.testi,.testi.inv{grid-template-columns:1fr;gap:18px}.testi video{max-width:300px;margin:0 auto}.testi.inv video{order:0}.testi + .testi{margin-top:56px}}
+
+#arranque[hidden] + .escenario{margin-top:30px}
+@media (max-width:600px){.arranque{padding:16px}#arranque[hidden] + .escenario{margin-top:20px}}
+
+/* ===== Acabado Noche y madera: tarjeta de arranque y diagnóstico completo ===== */
+.arranque,.escenario .ventana{background:linear-gradient(160deg,rgba(28,44,42,.96),rgba(10,18,17,.98));color:var(--claro);border:none;box-shadow:0 40px 80px -30px rgba(0,0,0,.8),inset 0 0 0 1px rgba(217,174,115,.38)}
+.arranque{border-radius:26px;padding:24px 20px}
+.arr-t,.barra-sup .paso-txt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris)}
+.arr-t b{color:var(--madera);font-weight:500}
+.arr-q{font-family:var(--serif);font-size:28px;font-weight:500;line-height:1.1;color:#fff;margin:10px 0 18px;padding-bottom:14px;border-bottom:1px solid rgba(217,174,115,.3)}
+.arr-ops button{background:rgba(255,255,255,.04);border:1px solid rgba(217,174,115,.28);color:#fff;border-radius:14px}
+.arr-ops button:hover,.arr-ops button:focus-visible{border-color:var(--madera);background:rgba(255,255,255,.07)}
+.arr-ops button[aria-pressed="true"]{background:var(--madera);border-color:var(--madera);color:var(--madera-osc)}
+.arr-ops small{color:var(--gris)}
+.arr-promesa{color:var(--gris)}.arr-promesa b{color:#fff}
+.arr-ver,.arr-wa{color:var(--gris)}.arr-wa a{color:var(--madera)}
+.escenario .lateral{background:rgba(255,255,255,.03);border-right:1px solid rgba(217,174,115,.16)}
+.escenario .lateral .mini b{color:#fff}
+.escenario .lateral h4{color:var(--gris)}
+.escenario .pasos-lat li button{color:#C8CFCD}
+.escenario .pasos-lat li button:hover{background:rgba(255,255,255,.05)}
+.escenario .pasos-lat .txt small{color:var(--gris)}
+.escenario .pasos-lat li.actual button{background:var(--madera);color:var(--madera-osc)}
+.escenario .pasos-lat li.hecho svg.i{color:var(--madera)}
+.escenario .lateral .nota-lat{background:rgba(217,174,115,.1);border:1px solid rgba(217,174,115,.28);color:#C8CFCD}
+.escenario .lateral .nota-lat b{color:var(--madera)}
+.escenario .principal{background:transparent}
+.escenario .barra-sup .folio{border-color:rgba(217,174,115,.3);color:#C8CFCD}
+.escenario .segs i{background:rgba(255,255,255,.1)}
+.escenario .segs i.on{background:rgba(217,174,115,.55)}
+.escenario .segs i.act{background:var(--madera)}
+.escenario .acuse{background:rgba(217,174,115,.1);color:#E6EBEA}
+.escenario .acuse svg{color:var(--madera)}
+.escenario .q{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;color:#fff;font-size:clamp(30px,3.2vw,42px)}
+.escenario .q-ayuda{color:var(--gris)}
+.escenario .op{background:rgba(255,255,255,.04);border-color:rgba(217,174,115,.28);color:#fff}
+.escenario .op small{color:var(--gris)}
+.escenario .op .ico{background:rgba(217,174,115,.12);color:var(--madera)}
+.escenario .op .plano{color:var(--madera)}
+.escenario .op:hover{border-color:var(--madera)}
+.escenario .op[aria-pressed="true"]{background:var(--madera);border-color:var(--madera);color:var(--madera-osc)}
+.escenario .op[aria-pressed="true"] small{color:#5C4126}
+.escenario .op[aria-pressed="true"] .ico{background:rgba(58,38,20,.12);color:var(--madera-osc)}
+.escenario .op[aria-pressed="true"] .plano{color:var(--madera-osc)}
+.escenario .pie-p{color:var(--gris)}
+.escenario .pie-p button{color:#fff}
+.escenario .campo label{color:var(--claro)}
+.escenario .campo input{background:rgba(255,255,255,.05);border-color:rgba(217,174,115,.3);color:#fff}
+.escenario .campo input::placeholder{color:#6F7B79}
+.escenario .campo input:focus{border-color:var(--madera);box-shadow:0 0 0 3px rgba(217,174,115,.2)}
+.escenario .campo .err{color:#F0A88F}
+.escenario .legal{color:var(--gris)}
+.escenario .legal button{color:#fff}
+.escenario .w{background:rgba(255,255,255,.04);border-color:rgba(217,174,115,.22)}
+.escenario .w h3{color:var(--gris)}
+.escenario .w h3 svg,.escenario .w li svg{color:var(--madera)}
+.escenario .w p,.escenario .w li{color:#D7DDDB}
+.escenario .w.perfil{background:var(--petroleo);border-color:var(--petroleo)}
+.escenario .w.perfil p,.escenario .w.perfil strong{color:#fff}
+.escenario .w.paso{background:var(--madera);border-color:var(--madera)}
+.escenario .w.paso p{color:#4A321B}
+.escenario .w.paso h3{color:#6B4B2A}
+.escenario .w.agenda{background:rgba(0,0,0,.25);border-color:rgba(217,174,115,.3)}
+.escenario .dec li{border-color:rgba(255,255,255,.08)}
+.escenario .dec b{color:#fff}
+.escenario .dec span{color:#B5BFBD}
+.escenario .w.alerta{background:rgba(176,85,58,.12);border-color:rgba(176,85,58,.35)}
+.escenario .w.alerta li svg{color:#E08A6E}
+.escenario .leyenda,.escenario .mini-nota{color:var(--gris)!important}
+.escenario .res-nota{color:var(--gris)}
+.escenario .res-nota a{color:#fff}
+.escenario .btn-osc{background:var(--madera);color:var(--madera-osc)}
+.escenario .btn-osc svg{color:var(--madera-osc)}
+@media (max-width:600px){.arranque{padding:18px 16px}.arr-q{font-size:25px}}
 </style>
 <script>try{if(/[?&](utm_source|fbclid)=/.test(location.search))document.documentElement.classList.add("desde-anuncio")}catch(e){}</script>
 </head>
@@ -448,11 +563,15 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
 <main>
 <section class="hero">
   <div class="cont">
-    <span class="insignia"><b>Gratis</b>Diagnóstico en línea de tu cocina, en 2 minutos</span>
-    <h1>Tu cocina, hecha por quien <em>sí cumple</em>.</h1>
-    <p class="sub">Alta carpintería a la medida en Puebla y Tlaxcala.</p>
+        <h1>Tu cocina a la medida, <em>vista en render</em> antes de invertir.</h1>
+    <p class="sub">Diseño, fabricación en nuestra planta en Puebla e instalación, con un solo responsable de principio a fin.</p>
+    <div class="h-fotos">
+      <figure><img decoding="async" src="img/residencial/gustavo-isla.webp" alt="Cocina terminada con isla, cubierta en cascada y plafón de listones de madera"><figcaption>Cocina terminada</figcaption></figure>
+      <figure><img decoding="async" src="img/residencial/render-4.webp" alt="Render de cocina con isla de mármol y madera"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img decoding="async" src="img/residencial/eunice-centro.webp" alt="Centro de entretenimiento con chimenea en Lomas de Angelópolis"><figcaption>Lomas de Angelópolis</figcaption></figure>
+    </div>
     <div class="arranque" id="arranque">
-      <p class="arr-t"><b>Diagnóstico gratis · Paso 1 de 8</b></p>
+      <p class="arr-t"><b>Diagnóstico en línea · Paso 1 de 7</b></p>
       <h2 class="arr-q">Para empezar, ¿en qué punto está tu cocina?</h2>
       <div class="arr-ops">
         <button type="button" data-v="nueva">Casa nueva<small>La cocina está por hacerse</small></button>
@@ -460,17 +579,10 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
         <button type="button" data-v="obra">Estoy en obra<small>Construyendo o remodelando</small></button>
         <button type="button" data-v="ideas">Estoy viendo ideas<small>Todavía no decido</small></button>
       </div>
-      <p class="arr-promesa"><b>Antes de invertir, ves tu cocina terminada en render.</b> La diseñamos con las medidas de tu casa, la fabricamos en nuestra planta y un solo responsable te la entrega instalada.</p>
-      <a class="arr-ver" href="https://www.instagram.com/armadillo.proyecto/" target="_blank" rel="noopener">Ver proyectos</a>
+      <p class="arr-promesa"><b>Antes de invertir, ves tu cocina terminada en render.</b> La diseñamos con las medidas de tu casa, con materiales y herrajes definidos por escrito, y la fabricamos en nuestra planta.</p>
+      <a class="arr-ver" href="#proyectos">Ver proyectos</a>
+      <p class="arr-wa">¿Prefieres platicarlo? <a id="arr-wa" href="#" target="_blank" rel="noopener">Escríbele a Daniel Romo por WhatsApp</a></p>
     </div>
-    <div class="checks">
-      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Planta propia en Puebla</span>
-      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Render 3D antes de fabricar</span>
-      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Visita técnica de $1,000, abonable</span>
-      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Cocinas desde $200,000</span>
-      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>+75 proyectos de carpintería entregados</span>
-    </div>
-
     <div class="escenario esperando" id="diagnostico">
       <div class="flota f-foto" aria-hidden="true">
         <img loading="lazy" decoding="async" src="img/cocina-isla.webp" alt="">
@@ -492,7 +604,7 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
             <div class="mini"><img loading="lazy" decoding="async" src="img/logo.webp" alt=""><b>Armadillo</b></div>
             <h4>TU DIAGNÓSTICO</h4>
             <ol class="pasos-lat" id="pasos-lat"></ol>
-            <div class="nota-lat"><b>Diagnóstico en línea gratis</b>Si después quieres que vayamos a tu casa, la visita técnica cuesta $1,000 y se abona completa a tu cocina.</div>
+            <div class="nota-lat"><b>Diagnóstico en línea</b>Si después quieres que vayamos a tu casa, la visita técnica cuesta $1,000 y se abona completa a tu cocina.</div>
           </aside>
           <section class="principal" aria-label="Diagnóstico de cocina">
             <div class="barra-sup"><span class="paso-txt" id="paso-txt">Paso 1 de 7</span><span class="folio" id="folio"></span></div>
@@ -506,6 +618,14 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
         </div>
       </div>
     </div>
+    <div class="checks">
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Planta propia en Puebla</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Render 3D antes de fabricar</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Pagas por etapas</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>12 meses de garantía</span>
+      <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>+75 proyectos de carpintería entregados</span>
+    </div>
+
   </div>
 </section>
 
@@ -513,14 +633,79 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
   <div class="cont">
     <div class="cab">
       <span class="eti">Proyectos reales</span>
-      <h2>Carpintería que se nota en cada detalle</h2>
-      <p>Cada pieza se diseña sobre medidas reales y se fabrica en nuestra planta en Puebla.</p>
+      <h2>Así la ves en render, así queda en tu casa</h2>
+      <p>Cada proyecto se diseña sobre medidas reales y se fabrica en nuestra planta en Puebla.</p>
     </div>
-    <div class="galeria">
-      <figure class="g1"><img loading="lazy" decoding="async" src="img/cocina-isla.webp" alt="Cocina con isla y plafón de listones de madera"><figcaption>Cocina con isla</figcaption></figure>
-      <figure class="g2"><img loading="lazy" decoding="async" src="img/lambrin.webp" alt="Lambrín de madera con iluminación"><figcaption>Lambrín a la medida</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="img/cocina-cascada.webp" alt="Isla de cocina con cubierta de piedra en cascada hasta el piso"><figcaption>Cubierta en cascada</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="img/repisas.webp" alt="Repisas de madera con luz integrada"><figcaption>Repisas con luz</figcaption></figure>
+    <p class="sub-h">De obra negra a cocina terminada<small>Un mismo espacio, antes y después de nuestro trabajo.</small></p>
+    <div class="ad">
+      <figure><img loading="lazy" decoding="async" src="img/residencial/gustavo-antes.webp" alt="Espacio de cocina en obra negra antes del proyecto"><figcaption>Antes</figcaption></figure>
+      <figure class="despues"><img loading="lazy" decoding="async" src="img/residencial/gustavo-despues.webp" alt="La misma cocina terminada con isla y plafón de madera"><figcaption>Después</figcaption></figure>
+    </div>
+    <p class="sub-h">Trabajos entregados</p>
+    <div class="reales">
+      <figure><img loading="lazy" decoding="async" src="img/residencial/gustavo-cascada.webp" alt="Isla con cubierta en cascada"><figcaption><span>Cocina</span>Isla con cubierta en cascada</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/gustavo-detalle.webp" alt="Detalle de isla con listones de madera"><figcaption><span>Cocina</span>Isla con listones de madera</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/eunice-centro.webp" alt="Centro de entretenimiento con chimenea"><figcaption><span>Lomas de Angelópolis</span>Centro de entretenimiento</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/eunice-recibidor.webp" alt="Recibidor con espejo e iluminación"><figcaption><span>Lomas de Angelópolis</span>Recibidor a la medida</figcaption></figure>
+    </div>
+    <p class="sub-h">Así presentamos cada cocina antes de fabricarla<small>Renders de proyecto. Desliza para ver más.</small></p>
+    <div class="renders">
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-4.webp" alt="Render de cocina con isla de mármol y madera"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-1.webp" alt="Render de cocina con isla de mármol y nogal"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-3.webp" alt="Render de cocina blanca con isla de listones"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-2.webp" alt="Render de cocina con barra y cubierta de mármol"><figcaption>Render de proyecto</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="img/residencial/render-5.webp" alt="Render de cocina en madera y negro"><figcaption>Render de proyecto</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cliente">
+  <div class="cont testi">
+    <video controls playsinline preload="none" poster="img/residencial/daniel-poster.webp" src="img/residencial/daniel-cocina.mp4"></video>
+    <div>
+      <span class="eti" style="align-self:flex-start">Clientes</span>
+      <blockquote>Un cliente de Lomas de Angelópolis nos cuenta cómo quedó su cocina.</blockquote>
+      <p class="quien"><b>Daniel Saldaña</b>Cocina integral y mueble de TV</p>
+      <ul>
+        <li>Nos conoció por redes y revisó nuestros proyectos</li>
+        <li>Le presentamos 2 o 3 propuestas en render 3D y él eligió</li>
+        <li>“Se adaptan a lo que tú quieres y al presupuesto”</li>
+        <li>“Calidad, servicio, honestidad”</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cont testi inv">
+    <video controls playsinline preload="none" poster="img/residencial/eunice-poster.webp" src="img/residencial/eunice.mp4"></video>
+    <div>
+      <blockquote>Una clienta de Lomas de Angelópolis nos cuenta cómo le fue con su proyecto.</blockquote>
+      <p class="quien"><b>Eunice</b>Centro de entretenimiento con chimenea y recibidor a la medida</p>
+      <ul>
+        <li>“Facilidades de pago”</li>
+        <li>Entrega rápida del proyecto</li>
+        <li>Un solo equipo responsable del diseño a la instalación</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="showroom">
+  <div class="cont showroom">
+    <div class="foto"><img loading="lazy" decoding="async" src="img/fachada.webp" alt="Fachada del showroom de Armadillo Diseño"></div>
+    <div class="txt">
+      <span class="eti" style="align-self:flex-start">Showroom</span>
+      <h2>Conoce nuestros materiales y la planta</h2>
+      <p>Te mostramos muestras de acabados y herrajes, la planta donde fabricamos tu cocina, y platicamos de tu proyecto sin prisa.</p>
+      <div class="sr-ctas"><a class="btn" id="sr-wa" href="#" target="_blank" rel="noopener">Agendar recorrido <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="btn-linea" href="https://maps.app.goo.gl/8gG1xvHt7NSWsRBt9" target="_blank" rel="noopener">Cómo llegar</a></div>
+      <p class="sr-nota">Sin costo, con cita, de lunes a viernes de 10:00 a 5:00. Ideal si todavía estás comparando opciones.</p>
+    </div>
+  </div>
+  <div class="cont">
+    <div class="cita">
+      <img loading="lazy" decoding="async" class="sello" src="img/logo.webp" alt="">
+      <blockquote>“Tu dinero te costó ganarlo. Lo mínimo que puedes esperar es que quien haga tu cocina cumpla lo que te prometió.”</blockquote>
+      <p class="quien"><b>Ing. Daniel García</b>Fundador de Armadillo Diseño</p>
+      <a class="btn" href="#diagnostico">Hacer mi diagnóstico <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
   </div>
 </section>
@@ -551,22 +736,7 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
   </div>
 </section>
 
-<section class="sec">
-  <div class="cont estandar">
-    <div class="cab">
-      <span class="eti">Nuestro estándar</span>
-      <h2>Lo mínimo que debes exigir</h2>
-      <p>En carpintería se volvió normal que no cumplan. Esto es lo que tienes derecho a pedir, con nosotros o con quien elijas.</p>
-    </div>
-    <ul class="lista-blanca">
-      <li><span class="ok"><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>Puntualidad</strong><span>Si llegan tarde a la primera cita, tu cocina tampoco llegará a tiempo.</span></div></li>
-      <li><span class="ok"><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>Render antes de fabricar</strong><span>Tu cocina en 3D, con medidas y acabados, antes de cualquier anticipo.</span></div></li>
-      <li><span class="ok"><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>Materiales por escrito</strong><span>El material define la calidad y el precio.</span></div></li>
-      <li><span class="ok"><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>Un taller que puedas visitar</strong><span>Saber dónde se fabrica tu proyecto y quién lo hace.</span></div></li>
-      <li class="arm"><span class="ok"><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>Alguien que dé la cara</strong><span>Una persona responsable de tu proyecto y tu casa limpia al terminar.</span></div></li>
-    </ul>
-  </div>
-</section>
+
 
 <section class="sec" id="proceso">
   <div class="cont">
@@ -589,33 +759,13 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
   </div>
 </section>
 
-<section class="sec" id="showroom">
-  <div class="cont showroom">
-    <div class="foto"><img loading="lazy" decoding="async" src="img/fachada.webp" alt="Fachada del showroom de Armadillo Diseño"></div>
-    <div class="txt">
-      <span class="eti" style="align-self:flex-start">Showroom</span>
-      <h2>Ven a ver y tocar los materiales</h2>
-      <p>Te mostramos acabados, herrajes y proyectos en persona, y platicamos de tu cocina sin prisa.</p>
-      <div class="sr-ctas"><a class="btn" id="sr-wa" href="#" target="_blank" rel="noopener">Agendar visita al showroom <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="btn-linea" href="https://maps.app.goo.gl/8gG1xvHt7NSWsRBt9" target="_blank" rel="noopener">Cómo llegar</a></div>
-      <p class="sr-nota">Sin costo, con cita, de lunes a viernes de 9:00 a 6:00. Ideal si todavía estás comparando opciones.</p>
-    </div>
-  </div>
-  <div class="cont">
-    <div class="cita">
-      <img loading="lazy" decoding="async" class="sello" src="img/logo.webp" alt="">
-      <blockquote>“Tu dinero te costó ganarlo. Lo mínimo que puedes esperar es que quien haga tu cocina cumpla lo que te prometió.”</blockquote>
-      <p class="quien"><b>Ing. Daniel García</b>Fundador de Armadillo Diseño</p>
-      <a class="btn" href="#diagnostico">Hacer mi diagnóstico <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-    </div>
-  </div>
-</section>
+
 
 </main>
 <footer class="pie"><div class="cont"><a class="marca" href="#"><img loading="lazy" decoding="async" src="img/logo.webp" alt=""><div><b>Armadillo</b><span>DISEÑO</span></div></a><span>Alta carpintería residencial a la medida en Puebla</span><a href="https://www.instagram.com/armadillo.proyecto/" target="_blank" rel="noopener">@armadillo.proyecto</a></div></footer>
 
 <button type="button" class="flotante oculto" id="flotante" aria-controls="diagnostico" tabindex="-1">
-  <span class="f-txt"><b id="f-tit">Hacer mi diagnóstico gratis</b><small id="f-sub">2 minutos, sin compromiso</small></span>
+  <span class="f-txt"><b id="f-tit">Hacer mi diagnóstico</b><small id="f-sub">2 minutos, sin compromiso</small></span>
   <span class="flecha"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 </button>
 
@@ -713,25 +863,22 @@ const preguntas = [
       {v:"u", t:"En U", a:"La U da mucha guarda. Las esquinas son lo que hay que cuidar."},
       {v:"isla", t:"Con isla", a:"Una isla cambia por completo la forma de convivir en la cocina."},
       {v:"nose", t:"No estoy seguro", a:"No te preocupes, eso lo resolvemos al medir."} ]},
-  { id:"tamano", campo:"Muro principal", q:"¿Cuánto mide, más o menos, el muro más largo?", ayuda:"Un cálculo a ojo está bien. En la visita medimos exacto.", op:[
-      {v:"chico", t:"Menos de 3 m"}, {v:"medio", t:"De 3 a 5 m"}, {v:"grande", t:"De 5 a 7 m"},
-      {v:"muy", t:"Más de 7 m"}, {v:"nose", t:"No lo sé"} ], acuse:"Anotado. Con eso ya tenemos la escala de tu proyecto." },
   { id:"acabado", campo:"Acabados", q:"¿Qué nivel de acabados tienes en mente?", tipo:"tres", op:[
       {v:"funcional", t:"Funcional y muy bien hecha", s:"Buenos materiales, diseño limpio"},
       {v:"diseno", t:"Diseño y materiales seleccionados", s:"Más detalle y mejores herrajes"},
       {v:"alta", t:"Alta gama, sin concesiones", s:"Lo mejor en materiales y herrajes"} ], acuse:"Anotado." },
   { id:"presupuesto", campo:"Inversión", q:"Para proponerte materiales que encajen contigo, ¿qué inversión tienes contemplada?", ayuda:"Es solo una referencia. Nos ayuda a no proponerte algo fuera de lo que buscas.", op:[
-      {v:"hasta200", t:"Menos de $200,000", a:"Gracias por decirlo. Te contamos con honestidad qué se puede hacer bien con ese presupuesto."},
-      {v:"200a250", t:"$200,000 a $250,000", a:"Perfecto. Es un rango donde se logran cocinas muy bien resueltas."},
-      {v:"250a400", t:"$250,000 a $400,000", a:"Excelente. Con ese rango ya se eligen materiales y herrajes de mejor nivel."},
       {v:"mas400", t:"Más de $400,000", a:"Excelente. Hay espacio para materiales de alta gama y piezas especiales."},
+      {v:"250a400", t:"$250,000 a $400,000", a:"Excelente. Con ese rango ya se eligen materiales y herrajes de mejor nivel."},
+      {v:"200a250", t:"$200,000 a $250,000", a:"Perfecto. Es un rango donde se logran cocinas muy bien resueltas."},
+      {v:"hasta200", t:"Menos de $200,000", a:"Gracias por decirlo. Te contamos con honestidad qué se puede hacer bien con ese presupuesto."},
       {v:"orientar", t:"Aún no lo sé, pero puedo invertir desde $200,000", s:"Quiero que me orienten", a:"Claro. En la visita te mostramos opciones en distintos niveles."} ]},
   { id:"tiempo", campo:"Tiempo", q:"¿Para cuándo te gustaría tenerla?", op:[
       {v:"ya", t:"Lo antes posible", a:"Entonces conviene agendar tu visita cuanto antes."},
       {v:"1a3", t:"En 1 a 3 meses"}, {v:"3a6", t:"En 3 a 6 meses"}, {v:"explorar", t:"Todavía sin fecha"} ], acuse:"Anotado." },
   { id:"zona", campo:"Zona", q:"Por último, ¿en qué zona está tu casa?", op:[
-      {v:"Angelópolis / Lomas", t:"Angelópolis o Lomas"}, {v:"Cholula / San Andrés", t:"Cholula o San Andrés"},
-      {v:"Atlixco", t:"Atlixco"}, {v:"Cuautlancingo / norte", t:"Cuautlancingo o zona norte"},
+      {v:"Angelópolis / Lomas", t:"Angelópolis, Lomas o La Vista"}, {v:"Cholula / San Andrés", t:"Cholula o San Andrés"},
+      {v:"La Paz / Zavaleta", t:"La Paz, Zavaleta o Huexotitla"}, {v:"Atlixco", t:"Atlixco"}, {v:"Cuautlancingo / norte", t:"Cuautlancingo o zona norte"},
       {v:"Tlaxcala", t:"Tlaxcala"}, {v:"Otra zona de Puebla", t:"Otra zona o municipio de Puebla"}, {v:"Fuera de Puebla", t:"Vivo fuera de Puebla y Tlaxcala"} ]}
 ];
 const TOTAL = preguntas.length;
@@ -810,6 +957,7 @@ document.querySelectorAll('a[href="#diagnostico"]').forEach(a => a.addEventListe
 document.querySelectorAll("#arranque [data-v]").forEach(b => b.onclick = () => {
   document.querySelectorAll("#arranque [data-v]").forEach(x => x.setAttribute("aria-pressed", x === b));
   $("diagnostico").classList.remove("esperando");
+  $("arranque").hidden = true;
   if(fase !== "preguntas" || paso !== 0) pintarPrimera();
   const op = zona.querySelector(`.op[data-v="${b.dataset.v}"]`);
   if(op) op.click(); else $("diagnostico").scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
@@ -831,7 +979,7 @@ function formulario(){
   zona.innerHTML = `<div class="anim">
       <p class="acuse">${svg("check")}<span>Listo, ya tenemos lo necesario para entender tu proyecto.</span></p>
       <h2 class="q" tabindex="-1">¿A nombre de quién preparamos tu diagnóstico?</h2>
-      <p class="q-ayuda">Te mostramos tu recomendación al instante. Te contactamos por WhatsApp o llamada para resolver tus dudas y agendar tu visita.</p>
+      <p class="q-ayuda">Te mostramos tu recomendación al instante. Después te escribe Daniel Romo, de nuestro equipo, por WhatsApp y en horario de oficina, para resolver tus dudas. Nada de llamadas insistentes.</p>
       <form class="form" id="form" novalidate>
         <div class="campo"><label for="f-nombre">Nombre</label><input id="f-nombre" type="text" autocomplete="name" maxlength="60" value="${esc(contacto.nombre)}"><p class="err" id="e-nombre"></p></div>
         <div class="campo"><label for="f-tel">WhatsApp</label><input id="f-tel" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="222 123 4567" value="${esc(contacto.tel)}"><p class="err" id="e-tel"></p></div>
@@ -982,7 +1130,7 @@ function resultado(){
             <button type="button" class="btn" id="apartar">Apartar mi visita <span class="flecha">${svg("flecha")}</span></button>
           </div>
           <p class="alt-wa"><a id="platicar" href="${linkWA("Antes de agendar, me gustaría platicar mi caso.")}" target="_blank" rel="noopener">Prefiero platicar mi caso por WhatsApp primero</a><br>
-            <a id="showroom-alt" href="${linkWA("Antes de la visita a mi casa, me gustaría conocer el showroom.")}" target="_blank" rel="noopener">O conoce primero el showroom, sin costo</a></p>
+            <a id="showroom-alt" href="${linkWA("Antes de la visita a mi casa, me gustaría conocer sus materiales y la planta.")}" target="_blank" rel="noopener">O conoce primero nuestros materiales y la planta, sin costo</a></p>
         </div>`;
   zona.innerHTML = `<div class="anim">
       <div class="res-cab"><div><h2 class="q" tabindex="-1">${primer}, este es tu diagnóstico</h2>
@@ -1098,8 +1246,11 @@ function linkWA(final){
 /* ===== Showroom y prueba social ===== */
 (() => {
   const sr = $("sr-wa");
-  if(sr){ sr.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Hola, quiero agendar una cita para visitar el showroom de Armadillo y platicar de mi cocina. ¿Qué día tienen disponible entre semana?")}`;
+  if(sr){ sr.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Hola, quiero agendar un recorrido para conocer sus materiales y la planta, y platicar de mi cocina. ¿Qué día tienen disponible entre semana?")}`;
     sr.onclick = () => { enviar({ evento: "info", nivel: 6 }); if(typeof window.fbq === "function") window.fbq("track","Contact"); }; }
+  const aw = $("arr-wa");
+  if(aw){ aw.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Hola, vi su página y me interesa una cocina a la medida. ¿Me pueden orientar?")}`;
+    aw.onclick = () => { enviar({ evento: "info", nivel: 6 }); if(typeof window.fbq === "function") window.fbq("track","Contact"); }; }
   const P = CONFIG.prueba || {}, T = CONFIG.testimonios || [];
   const datosP = [[P.cocinas, "cocinas entregadas"], [P.anios, "años fabricando"], [P.calificacion, "calificación de clientes"]].filter(x => x[0]);
   if(!datosP.length && !T.length) return;
@@ -1117,7 +1268,7 @@ const SID = (() => {
 const ORIGEN = (() => {
   const q = new URLSearchParams(location.search);
   return {
-    anuncio: q.get("utm_content") || "", campana: q.get("utm_campaign") || "", fuente: q.get("utm_source") || "",
+    anuncio: q.get("utm_content") || "", campana: (q.get("utm_campaign") || "") + " · residencial", fuente: q.get("utm_source") || "",
     dispositivo: /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "Celular" : "Computadora",
     referencia: (document.referrer || "").replace(/^https?:\/\//, "").split("/")[0]
   };
@@ -1181,7 +1332,7 @@ function actualizarFlotante(){
   } else if(fase === "contacto"){
     tit = "Ver mi diagnóstico"; sub = "Solo falta tu nombre y WhatsApp"; destino = zona;
   } else if(hechas === 0){
-    tit = "Hacer mi diagnóstico gratis"; sub = "2 minutos, sin compromiso"; destino = zona;
+    tit = "Hacer mi diagnóstico"; sub = "2 minutos, sin compromiso"; destino = zona;
   } else {
     tit = "Continuar mi diagnóstico"; sub = `Vas en el paso ${paso + 1} de ${TOTAL}`; destino = zona;
   }
