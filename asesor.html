@@ -118,6 +118,8 @@ const PAGO = "";   /* Datos de pago de la visita (CLABE o liga de Clip). Cuando 
 const CADENCIA = [0, 1, 3, 7, 14];
 const MOTIVOS = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
 const HORARIOS = ["a las 12:00", "a la 1:00 pm", "a las 2:00 pm", "a las 3:00 pm", "a las 4:00 pm"];   /* Visitas de 1 hora, lunes a viernes de 12 a 5 */
+const HORAS_SHOWROOM = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];                    /* recorridos sin costo: lunes a viernes de 10 a 5 */
+const MOTIVOS_SHOWROOM = ["Recorrido por showroom y planta", "Presentar render y propuesta", "Otro"];
 /* ======================================= */
 
 const $ = id => document.getElementById(id);
@@ -128,12 +130,14 @@ const q = new URLSearchParams(location.search), F = q.get("f") || "", K = q.get(
 const DEMO = K === "demo";
 const DIA = 864e5;
 let L = null, yo = store.get("ad_asesor") || "", panel = "", horario = "", visitador = "", ocupado = false;
+let shEdit = false, shHora = "", shMotivo = "";   /* formulario de visita al showroom */
 
 const aMs = v => { if(v === "" || v == null) return 0; if(typeof v === "number") return v; const s = String(v);
   if(/^\d{4}-\d{2}-\d{2}$/.test(s)){ const [a,m,d] = s.split("-").map(Number); return new Date(a, m-1, d).getTime(); } const d = new Date(s); return isNaN(d) ? 0 : d.getTime(); };
 const hoy0 = () => { const d = new Date(); d.setHours(0,0,0,0); return d.getTime(); };
 const iso = d => d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
 const fCorta = ms => new Date(ms).toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
+const hora12 = t => { const m = String(t || "").match(/^(\d{1,2}):(\d{2})$/); if(!m) return t || "sin hora"; const h = Number(m[1]); return (h % 12 || 12) + ":" + m[2] + (h >= 12 ? " pm" : " am"); };
 function hace(ms){ if(!ms) return ""; const s = (Date.now() - ms) / 1000;
   if(s < 3600) return `hace ${Math.max(1, Math.floor(s/60))} min`; if(s < 86400) return `hace ${Math.floor(s/3600)} h`;
   if(s < 172800) return "ayer"; return `hace ${Math.floor(s/86400)} días`; }
@@ -148,7 +152,8 @@ function norm(r){
     seg: r["Seguimiento"] || "Nuevo", resp: r["Responsable"] || "", primer: aMs(r["Primer contacto"]), ultimo: aMs(r["Último contacto"]),
     proximo: aMs(r["Próximo contacto"]), intentos: Number(r["Intentos"]) || 0, motivo: r["Motivo perdido"] || "", monto: Number(r["Monto cerrado"]) || 0,
     hist: String(r["Historial"] || "").split("\n").filter(Boolean).reverse(),
-    notas: String(r["Notas"] || "").split("\n").filter(Boolean).reverse() };
+    notas: String(r["Notas"] || "").split("\n").filter(Boolean).reverse(),
+    shFecha: aMs(r["Showroom fecha"]), shHora: String(r["Showroom horario"] || ""), shMotivo: r["Showroom motivo"] || "", shHecho: r["Showroom realizado"] === "Sí" };
 }
 
 /* ---------- API ---------- */
@@ -170,7 +175,8 @@ async function guardar(c, ok){
   try{
     const r = await api({ accion: "asesor", quien: yo, cambios: JSON.stringify(c) });
     if(!r.ok) throw new Error(r.error);
-    L = norm(r.lead); panel = ""; horario = ""; visitador = ""; pintar(); toast(ok || "Listo, el CRM ya se actualizó");
+    L = norm(r.lead); panel = ""; horario = ""; visitador = ""; shEdit = false; shHora = ""; shMotivo = ""; pintar();
+    toast(c.showroom_fecha !== undefined && !("Showroom fecha" in r.lead) ? "Falta actualizar el Apps Script: el showroom no se guardó." : ok || "Listo, el CRM ya se actualizó");
   }catch(e){ toast("No se guardó. Revisa tu internet e inténtalo otra vez."); }
   finally{ ocupado = false; $("app").classList.remove("cargando"); }
 }
@@ -259,7 +265,7 @@ function pintar(){
     <div><h1>${esc(L.nombre)}</h1><p>Llegó ${hace(L.fecha)}</p></div></div>
     <div class="chips"><span class="chip etapa">${esc(L.seg)}</span><span class="chip">Prioridad ${esc(L.prioridad.toLowerCase())}</span>${tarde ? `<span class="chip rojo">Fuera de tiempo</span>` : ""}${L.apartada ? `<span class="chip">Apartó visita</span>` : ""}</div>
     <div class="datos">
-      ${[["Zona", L.zona], ["Inversión", L.inversion], ["Para cuándo", L.tiempo], ["Cocina", [L.forma, L.acabado].filter(Boolean).join(" · ")], ["Situación", L.etapaCasa], ["Visita", L.visitaDia ? L.visitaDia + (L.visitaHora ? ", " + L.visitaHora : "") : ""]]
+      ${[["Zona", L.zona], ["Inversión", L.inversion], ["Para cuándo", L.tiempo], ["Cocina", [L.forma, L.acabado].filter(Boolean).join(" · ")], ["Situación", L.etapaCasa], ["Visita", L.visitaDia ? L.visitaDia + (L.visitaHora ? ", " + L.visitaHora : "") : ""], ["Showroom", L.shFecha ? fCorta(L.shFecha) + ", " + hora12(L.shHora) + (L.shHecho ? " (ya vino)" : "") : ""]]
         .filter(x => x[1]).map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}
     </div></section>`;
   /* Notas que deja el equipo (aquí o en el CRM principal), la más reciente primero. */
@@ -287,6 +293,17 @@ function pintar(){
   if(panel === "perdido") h += `<section class="card panel"><p>¿Por qué se perdió?</p><div class="opciones rojo">${MOTIVOS.map(m => `<button data-motivo="${m}">${m}</button>`).join("")}</div>
     <div class="fila-b"><button class="btn sec" data-cerrar>Cancelar</button></div></section>`;
 
+  /* Visita al showroom: recorrido sin costo o presentación del render y la propuesta. */
+  h += `<p class="titulo">Visita al showroom</p><section class="card panel">`;
+  if(shEdit) h += `<p>¿Qué día viene? <span style="font-weight:400;color:var(--text2);font-size:14px">Lunes a viernes, de 10 a 5. Av. Rosendo Márquez 17A, col. La Paz.</span></p>
+    <input type="date" id="s-fecha" min="${iso(new Date())}" value="${L.shFecha ? iso(new Date(L.shFecha)) : ""}">
+    <div class="opciones" role="group" aria-label="Hora">${HORAS_SHOWROOM.map(x => `<button data-shora="${x}" aria-pressed="${shHora === x}">${hora12(x)}</button>`).join("")}</div>
+    <p>¿Para qué viene?</p><div class="opciones" role="group" aria-label="Para qué viene">${MOTIVOS_SHOWROOM.map(x => `<button data-smotivo="${x}" aria-pressed="${shMotivo === x}">${x}</button>`).join("")}</div>
+    <div class="fila-b"><button class="btn sec" id="s-cancelar">Cancelar</button><button class="btn" id="g-show" style="background:var(--madera)">Guardar</button></div>`;
+  else if(L.shFecha) h += `<p>${esc(fCorta(L.shFecha))}, ${esc(hora12(L.shHora))}${L.shHecho ? " · ya vino" : ""}</p>${L.shMotivo ? `<span style="color:var(--text2);font-size:14px;margin-top:-6px">${esc(L.shMotivo)}</span>` : ""}
+    <div class="fila-b">${L.shHecho ? "" : `<button class="btn" id="s-vino" style="background:var(--madera)">Ya vino</button>`}<button class="btn sec" id="s-cambiar">Cambiar</button><button class="btn sec" id="s-quitar">Cancelar visita</button></div>`;
+  else h += `<span style="color:var(--text2);font-size:14px">Recorrido sin costo por el showroom y la planta, o para presentarle su render.</span><div class="fila-b"><button class="btn sec" id="s-cambiar">Agendar visita al showroom</button></div>`;
+  h += `</section>`;
   h += `<p class="titulo">Nota rápida</p><section class="card panel"><textarea id="v-nota" placeholder="Ej. Quiere isla, le preocupa el tiempo de entrega"></textarea><div class="fila-b"><button class="btn" id="g-nota">Guardar nota</button></div></section>`;
   if(L.hist.length) h += `<p class="titulo">Lo último</p><section class="card"><div class="linea">${L.hist.slice(0, 6).map(n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; }).join("")}</div></section>`;
   $("app").innerHTML = h;
@@ -330,6 +347,18 @@ function conectar(){
   const gg = $("g-gano"); if(gg) gg.onclick = () => { const v = $("v-monto").value; if(!v){ toast("Escribe el monto"); return; } guardar({ seguimiento: "Ganado", monto: v }, "¡Cocina cerrada!"); };
   document.querySelectorAll("[data-motivo]").forEach(b => b.onclick = () => guardar({ seguimiento: "Perdido", motivo: b.dataset.motivo }, "Registrado como perdido"));
   $("g-nota").onclick = () => { const v = $("v-nota").value.trim(); if(!v){ toast("Escribe la nota"); return; } guardar({ nota: v }, "Nota guardada"); };
+  const sCam = $("s-cambiar"); if(sCam) sCam.onclick = () => { shEdit = true; shHora = ""; shMotivo = L.shMotivo || ""; pintar(); $("s-fecha")?.scrollIntoView({ behavior: "smooth", block: "center" }); };
+  const sCan = $("s-cancelar"); if(sCan) sCan.onclick = () => { shEdit = false; pintar(); };
+  document.querySelectorAll("[data-shora]").forEach(b => b.onclick = () => { shHora = b.dataset.shora; document.querySelectorAll("[data-shora]").forEach(x => x.setAttribute("aria-pressed", x === b)); });
+  document.querySelectorAll("[data-smotivo]").forEach(b => b.onclick = () => { shMotivo = b.dataset.smotivo; document.querySelectorAll("[data-smotivo]").forEach(x => x.setAttribute("aria-pressed", x === b)); });
+  const gs = $("g-show"); if(gs) gs.onclick = () => {
+    const v = $("s-fecha").value; if(!v){ toast("Elige el día"); return; } if(!shHora){ toast("Elige la hora"); return; }
+    const [a, m, d] = v.split("-").map(Number), f = new Date(a, m - 1, d);
+    if(f.getDay() === 0 || f.getDay() === 6){ toast("El showroom abre de lunes a viernes"); return; }
+    guardar({ showroom_fecha: v, showroom_dia: fCorta(f.getTime()), showroom_horario: shHora, showroom_motivo: shMotivo || MOTIVOS_SHOWROOM[0], contacto: "Agendó showroom" }, "Visita al showroom guardada");
+  };
+  const sv = $("s-vino"); if(sv) sv.onclick = () => guardar({ showroom_realizado: true }, "Listo: vino al showroom");
+  const sq = $("s-quitar"); if(sq) sq.onclick = () => guardar({ showroom_fecha: "" }, "Visita al showroom cancelada");
 }
 function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("ver"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("ver"), 2600); }
 
@@ -337,7 +366,7 @@ function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("
 function demo(p){
   if(!demo.l) demo.l = { "Folio": F || "AD-5279", "Fecha": Date.now() - 3 * 36e5, "Nombre": "Laura Méndez", "WhatsApp": "2221234567", "Prioridad": "Alta", "Estado": "Diagnóstico completo",
     "Etapa": "Casa nueva", "Distribución": "Con isla", "Acabados": "Diseño y materiales seleccionados", "Inversión": "$250,000 a $400,000", "Tiempo": "En 1 a 3 meses",
-    "Zona": "Cholula o San Andrés", "Seguimiento": "Nuevo", "Responsable": "Arq. Eric", "Intentos": 0, "Historial": "03/11 08:40 · Llegó desde la landing\n03/11 08:52 · Responsable: Arq. Eric",
+    "Zona": "Cholula o San Andrés", "Seguimiento": "Nuevo", "Showroom fecha": "", "Responsable": "Arq. Eric", "Intentos": 0, "Historial": "03/11 08:40 · Llegó desde la landing\n03/11 08:52 · Responsable: Arq. Eric",
     "Notas": "03/11 09:30 · Quiere isla con barra para 4. Pidió ver muestras de madera.\n03/11 12:10 · Daniel: le marcamos después de las 6, en el día no contesta." };
   const l = demo.l;
   if(p.accion === "asesor"){
@@ -347,6 +376,8 @@ function demo(p){
     if(c.intento) l["Intentos"] = (l["Intentos"] || 0) + 1; if(c.proximo !== undefined) l["Próximo contacto"] = c.proximo;
     if(c.visita_dia){ l["Visita día"] = c.visita_dia; l["Visita horario"] = c.visita_horario; }
     if(c.motivo) l["Motivo perdido"] = c.motivo; if(c.monto) l["Monto cerrado"] = c.monto;
+    if(c.showroom_fecha !== undefined){ l["Showroom fecha"] = c.showroom_fecha; l["Showroom horario"] = c.showroom_horario || ""; l["Showroom motivo"] = c.showroom_motivo || ""; l["Showroom realizado"] = ""; }
+    if(c.showroom_realizado) l["Showroom realizado"] = "Sí";
     if(c.nota) l["Notas"] = (l["Notas"] ? l["Notas"] + "\n" : "") + s + " · " + c.nota;
     l["Historial"] += `\n${s} · ${p.quien}: ${[c.contacto, c.seguimiento, c.nota, c.motivo].filter(Boolean).join(" · ")}`;
   }

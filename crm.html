@@ -334,8 +334,66 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
 .pie-t b{font-weight:600}
 .barra-acciones{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 4px}
 .tile.rojo .num{color:var(--red)}
-@media (max-width:900px){.fila .der.urg .pill{display:none}.tabbar{grid-template-columns:repeat(4,1fr)}.equipo{grid-template-columns:1fr}}
+@media (max-width:900px){.fila .der.urg .pill{display:none}.tabbar{grid-template-columns:repeat(5,1fr)}.equipo{grid-template-columns:1fr}}
 .rejilla>*{min-width:0}.tabla-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}.tabla-scroll .tabla{min-width:640px}.tabla td small{color:var(--text3);font-size:11px;margin-left:2px}
+
+/* ---------- Agenda ---------- */
+:root{--tec:var(--accent);--tec-tint:var(--accent-tint);--sh:var(--madera);--sh-tint:var(--madera-tint)}
+.semana-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:22px 0 10px}
+.semana-nav .rango{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-right:auto}
+.semana-nav .flecha{width:34px;height:34px;border-radius:99px;background:var(--fill);color:var(--accent);display:grid;place-items:center;font-size:18px;font-weight:600}
+.leyenda{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--text2);margin:0 4px 10px}
+.leyenda span{display:inline-flex;align-items:center;gap:6px}
+.leyenda i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.semana{display:grid;grid-template-columns:repeat(var(--dias,5),minmax(0,1fr));gap:8px}
+.dia{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:10px 8px 8px;min-height:150px;display:flex;flex-direction:column;gap:6px}
+.dia-cab{display:flex;align-items:baseline;gap:6px;padding:0 4px 4px}
+.dia-cab small{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.03em}
+.dia-cab b{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.dia.hoy .dia-cab b{background:var(--red);color:#fff;border-radius:99px;min-width:30px;height:30px;display:inline-grid;place-items:center;font-size:16px;padding:0 6px}
+.dia.pasado{opacity:.62}
+.dia .libre{font-size:12.5px;color:var(--text3);padding:2px 4px}
+.evt{display:block;width:100%;text-align:left;border-radius:10px;padding:7px 9px 7px 10px;border-left:3px solid var(--tec);background:var(--tec-tint);font-size:13px;line-height:1.3}
+.evt.showroom{border-left-color:var(--sh);background:var(--sh-tint)}
+.evt:hover{filter:brightness(.97)}
+.evt .h{font-size:11.5px;font-weight:700;color:var(--tec);display:block}
+.evt.showroom .h{color:var(--sh)}
+.evt .n{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.evt .e{display:inline-block;margin-top:3px;font-size:11px;font-weight:600;padding:1px 7px;border-radius:99px;background:var(--card)}
+.evt .e.pend{color:color-mix(in srgb,var(--orange) 85%,var(--text))}.evt .e.conf{color:var(--blue)}.evt .e.ok{color:color-mix(in srgb,var(--green) 72%,var(--text))}.evt .e.hecha{color:var(--text2)}
+.feed{background:var(--card);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.feed-dia{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.03em;padding:12px 14px 4px}
+.act{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:9px 14px;position:relative}
+.act:hover{background:var(--fill2)}
+.act .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--fill2);color:var(--text2)}
+.act .ic svg{width:16px;height:16px}
+.act .tx{flex:1;min-width:0}
+.act .tx b{display:block;font-weight:500;font-size:14.5px;white-space:pre-wrap;word-wrap:break-word}
+.act .tx span{display:block;font-size:12.5px;color:var(--text2);margin-top:1px}
+.ic.visita{background:var(--tec-tint);color:var(--tec)}.ic.showroom{background:var(--sh-tint);color:var(--sh)}
+.ic.nota{background:color-mix(in srgb,var(--indigo) 13%,transparent);color:var(--indigo)}
+.ic.cierre{background:color-mix(in srgb,var(--green) 15%,transparent);color:color-mix(in srgb,var(--green) 72%,var(--text))}
+.ic.perdido{background:var(--fill);color:var(--text2)}.ic.etapa{background:color-mix(in srgb,var(--purple) 13%,transparent);color:var(--purple)}
+.ic.contacto{background:color-mix(in srgb,var(--blue) 12%,transparent);color:var(--blue)}.ic.llegada{background:var(--fill2);color:var(--text2)}
+.act-ficha{padding:4px 0 6px}
+.act-ficha .act{padding:8px 14px;cursor:default}
+.act-ficha .act:hover{background:none}
+.horas{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 12px}
+.horas button{height:32px;padding:0 12px;border-radius:99px;background:var(--fill2);font-size:13.5px;font-weight:500}
+.horas button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.horas.sh button[aria-pressed="true"]{background:var(--madera)}
+.rapidos .btn{background:var(--accent);color:#fff}
+.form-t{font-size:13.5px;font-weight:600;padding:12px 14px 0}
+.ver-todo{display:block;width:100%;color:var(--accent);font-size:14px;padding:10px 14px 12px;text-align:left;border-top:1px solid var(--sep)}
+@media (max-width:900px){
+  .semana{grid-template-columns:1fr;gap:6px}
+  .dia{min-height:0;flex-direction:row;flex-wrap:wrap;align-items:flex-start;padding:10px}
+  .dia-cab{width:64px;flex:none;flex-direction:column;gap:0;padding:2px 0 0 2px}
+  .dia .evts{flex:1;min-width:0;display:grid;gap:6px}
+  .dia .libre{padding-top:8px}
+  .semana-nav .rango{font-size:17px;width:100%}
+}
+@media (min-width:901px){.dia .evts{display:grid;gap:6px}}
 </style>
 </head>
 <body>
@@ -362,6 +420,7 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
       <div><b>Armadillo</b><span>CRM de cocinas</span></div>
     </div>
     <button class="nav-item" data-ir="hoy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Hoy<span class="badge oculto" data-badge></span></button>
+    <button class="nav-item" data-ir="agenda"><svg class="i" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Agenda<span class="badge oculto" data-badge-ag></span></button>
     <button class="nav-item" data-ir="leads"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-3-2-5.6-4.8-6.3"/></svg>Leads</button>
     <button class="nav-item" data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><circle cx="5" cy="10" r="2.3"/><circle cx="19" cy="10" r="2.3"/><path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M1.5 19c0-2.2 1.5-4 3.5-4.4M22.5 19c0-2.2-1.5-4-3.5-4.4"/></svg>Equipo<span class="badge oculto" data-badge-eq></span></button>
     <button class="nav-item" data-ir="metricas"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Métricas</button>
@@ -376,6 +435,7 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
 
   <nav class="tabbar" aria-label="Navegación">
     <button data-ir="hoy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Hoy<span class="badge oculto" data-badge></span></button>
+    <button data-ir="agenda"><svg class="i" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Agenda<span class="badge oculto" data-badge-ag></span></button>
     <button data-ir="leads"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-3-2-5.6-4.8-6.3"/></svg>Leads</button>
     <button data-ir="equipo"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><circle cx="5" cy="10" r="2.3"/><circle cx="19" cy="10" r="2.3"/><path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M1.5 19c0-2.2 1.5-4 3.5-4.4M22.5 19c0-2.2-1.5-4-3.5-4.4"/></svg>Equipo<span class="badge oculto" data-badge-eq></span></button>
     <button data-ir="metricas"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Métricas</button>
@@ -399,6 +459,10 @@ const CADENCIA = [0, 1, 3, 7, 14];   /* días de cada intento de seguimiento, co
 const MOTIVOS_PERDIDO = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
 const MOTIVOS_REASIGNAR = ["No contestó a tiempo", "Carga de trabajo", "Zona", "Otro"];
 const PREGUNTAS = ["Etapa", "Uso", "Distribución", "Muro", "Acabados", "Inversión", "Tiempo", "Zona"];
+const HORARIOS_VISITA = ["a las 12:00", "a la 1:00 pm", "a las 2:00 pm", "a las 3:00 pm", "a las 4:00 pm"];   /* visitas técnicas: lunes a viernes de 12 a 5, duran 1 hora */
+const HORAS_SHOWROOM = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];                    /* recorridos sin costo: lunes a viernes de 10 a 5 */
+const MOTIVOS_SHOWROOM = ["Recorrido por showroom y planta", "Presentar render y propuesta", "Otro"];
+const PERSONAS_HIST = ["Daniel Romo", "Daniel", "Arq. Eric", "Arq. Omar", "Equipo", "Asistente"];      /* quienes pueden aparecer como autor en el historial */
 /* ======================================= */
 
 const $ = id => document.getElementById(id);
@@ -433,6 +497,8 @@ let embudoAnuncio = "todos";
 let filtro = "todos", busqueda = "", etapaFiltro = "";
 let fichaFolio = null, ultimaSync = 0, cargando = false;
 let pidiendo = null;   /* "perdido" o { resp } mientras se elige un motivo en la ficha */
+let semana = 0, actFiltro = "todo", actMas = false;                               /* Agenda: semana visible (0 = esta) y filtro de actividad */
+let editVisita = false, editShow = false, horaSel = "", motivoSel = "", verTodaAct = false;   /* formularios de la ficha */
 
 /* ---------- Utilidades de fecha y formato ---------- */
 const DIA = 864e5;
@@ -480,7 +546,9 @@ function normLead(l){
     ultimoContacto: aFecha(l["Último contacto"])?.getTime() || 0, proximo: aFecha(l["Próximo contacto"]),
     dispositivo: l["Dispositivo"] || "", ubic: l["Ubicación visita"] || "", responsable: l["Responsable"] || "",
     asignado: aFecha(l["Asignado"])?.getTime() || 0, primerContacto: aFecha(l["Primer contacto"])?.getTime() || 0,
-    intentos: Number(l["Intentos"]) || 0, motivo: l["Motivo perdido"] || "", token: l["Token"] || ""
+    intentos: Number(l["Intentos"]) || 0, motivo: l["Motivo perdido"] || "", token: l["Token"] || "",
+    showroomFecha: aFecha(l["Showroom fecha"]), showroomHora: String(l["Showroom horario"] || ""), showroomMotivo: l["Showroom motivo"] || "",
+    showroomHecho: l["Showroom realizado"] === "Sí"
   };
 }
 function normSesion(s){
@@ -565,7 +633,8 @@ async function guardar(folio, cambios, exito){
     const r = await api({ accion: "guardar", folio, cambios: JSON.stringify(cambios) });
     if(!r.ok) throw new Error(r.error);
     Object.assign(l, normLead(r.lead)); render(); pintarFicha();
-    if(exito) toast(exito);
+    if(cambios.showroom_fecha !== undefined && !("Showroom fecha" in r.lead)) toast("Falta actualizar el Apps Script: la visita al showroom no se guardó.");
+    else if(exito) toast(exito);
   }catch(e){
     Object.assign(l, antes); render(); pintarFicha();
     toast("No se guardó. Revisa tu conexión e inténtalo de nuevo.");
@@ -582,13 +651,19 @@ function aplicarLocal(l, c){
   if(c.intento) l.intentos = (l.intentos || 0) + 1;
   if(c.motivo !== undefined) l.motivo = c.motivo;
   if(c.nota) l.notas = (l.notas ? l.notas + "\n" : "") + sello + " · " + c.nota;
+  if(c.visita_fecha !== undefined){ l.visitaFecha = aFecha(c.visita_fecha); l.visitaDia = c.visita_dia || ""; l.visitaHora = c.visita_horario || ""; }
+  if(c.showroom_fecha !== undefined){ l.showroomFecha = aFecha(c.showroom_fecha); l.showroomHora = c.showroom_horario || ""; l.showroomMotivo = c.showroom_motivo || ""; l.showroomHecho = false; }
+  if(c.showroom_realizado) l.showroomHecho = true;
 }
 
 /* ---------- Navegación ---------- */
 function ir(v){ vista = v; store.set("ad_crm_vista", v); render(); window.scrollTo(0,0); }
 document.addEventListener("click", e => {
-  const b = e.target.closest("[data-ir],[data-accion],[data-lead],[data-filtro],[data-periodo],[data-etapa-filtro],[data-embudo]");
+  const b = e.target.closest("[data-ir],[data-accion],[data-lead],[data-filtro],[data-periodo],[data-etapa-filtro],[data-embudo],[data-semana],[data-act-filtro]");
   if(!b) return;
+  if(b.dataset.semana !== undefined){ semana = b.dataset.semana === "0" ? 0 : semana + Number(b.dataset.semana); render(); return; }
+  if(b.dataset.actFiltro){ actFiltro = b.dataset.actFiltro; actMas = false; render(); return; }
+  if(b.dataset.accion === "act-mas"){ actMas = !actMas; render(); return; }
   if(b.dataset.ir) ir(b.dataset.ir);
   else if(b.dataset.lead) abrirFicha(b.dataset.lead);
   else if(b.dataset.filtro){ filtro = b.dataset.filtro; etapaFiltro = ""; render(); }
@@ -605,7 +680,9 @@ function render(){
   document.querySelectorAll("[data-badge]").forEach(b => { b.textContent = n; b.classList.toggle("oculto", !n); });
   const ne = datos.leads.filter(l => fueraTiempo(l)).length;
   document.querySelectorAll("[data-badge-eq]").forEach(b => { b.textContent = ne; b.classList.toggle("oculto", !ne); });
-  const html = vista === "leads" ? vistaLeads() : vista === "metricas" ? vistaMetricas() : vista === "equipo" ? vistaEquipo() : vistaHoy();
+  const hoy0 = hoyInicio().getTime(), nag = eventosAgenda().filter(x => x.dia.getTime() === hoy0 && x.est[1] !== "hecha").length;
+  document.querySelectorAll("[data-badge-ag]").forEach(b => { b.textContent = nag; b.classList.toggle("oculto", !nag); });
+  const html = vista === "leads" ? vistaLeads() : vista === "metricas" ? vistaMetricas() : vista === "equipo" ? vistaEquipo() : vista === "agenda" ? vistaAgenda() : vistaHoy();
   const p = $("principal");
   const enfocado = document.activeElement && document.activeElement.id === "buscar";
   const pos = enfocado ? document.activeElement.selectionStart : 0;
@@ -670,6 +747,152 @@ function vistaHoy(){
   h += bloque("Nuevos sin contactar", "Los más antiguos primero", p.nuevos);
   h += bloque("Seguimientos para hoy", "Fecha de próximo contacto vencida o de hoy", p.seguimientos, l => `Contactar: ${l.proximo.toLocaleDateString("es-MX",{day:"numeric",month:"short"})} · ${l.zona}`);
   h += bloque("Próximas visitas", "Visitas técnicas confirmadas", p.proximas, l => `${l.visitaFecha.toLocaleDateString("es-MX",{weekday:"short",day:"numeric",month:"short"})}${l.visitaHora ? " · " + l.visitaHora : ""}`);
+  return h;
+}
+
+/* ---------- Agenda y actividad ---------- */
+/* Sellos del historial y las notas: "18/11 16:55" (servidor) o "18/11, 16:55" (local). No traen año: si quedan en el futuro, son del año pasado. */
+function selloMs(s){
+  const m = String(s).match(/(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?,?\s+(\d{1,2}):(\d{2})/);
+  if(!m) return /^ahora$/i.test(String(s).trim()) ? Date.now() : 0;
+  const y = m[3] ? (m[3].length === 2 ? 2000 + Number(m[3]) : Number(m[3])) : new Date().getFullYear();
+  const d = new Date(y, Number(m[2]) - 1, Number(m[1]), Number(m[4]), Number(m[5]));
+  if(!m[3] && d.getTime() > Date.now() + 2 * DIA) d.setFullYear(y - 1);
+  return d.getTime();
+}
+/* Minutos desde medianoche a partir del texto del horario ("a la 1:00 pm", "a mediodía (12 a 2)", "15:00"). Sin hora = al final del día. */
+function minutos(t){
+  const s = String(t || "").toLowerCase(); if(!s) return 9999;
+  const m = s.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.\s?m\.|p\.\s?m\.)?/); if(!m) return /mañana/.test(s) ? 540 : /tarde/.test(s) ? 900 : 9999;
+  let h = Number(m[1]); const pm = m[3] && m[3].startsWith("p");
+  if(pm && h < 12) h += 12; else if(!m[3] && !m[2] && h < 8) h += 12; else if(!m[3] && m[2] && h < 8) h += 12;
+  return h * 60 + Number(m[2] || 0);
+}
+function horaCorta(t){
+  const s = String(t || "").trim(); if(!s) return "Sin hora";
+  const par = s.match(/\(([^)]+)\)/); if(par) return par[1];
+  const x = s.replace(/^(a las|a la|por la|a)\s+/i, "");
+  if(/^\d{1,2}:\d{2}$/.test(x)){ const mm = minutos(x), h = Math.floor(mm / 60); return (h % 12 || 12) + ":" + String(mm % 60).padStart(2, "0") + (h >= 12 ? " pm" : " am"); }
+  return x;
+}
+const diaLargo = d => d.toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"long" });
+const ETAPAS_CON_VISITA = ["Visita agendada", "Visita pagada", "Visita realizada", "Propuesta enviada", "Ganado"];
+/* Visitas técnicas y al showroom de todos los prospectos (sin los perdidos). */
+function eventosAgenda(){
+  const ev = [];
+  datos.leads.forEach(l => {
+    if(l.seguimiento === "Perdido") return;
+    if(l.visitaFecha && (apartoVisita(l) || ETAPAS_CON_VISITA.includes(l.seguimiento))){
+      const est = l.seguimiento === "Visita pagada" ? ["Pagada", "ok"] : l.seguimiento === "Visita agendada" ? ["Por cobrar", "pend"]
+        : (l.seguimiento === "Nuevo" || l.seguimiento === "Contactado") ? ["Por confirmar", "conf"] : ["Realizada", "hecha"];
+      ev.push({ tipo: "tecnica", l, dia: l.visitaFecha, hora: horaCorta(l.visitaHora), min: minutos(l.visitaHora), est });
+    }
+    if(l.showroomFecha) ev.push({ tipo: "showroom", l, dia: l.showroomFecha, hora: horaCorta(l.showroomHora), min: minutos(l.showroomHora),
+      est: l.showroomHecho ? ["Vino", "hecha"] : ["Agendada", "ok"], motivo: l.showroomMotivo });
+  });
+  return ev.sort((a, b) => a.dia - b.dia || a.min - b.min);
+}
+/* Un renglón del historial a un movimiento legible. Solo pasan los que cambian algo del proceso; lo demás (intentos, mensajes, responsables) queda fuera. */
+function clasificar(partes, todo){
+  const has = re => partes.find(p => re.test(p)) || "";
+  const seg = has(/^Seguimiento: /).replace("Seguimiento: ", "");
+  const vis = has(/^Visita: /), aparto = has(/^Apartó visita/), sh = has(/^Showroom /), vino = has(/^Vino al showroom/);
+  const monto = has(/^Monto cerrado/), motivo = has(/^Motivo: /);
+  if(has(/^Llegó desde la landing/)) return { tipo: "llegada", txt: "Hizo su diagnóstico en la página" };
+  if(aparto) return { tipo: "visita", txt: "Apartó visita técnica en la página · " + aparto.replace(/^Apartó visita:\s*/, "").replace(/,\s*$/, "") };
+  if(vis) return { tipo: "visita", txt: (seg === "Visita agendada" || has(/^Agendó visita/) ? "Agendó visita técnica" : "Cambió la visita técnica") + " · " + vis.replace(/^Visita:\s*/, "") };
+  if(sh) return { tipo: "showroom", txt: sh.replace(/^Showroom agendado: /, "Agendó visita al showroom · ").replace(/^Showroom cancelado$/, "Canceló la visita al showroom") };
+  if(vino) return { tipo: "showroom", txt: "Vino al showroom" };
+  if(seg === "Ganado") return { tipo: "cierre", txt: "Cerró su cocina" + (monto ? " · " + monto.replace("Monto cerrado: ", "") : "") };
+  if(seg === "Perdido") return { tipo: "perdido", txt: "Se perdió" + (motivo ? " · " + motivo.replace("Motivo: ", "") : "") };
+  if(monto) return { tipo: "cierre", txt: monto };
+  if(seg === "Visita pagada" || has(/^Pagó la visita/)) return { tipo: "visita", txt: "Pagó la visita técnica ($1,000)" };
+  if(seg === "Visita realizada") return { tipo: "visita", txt: "Visita técnica realizada" };
+  if(seg === "Propuesta enviada") return { tipo: "etapa", txt: "Se le envió render y propuesta" };
+  if(seg === "Visita agendada" || has(/^Visita confirmada/)) return { tipo: "visita", txt: "Visita técnica confirmada" };
+  if(has(/^Contestó/)) return { tipo: "contacto", txt: "Contestó" };
+  if(todo){ const r = partes.filter(p => p !== "Nota agregada").join(" · "); return r ? { tipo: "otro", txt: r } : null; }
+  return null;
+}
+const NOTAS_AUTO = /^Cita enviada al grupo/;
+/* Movimientos de un prospecto, del más reciente al más viejo. todo = incluye los movimientos menores. */
+function actividadLead(l, todo){
+  const autorNota = {}, ev = [];
+  String(l.historial || "").split("\n").filter(Boolean).forEach(line => {
+    const m = line.match(/^(.+?) · (.*)$/); if(!m) return;
+    let resto = m[2], quien = "";
+    const q = PERSONAS_HIST.find(p => resto.startsWith(p + ": "));
+    if(q){ quien = q; resto = resto.slice(q.length + 2); }
+    const partes = resto.split(" · ");
+    if(quien && partes.includes("Nota agregada")) autorNota[m[1].replace(",", "")] = quien;
+    const c = clasificar(partes, todo);
+    if(c) ev.push(Object.assign({ t: selloMs(m[1]), quien, l }, c));
+  });
+  String(l.notas || "").split("\n").filter(Boolean).forEach(n => {
+    const m = n.match(/^(.+?) · (.*)$/), txt = m ? m[2] : n;
+    if(!todo && NOTAS_AUTO.test(txt)) return;
+    ev.push({ tipo: "nota", txt, t: m ? selloMs(m[1]) : 0, quien: m ? autorNota[m[1].replace(",", "")] || "" : "", l });
+  });
+  return ev.sort((a, b) => b.t - a.t);
+}
+const IC_ACT = { visita: I.cal, showroom: '<svg class="i" viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 9v11h14V9M9 20v-6h6v6"/></svg>',
+  nota: '<svg class="i" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>', cierre: I.ok,
+  perdido: '<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>', etapa: I.doc, contacto: I.tel, llegada: I.inicio, otro: I.ref };
+const fmtHora = ms => new Date(ms).toLocaleTimeString("es-MX", { hour:"numeric", minute:"2-digit", hour12:true }).replace(/\s?([ap])\.?\s?m\.?/i, " $1m");
+function filaAct(x, conNombre){
+  const pie = [conNombre ? x.l.nombre : "", x.quien, x.t ? (conNombre ? fmtHora(x.t) : fmtDiaHora(x.t)) : ""].filter(Boolean).join(" · ");
+  const tag = conNombre ? "button" : "div";
+  return `<${tag} class="act"${conNombre ? ` data-lead="${esc(x.l.folio)}"` : ""}><span class="ic ${x.tipo}">${IC_ACT[x.tipo] || IC_ACT.otro}</span>
+    <span class="tx"><b>${esc(x.txt)}</b>${pie ? `<span>${esc(pie)}</span>` : ""}</span></${tag}>`;
+}
+const FILTROS_ACT = [["todo", "Todo"], ["visitas", "Visitas"], ["showroom", "Showroom"], ["notas", "Notas"], ["cierres", "Cierres"]];
+const pasaFiltro = (x, f) => f === "todo" || (f === "visitas" && x.tipo === "visita") || (f === "showroom" && x.tipo === "showroom")
+  || (f === "notas" && x.tipo === "nota") || (f === "cierres" && (x.tipo === "cierre" || x.tipo === "perdido" || x.tipo === "etapa"));
+function lunes(offset){ const d = hoyInicio(); const w = (d.getDay() + 6) % 7; d.setDate(d.getDate() - w + offset * 7); return d; }
+
+function vistaAgenda(){
+  const hoy = hoyInicio().getTime(), ini = lunes(semana), fin = new Date(ini.getTime() + 7 * DIA);
+  const ev = eventosAgenda(), enSemana = ev.filter(x => x.dia >= ini && x.dia < fin);
+  const tec = enSemana.filter(x => x.tipo === "tecnica"), sh = enSemana.filter(x => x.tipo === "showroom");
+  const fmtD = d => d.toLocaleDateString("es-MX", { day:"numeric", month:"short" }).replace(".", "");
+  const viernes = new Date(ini.getTime() + 4 * DIA);
+  let h = encabezado("Agenda", "Visitas técnicas, visitas al showroom y lo importante de cada prospecto");
+  h += `<div class="tiles">
+    <div class="tile"><div class="et">${I.cal}Visitas técnicas</div><div class="num">${tec.length}</div><div class="sub">${tec.filter(x => x.est[1] === "ok").length} pagadas · ${tec.filter(x => x.est[1] === "pend" || x.est[1] === "conf").length} por cobrar o confirmar</div></div>
+    <div class="tile"><div class="et">${IC_ACT.showroom}Showroom</div><div class="num">${sh.length}</div><div class="sub">${sh.filter(x => x.est[1] === "hecha").length} ya vinieron</div></div>
+    <div class="tile ocultable"><div class="et">${I.ok}Hoy</div><div class="num">${ev.filter(x => x.dia.getTime() === hoy).length}</div><div class="sub">citas en la agenda</div></div>
+  </div>`;
+  h += `<div class="semana-nav"><span class="rango">${semana === 0 ? "Esta semana" : semana === 1 ? "La próxima semana" : semana === -1 ? "La semana pasada" : "Semana"} · ${fmtD(ini)} al ${fmtD(viernes)}</span>
+    <button class="flecha" data-semana="-1" aria-label="Semana anterior">‹</button>${semana ? `<button class="btn chico sec" data-semana="0">Hoy</button>` : ""}<button class="flecha" data-semana="1" aria-label="Semana siguiente">›</button></div>
+    <div class="leyenda"><span><i style="background:var(--tec)"></i>Visita técnica</span><span><i style="background:var(--sh)"></i>Showroom</span></div>`;
+  const dias = [];
+  for(let i = 0; i < 7; i++){
+    const d = new Date(ini.getTime() + i * DIA), lista = enSemana.filter(x => x.dia.getTime() === d.getTime());
+    if(i >= 5 && !lista.length) continue;
+    dias.push(`<div class="dia${d.getTime() === hoy ? " hoy" : d.getTime() < hoy ? " pasado" : ""}"><div class="dia-cab"><small>${d.toLocaleDateString("es-MX", { weekday:"short" }).replace(".", "")}</small><b>${d.getDate()}</b></div>
+      <div class="evts">${lista.length ? lista.map(x => `<button class="evt ${x.tipo}" data-lead="${esc(x.l.folio)}"><span class="h">${esc(x.hora)} · ${x.tipo === "tecnica" ? "Visita técnica" : "Showroom"}</span>
+        <span class="n">${esc(x.l.nombre)}</span>${x.tipo === "tecnica" ? `<span class="t2" style="display:block;font-size:12px;color:var(--text2)">${esc(x.l.ubic || x.l.zona || "")}</span>` : x.motivo ? `<span style="display:block;font-size:12px;color:var(--text2)">${esc(x.motivo)}</span>` : ""}
+        <span class="e ${x.est[1]}">${x.est[0]}</span></button>`).join("") : `<span class="libre">Sin citas</span>`}</div></div>`);
+  }
+  h += `<div class="semana" style="--dias:${dias.length}">${dias.join("")}</div>`;
+  const sinFecha = datos.leads.filter(l => l.seguimiento === "Visita agendada" && !l.visitaFecha);
+  if(sinFecha.length) h += `<div class="grupo-titulo"><b>Visitas sin fecha</b><span>Están en "Visita agendada" pero no tienen día. Ábrelos y ponles fecha</span></div><div class="lista">${sinFecha.map(l => filaLead(l)).join("")}</div>`;
+  const desde = hoy - 13 * DIA;
+  const act = datos.leads.flatMap(l => actividadLead(l, false)).filter(x => x.t >= desde && x.tipo !== "llegada" && pasaFiltro(x, actFiltro)).sort((a, b) => b.t - a.t);
+  const actVer = act.slice(0, actMas ? 200 : 25);
+  h += `<div class="grupo-titulo"><b>Actividad reciente</b><span>Últimos 14 días. Solo visitas, showroom, notas y cierres; los intentos de contacto no aparecen</span></div>
+    <div class="chips" role="group" aria-label="Filtrar actividad">${FILTROS_ACT.map(([k, t]) => `<button class="chip" data-act-filtro="${k}" aria-pressed="${actFiltro === k}">${t}</button>`).join("")}</div>`;
+  if(!act.length) h += `<div class="lista">${vacio("Sin movimientos", "Aquí aparecen las visitas, el showroom, las notas y los cierres de los últimos 14 días.")}</div>`;
+  else {
+    let dia = "", cuerpo = "";
+    actVer.forEach(x => {
+      const d0 = new Date(x.t); d0.setHours(0,0,0,0);
+      const et = d0.getTime() === hoy ? "Hoy" : d0.getTime() === hoy - DIA ? "Ayer" : d0.toLocaleDateString("es-MX", { weekday:"long", day:"numeric", month:"short" }).replace(".", "");
+      if(et !== dia){ dia = et; cuerpo += `<div class="feed-dia">${et}</div>`; }
+      cuerpo += filaAct(x, true);
+    });
+    h += `<div class="feed">${cuerpo}${act.length > 25 ? `<button class="ver-todo" data-accion="act-mas">${actMas ? "Ver menos" : `Ver ${Math.min(act.length, 200) - 25} movimientos más`}</button>` : ""}</div>`;
+  }
   return h;
 }
 
@@ -884,7 +1107,7 @@ function vistaEquipo(){
 
 /* ---------- Ficha del lead ---------- */
 function abrirFicha(folio){
-  fichaFolio = folio; pidiendo = null;
+  fichaFolio = folio; pidiendo = null; editVisita = false; editShow = false; horaSel = ""; motivoSel = ""; verTodaAct = false;
   const f = $("ficha"); f.hidden = false;
   requestAnimationFrame(() => { f.classList.add("abierta"); $("velo").classList.add("abierto"); });
   pintarFicha();
@@ -1073,9 +1296,6 @@ function pintarFicha(){
   if(!fichaFolio) return;
   const l = datos.leads.find(x => x.folio === fichaFolio); if(!l){ cerrarFicha(); return; }
   const dato = (k, v) => v ? `<div class="dato"><span>${k}</span><b>${esc(v)}</b></div>` : "";
-  const notas = l.notas ? l.notas.split("\n").filter(Boolean).reverse().map(n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; }).join("") : "";
-  const evt = n => { const m = n.match(/^(.+?) · (.*)$/); return m ? `<p><small>${esc(m[1])}</small>${esc(m[2])}</p>` : `<p>${esc(n)}</p>`; };
-  const histArr = l.historial ? l.historial.split("\n").filter(Boolean).reverse() : [];
   const vf = l.visitaFecha;
   let h = `<div class="persona"><span class="avatar ${esc(l.prioridad)}">${esc(iniciales(l.nombre))}</span>
     <h2 id="ficha-nombre">${esc(l.nombre)}</h2><p>Folio ${esc(l.folio)} · llegó ${hace(l.fecha)}</p>
@@ -1086,13 +1306,39 @@ function pintarFicha(){
     <a class="accion" id="a-diag" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjDiagnostico(l))}" target="_blank" rel="noopener">${I.doc}Diagnóstico</a></div>
     ${cajaSiguiente(l)}
     ${l.escribio ? `<p class="aviso-wa">${I.ok}<span>Este lead tocó el botón de WhatsApp en la landing, así que el chat con Daniel se abrió con su diagnóstico ya escrito. No hace falta reenviárselo. Lo único que no podemos saber es si de verdad mandó el mensaje.</span></p>` : ""}`;
-  if(apartoVisita(l) || l.visitaDia){
+  const tieneVisita = apartoVisita(l) || l.visitaDia || l.visitaFecha;
+  const formVisita = `<p class="form-t">${tieneVisita ? "Nueva fecha de la visita técnica" : "Agendar visita técnica"}</p>
+      <div class="linea-form"><input type="date" id="f-vfecha" value="${vf ? isoDia(vf) : ""}" min="${isoDia(new Date())}" aria-label="Día de la visita técnica"></div>
+      <div class="horas" role="group" aria-label="Horario de la visita">${HORARIOS_VISITA.map(x => `<button data-vhora="${x}" aria-pressed="${horaSel === x}">${horaCorta(x)}</button>`).join("")}</div>
+      <p class="nota-caja">Lunes a viernes, de 12 a 5. Duran 1 hora y van el Ing. Daniel García y el Arq. Omar.</p>
+      <div class="rapidos"><button class="btn chico" id="g-visita" style="color:#fff">Guardar visita</button>${tieneVisita ? `<button data-cancelar-form>Cancelar</button>` : ""}</div>`;
+  if(tieneVisita){
     h += `<p class="seccion-t">Visita técnica</p><div class="caja"><div class="visita-caja">
       <span class="cal"><small>${vf ? vf.toLocaleDateString("es-MX",{weekday:"short"}).replace(".","") : "—"}</small><b>${vf ? vf.getDate() : "?"}</b></span>
-      <span class="txt"><b>${esc(l.visitaDia || "Sin fecha")}</b><span>${esc(l.visitaHora || "")}${l.ubic ? " · " + esc(l.ubic) : ""}</span></span>
+      <span class="txt"><b>${esc(l.visitaDia || (vf ? diaLargo(vf) : "Sin fecha"))}</b><span>${esc(l.visitaHora || "")}${l.ubic ? " · " + esc(l.ubic) : ""}</span></span>
       ${l.seguimiento === "Nuevo" || l.seguimiento === "Contactado" ? `<button class="btn chico" id="confirmar-visita">Confirmar</button>` : ""}</div>
       <div class="dato"><span>Van a la visita</span><b>Ing. Daniel García y Arq. Omar</b></div>
-      ${l.seguimiento === "Visita agendada" || l.seguimiento === "Visita pagada" ? `<div class="rapidos"><a class="btn chico" id="cita-grupo" href="https://wa.me/?text=${encodeURIComponent(msjCita(l))}" target="_blank" rel="noopener" style="color:#fff">${I.enviar}Mandar cita al grupo de marketing</a></div>` : ""}</div>`;
+      ${editVisita ? formVisita : `<div class="rapidos">${l.seguimiento === "Visita agendada" || l.seguimiento === "Visita pagada" ? `<a class="btn chico" id="cita-grupo" href="https://wa.me/?text=${encodeURIComponent(msjCita(l))}" target="_blank" rel="noopener" style="color:#fff">${I.enviar}Mandar cita al grupo de marketing</a>` : ""}${activo(l) ? `<button id="cambiar-visita">Cambiar fecha</button>` : ""}</div>`}</div>`;
+  } else if(activo(l)){
+    h += `<p class="seccion-t">Visita técnica</p><div class="caja">${editVisita ? formVisita : `<div class="rapidos" style="padding-top:12px"><button id="cambiar-visita">Agendar visita técnica</button></div>`}</div>`;
+  }
+  /* Visita al showroom: recorrido sin costo o presentación del render y la propuesta. */
+  const sf = l.showroomFecha;
+  if(sf || activo(l)){
+    const formShow = `<p class="form-t">${sf ? "Nueva fecha en el showroom" : "Agendar visita al showroom"}</p>
+      <div class="linea-form"><input type="date" id="f-sfecha" value="${sf ? isoDia(sf) : ""}" min="${isoDia(new Date())}" aria-label="Día de la visita al showroom"></div>
+      <div class="horas sh" role="group" aria-label="Hora en el showroom">${HORAS_SHOWROOM.map(x => `<button data-shora="${x}" aria-pressed="${horaSel === x}">${horaCorta(x)}</button>`).join("")}</div>
+      <div class="horas sh" role="group" aria-label="Para qué viene">${MOTIVOS_SHOWROOM.map(x => `<button data-smotivo="${x}" aria-pressed="${motivoSel === x}">${x}</button>`).join("")}</div>
+      <p class="nota-caja">Lunes a viernes, de 10 a 5. Av. Rosendo Márquez 17A, col. La Paz.</p>
+      <div class="rapidos"><button class="btn chico" id="g-show" style="color:#fff;background:var(--madera)">Guardar</button><button data-cancelar-form>Cancelar</button></div>`;
+    h += `<p class="seccion-t">Visita al showroom</p><div class="caja">`;
+    if(sf){
+      h += `<div class="visita-caja"><span class="cal"><small style="color:var(--madera)">${sf.toLocaleDateString("es-MX",{weekday:"short"}).replace(".","")}</small><b>${sf.getDate()}</b></span>
+        <span class="txt"><b>${esc(diaLargo(sf))}</b><span>${esc(horaCorta(l.showroomHora))}${l.showroomMotivo ? " · " + esc(l.showroomMotivo) : ""}</span></span>
+        ${l.showroomHecho ? `<span class="pill e-Visita-pagada">Vino</span>` : `<button class="btn chico" id="show-vino" style="background:var(--madera)">Ya vino</button>`}</div>`;
+      h += editShow ? formShow : `<div class="rapidos"><button id="cambiar-show">Cambiar fecha</button><button id="cancelar-show">Cancelar visita</button></div>`;
+    } else h += editShow ? formShow : `<div class="rapidos" style="padding-top:12px"><button id="cambiar-show">Agendar visita al showroom</button></div>`;
+    h += `</div>`;
   }
   h += `<p class="seccion-t">Etapa</p><div class="caja"><div class="etapas" role="group" aria-label="Etapa de seguimiento">${ETAPAS.map(e =>
     `<button data-etapa="${e}" aria-pressed="${l.seguimiento === e}">${e}</button>`).join("")}</div>
@@ -1111,6 +1357,13 @@ function pintarFicha(){
   h += `<p class="seccion-t">Próximo contacto</p><div class="caja">
     <div class="linea-form"><input type="date" id="f-proximo" value="${l.proximo ? isoDia(l.proximo) : ""}" aria-label="Fecha de próximo contacto"><button class="btn chico sec" id="g-proximo">Guardar</button></div>
     <div class="rapidos"><button data-dias="1">Mañana</button><button data-dias="3">En 3 días</button><button data-dias="7">En 1 semana</button>${l.proximo ? `<button data-dias="0">Quitar</button>` : ""}</div></div>`;
+  /* Actividad: notas del equipo y movimientos que cambian el proceso, en una sola línea. Los movimientos menores quedan detrás de "Ver todo". */
+  const actRel = actividadLead(l, false), actTodo = actividadLead(l, true), extra = actTodo.length - actRel.length;
+  const actLista = verTodaAct ? actTodo : actRel;
+  h += `<p class="seccion-t">Actividad y notas</p><div class="caja"><div class="linea-form"><textarea id="f-nota" placeholder="Agrega una nota del seguimiento o la visita" aria-label="Nueva nota"></textarea></div>
+    <div class="rapidos"><button class="btn chico" id="g-nota" style="color:#fff">Agregar nota</button></div>
+    ${actLista.length ? `<div class="act-ficha">${actLista.slice(0, verTodaAct ? 200 : 12).map(x => filaAct(x, false)).join("")}</div>` : `<p class="nota-caja">Todavía no hay notas ni movimientos importantes.</p>`}
+    ${extra > 0 || actRel.length > 12 ? `<button class="ver-todo" id="ver-todo">${verTodaAct ? "Ver solo lo importante" : `Ver todo (${extra > 0 ? extra + (extra === 1 ? " movimiento menor" : " movimientos menores") : "más"})`}</button>` : ""}</div>`;
   h += `<p class="seccion-t">Diagnóstico</p><div class="caja">
     ${dato("WhatsApp", l.tel)}${dato("Zona", l.zona)}${dato("Inversión", l.inversion)}${dato("Tiempo", l.tiempo)}
     ${dato("Etapa", l.etapa)}${dato("Uso", l.uso)}${dato("Distribución", l.forma)}${dato("Muro", l.tamano)}${dato("Acabados", l.acabado)}
@@ -1118,9 +1371,6 @@ function pintarFicha(){
     ${dato("Anuncio", l.anuncio)}${dato("Dispositivo", l.dispositivo)}</div>`;
   if(AGENTE_URL || DEMO) h += `<p class="seccion-t">Asistente de WhatsApp</p><div class="caja" id="agente-caja"></div>`;
   h += `<p class="seccion-t">Cierre</p><div class="caja"><div class="linea-form"><input type="number" inputmode="numeric" id="f-monto" placeholder="Monto cerrado en pesos" value="${l.monto || ""}" aria-label="Monto cerrado"><button class="btn chico sec" id="g-monto">Guardar</button></div></div>`;
-  h += `<p class="seccion-t">Notas</p><div class="caja"><div class="linea-form"><textarea id="f-nota" placeholder="Agrega una nota de la llamada o la visita" aria-label="Nueva nota"></textarea></div>
-    <div class="rapidos"><button class="btn chico" id="g-nota" style="color:#fff">Agregar nota</button></div>${notas ? `<div class="notas">${notas}</div>` : ""}</div>`;
-  if(histArr.length) h += `<p class="seccion-t">Historial</p><div class="caja"><div class="linea-t">${histArr.slice(0, 6).map(evt).join("")}</div>${histArr.length > 6 ? `<details class="hist"><summary>Ver ${histArr.length - 6} movimientos anteriores</summary><div class="linea-t">${histArr.slice(6).map(evt).join("")}</div></details>` : ""}</div>`;
   $("ficha-cuerpo").innerHTML = h;
   if(AGENTE_URL || DEMO) pintarAgente(l);
 
@@ -1160,6 +1410,35 @@ function pintarFicha(){
   });
   $("g-monto").onclick = () => guardar(l.folio, { monto: $("f-monto").value }, "Monto guardado");
   $("g-nota").onclick = () => { const t = $("f-nota").value.trim(); if(!t){ $("f-nota").focus(); toast("Escribe la nota antes de agregarla."); return; } guardar(l.folio, { nota: t }, "Nota agregada"); };
+  const vt = $("ver-todo"); if(vt) vt.onclick = () => { verTodaAct = !verTodaAct; pintarFicha(); };
+
+  /* Formularios de visita técnica y showroom */
+  const abrirForm = cual => { editVisita = cual === "v"; editShow = cual === "s"; horaSel = ""; motivoSel = cual === "s" ? (l.showroomMotivo || "") : ""; pintarFicha(); };
+  const cv2 = $("cambiar-visita"); if(cv2) cv2.onclick = () => abrirForm("v");
+  const cs = $("cambiar-show"); if(cs) cs.onclick = () => abrirForm("s");
+  document.querySelectorAll("[data-cancelar-form]").forEach(b => b.onclick = () => abrirForm(""));
+  const marcar = (sel, attr, val) => document.querySelectorAll(sel).forEach(x => x.setAttribute("aria-pressed", x.dataset[attr] === val));
+  document.querySelectorAll("[data-vhora]").forEach(b => b.onclick = () => { horaSel = b.dataset.vhora; marcar("[data-vhora]", "vhora", horaSel); });
+  document.querySelectorAll("[data-shora]").forEach(b => b.onclick = () => { horaSel = b.dataset.shora; marcar("[data-shora]", "shora", horaSel); });
+  document.querySelectorAll("[data-smotivo]").forEach(b => b.onclick = () => { motivoSel = b.dataset.smotivo; marcar("[data-smotivo]", "smotivo", motivoSel); });
+  const diaHabil = v => { const [a, m, d] = v.split("-").map(Number), f = new Date(a, m - 1, d); return f.getDay() !== 0 && f.getDay() !== 6 ? f : null; };
+  const gv = $("g-visita"); if(gv) gv.onclick = () => {
+    const v = $("f-vfecha").value; if(!v){ toast("Elige el día de la visita."); return; } if(!horaSel){ toast("Elige el horario."); return; }
+    const f = diaHabil(v); if(!f){ toast("Las visitas técnicas son de lunes a viernes."); return; }
+    const c = { visita_dia: diaLargo(f), visita_horario: horaSel, visita_fecha: v };
+    if(l.seguimiento === "Nuevo" || l.seguimiento === "Contactado"){ c.seguimiento = "Visita agendada"; c.contacto = "Agendó visita"; }
+    editVisita = false; horaSel = "";
+    guardar(l.folio, c, "Visita técnica guardada");
+  };
+  const gs = $("g-show"); if(gs) gs.onclick = () => {
+    const v = $("f-sfecha").value; if(!v){ toast("Elige el día."); return; } if(!horaSel){ toast("Elige la hora."); return; }
+    const f = diaHabil(v); if(!f){ toast("El showroom abre de lunes a viernes."); return; }
+    const c = { showroom_fecha: v, showroom_dia: diaLargo(f), showroom_horario: horaSel, showroom_motivo: motivoSel || MOTIVOS_SHOWROOM[0] };
+    editShow = false; horaSel = ""; motivoSel = "";
+    guardar(l.folio, c, "Visita al showroom guardada");
+  };
+  const sv = $("show-vino"); if(sv) sv.onclick = () => guardar(l.folio, { showroom_realizado: true }, "Listo: vino al showroom");
+  const sc = $("cancelar-show"); if(sc) sc.onclick = () => guardar(l.folio, { showroom_fecha: "" }, "Visita al showroom cancelada");
 }
 
 /* ---------- Sesión ---------- */
@@ -1223,8 +1502,27 @@ function demoApi(p){
       const prio = inv === "Menos de $150,000" || tiempo === "Todavía sin fecha" ? "Baja" : (tiempo === "Lo antes posible" && inv !== "$150,000 a $250,000") ? "Alta" : pick(["Alta","Media"]);
       const ap = s["Apartó visita"] === "Sí";
       const edad = (now - s["Inicio"]) / DIA;
-      const seg = edad < 1.2 ? "Nuevo" : pick(["Contactado","Visita agendada","Visita realizada","Propuesta enviada","Ganado","Perdido","Contactado","Nuevo"]);
-      const vf = new Date(s["Inicio"] + (2 + Math.floor(r()*4)) * DIA); vf.setHours(0,0,0,0);
+      const seg = edad < 1.2 ? "Nuevo" : pick(["Contactado","Visita agendada","Visita pagada","Visita realizada","Propuesta enviada","Ganado","Perdido","Contactado","Nuevo"]);
+      const habil = d => { while(d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1); return d; };
+      const futura = seg === "Visita agendada" || seg === "Visita pagada";
+      const vf = habil(new Date(futura ? now + Math.floor(r() * 9) * DIA : s["Inicio"] + (2 + Math.floor(r()*4)) * DIA)); vf.setHours(0,0,0,0);
+      const conVisita = ap || ["Visita agendada","Visita pagada","Visita realizada","Propuesta enviada","Ganado"].includes(seg);
+      const horaV = pick(HORARIOS_VISITA);
+      const showDemo = (seg === "Visita realizada" || seg === "Propuesta enviada") && r() < .7;
+      const sf = habil(new Date(now + Math.floor(r() * 11 - 3) * DIA)); sf.setHours(0,0,0,0);
+      const sello = ms => { const d = new Date(ms); return String(d.getDate()).padStart(2,"0") + "/" + String(d.getMonth()+1).padStart(2,"0") + " " + String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0"); };
+      const t1 = s["Inicio"] + 90000, t2 = t1 + 4 * 36e5, t3 = t1 + DIA;
+      const hist = [sello(t1) + " · Llegó desde la landing"];
+      if(seg !== "Nuevo") hist.push(sello(t1 + 36e5) + " · Daniel Romo: WhatsApp enviado · Intento 1 de 5", sello(t2) + " · Daniel Romo: Seguimiento: Contactado · Contestó · Próximo contacto: " + isoDia(new Date(t2 + 2 * DIA)));
+      if(conVisita && seg !== "Nuevo" && seg !== "Contactado") hist.push(sello(t3) + " · Daniel Romo: Seguimiento: Visita agendada · Agendó visita · Visita: " + diaLargo(vf) + ", " + horaV);
+      if(["Visita pagada","Visita realizada","Propuesta enviada","Ganado"].includes(seg)) hist.push(sello(t3 + 5 * 36e5) + " · Daniel Romo: Seguimiento: Visita pagada · Pagó la visita");
+      if(["Visita realizada","Propuesta enviada","Ganado"].includes(seg)) hist.push(sello(Math.min(now - 2 * 36e5, vf.getTime() + 14 * 36e5)) + " · Arq. Omar: Seguimiento: Visita realizada");
+      if(showDemo) hist.push(sello(Math.min(now - 36e5, sf.getTime() - DIA + 11 * 36e5)) + " · Daniel Romo: Showroom agendado: " + diaLargo(sf) + ", 12:00 (Presentar render y propuesta)");
+      if(seg === "Propuesta enviada") hist.push(sello(now - 30 * 36e5) + " · Seguimiento: Propuesta enviada · Próximo contacto: " + isoDia(new Date(now + 2 * DIA)));
+      if(seg === "Perdido") hist.push(sello(now - 50 * 36e5) + " · Seguimiento: Perdido · Motivo: Presupuesto");
+      if(seg === "Ganado") hist.push(sello(now - 20 * 36e5) + " · Seguimiento: Ganado · Monto cerrado: $260,000");
+      const notaDemo = seg !== "Nuevo" && r() < .6 ? [sello(t2 + 600000) + " · " + pick(["Le interesa isla con barra. Quiere ver muestras de madera.", "Casa nueva en Lomas, entregan llaves en diciembre. Quiere la cocina lista para enero.", "Pidió que le marquemos después de las 6, en el día no contesta.", "Le preocupa el tiempo de entrega; le expliqué las 6 semanas."])] : [];
+      if(notaDemo.length) hist.push(notaDemo[0].split(" · ")[0] + " · Daniel Romo: Nota agregada");
       const rango = inv.includes("400,000") && inv.startsWith("Más") ? "300000-420000" : inv.includes("250,000 a") ? "220000-300000" : "180000-220000";
       leads.push({ "Fecha": s["Inicio"] + 90000, "Folio": "AD-" + (4100 + i), "Estado": ap ? "Visita apartada" : "Diagnóstico completo", "Prioridad": prio,
         "Nombre": nombres[i % nombres.length], "WhatsApp": "222" + String(1000000 + Math.floor(r()*8999999)),
@@ -1232,12 +1530,15 @@ function demoApi(p){
         "Distribución": pick(["En L","Con isla","En U","Un muro","No estoy seguro"]), "Muro principal": pick(["De 3 a 5 m","De 5 a 7 m","Menos de 3 m"]),
         "Acabados": pick(["Funcional y muy bien hecha","Diseño y materiales seleccionados","Alta gama, sin concesiones"]), "Inversión": inv, "Tiempo": tiempo,
         "Zona": pick(["Angelópolis o Lomas","Cholula o San Andrés","Cholula o San Andrés","Atlixco","Cuautlancingo o zona norte","Otra zona de Puebla"]),
-        "Visita día": ap ? vf.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"}) : "", "Visita horario": ap ? pick(["por la mañana (9 a 12)","a mediodía (12 a 3)","por la tarde (3 a 6)"]) : "",
-        "Visita fecha": ap ? vf.getTime() : "", "Escribió por WhatsApp": s["Abrió WhatsApp"], "Rango estimado (interno)": rango, "Anuncio": s["Anuncio"],
+        "Visita día": conVisita ? diaLargo(vf) : "", "Visita horario": conVisita ? horaV : "",
+        "Visita fecha": conVisita ? vf.getTime() : "", "Escribió por WhatsApp": s["Abrió WhatsApp"], "Rango estimado (interno)": rango, "Anuncio": s["Anuncio"],
+        "Ubicación visita": conVisita ? pick(["Lomas de Angelópolis", "La Vista", "Zavaleta", "Cholula centro", "Lomas del Valle"]) : "",
+        "Showroom fecha": showDemo ? sf.getTime() : "", "Showroom horario": showDemo ? "12:00" : "", "Showroom motivo": showDemo ? "Presentar render y propuesta" : "",
+        "Showroom realizado": showDemo && sf.getTime() < hoyInicio().getTime() ? "Sí" : "",
         "Monto cerrado": seg === "Ganado" ? 180000 + Math.floor(r() * 18) * 10000 : "", "Seguimiento": seg,
         "Último contacto": seg !== "Nuevo" ? s["Inicio"] + DIA * .5 : "", "Próximo contacto": ["Contactado","Propuesta enviada"].includes(seg) && r() < .6 ? now - Math.floor(r()*2) * DIA : "",
-        "Notas": seg !== "Nuevo" && r() < .5 ? "20/10 12:40 · Le interesa isla con barra. Quiere ver muestras de madera." : "",
-        "Historial": "20/10 11:02 · Llegó desde la landing", "Dispositivo": s["Dispositivo"],
+        "Notas": notaDemo.join("\n"),
+        "Historial": hist.join("\n"), "Dispositivo": s["Dispositivo"],
         "Responsable": seg === "Nuevo" && r() < .5 ? "" : pick(EQUIPO), "Asignado": s["Inicio"] + 36e5,
         "Primer contacto": seg !== "Nuevo" ? s["Inicio"] + Math.floor(r() * 20) * 36e5 : "",
         "Intentos": seg === "Contactado" ? 1 + Math.floor(r() * 5) : seg !== "Nuevo" ? 1 : 0,
@@ -1256,8 +1557,16 @@ function demoApi(p){
     if(c.contacto && !l["Primer contacto"]) l["Primer contacto"] = Date.now();
     if(c.intento) l["Intentos"] = (Number(l["Intentos"]) || 0) + 1;
     if(c.motivo !== undefined) l["Motivo perdido"] = c.motivo;
-    if(c.nota) l["Notas"] = (l["Notas"] ? l["Notas"] + "\n" : "") + "ahora · " + c.nota;
-    return Promise.resolve({ ok: true, lead: l });
+    const d = new Date(), s = String(d.getDate()).padStart(2,"0") + "/" + String(d.getMonth()+1).padStart(2,"0") + " " + String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
+    if(c.nota) l["Notas"] = (l["Notas"] ? l["Notas"] + "\n" : "") + s + " · " + c.nota;
+    if(c.visita_fecha !== undefined){ l["Visita fecha"] = c.visita_fecha; l["Visita día"] = c.visita_dia; l["Visita horario"] = c.visita_horario; }
+    if(c.showroom_fecha !== undefined){ l["Showroom fecha"] = c.showroom_fecha; l["Showroom horario"] = c.showroom_horario || ""; l["Showroom motivo"] = c.showroom_motivo || ""; l["Showroom realizado"] = ""; }
+    if(c.showroom_realizado) l["Showroom realizado"] = "Sí";
+    const h = [c.seguimiento && "Seguimiento: " + c.seguimiento, c.contacto, c.visita_dia && "Visita: " + c.visita_dia + ", " + c.visita_horario,
+      c.showroom_fecha !== undefined && (c.showroom_fecha ? "Showroom agendado: " + c.showroom_dia + ", " + c.showroom_horario + " (" + c.showroom_motivo + ")" : "Showroom cancelado"),
+      c.showroom_realizado && "Vino al showroom", c.motivo && "Motivo: " + c.motivo, c.nota && "Nota agregada"].filter(Boolean);
+    if(h.length) l["Historial"] = (l["Historial"] ? l["Historial"] + "\n" : "") + s + " · " + h.join(" · ");
+    return Promise.resolve({ ok: true, lead: Object.assign({}, l) });
   }
 }
 
