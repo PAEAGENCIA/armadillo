@@ -1,0 +1,198 @@
+/* Redeo · 2.0: código de compra, premios a elegir, niveles, recordatorios y app instalable. */
+
+/* Los íconos de los botones nunca se encogen (en botones angostos se perdían). */
+.btn svg{flex-shrink:0;}
+
+/* ---------- Código de compra (panel) ---------- */
+.cp-cta{background:var(--surface);color:var(--ink);border:1.5px solid var(--ink);box-shadow:0 3px 0 var(--ink);}
+.cp-cta .ico{background:var(--brand-soft);color:var(--brand);}
+.cp-cta span.s{opacity:.65;}
+.cp-cta:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink);}
+.cp-stepper{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:8px;}
+.cp-stepper button{width:52px;height:52px;border-radius:12px;border:none;background:var(--brand-soft);color:var(--brand-deep);font:800 1.5rem/1 var(--sans);cursor:pointer;}
+.cp-stepper b{font:700 2rem/1 var(--display);color:var(--ink);min-width:36px;text-align:center;}
+.cp-stepper span{flex:1;font-weight:700;color:var(--ink-2);}
+/* El código se ve como un recibo recién impreso: papel, borde dentado y el código en grande. */
+.cp-ticket{position:relative;background:#FFFDF7;border-radius:14px;padding:18px 18px 16px;text-align:center;box-shadow:0 1px 0 var(--line),0 14px 30px -18px rgba(19,35,29,.35);
+  background-image:radial-gradient(circle at 10px -2px,var(--bg) 7px,transparent 7.5px),radial-gradient(circle at 10px calc(100% + 2px),var(--bg) 7px,transparent 7.5px);
+  background-size:20px 100%;background-repeat:repeat-x;animation:cp-print .45s cubic-bezier(.2,.8,.2,1) both;}
+@keyframes cp-print{from{opacity:0;transform:translateY(-14px) scaleY(.92)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.cp-ticket{animation:none}}
+.cp-gana{font-size:.95rem;color:var(--ink-2);}
+.cp-gana b{display:block;font:700 1.55rem/1.15 var(--display);color:var(--ink);}
+.cp-qr{position:relative;width:208px;height:208px;margin:12px auto 8px;}
+.cp-qr img{width:100%;height:100%;image-rendering:pixelated;display:block;}
+.cp-stamp{position:absolute;inset:18px;border:4px solid var(--ok);border-radius:18px;color:var(--ok);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:rgba(255,253,247,.86);transform:rotate(-8deg);font:700 1.35rem var(--display);}
+.cp-ticket.done .cp-qr img{opacity:.35;filter:grayscale(1);}
+.cp-code{font-size:1.45rem;font-weight:700;letter-spacing:.12em;color:var(--ink);padding:8px 0;border-top:1.5px dashed var(--line);border-bottom:1.5px dashed var(--line);margin:4px 0 10px;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;}
+.cp-list{display:flex;flex-direction:column;}
+.cp-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);}
+.cp-row .mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:.8rem;font-weight:600;color:var(--ink-2);}
+.cp-st{font-size:.74rem;font-weight:800;white-space:nowrap;}
+.cp-recent{text-align:center;}
+
+/* ---------- Código de compra (cliente) ---------- */
+.cp-banner{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;border-radius:16px;background:#FFFDF7;border:1.5px dashed var(--accent);color:var(--ink);font-size:.9rem;line-height:1.45;}
+.cp-banner svg{flex-shrink:0;margin-top:1px;color:var(--accent);}
+.cp-banner span{flex:1;}
+.cp-banner .linkbtn{color:var(--muted);text-decoration:none;}
+.cp-banner.ok{background:var(--brand-soft);border:1.5px solid var(--brand);}
+.cp-banner.ok svg{color:var(--brand);}
+.cp-banner.err{background:#FFF4F2;border:1.5px solid #F2C4BD;}
+.cp-banner.err svg{color:var(--danger);}
+.cp-banner.pop{animation:cp-pop .5s cubic-bezier(.2,1.4,.4,1) both;}
+@keyframes cp-pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.cp-in{letter-spacing:.1em;text-transform:uppercase;font-weight:700;}
+.card-links{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:8px;}
+.card-links .linkbtn{display:inline-flex;align-items:center;gap:6px;}
+
+/* ---------- Premios a elegir ---------- */
+.rw-cost{flex-shrink:0;min-width:54px;height:40px;padding:0 8px;border-radius:12px;background:var(--ink);color:#fff;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;font:700 1rem/1 var(--display);}
+.rw-cost small{font:700 .58rem/1 var(--sans);opacity:.7;margin-top:2px;text-transform:uppercase;letter-spacing:.04em;}
+.rw-ladder{display:flex;flex-direction:column;gap:10px;}
+.rw-step{display:flex;align-items:center;gap:12px;}
+.rw-step .rw-cost{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line);}
+.rw-step.ok .rw-cost{background:var(--accent);border-color:var(--accent);color:#2A1C00;}
+.rw-body{flex:1;min-width:0;}
+.rw-body b{display:block;font-size:.92rem;}
+.rw-bar{display:block;height:6px;border-radius:6px;background:var(--line);margin-top:5px;overflow:hidden;}
+.rw-bar span{display:block;height:100%;background:var(--brand);border-radius:6px;}
+.rw-step.ok .rw-bar span{background:var(--accent);}
+.rw-state{font-size:.74rem;font-weight:800;color:#8A5B00;white-space:nowrap;display:inline-flex;align-items:center;gap:3px;}
+.rw-list{display:flex;flex-direction:column;gap:8px;}
+.rw-opt{display:flex;align-items:center;gap:12px;width:100%;padding:8px 12px 8px 8px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);font-family:var(--sans);text-align:left;cursor:pointer;color:var(--ink);}
+.rw-opt.on{border-color:var(--accent);background:#FFF8E7;box-shadow:0 0 0 3px rgba(201,151,58,.18);}
+.rw-opt:disabled{opacity:.5;cursor:not-allowed;}
+.rw-opt .rw-cost{background:var(--surface-2);color:var(--ink);border:1px solid var(--line);}
+.rw-opt.on .rw-cost{background:var(--accent);border-color:var(--accent);color:#2A1C00;}
+.rw-name{flex:1;min-width:0;font-weight:700;font-size:.92rem;}
+.rw-name em{font-style:normal;font-weight:600;font-size:.72rem;color:var(--muted);}
+.rw-miss{font-size:.72rem;color:var(--muted);font-weight:700;white-space:nowrap;}
+.rw-opt svg{color:#8A5B00;flex-shrink:0;}
+.rw-edit{display:flex;flex-direction:column;gap:8px;}
+.rw-edit-row{display:flex;align-items:center;gap:12px;font-weight:700;font-size:.92rem;}
+.rw-edit-row.main .rw-cost{background:var(--accent);color:#2A1C00;}
+.rw-add{display:grid;grid-template-columns:86px 1fr auto;gap:8px;}
+.rw-add .btn{height:50px;padding:0 14px;}
+
+/* ---------- Niveles ---------- */
+.lvl-chip{display:inline-flex;align-items:center;gap:3px;height:20px;padding:0 8px;border-radius:999px;background:#EEF1F0;color:var(--ink-2);font-size:.68rem;font-weight:800;vertical-align:middle;white-space:nowrap;}
+.lvl-chip.top{background:linear-gradient(135deg,#F3D99A,#E8C274);color:#4A3200;}
+.lvl-card .lvl-head{display:flex;align-items:center;gap:12px;}
+.lvl-medal{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand);flex-shrink:0;}
+.lvl-card.top .lvl-medal{background:linear-gradient(135deg,#F3D99A,#C9973A);color:#3A2600;}
+.lvl-name{display:block;font:700 1.35rem/1.1 var(--display);}
+.lvl-steps{display:flex;flex-direction:column;gap:6px;}
+.lvl-step{border:1px solid var(--line);border-radius:12px;padding:9px 12px;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline;font-size:.84rem;background:var(--surface-2);}
+.lvl-step b{font-size:.88rem;}
+.lvl-step .muted{text-align:right;}
+.lvl-step > span:last-child:not(.muted){grid-column:1 / -1;color:var(--ink-2);margin-top:2px;}
+.lvl-step.past{opacity:.6;}
+.lvl-step.on{border-color:var(--brand);background:var(--brand-soft);box-shadow:inset 0 0 0 1px var(--brand);}
+.lvl-card.top .lvl-step.on{border-color:var(--accent);background:#FFF8E7;box-shadow:inset 0 0 0 1px var(--accent);}
+.lvl-edit .day.wide{width:auto;padding:0 12px;}
+
+/* ---------- Recordatorios ---------- */
+.rem-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);}
+.rem-card > svg{color:var(--accent);flex-shrink:0;}
+.rem-card b{display:block;font:700 1.1rem/1.2 var(--display);}
+.rem-edit select.input{appearance:auto;}
+
+/* ---------- App instalable ---------- */
+.inst-sheet{padding-top:14px;}
+.inst-head{display:flex;gap:16px;align-items:center;margin:4px 0 18px;}
+.inst-head h3{font:700 1.3rem/1.15 var(--display);margin:0;color:var(--brand-deep);}
+.inst-head p{margin:4px 0 0;font-size:.86rem;color:var(--ink-2);line-height:1.4;}
+.inst-wrap{position:relative;flex-shrink:0;}
+.inst-icon{width:68px;height:68px;border-radius:17px;display:block;box-shadow:0 8px 16px -8px rgba(10,42,32,.6);}
+.inst-tile{display:grid;place-items:center;font:700 2.1rem/1 var(--display);}
+.inst-seal{position:absolute;right:-5px;bottom:-5px;width:24px;height:24px;border-radius:50%;background:#E8C274;border:2.5px solid var(--bg);display:grid;place-items:center;color:#0A2A20;}
+.inst-steps{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:2px 14px;margin-bottom:16px;}
+.inst-step{display:flex;align-items:center;gap:12px;padding:12px 0;font-size:.9rem;color:var(--ink-2);}
+.inst-step + .inst-step{border-top:1px dashed var(--line);}
+.inst-step .k{width:32px;height:32px;border-radius:10px;background:#EAF2FE;color:#1C6FE0;display:grid;place-items:center;flex-shrink:0;}
+.inst-step b{color:var(--ink);}
+.inst-cta{height:56px;font-size:1rem;}
+.inst-later{display:block;margin:14px auto 0;color:var(--muted);text-decoration:none;font-weight:700;}
+.inst-card-top{display:flex;gap:12px;align-items:center;}
+.inst-mini img{width:44px;height:44px;border-radius:12px;display:block;}
+.inst-link{color:var(--ink-2);}
+.off-chip{display:inline-flex;align-items:center;gap:7px;background:#FFF6E2;border:1.5px solid #EED9A8;color:#7A5A16;font-size:.78rem;font-weight:700;border-radius:999px;padding:6px 12px;}
+/* Abierta como app: respeta la barra de estado y la del iPhone. */
+@media (display-mode: standalone){
+  .app-shell{padding-top:max(14px, env(safe-area-inset-top));}
+}
+
+/* ---------- Avisos al celular ---------- */
+.push-ico{width:34px;height:34px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex-shrink:0;}
+.push-text{height:auto;min-height:88px;padding:12px 14px;resize:vertical;line-height:1.45;font-family:var(--sans);}
+/* Vista previa: se ve como una notificación del celular. */
+.push-prev{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:20px;background:rgba(240,238,232,.92);border:1px solid var(--line);box-shadow:0 10px 24px -14px rgba(19,35,29,.35);backdrop-filter:blur(8px);}
+.push-prev-ico img,.push-prev-ico span{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font:700 1.1rem/1 var(--display);}
+.push-prev-top{display:flex;justify-content:space-between;gap:8px;font-size:.82rem;}
+.push-prev-top span{color:var(--muted);font-size:.74rem;}
+.push-prev p{margin:2px 0 0;font-size:.86rem;line-height:1.35;color:var(--ink);word-break:break-word;}
+
+/* ---------- Stickers de mostrador ---------- */
+.stk-hero{width:190px;height:190px;margin:0 auto;filter:drop-shadow(0 14px 18px rgba(10,42,32,.28));transform:rotate(-6deg);}
+.stk-hero svg,.stk-preview svg{width:100%;height:100%;display:block;}
+.stk-preview{width:150px;height:150px;margin:0 auto;}
+.stk-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--surface-2);border:1px dashed var(--line);}
+.stk-mini{width:34px;height:34px;border-radius:50%;background:#0F5A45;color:#E8C274;display:grid;place-items:center;flex-shrink:0;}
+.quiet-card{border-color:#F1DDA6;background:#FFFBEF;padding:6px 14px;}
+.quiet-head{display:flex;gap:12px;align-items:center;width:100%;border:none;background:none;padding:8px 0;cursor:pointer;font-family:var(--sans);color:var(--ink);}
+.quiet-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px dashed #EED9A8;}
+
+/* ---------- 2.3 · "¿Cómo nos conociste?" ---------- */
+.ask{position:relative;padding:18px 16px 12px;border-radius:var(--r-lg);background:linear-gradient(160deg,#FFFFFF 0%,#F4F8F5 100%);border:1.5px solid var(--brand-soft);box-shadow:var(--shadow);}
+.ask::before{content:"";position:absolute;left:16px;top:-1.5px;width:44px;height:3px;border-radius:0 0 3px 3px;background:var(--accent);}
+.ask-kicker{margin:0 0 2px;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+.ask-q{margin:0 0 12px;font-family:var(--display);font-weight:600;font-size:1.32rem;line-height:1.2;color:var(--ink);letter-spacing:-.01em;}
+.ask-sub{margin:-6px 0 12px;font-size:.86rem;color:var(--ink-2);line-height:1.45;}
+.ask-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ask-opt{display:flex;align-items:center;gap:9px;min-height:52px;padding:8px 10px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);text-align:left;line-height:1.2;cursor:pointer;transition:border-color .12s,transform .12s,background .12s;}
+.ask-opt:active{transform:scale(.97);}
+.ask-opt:hover{border-color:var(--brand);}
+.ask-opt:disabled{opacity:.6;}
+.ask-ico{flex-shrink:0;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--brand-soft);color:var(--brand);}
+.ask-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.ask-skip{display:block;margin:10px auto 0;padding:6px 10px;border:none;background:none;font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;}
+.ask-back{display:inline-flex;align-items:center;gap:4px;margin:0 0 6px;padding:0;border:none;background:none;font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer;}
+.ask-back svg{flex-shrink:0;}
+
+/* ---------- 2.3 · Registro más ligero y comunidad ---------- */
+.signup-card .field label{font-weight:700;}
+.ref-chip{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:var(--brand-soft);color:var(--brand-deep);font-size:.84rem;line-height:1.4;font-weight:600;}
+.ref-chip svg{flex-shrink:0;margin-top:1px;}
+.community{border-radius:var(--r-lg);background:#fff;border:1.5px solid var(--line);padding:14px;transition:border-color .15s,background .15s;}
+.community.on{border-color:#E3CF9F;background:linear-gradient(160deg,#FFFDF7 0%,#FBF4E2 100%);}
+.community-row{display:flex;gap:12px;align-items:flex-start;}
+.community-row b{display:block;font-size:.92rem;color:var(--ink);}
+.community-row p{margin:2px 0 0;font-size:.82rem;color:var(--muted);line-height:1.4;}
+.community-ico{flex-shrink:0;display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#FBEFD2;color:#9A6B12;}
+.community-mail{margin-top:12px;padding-top:12px;border-top:1px dashed #E3CF9F;}
+.community-mail .hint{margin-bottom:0;}
+.legal-check{padding:4px 2px;font-size:.84rem;}
+
+/* ---------- 2.3 · Panel: de dónde llegan los clientes ---------- */
+.src-list{display:flex;flex-direction:column;gap:12px;}
+.src-row{display:flex;gap:10px;align-items:flex-start;}
+.src-ico{flex-shrink:0;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);}
+.src-row.top .src-ico{background:var(--brand-soft);border-color:transparent;color:var(--brand);}
+.src-main{flex:1;min-width:0;}
+.src-line{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;}
+.src-line b{color:var(--ink);font-weight:700;}
+.src-line span{font-weight:700;color:var(--ink);white-space:nowrap;}
+.src-bar{height:7px;margin-top:5px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;}
+.src-bar span{display:block;height:100%;border-radius:999px;background:#9DB8AC;}
+.src-row.top .src-bar span{background:var(--brand);}
+.src-tip{display:flex;gap:8px;align-items:flex-start;margin:14px 0 0;padding:10px 12px;border-radius:12px;background:#FFF6E0;color:#5A3A00;font-size:.84rem;line-height:1.4;}
+.src-tip svg{flex-shrink:0;margin-top:1px;}
+.ask-inline{box-shadow:none;background:#fff;border-color:var(--line);padding-top:16px;}
+.ask-inline::before{display:none;}
+.ask-inline .ask-q{font-size:1.12rem;margin-bottom:10px;}
+.ask-opt.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-deep);}
+.ask-opt.on .ask-ico{background:var(--brand);color:#fff;}
+.ask-follow{margin:14px 0 8px;font-size:.86rem;font-weight:700;color:var(--ink);}
+.community-mail-t{display:flex;gap:8px;align-items:flex-start;margin:0 0 10px;font-size:.84rem;color:var(--ink-2);line-height:1.45;}
+.community-mail-t svg{flex-shrink:0;margin-top:2px;color:#9A6B12;}
