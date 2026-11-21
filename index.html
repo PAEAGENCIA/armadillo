@@ -547,8 +547,30 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
 .escenario .btn-osc{background:var(--madera);color:var(--madera-osc)}
 .escenario .btn-osc svg{color:var(--madera-osc)}
 @media (max-width:600px){.arranque{padding:18px 16px}.arr-q{font-size:25px}}
+
+/* ===== Portada enfocada: diagnóstico junto al título; lo demás tras "Quiero conocer más" ===== */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,540px);gap:56px;align-items:center;text-align:left;margin-top:34px}
+.hero-grid .hero-txt h1{margin:0;max-width:none;font-size:clamp(40px,4.4vw,64px)}
+.hero-grid .hero-txt .sub{margin:20px 0 0;max-width:46ch}
+.hero-grid .checks{justify-content:flex-start;flex-direction:column;gap:10px;margin-top:26px;font-size:14px}
+.hero-grid .arranque{margin:0;max-width:none}
+.hero.diag-on .hero-grid{display:none}
+.hero.diag-on .escenario{margin-top:24px}
+.ver-mas{display:flex;justify-content:center;margin:40px 0 8px}
+.ver-mas .btn-linea{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;font-size:15px;cursor:pointer;background:transparent}
+.ver-mas .btn-linea svg{width:18px;height:18px}
+.sec-fotos{padding:28px 0 0}
+.sec-fotos .h-fotos{margin-top:0}
+.solo-diag main > section:not(.hero),.solo-diag footer.pie{display:none}
+html:not(.solo-diag) .ver-mas{display:none}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:22px;text-align:center;margin-top:10px}
+  .hero-grid .hero-txt h1{margin:0 auto;max-width:15ch}
+  .hero-grid .hero-txt .sub{margin:14px auto 0}
+  .hero-grid .checks{display:none}
+}
 </style>
-<script>try{if(/[?&](utm_source|fbclid)=/.test(location.search))document.documentElement.classList.add("desde-anuncio")}catch(e){}</script>
+<script>try{document.documentElement.classList.add("solo-diag");if(/[?&](utm_source|fbclid)=/.test(location.search))document.documentElement.classList.add("desde-anuncio")}catch(e){}</script>
 </head>
 <body>
 <div class="lambrin" aria-hidden="true"></div>
@@ -571,10 +593,10 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
 <main>
 <section class="hero">
   <div class="cont">
+   <div class="hero-grid">
+    <div class="hero-txt">
         <h1>Tu cocina a la medida, <em>vista en render</em> antes de invertir.</h1>
     <p class="sub">Diseño, fabricación en nuestra planta en Puebla e instalación, con un solo responsable de principio a fin.</p>
-    <div class="ctas"><a class="btn btn-grande" href="#diagnostico">Diseñar mi cocina <span class="flecha"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
-    <p class="micro">Gratis · 2 minutos · Sin compromiso</p>
     <div class="checks">
       <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Planta propia en Puebla</span>
       <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Render 3D antes de fabricar</span>
@@ -582,13 +604,10 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
       <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>12 meses de garantía</span>
       <span><svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>+75 proyectos de carpintería entregados</span>
     </div>
-    <div class="h-fotos">
-      <figure><img decoding="async" src="img/residencial/gustavo-antes.webp" alt="Espacio de cocina en obra negra el día de la medición"><span class="n">1</span><figcaption>Medimos tu espacio</figcaption></figure>
-      <figure><img decoding="async" src="img/residencial/render-4.webp" alt="Render de cocina con isla de mármol y madera"><span class="n">2</span><figcaption>La ves en render</figcaption></figure>
-      <figure><img decoding="async" src="img/residencial/gustavo-isla.webp" alt="Cocina terminada con isla, cubierta en cascada y plafón de listones de madera"><span class="n">3</span><figcaption>Tu cocina terminada</figcaption></figure>
     </div>
+    <div class="hero-diag">
     <div class="arranque" id="arranque">
-      <p class="arr-t"><b>Diagnóstico en línea · Paso 1 de 7</b></p>
+      <p class="arr-t"><b>Diagnóstico gratis · 2 minutos</b> · Paso 1 de 5</p>
       <h2 class="arr-q">Para empezar, ¿en qué punto está tu cocina?</h2>
       <div class="arr-ops">
         <button type="button" data-v="nueva">Casa nueva<small>La cocina está por hacerse</small></button>
@@ -600,6 +619,8 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
       <a class="arr-ver" href="#proyectos">Ver proyectos</a>
       <p class="arr-wa">¿Prefieres platicarlo? <a id="arr-wa" href="#" target="_blank" rel="noopener">Escríbele a Daniel Romo por WhatsApp</a></p>
     </div>
+    </div>
+   </div>
     <div class="escenario esperando" id="diagnostico">
 
       <div class="ventana">
@@ -610,7 +631,7 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
             <ol class="pasos-lat" id="pasos-lat"></ol>
           </aside>
           <section class="principal" aria-label="Diagnóstico de cocina">
-            <div class="barra-sup"><span class="paso-txt" id="paso-txt">Paso 1 de 7</span><span class="folio" id="folio"></span></div>
+            <div class="barra-sup"><span class="paso-txt" id="paso-txt">Paso 1 de 5</span><span class="folio" id="folio"></span></div>
             <div class="segs" id="segs" aria-hidden="true"></div>
             <div id="zona" aria-live="polite"></div>
             <div class="pie-p">
@@ -622,6 +643,17 @@ dialog::backdrop{background:rgba(5,10,10,.7)}
       </div>
     </div>
 
+    <div class="ver-mas"><button type="button" id="ver-mas" class="btn-linea" aria-expanded="false" aria-controls="mas-armadillo">Quiero conocer más de Armadillo <svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></div>
+  </div>
+</section>
+
+<section class="sec-fotos" id="mas-armadillo">
+  <div class="cont">
+    <div class="h-fotos">
+      <figure><img decoding="async" src="img/residencial/gustavo-antes.webp" alt="Espacio de cocina en obra negra el día de la medición"><span class="n">1</span><figcaption>Medimos tu espacio</figcaption></figure>
+      <figure><img decoding="async" src="img/residencial/render-4.webp" alt="Render de cocina con isla de mármol y madera"><span class="n">2</span><figcaption>La ves en render</figcaption></figure>
+      <figure><img decoding="async" src="img/residencial/gustavo-isla.webp" alt="Cocina terminada con isla, cubierta en cascada y plafón de listones de madera"><span class="n">3</span><figcaption>Tu cocina terminada</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -852,21 +884,12 @@ const preguntas = [
       {v:"renovar", t:"Quiero renovarla", s:"Ya tengo cocina, pero no me funciona", ic:"casa", a:"Bien. En la visita vemos qué se puede aprovechar de lo que ya tienes."},
       {v:"obra", t:"Estoy en obra", s:"Construyendo o remodelando", ic:"obra", a:"Ideal: definir la cocina antes de cerrar instalaciones evita romper después."},
       {v:"ideas", t:"Estoy viendo ideas", s:"Todavía no decido", ic:"idea", a:"Perfecto, para eso sirve este diagnóstico."} ]},
-  { id:"uso", campo:"Uso", q:"¿Cómo se vive la cocina en tu casa?", op:[
-      {v:"diario", t:"Se cocina a diario", s:"Uso intensivo todos los días", a:"Entonces la resistencia de la cubierta y los herrajes es prioridad."},
-      {v:"reunion", t:"Ahí se reúne la familia", s:"Es el corazón de la casa", a:"Entonces conviene pensar en barra o isla para convivir mientras se cocina."},
-      {v:"rapido", t:"Desayunos y cenas rápidas", s:"Práctica para el día a día", a:"Entonces la clave es tener lo de todos los días a la mano."},
-      {v:"personal", t:"Cocina alguien más", s:"Personal de apoyo en casa", a:"Entonces conviene separar el área de trabajo del área social."} ]},
   { id:"forma", campo:"Distribución", q:"¿Qué forma tiene el espacio?", tipo:"planos", op:[
       {v:"lineal", t:"Un muro", a:"Un muro bien resuelto rinde más de lo que parece."},
       {v:"l", t:"En L", a:"La L es de las distribuciones más cómodas para trabajar."},
       {v:"u", t:"En U", a:"La U da mucha guarda. Las esquinas son lo que hay que cuidar."},
       {v:"isla", t:"Con isla", a:"Una isla cambia por completo la forma de convivir en la cocina."},
       {v:"nose", t:"No estoy seguro", a:"No te preocupes, eso lo resolvemos al medir."} ]},
-  { id:"acabado", campo:"Acabados", q:"¿Qué nivel de acabados tienes en mente?", tipo:"tres", op:[
-      {v:"funcional", t:"Funcional y muy bien hecha", s:"Buenos materiales, diseño limpio"},
-      {v:"diseno", t:"Diseño y materiales seleccionados", s:"Más detalle y mejores herrajes"},
-      {v:"alta", t:"Alta gama, sin concesiones", s:"Lo mejor en materiales y herrajes"} ], acuse:"Anotado." },
   { id:"presupuesto", campo:"Inversión", q:"Para proponerte materiales que encajen contigo, ¿qué inversión tienes contemplada?", ayuda:"Es solo una referencia. Nos ayuda a no proponerte algo fuera de lo que buscas.", op:[
       {v:"mas400", t:"Más de $400,000", a:"Excelente. Hay espacio para materiales de alta gama y piezas especiales."},
       {v:"250a400", t:"$250,000 a $400,000", a:"Excelente. Con ese rango ya se eligen materiales y herrajes de mejor nivel."},
@@ -882,6 +905,11 @@ const preguntas = [
       {v:"Tlaxcala", t:"Tlaxcala"}, {v:"Otra zona de Puebla", t:"Otra zona o municipio de Puebla"}, {v:"Fuera de Puebla", t:"Vivo fuera de Puebla y Tlaxcala"} ]}
 ];
 const TOTAL = preguntas.length;
+/* El nivel de acabados ya no se pregunta: se deduce de la inversión (sirve para el resultado y el rango interno) */
+const ACABADO_POR_PRES = {mas400:"alta", "250a400":"diseno", "200a250":"funcional", hasta200:"funcional", orientar:"diseno"};
+const ACABADO_TXT = {funcional:"Funcional y muy bien hecha", diseno:"Diseño y materiales seleccionados", alta:"Alta gama, sin concesiones"};
+/* El CRM mide el avance con la numeración anterior de 7 preguntas; se conserva para no romper sus reportes */
+const PASO_CRM = [1, 3, 5, 6, 7];
 const $ = id => document.getElementById(id);
 const zona = $("zona"), atras = $("atras");
 const R = {}, contacto = {nombre:"", tel:""};
@@ -910,7 +938,7 @@ function lateral(){
 function pintar(){
   fase = "preguntas";
   const p = preguntas[paso];
-  avanzar(paso + 1);
+  avanzar(PASO_CRM[paso] || paso + 1);
   $("paso-txt").textContent = `Paso ${paso + 1} de ${TOTAL}`;
   atras.hidden = paso === 0;
   const cls = p.tipo === "tres" ? "ops tres" : "ops";
@@ -935,6 +963,7 @@ atras.onclick = () => {
 function elegir(p, b){
   if(!iniciado){ iniciado = true; if(typeof window.fbq === "function") window.fbq("trackCustom","DiagnosticoIniciado"); }
   R[p.id] = b.dataset.v;
+  if(p.id === "presupuesto") R.acabado = ACABADO_POR_PRES[R.presupuesto] || "diseno";
   zona.querySelectorAll(".op").forEach(x => x.setAttribute("aria-pressed", x === b));
   const o = opcion(p);
   acuse = (o && o.a) || p.acuse || "";
@@ -958,6 +987,7 @@ document.querySelectorAll("#arranque [data-v]").forEach(b => b.onclick = () => {
   document.querySelectorAll("#arranque [data-v]").forEach(x => x.setAttribute("aria-pressed", x === b));
   $("diagnostico").classList.remove("esperando");
   $("arranque").hidden = true;
+  document.querySelector(".hero").classList.add("diag-on");
   if(fase !== "preguntas" || paso !== 0) pintarPrimera();
   const op = zona.querySelector(`.op[data-v="${b.dataset.v}"]`);
   if(op) op.click(); else $("diagnostico").scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
@@ -973,7 +1003,7 @@ function enfocar(){
 
 function formulario(){
   fase = "contacto";
-  avanzar(TOTAL + 1);
+  avanzar(8);
   $("paso-txt").textContent = "Último paso";
   atras.hidden = false;
   zona.innerHTML = `<div class="anim">
@@ -1074,7 +1104,7 @@ function fechaRender(){
 
 function resultado(){
   fase = "resultado";
-  avanzar(TOTAL + 2);
+  avanzar(9);
   $("paso-txt").textContent = "Diagnóstico listo";
   atras.hidden = true;
   const revisar = ["Medidas exactas, niveles de muros y piso","Instalaciones de agua, luz y gas","Electrodomésticos que conservas o vas a comprar"];
@@ -1303,6 +1333,7 @@ function guardar(evento){
     rango_estimado:rangoInterno(), prioridad:prioridad() };
   if(apartado){ d.visita_dia = visita.diaL; d.visita_horario = visita.hora; d.visita_fecha = visita.dia; d.visita_ubicacion = visita.ubic; }
   preguntas.forEach(p => d[p.id] = etiqueta(p));
+  d.acabado = ACABADO_TXT[R.acabado] || "";
   enviar(d);
 }
 
@@ -1356,6 +1387,27 @@ flot.onclick = () => {
 
 enviar({ evento: "visita" });
 pintar();
+
+/* ===== "Quiero conocer más de Armadillo": muestra el resto de la página ===== */
+function mostrarMas(destino){
+  const html = document.documentElement;
+  if(html.classList.contains("solo-diag")){
+    html.classList.remove("solo-diag");
+    const b = document.getElementById("ver-mas"); if(b) b.setAttribute("aria-expanded","true");
+    if(typeof enviar === "function") enviar({ evento: "info", nivel: 0, antes: pasoMax < 2 });
+  }
+  const el = destino && document.querySelector(destino);
+  if(el) setTimeout(() => el.scrollIntoView({ block:"start", behavior: reduce ? "auto" : "smooth" }), 30);
+}
+document.getElementById("ver-mas").addEventListener("click", () => mostrarMas("#mas-armadillo"));
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if(!a || !document.documentElement.classList.contains("solo-diag")) return;
+  const id = a.getAttribute("href");
+  if(id.length < 2 || id === "#diagnostico" || id === "#agenda") return;
+  const t = document.querySelector(id);
+  if(t && t.closest("main > section:not(.hero), footer.pie")){ e.preventDefault(); mostrarMas(id); }
+});
 </script>
 </body>
 </html>
