@@ -394,6 +394,38 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
   .semana-nav .rango{font-size:17px;width:100%}
 }
 @media (min-width:901px){.dia .evts{display:grid;gap:6px}}
+/* ---------- Calendario de disponibilidad ---------- */
+.dgrid{display:grid;grid-template-columns:40px repeat(var(--dcols,6),minmax(0,1fr));gap:3px;font-size:12px;line-height:1.1}
+.dgrid .dh{text-align:center;padding:0 0 5px}
+.dgrid .dh small{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.03em;color:#8E8E93;font-weight:600;margin-bottom:2px}
+.dgrid .dh b{font-size:15px;font-weight:700;display:inline-block;min-width:24px;padding:2px 4px;border-radius:99px}
+.dgrid .dh.hoy b{color:#fff;background:#FF3B30}
+.dgrid .dl{font-size:10.5px;color:#8E8E93;text-align:right;padding-right:5px;align-self:center;white-space:nowrap}
+.dgrid .dc{height:30px;border-radius:7px;background:rgba(118,118,128,.13);display:grid;place-items:center;font-weight:700;font-size:11.5px;line-height:1;font-family:inherit;letter-spacing:.04em;color:#fff;position:relative;border:0;padding:0;min-width:0}
+.dgrid .dc.s{background:#2FB457}
+.dgrid .dc.t{background:rgba(47,180,87,.22);color:#1C7A3A}
+.dgrid .dc.pas{opacity:.35;filter:grayscale(1)}
+.dgrid .dc.sel{box-shadow:0 0 0 2.5px var(--text,#1D1D1F)}
+.dgrid .dc i{position:absolute;right:3px;top:3px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.85)}
+.dgrid .dc.t i{background:#2FB457}
+.dgrid button.dc{cursor:pointer}
+.dgrid button.dc:hover{filter:brightness(1.07)}
+.dley{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:12px;color:#8E8E93;margin-top:9px}
+.dley i{display:inline-block;width:10px;height:10px;border-radius:3px;background:rgba(118,118,128,.2);margin-right:5px;vertical-align:-1px}
+.dley i.s{background:#2FB457}.dley i.t{background:rgba(47,180,87,.3)}
+@media (prefers-color-scheme:dark){.dgrid .dc.t{color:#7EE29A}.dgrid .dc{background:rgba(118,118,128,.22)}}
+.disp-caja{padding:14px}
+/* ---------- Alta manual ---------- */
+.enc-acciones{display:flex;gap:8px;align-items:center}
+.alta .af{padding:10px 14px 0}
+.alta .af label{display:block;font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.alta .af input,.alta .af select,.alta .af textarea{width:100%;border:0;background:var(--fill2);border-radius:10px;padding:11px 12px;font:inherit;font-size:16px;color:var(--text)}
+.alta .af textarea{min-height:76px;resize:vertical}
+.alta .af .err{color:var(--red);font-size:13px;margin-top:4px;min-height:0}
+.alta .horas{padding:0}
+.alta .opc{font-weight:400;color:var(--text3)}
+.msj-auto{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.msj-texto{white-space:pre-line;font-size:15px;line-height:1.45;margin-top:10px;padding:12px 14px;border-radius:12px;background:rgba(47,180,87,.10)}
 </style>
 </head>
 <body>
@@ -454,6 +486,15 @@ details.hist .notas p{font-size:13px;color:var(--text2)}
 const API = "https://script.google.com/macros/s/AKfycbxaxYx2Esw2nu3v2PPYmvPWl3ipeXG1lczlPagHxst3H0MCP9V8NTSFjdcW4AZm1ksF/exec";
 const WHATSAPP_DANIEL = "522221367108";
 const EQUIPO = ["Daniel", "Arq. Eric", "Arq. Omar"];
+/* Alta manual: mismas etiquetas que la página, para que todo se lea igual en el CRM. */
+const ALTA = {
+  interes: ["Cocina", "Clóset", "Centro de entretenimiento", "Recibidor", "Mueble de baño", "Otro"],
+  origen: ["WhatsApp directo", "Llamada", "Recomendación", "Instagram", "Facebook", "Anuncio de Meta", "Showroom", "Otro"],
+  zona: ["Angelópolis, Lomas o La Vista", "Cholula o San Andrés", "La Paz, Zavaleta o Huexotitla", "Atlixco", "Cuautlancingo o zona norte", "Tlaxcala", "Otra zona o municipio de Puebla", "Vivo fuera de Puebla y Tlaxcala"],
+  etapa: ["Casa nueva", "Quiero renovarla", "Estoy en obra", "Estoy viendo ideas"],
+  inversion: ["Más de $400,000", "$250,000 a $400,000", "$200,000 a $250,000", "Menos de $200,000", "Aún no lo sé, pero puedo invertir desde $200,000"],
+  tiempo: ["Lo antes posible", "En 1 a 3 meses", "En 3 a 6 meses", "Todavía sin fecha"]
+};
 const ETAPAS = ["Nuevo", "Contactado", "Visita agendada", "Visita pagada", "Visita realizada", "Propuesta enviada", "Ganado", "Perdido"];
 const CADENCIA = [0, 1, 3, 7, 14];   /* días de cada intento de seguimiento, contados desde el primero */
 const MOTIVOS_PERDIDO = ["No contestó", "Presupuesto", "Eligió a otro", "Ya no lo hará", "Fuera de zona", "Solo veía ideas", "Otro"];
@@ -548,7 +589,8 @@ function normLead(l){
     asignado: aFecha(l["Asignado"])?.getTime() || 0, primerContacto: aFecha(l["Primer contacto"])?.getTime() || 0,
     intentos: Number(l["Intentos"]) || 0, motivo: l["Motivo perdido"] || "", token: l["Token"] || "",
     showroomFecha: aFecha(l["Showroom fecha"]), showroomHora: String(l["Showroom horario"] || ""), showroomMotivo: l["Showroom motivo"] || "",
-    showroomHecho: l["Showroom realizado"] === "Sí"
+    showroomHecho: l["Showroom realizado"] === "Sí",
+    manual: l["Estado"] === "Alta manual", origen: l["Origen"] || "", interes: l["Interés"] || ""
   };
 }
 function normSesion(s){
@@ -615,7 +657,7 @@ async function sincronizar(manual){
   try{
     const r = await api({ accion: "datos" });
     if(!r.ok){ if(r.error === "clave"){ salir("La clave no es correcta."); return; } throw new Error(r.error); }
-    datos.leads = r.leads.map(normLead).sort((a,b) => b.fecha - a.fecha);
+    datos.leads = r.leads.map(normLead).sort((a,b) => b.fecha - a.fecha); datos.equipoUrl = r.equipoUrl || (DEMO ? "equipo.html?k=demo" : "");
     datos.sesiones = limpiarSesiones(r.sesiones.map(normSesion), datos.leads);
     ultimaSync = Date.now();
     render();
@@ -664,6 +706,8 @@ document.addEventListener("click", e => {
   if(b.dataset.semana !== undefined){ semana = b.dataset.semana === "0" ? 0 : semana + Number(b.dataset.semana); render(); return; }
   if(b.dataset.actFiltro){ actFiltro = b.dataset.actFiltro; actMas = false; render(); return; }
   if(b.dataset.accion === "act-mas"){ actMas = !actMas; render(); return; }
+  if(b.dataset.accion === "copiar-msj"){ const t = MSJ_AUTO[b.dataset.i].texto; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast("Mensaje copiado. Pégalo en WhatsApp Business."), () => prompt("Copia el mensaje:", t)); return; }
+  if(b.dataset.accion === "link-equipo"){ const u = datos.equipoUrl; (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => toast("Link copiado. Mándaselo a Daniel y a Omar."), () => prompt("Copia el link del equipo:", u)); return; }
   if(b.dataset.ir) ir(b.dataset.ir);
   else if(b.dataset.lead) abrirFicha(b.dataset.lead);
   else if(b.dataset.filtro){ filtro = b.dataset.filtro; etapaFiltro = ""; render(); }
@@ -671,6 +715,7 @@ document.addEventListener("click", e => {
   else if(b.dataset.periodo){ periodo = b.dataset.periodo; store.set("ad_crm_periodo", periodo); render(); }
   else if(b.dataset.embudo){ embudoAnuncio = b.dataset.embudo; render(); }
   else if(b.dataset.accion === "actualizar") sincronizar(true);
+  else if(b.dataset.accion === "nuevo-lead") abrirAlta();
   else if(b.dataset.accion === "salir") salir();
 });
 
@@ -691,9 +736,9 @@ function render(){
   const ib = $("buscar"); if(ib) ib.oninput = () => { busqueda = ib.value; render(); };
 }
 
-function encabezado(titulo, sub){
+function encabezado(titulo, sub, conAlta){
   return `<header class="encabezado"><div><h1>${titulo}</h1>${sub ? `<p>${sub}</p>` : ""}</div>
-    <button class="icono-btn" data-accion="actualizar" aria-label="Actualizar datos" id="btn-ref">${I.ref}</button></header>`;
+    <div class="enc-acciones">${conAlta ? `<button class="btn chico" data-accion="nuevo-lead">+ Nuevo lead</button>` : ""}<button class="icono-btn" data-accion="actualizar" aria-label="Actualizar datos" id="btn-ref">${I.ref}</button></div></header>`;
 }
 function girar(si){ document.querySelectorAll("#btn-ref").forEach(b => b.classList.toggle("girando", si)); }
 function actualizarSync(){ $("sync-lat").textContent = ultimaSync ? "Actualizado " + hace(ultimaSync) : "Sin sincronizar"; }
@@ -730,7 +775,7 @@ function vistaHoy(){
   const leadsHoy = datos.leads.filter(l => l.fecha >= hoy).length;
   const visitasHoy = datos.sesiones.filter(s => s.inicio >= hoy).length;
   const semana = datos.leads.filter(l => l.visitaFecha && l.visitaFecha.getTime() >= hoy && l.visitaFecha.getTime() < hoy + 7*DIA && activo(l)).length;
-  let h = encabezado("Hoy", fecha.charAt(0).toUpperCase() + fecha.slice(1));
+  let h = encabezado("Hoy", fecha.charAt(0).toUpperCase() + fecha.slice(1), true);
   const venc = [...p.confirmar, ...p.nuevos].filter(fueraTiempo);
   h += `<div class="tiles">
     <div class="tile ${venc.length ? "rojo" : ""}"><div class="et">${I.persona}Por atender</div><div class="num">${p.total}</div><div class="sub">${venc.length} fuera de tiempo</div></div>
@@ -750,6 +795,62 @@ function vistaHoy(){
   return h;
 }
 
+/* ---------- Disponibilidad del equipo en showroom y taller (mismo bloque en equipo, cola, asesor y crm) ---------- */
+const DISP_EQUIPO = [{ id: "Daniel", nombre: "Ing. Daniel García", corto: "Daniel", ini: "D" }, { id: "Omar", nombre: "Arq. Omar", corto: "Omar", ini: "O" }];
+const DISP_HORAS = [9, 10, 11, 12, 13, 14, 15, 16, 17];       /* cada bloque es de una hora: 9 = de 9 a 10 */
+const DISP_LUGAR = { S: "Showroom", T: "Taller" };
+const dIso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+function dLunes(off){ const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() - (d.getDay() + 6) % 7 + off * 7); return d; }
+function dSemana(off){ const l = dLunes(off); return Array.from({ length: 6 }, (_, i) => { const d = new Date(l); d.setDate(l.getDate() + i); return d; }); }
+function dSemanaDe(fecha){ const [a, m, d] = fecha.split("-").map(Number), f = new Date(a, m - 1, d); f.setDate(f.getDate() - (f.getDay() + 6) % 7); return Math.round((f - dLunes(0)) / (7 * 864e5)); }
+const dHora = h => (h % 12 || 12) + (h < 12 || h === 24 ? " am" : " pm");
+function dParse(s){ const o = {}; String(s || "").split(",").forEach(x => { const m = x.match(/^(\d{1,2}):([ST])$/); if(m) o[m[1]] = m[2]; }); return o; }
+function dTexto(o){ return Object.keys(o).map(Number).sort((a, b) => a - b).map(h => h + ":" + o[h]).join(","); }
+function dQuien(disp, fecha, hora){ const dia = disp[fecha] || {}; return DISP_EQUIPO.map(p => ({ p, l: dParse(dia[p.id])[hora] })).filter(x => x.l); }
+function dRangos(o){ const r = []; Object.keys(o).map(Number).sort((a, b) => a - b).forEach(h => { const u = r[r.length - 1]; if(u && u.l === o[h] && u.fin === h) u.fin = h + 1; else r.push({ l: o[h], ini: h, fin: h + 1 }); }); return r; }
+/* "Daniel en showroom de 10 am a 1 pm · Omar en taller de 9 am a 6 pm" */
+function dResumen(disp, fecha, soloLugar){
+  const dia = disp[fecha] || {}, partes = [];
+  DISP_EQUIPO.forEach(p => dRangos(dParse(dia[p.id])).filter(r => !soloLugar || r.l === soloLugar)
+    .forEach(r => partes.push(`${p.corto} en ${DISP_LUGAR[r.l].toLowerCase()} de ${dHora(r.ini)} a ${dHora(r.fin)}`)));
+  return partes.join(" · ");
+}
+const dTitulo = sem => { const f = d => d.toLocaleDateString("es-MX", { day: "numeric", month: "short" }).replace(".", ""); return `${f(sem[0])} al ${f(sem[sem.length - 1])}`; };
+/* Calendario semanal: gris apagado = nadie; verde = alguien en showroom; verde claro = solo en taller.
+   opts.clic: las horas con showroom son botones (data-dfecha, data-dhora) para elegirlas. opts.marca: { fecha, hora } resaltada. */
+function dTabla(disp, sem, opts = {}){
+  const hoy = dIso(new Date()), hAhora = new Date().getHours();
+  let h = `<div class="dgrid" style="--dcols:${sem.length}"><span></span>` + sem.map(d =>
+    `<span class="dh${dIso(d) === hoy ? " hoy" : ""}"><small>${d.toLocaleDateString("es-MX", { weekday: "short" }).replace(".", "")}</small><b>${d.getDate()}</b></span>`).join("");
+  DISP_HORAS.forEach(hr => {
+    h += `<span class="dl">${dHora(hr)}</span>`;
+    sem.forEach(d => {
+      const f = dIso(d), q = dQuien(disp, f, hr), s = q.filter(x => x.l === "S"), t = q.filter(x => x.l === "T");
+      const pasada = f < hoy || (f === hoy && hr < hAhora);
+      const cls = (s.length ? "s" : t.length ? "t" : "") + (pasada ? " pas" : "") + (opts.marca && opts.marca.fecha === f && Number(opts.marca.hora) === hr ? " sel" : "");
+      const txt = (s.length ? s : t).map(x => x.p.ini).join(" ");
+      const tit = q.length ? q.map(x => `${x.p.corto} en ${DISP_LUGAR[x.l].toLowerCase()}`).join(", ") : "Nadie";
+      const boton = opts.clic && s.length && !pasada;
+      h += boton ? `<button class="dc ${cls}" data-dfecha="${f}" data-dhora="${hr}" title="${dHora(hr)}: ${tit}" aria-label="${d.toLocaleDateString("es-MX", { weekday: "long", day: "numeric" })}, ${dHora(hr)}: ${tit}">${txt}${t.length ? "<i></i>" : ""}</button>`
+        : `<span class="dc ${cls}" title="${dHora(hr)}: ${tit}">${txt}${s.length && t.length ? "<i></i>" : ""}</span>`;
+    });
+  });
+  return h + `</div><div class="dley"><span><i class="s"></i>Showroom</span><span><i class="t"></i>Taller</span><span><i></i>Nadie</span><span>D = Daniel · O = Omar</span></div>`;
+}
+/* Datos de ejemplo para los modos demo. */
+function dDemo(){ const o = {}; dSemana(-1).concat(dSemana(0), dSemana(1), dSemana(2)).forEach(d => { const f = dIso(d), w = d.getDay();
+  if(w >= 1 && w <= 5){ o[f] = { Omar: w % 2 ? "10:S,11:S,12:S,13:S,15:T,16:T" : "9:T,10:T,11:T,12:T" }; if(w === 2 || w === 4) o[f].Daniel = "11:S,12:S,13:S,14:S"; } }); return o; }
+
+let dispCRM = {}, dispEstado = {};   /* horas del equipo por semana: true, "cargando" o el error */
+async function cargarDispCRM(off){
+  if(dispEstado[off] === "cargando") return; dispEstado[off] = "cargando";
+  const sem = dSemana(off);
+  try{
+    const r = DEMO ? { ok: true, dias: dDemo() } : await api({ accion: "disp", desde: dIso(sem[0]), hasta: dIso(sem[5]) });
+    if(r.ok){ sem.forEach(d => delete dispCRM[dIso(d)]); Object.assign(dispCRM, r.dias); dispEstado[off] = true; } else dispEstado[off] = r.error || "error";
+  }catch(e){ dispEstado[off] = "red"; }
+  if(vista === "agenda") render();
+}
 /* ---------- Agenda y actividad ---------- */
 /* Sellos del historial y las notas: "18/11 16:55" (servidor) o "18/11, 16:55" (local). No traen año: si quedan en el futuro, son del año pasado. */
 function selloMs(s){
@@ -875,6 +976,11 @@ function vistaAgenda(){
         <span class="e ${x.est[1]}">${x.est[0]}</span></button>`).join("") : `<span class="libre">Sin citas</span>`}</div></div>`);
   }
   h += `<div class="semana" style="--dias:${dias.length}">${dias.join("")}</div>`;
+  const de = dispEstado[semana];
+  h += `<div class="grupo-titulo"><b>Showroom y taller</b><span>Las horas que marcan Daniel y Omar en su link. Romo agenda el showroom en las horas verdes</span></div>
+    <div class="caja disp-caja">${de === true ? dTabla(dispCRM, dSemana(semana)) : de === "accion" ? `<p class="nota-caja">Falta actualizar el Apps Script para ver las horas del equipo.</p>` : de && de !== "cargando" ? `<p class="nota-caja">No se pudieron cargar las horas del equipo.</p>` : `<p class="nota-caja">Cargando…</p>`}
+    ${datos.equipoUrl ? `<div class="rapidos" style="padding:12px 0 0"><button data-accion="link-equipo">Copiar link del equipo</button></div>` : ""}</div>`;
+  if(de === undefined) setTimeout(() => cargarDispCRM(semana), 0);
   const sinFecha = datos.leads.filter(l => l.seguimiento === "Visita agendada" && !l.visitaFecha);
   if(sinFecha.length) h += `<div class="grupo-titulo"><b>Visitas sin fecha</b><span>Están en "Visita agendada" pero no tienen día. Ábrelos y ponles fecha</span></div><div class="lista">${sinFecha.map(l => filaLead(l)).join("")}</div>`;
   const desde = hoy - 13 * DIA;
@@ -913,7 +1019,7 @@ function vistaLeads(){
   const f = (FILTROS.find(x => x[0] === filtro) || FILTROS[0])[2];
   const lista = datos.leads.filter(l => f(l) && (!etapaFiltro || l.seguimiento === etapaFiltro) &&
     (!q || [l.nombre, l.tel, l.zona, l.folio, l.forma, l.anuncio, l.responsable].join(" ").toLowerCase().includes(q)));
-  let h = encabezado("Leads", `${fmtNum(datos.leads.length)} en total`);
+  let h = encabezado("Leads", `${fmtNum(datos.leads.length)} en total`, true);
   h += `<div class="pipe" aria-label="Embudo de seguimiento">${ETAPAS.map(e => {
     const n = datos.leads.filter(l => l.seguimiento === e).length;
     return `<button data-etapa-filtro="${e}" aria-pressed="${etapaFiltro === e}"><b>${n}</b><span>${e}</span></button>`;
@@ -1093,6 +1199,7 @@ function vistaEquipo(){
       </div>
       <div class="pie-t"><span>Responde en <b>${s.prom ? fmtDur(s.prom) : "—"}</b></span><span><b>${s.nCont ? s.aTiempo + "%" : "—"}</b> a tiempo</span></div>
     </div></div>`; }
+  h += bloqueMsjAuto();
   const bloque = (titulo, ayuda, arr, extra) => arr.length ? `<div class="grupo-titulo"><b>${titulo}</b><span>${ayuda}</span></div><div class="lista">${arr.map(l => filaLead(l, extra && extra(l))).join("")}</div>` : "";
   h += bloque("Fuera de tiempo", "Atiéndelos primero", venc, l => `Llegó ${hace(l.fecha)}`);
   const manana = hoyInicio().getTime() + DIA;
@@ -1105,7 +1212,78 @@ function vistaEquipo(){
   return h;
 }
 
+/* ---------- Mensajes automáticos de WhatsApp Business (los configura Daniel Romo en su app) ---------- */
+const MSJ_AUTO = [
+  { titulo: "Mensaje de bienvenida", donde: "Herramientas para la empresa → Mensaje de bienvenida",
+    texto: "Hola, gracias por escribir a Armadillo Diseño 👋 Soy Daniel Romo.\n\nEn un momento le atiendo personalmente. Para orientarle mejor, me gustaría platicar con usted un par de minutos por llamada.\n\n¿Con quién tengo el gusto y a qué hora le queda bien que le marque?" },
+  { titulo: "Mensaje de ausencia", donde: "Herramientas para la empresa → Mensaje de ausencia · de 8:00 pm a 7:30 am",
+    texto: "Hola, gracias por escribir a Armadillo Diseño 🌄 Soy Daniel Romo.\n\nEn este momento estamos fuera de horario, pero le respondo a primera hora. ¿Con quién tengo el gusto y a qué hora le queda bien que le marque mañana?" }
+];
+const bloqueMsjAuto = () => `<div class="grupo-titulo"><b>Mensajes automáticos de WhatsApp</b><span>Se configuran una vez en WhatsApp Business de Daniel Romo</span></div><div class="msj-auto">${MSJ_AUTO.map((m, i) =>
+  `<div class="tarjeta"><h2>${m.titulo}</h2><p class="ayuda">${m.donde}</p><div class="msj-texto">${esc(m.texto)}</div><div class="rapidos" style="padding:12px 0 0"><button data-accion="copiar-msj" data-i="${i}">Copiar mensaje</button></div></div>`).join("")}</div>`;
+
 /* ---------- Ficha del lead ---------- */
+/* ---------- Alta manual de leads ---------- */
+const msjInvitarDiag = l => `Hola ${primerNombre(l.nombre)}, soy Daniel Romo de Armadillo Diseño. Para orientarte mejor con tu proyecto, te comparto un diagnóstico de 2 minutos: https://armadillodiseno.com.mx\n\nAl terminar te propongo un horario para tu visita técnica. ¿Te parece?`;
+function prioridadAlta(a){
+  const p = { "Menos de $200,000": 0, "$200,000 a $250,000": 2, "$250,000 a $400,000": 3, "Más de $400,000": 3, "Aún no lo sé, pero puedo invertir desde $200,000": 2 }[a.inversion] ?? 1;
+  const t = { "Lo antes posible": 3, "En 1 a 3 meses": 2, "En 3 a 6 meses": 1, "Todavía sin fecha": 0 }[a.tiempo] ?? 1;
+  const e = a.etapa === "Estoy viendo ideas" ? 0 : a.etapa ? 2 : 1, z = a.zona === "Vivo fuera de Puebla y Tlaxcala" ? 0 : 1;
+  const sum = p + t + e + z; return sum >= 8 ? "Alta" : sum >= 5 ? "Media" : "Baja";
+}
+let alta = null;   /* datos del formulario mientras está abierto */
+function abrirAlta(){
+  fichaFolio = null; alta = { interes: "Cocina", origen: "" };
+  const f = $("ficha"); f.hidden = false;
+  requestAnimationFrame(() => { f.classList.add("abierta"); $("velo").classList.add("abierto"); });
+  pintarAlta(); $("ficha-cuerpo").scrollTop = 0;
+  setTimeout(() => $("alta-nombre")?.focus(), 80);
+}
+function pintarAlta(){
+  const chips = (k, op) => `<div class="horas" role="group">${op.map(x => `<button type="button" data-alta="${k}" data-v="${esc(x)}" aria-pressed="${alta[k] === x}">${esc(x)}</button>`).join("")}</div>`;
+  const sel = (k, op, ph) => `<select id="alta-${k}"><option value="">${ph}</option>${op.map(x => `<option ${alta[k] === x ? "selected" : ""}>${esc(x)}</option>`).join("")}</select>`;
+  $("ficha-cuerpo").innerHTML = `<div class="persona"><span class="avatar Media">+</span><h2 id="ficha-nombre">Nuevo lead</h2><p>Para prospectos que llegan por WhatsApp, llamada, recomendación o redes</p></div>
+    <div class="alta"><p class="seccion-t">Datos de contacto</p><div class="caja" style="padding-bottom:12px">
+      <div class="af"><label for="alta-nombre">Nombre</label><input id="alta-nombre" autocomplete="off" value="${esc(alta.nombre || "")}" placeholder="Nombre y apellido"><div class="err" id="e-nombre"></div></div>
+      <div class="af"><label for="alta-tel">WhatsApp</label><input id="alta-tel" type="tel" inputmode="numeric" value="${esc(alta.telefono || "")}" placeholder="10 dígitos, sin lada"><div class="err" id="e-tel"></div></div>
+      <div class="af"><label>¿Cómo llegó?</label>${chips("origen", ALTA.origen)}<div class="err" id="e-origen"></div></div>
+      <div class="af"><label>¿Qué le interesa?</label>${chips("interes", ALTA.interes)}</div>
+      <div class="af"><label for="alta-zona">Zona</label>${sel("zona", ALTA.zona, "Elige la zona")}</div></div>
+    <p class="seccion-t">Su proyecto <span class="opc">· opcional</span></p><div class="caja" style="padding-bottom:12px">
+      <div class="af"><label for="alta-etapa">¿En qué punto está?</label>${sel("etapa", ALTA.etapa, "Sin dato")}</div>
+      <div class="af"><label for="alta-inversion">Inversión</label>${sel("inversion", ALTA.inversion, "Sin dato")}</div>
+      <div class="af"><label for="alta-tiempo">¿Para cuándo?</label>${sel("tiempo", ALTA.tiempo, "Sin dato")}</div>
+      <div class="af"><label for="alta-nota">Nota</label><textarea id="alta-nota" placeholder="Lo que te contó: qué quiere, medidas, quién lo recomendó…">${esc(alta.nota || "")}</textarea></div></div>
+    <div class="rapidos" style="padding:16px 0 30px"><button class="btn" id="alta-guardar" style="width:100%">Dar de alta</button></div></div>`;
+  document.querySelectorAll("[data-alta]").forEach(b => b.onclick = () => { leerAlta(); alta[b.dataset.alta] = b.dataset.v; pintarAlta(); });
+  $("alta-guardar").onclick = guardarAlta;
+}
+function leerAlta(){
+  const v = id => ($(id) || {}).value || "";
+  Object.assign(alta, { nombre: v("alta-nombre").trim(), telefono: v("alta-tel"), zona: v("alta-zona"), etapa: v("alta-etapa"), inversion: v("alta-inversion"), tiempo: v("alta-tiempo"), nota: v("alta-nota").trim() });
+}
+async function guardarAlta(){
+  leerAlta();
+  const tel = alta.telefono.replace(/\D/g, "").replace(/^52(?=\d{10}$)/, "");
+  $("e-nombre").textContent = alta.nombre.length < 2 ? "Escribe su nombre." : "";
+  $("e-tel").textContent = /^\d{10}$/.test(tel) ? "" : "Escribe los 10 dígitos de su WhatsApp.";
+  $("e-origen").textContent = alta.origen ? "" : "Elige cómo llegó.";
+  if(alta.nombre.length < 2 || !/^\d{10}$/.test(tel) || !alta.origen) return;
+  const ya = datos.leads.find(l => l.tel === tel);
+  if(ya){ toast("Ese número ya está en el CRM. Te abro su ficha."); alta = null; abrirFicha(ya.folio); return; }
+  const b = $("alta-guardar"); b.disabled = true; b.textContent = "Guardando…";
+  try{
+    const r = await api({ accion: "crear", lead: JSON.stringify(Object.assign({}, alta, { telefono: tel, prioridad: prioridadAlta(alta) })) });
+    if(!r.ok) throw new Error(r.error);
+    const l = normLead(r.lead);
+    if(!datos.leads.some(x => x.folio === l.folio)) datos.leads.unshift(l);
+    alta = null; render(); abrirFicha(l.folio);
+    toast(r.duplicado ? "Ese número ya estaba en el CRM. Te abrí su ficha." : "Lead dado de alta.");
+  }catch(e){
+    b.disabled = false; b.textContent = "Dar de alta";
+    toast(String(e.message) === "accion" ? "Falta actualizar el Apps Script para dar de alta leads." : "No se pudo guardar. Revisa tu conexión e intenta otra vez.");
+  }
+}
 function abrirFicha(folio){
   fichaFolio = folio; pidiendo = null; editVisita = false; editShow = false; horaSel = ""; motivoSel = ""; verTodaAct = false;
   const f = $("ficha"); f.hidden = false;
@@ -1117,7 +1295,7 @@ function abrirFicha(folio){
 function cerrarFicha(){
   const f = $("ficha"); f.classList.remove("abierta"); $("velo").classList.remove("abierto");
   setTimeout(() => { if(!f.classList.contains("abierta")) f.hidden = true; }, 340);
-  fichaFolio = null;
+  fichaFolio = null; alta = null;
 }
 $("cerrar-ficha").onclick = cerrarFicha;
 $("velo").onclick = cerrarFicha;
@@ -1298,12 +1476,12 @@ function pintarFicha(){
   const dato = (k, v) => v ? `<div class="dato"><span>${k}</span><b>${esc(v)}</b></div>` : "";
   const vf = l.visitaFecha;
   let h = `<div class="persona"><span class="avatar ${esc(l.prioridad)}">${esc(iniciales(l.nombre))}</span>
-    <h2 id="ficha-nombre">${esc(l.nombre)}</h2><p>Folio ${esc(l.folio)} · llegó ${hace(l.fecha)}</p>
+    <h2 id="ficha-nombre">${esc(l.nombre)}</h2><p>Folio ${esc(l.folio)} · ${l.manual ? `dado de alta ${hace(l.fecha)}${l.origen ? " · " + esc(l.origen) : ""}${l.interes && l.interes !== "Cocina" ? " · " + esc(l.interes) : ""}` : `llegó ${hace(l.fecha)}`}</p>
     <div class="pills"><span class="pill ${claseEtapa(l.seguimiento)}">${esc(l.seguimiento)}</span><span class="pill" style="background:var(--fill2)"><span class="punto ${esc(l.prioridad)}"></span>Prioridad ${esc(l.prioridad.toLowerCase())}</span>${l.escribio ? `<span class="pill wa">${I.wa}Ya le escribió a Daniel</span>` : ""}${l.pago ? `<span class="pill e-Visita-pagada">Abrió el link de pago</span>` : ""}${(s => s ? `<span class="pill" style="background:var(--fill2)"><span class="sla ${s.clase}">${s.txt}</span></span>` : "")(sla(l))}</div></div>`;
   h += `<div class="acciones">
     <a class="accion" id="a-wa" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjCliente(l))}" target="_blank" rel="noopener">${I.wa}WhatsApp</a>
     <a class="accion" id="a-tel" href="tel:+52${esc(l.tel)}">${I.tel}Llamar</a>
-    <a class="accion" id="a-diag" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(msjDiagnostico(l))}" target="_blank" rel="noopener">${I.doc}Diagnóstico</a></div>
+    <a class="accion" id="a-diag" href="https://wa.me/52${esc(l.tel)}?text=${encodeURIComponent(l.etapa || l.forma ? msjDiagnostico(l) : msjInvitarDiag(l))}" target="_blank" rel="noopener">${I.doc}Diagnóstico</a></div>
     ${cajaSiguiente(l)}
     ${l.escribio ? `<p class="aviso-wa">${I.ok}<span>Este lead tocó el botón de WhatsApp en la landing, así que el chat con Daniel se abrió con su diagnóstico ya escrito. No hace falta reenviárselo. Lo único que no podemos saber es si de verdad mandó el mensaje.</span></p>` : ""}`;
   const tieneVisita = apartoVisita(l) || l.visitaDia || l.visitaFecha;
@@ -1464,7 +1642,7 @@ $("form-login").onsubmit = async e => {
     const r = await api({ accion: "datos" });
     if(!r.ok){ $("error-login").textContent = r.error === "clave" ? "La clave no es correcta." : "No pudimos entrar. Inténtalo de nuevo."; clave = ""; return; }
     store.set("ad_crm_clave", v);
-    datos.leads = r.leads.map(normLead).sort((a,b) => b.fecha - a.fecha);
+    datos.leads = r.leads.map(normLead).sort((a,b) => b.fecha - a.fecha); datos.equipoUrl = r.equipoUrl || (DEMO ? "equipo.html?k=demo" : "");
     datos.sesiones = limpiarSesiones(r.sesiones.map(normSesion), datos.leads);
     ultimaSync = Date.now();
     $("login").classList.add("oculto"); $("app").classList.remove("oculto");
@@ -1547,6 +1725,15 @@ function demoApi(p){
     demoApi.d = { leads, sesiones: ses };
   }
   if(p.accion === "datos") return Promise.resolve({ ok: true, leads: demoApi.d.leads, sesiones: demoApi.d.sesiones });
+  if(p.accion === "crear"){
+    const d = JSON.parse(p.lead), dup = demoApi.d.leads.find(l => String(l["WhatsApp"]) === d.telefono);
+    if(dup) return Promise.resolve({ ok: true, duplicado: true, lead: Object.assign({}, dup) });
+    const ahora = new Date(), s = String(ahora.getDate()).padStart(2,"0") + "/" + String(ahora.getMonth()+1).padStart(2,"0") + " " + String(ahora.getHours()).padStart(2,"0") + ":" + String(ahora.getMinutes()).padStart(2,"0");
+    const l = { "Fecha": ahora.getTime(), "Folio": "AD-" + Math.floor(1000 + Math.random() * 9000), "Estado": "Alta manual", "Prioridad": d.prioridad, "Nombre": d.nombre, "WhatsApp": d.telefono,
+      "Etapa": d.etapa, "Inversión": d.inversion, "Tiempo": d.tiempo, "Zona": d.zona, "Origen": d.origen, "Interés": d.interes, "Seguimiento": "Nuevo",
+      "Historial": s + " · Alta manual · Origen: " + d.origen + " · Interés: " + d.interes, "Notas": d.nota ? s + " · " + d.nota : "", "Showroom fecha": "", "Token": "demo" };
+    demoApi.d.leads.push(l); return Promise.resolve({ ok: true, lead: Object.assign({}, l) });
+  }
   if(p.accion === "guardar"){
     const l = demoApi.d.leads.find(x => x["Folio"] === p.folio); const c = JSON.parse(p.cambios);
     if(c.seguimiento) l["Seguimiento"] = c.seguimiento;
